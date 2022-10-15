@@ -1,0 +1,8 @@
+configuration {
+  modi: "window,run,ssh,drun";
+  show-icons: true;
+  terminal: "xfce4-terminal";
+}
+//@theme "/usr/share/rofi/themes/gruvbox-light-soft.rasi"
+//@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
+@theme "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"
