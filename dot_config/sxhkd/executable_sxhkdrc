@@ -30,7 +30,7 @@ super + r
 	redshift -PO 2400 
 super + shift + r
 	redshift -PO 2200 -b 0.6
-super + alt + r
+super + ctrl + r
 	redshift -x
 
 #
