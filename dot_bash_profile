@@ -1,0 +1,17 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+# shorthand for chezmoi
+alias c="chezmoi"
+
+# long format list
+alias la="ls -la"
+
+# refresh repositories and update packages
+alias uup="sudo dnf upgrade --refresh
