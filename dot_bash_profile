@@ -6,12 +6,3 @@ if [ -f ~/.bashrc ]; then
 fi
 
 # User specific environment and startup programs
-
-# shorthand for chezmoi
-alias dot="chezmoi"
-
-# long format list
-alias la="ls -la"
-
-# refresh repositories and update packages
-alias upgr8="sudo dnf upgrade --refresh"

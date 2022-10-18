@@ -1,0 +1,16 @@
+# workflow apps
+
+# navigation and listing
+alias la='ls -la'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ..='cd ..'
+
+
+# dotfiles management
+alias cm="chezmoi"
+alias cma='chezmoi apply'
+alias cmc='chezmoi cd'
+
+# package updates
+alias uu='sudo dnf upgrade --refresh'
