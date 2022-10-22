@@ -1,0 +1,11 @@
+[user]
+	name = Possumvibes
+	email = 90935434+possumvibes@users.noreply.github.com
+[alias]
+	nuke = branch -D
+	psu = push --set-upstream
+	psuo = push --set-upstream origin
+	cb = checkout -b
+	cam = commit -a -m
+[init]
+	defaultBranch = main
