@@ -1,4 +1,5 @@
 # workflow apps
+alias vi='nvim'
 
 # navigation and listing
 alias la='ls -la'
@@ -8,9 +9,9 @@ alias ..='cd ..'
 
 
 # dotfiles management
-alias cm="chezmoi"
+alias cm='chezmoi'
 alias cma='chezmoi apply'
 alias cmc='chezmoi cd'
 
 # package updates
-alias uu='sudo dnf upgrade --refresh'
+alias uu='sudo dnf upgrade --refresh -y'
