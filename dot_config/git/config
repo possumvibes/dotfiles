@@ -2,10 +2,12 @@
 	name = Possumvibes
 	email = 90935434+possumvibes@users.noreply.github.com
 [alias]
+	cam = commit -a -m
+	camm = add . && git commit -m
+	cb = checkout -b
 	nuke = branch -D
 	psu = push --set-upstream
 	psuo = push --set-upstream origin
-	cb = checkout -b
-	cam = commit -a -m
+	rpo = remote prune origin
 [init]
 	defaultBranch = main
