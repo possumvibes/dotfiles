@@ -145,7 +145,7 @@ super + {_,shift + }c
 super + {_,shift + }Tab
 	bspc desktop -f {next,prev}.local
 
-super + ctrl + {Left,Right}
+super + ctrl + {Right, Left}
 	bspc desktop -f {next,prev}.local
 
 # focus the last node/desktop
