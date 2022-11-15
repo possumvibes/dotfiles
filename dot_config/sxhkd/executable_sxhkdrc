@@ -3,8 +3,8 @@
 #
 
 # terminal emulator
-super +{_,shift + }Return
-	{kitty, xfce4-terminal}
+super +{_,shift +,ctrl + }Return
+	{kitty, alacritty, xfce4-terminal}
 
 # program launcher
 super + @space
