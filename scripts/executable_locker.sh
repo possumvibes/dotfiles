@@ -10,6 +10,8 @@ i3lock \
   --keyhl-color=60012b  \
   --bshl-color=d11272  \
   --ring-width=5  \
-  --indicator  \
   --wrong-text="Incorrect."  \
-  --verif-text="" 
+  --verif-text="" \
+  --time-str="%H:%M" \
+  --date-str="%A, %d %b" \
+  --indicator 
