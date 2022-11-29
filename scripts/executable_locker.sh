@@ -1,0 +1,15 @@
+i3lock \
+  -i ~/.local/share/wallpapers/xfce-101-no-logo.png -M \
+  -c 260012  \
+  -e -k -p default  \
+  --ring-color=260012  \
+  --ringwrong-color=a50018  \
+  --inside-color=26001201  \
+  --insidever-color=26001201  \
+  --insidewrong-color=26001201  \
+  --keyhl-color=60012b  \
+  --bshl-color=d11272  \
+  --ring-width=5  \
+  --indicator  \
+  --wrong-text="Incorrect."  \
+  --verif-text="" 
