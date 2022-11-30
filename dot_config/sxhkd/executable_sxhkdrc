@@ -46,10 +46,10 @@ super + alt + q
 	xfce4-session-logout
 
 # lock xfce
-ctrl + alt + l
-	xflock4
-ctrl + alt + shift + l
-	~/scripts/locker.sh
+ctrl + alt +{_,shift + }l
+	{~/scripts/locker.sh, xflock4}
+#ctrl + alt + shift + l
+#	xflock4
 
 #
 # bspwm hotkeys
