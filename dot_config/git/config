@@ -3,6 +3,7 @@
 	email = 90935434+possumvibes@users.noreply.github.com
 [alias]
 	cam = commit -a -m
+	cm = commit -m
 	camm = add . && git commit -m
 	cb = checkout -b
 	nuke = branch -D
