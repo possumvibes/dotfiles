@@ -4,8 +4,9 @@
 sxhkd &
 # todo: call ./autostart.sh instead of calling these individually
 picom &
-xset s 600 &
-xss-lock $HOME/scripts/locker.sh &
+#xset s 600 &
+#xss-lock $HOME/scripts/locker.sh &
+#xss-lock i3lock &
 
 ## one monitor only
 bspc monitor -d I II III IV V VI VII VIII IX X
