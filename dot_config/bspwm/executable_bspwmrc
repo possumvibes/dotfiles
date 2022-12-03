@@ -2,8 +2,10 @@
 
 # let's! get! this! hotkey daemon.
 sxhkd &
+# todo: call ./autostart.sh instead of calling these individually
 picom &
-#polybar example &
+xset s 600 &
+xss-lock $HOME/scripts/locker.sh &
 
 ## one monitor only
 bspc monitor -d I II III IV V VI VII VIII IX X
@@ -38,3 +40,4 @@ bspc rule -a Emacs desktop='^6' state=tiled follow=on
 #bspc rule -a Screenkey manage=off
 
 bspc rule -a xfce4-panel layer=above
+bspc rule -a polybar layer=above
