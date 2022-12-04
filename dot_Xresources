@@ -10,7 +10,7 @@ URxvt.iso14755_52: false
 ! Appearance
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
-URxvt.internalBorder: 24
+URxvt.internalBorder: 10
 URxvt.cursorBlink: false
 URxvt.cursorUnderline: false
 URxvt.saveline: 2048
@@ -25,7 +25,7 @@ urxvt.boldFont:  xft:JetBrainsMono-Medium:pixelsize=16:antialias=true
 URxvt*depth: 32
 
 ! Colors
-URxvt.background: [85]#1E1E2E
+URxvt.background: [80]#1E1E2E
 URxvt.foreground: #CDD6F4
 URxvt.cursorColor: #F5E0DC
 
