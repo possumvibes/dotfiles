@@ -11,7 +11,7 @@ URxvt.iso14755_52: false
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.internalBorder: 24
-URxvt.cursorBlink: true
+URxvt.cursorBlink: false
 URxvt.cursorUnderline: false
 URxvt.saveline: 2048
 URxvt*scrollBar:       false

@@ -4,7 +4,7 @@
 
 # terminal emulator
 super +{_,shift +,ctrl + }Return
-	{kitty, alacritty, xfce4-terminal}
+	{ kitty, urxvt, alacritty }
 
 # program launcher
 super + @space
