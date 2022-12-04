@@ -1,6 +1,6 @@
 # workflow apps
 alias vi='nvim'
-
+alias vim='nvim'
 # navigation and listing
 alias la='ls -la'
 alias ..='cd ..'

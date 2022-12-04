@@ -1,5 +1,6 @@
 # workflow apps
 alias vi='nvim'
+alias vim='nvim'
 
 alias xup='xrdb -load ~/.Xresources'
 
