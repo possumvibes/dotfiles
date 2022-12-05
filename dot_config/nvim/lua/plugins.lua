@@ -2,10 +2,14 @@
 -- Plugins.lua --
 -----------------
 
--- How To Actually Do This
--- 1. Add the plugin to the packer startup function.
--- 2. Write. (cm apply.) 
--- 3. run :PackerSync to clean and update plugins.
+-- How To Update This File With Chezmoi
+-- 1. cme .config/nvim/lua/plugins.lua
+-- 2. Add the plugin to the packer startup function.
+-- 3. Write changes 
+-- 4. IN A SEPARATE TERMINAL INSTANCE (or after :wq):
+--    a. call cmap to apply changes
+--    b. open a new nvim instance
+--    c. run `:PackerSync` to install new plugins
 -- 4. NOW you can add the usage into the init.lua.
 
 -------------------------------------
@@ -53,6 +57,7 @@ return require('packer').startup(function(use)
           ts_update()
       end,
   }
+  use 'nvim-treesitter/nvim-treesitter-textobjects'
 
   -- Tree File Explorer
   use {
