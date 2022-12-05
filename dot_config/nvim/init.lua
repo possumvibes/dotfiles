@@ -2,9 +2,20 @@
 -- init.lua --
 --------------
 
--- Import Modules
+-- How To Update This File
+-- cme .config/nvim/init.lua
+-- Write changes (cm apply)
+-- run `:source $MYVIMRC` to reload init.lua
+-- rinse and repeat!
+
+------------------------
+---- Import Modules ----
+------------------------
 require('plugins')
 
+-------------------
+---- Settings! ----
+-------------------
 
 -- Appearance/Behavior
 vim.opt.number = true
@@ -16,19 +27,22 @@ vim.opt.expandtab = true
 vim.opt.termguicolors = true
 
 
--- Vibes
+-- Vibes (namely, plugins)
 vim.cmd.colorscheme 'catppuccin'
 
-require('lualine').setup()
+--require('Comment').setup()
+
+require('nvim-treesitter.configs').setup({
+  highlight = {
+    enable = true
+  }
+})
+
+require('lualine').setup({
+  options = {
+    theme = 'catppuccin'
+  }
+})
 
 
--- Keybindings
--- leader keys
--- vim.g.mapleader = ','
--- vim.keymap.set('n', '<leader>w', '<cmd>write<cr>')
--- vim.keymap.set('n', '<leader>a', 'keepjumps normal! ggVG<cr>')
--- 
--- -- add dedicated bindings to copy to system clipboard
--- vim.keymap.set({'n', 'x'}, 'cp', '"+y')
--- vim.keymap.set({'n', 'x'}, 'cv', '"+p')
 
