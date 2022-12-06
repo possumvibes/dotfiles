@@ -14,9 +14,11 @@ alias la='ls -la'
 
 # dotfiles management
 alias cm='chezmoi'
+alias cme='chezmoi edit' 
+alias cmr='chezmoi re-add'
+
 alias cma='chezmoi add'
 alias cmc='chezmoi cd'
-alias cme='chezmoi edit' 
 alias cmp='chezmoi apply && echo chezmoi diff applied'
 
 # package updates
