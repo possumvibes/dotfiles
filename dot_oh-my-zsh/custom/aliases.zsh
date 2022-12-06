@@ -16,8 +16,8 @@ alias la='ls -la'
 alias cm='chezmoi'
 alias cma='chezmoi add'
 alias cmc='chezmoi cd'
-alias cme='chezmoi edit'
-alias cmap='chezmoi apply'
+alias cme='chezmoi edit' 
+alias cmp='chezmoi apply && echo chezmoi diff applied'
 
 # package updates
 alias uu='sudo dnf upgrade --refresh -y'

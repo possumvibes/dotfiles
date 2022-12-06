@@ -7,7 +7,7 @@
 -- 2. Add the plugin to the packer startup function.
 -- 3. Write changes 
 -- 4. IN A SEPARATE TERMINAL INSTANCE (or after :wq):
---    a. call cmap to apply changes
+--    a. call chezmoi apply to apply changes
 --    b. open a new nvim instance
 --    c. run `:PackerSync` to install new plugins
 -- 4. NOW you can add the usage into the init.lua.
@@ -46,6 +46,15 @@ return require('packer').startup(function(use)
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
+
+  -- duck! O> :)
+  use {
+    'tamton-aquib/duck.nvim',
+    config = function()
+        vim.keymap.set('n', '<leader>dd', function() require("duck").hatch() end, {})
+        vim.keymap.set('n', '<leader>dk', function() require("duck").cook() end, {})
+    end
   }
 
   -- Treesitter!

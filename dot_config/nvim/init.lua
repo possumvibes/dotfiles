@@ -25,15 +25,26 @@ require('plugins')
 ---- Settings! ----
 -------------------
 
--- Appearance/Behavior
-vim.opt.number = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
-vim.opt.termguicolors = true
+-- Set Leader key first thing!
+vim.g.mapleader = ' '       -- LEADER is SPACE!
 
+vim.keymap.set('n', '<Leader>w', '<cmd>write<cr>', {desc = 'Save'})
+
+-- Appearance/Behavior
+vim.opt.number = true       -- show line numbers
+vim.opt.ignorecase = true   -- ignore uppercase in searches
+vim.opt.smartcase = true    -- ...unless there's a capital in the search phrase
+
+vim.opt.wrap = true         -- long lines wrap
+vim.opt.breakindent = true  -- wrapped lines keep the real line's indent
+
+vim.opt.tabstop = 2         -- tab size
+vim.opt.shiftwidth = 2      -- line indentation tab (same as tab)
+vim.opt.expandtab = true    -- expands tabs to spaces
+
+vim.opt.splitbelow = true   -- default hsplit is below active window
+vim.opt.splitright = true   -- default vsplit is right of active window
+vim.opt.termguicolors = true -- truly no idea but it's important for at least one plugin and general rendering?
 
 -- Vibes (namely, plugins)
 vim.cmd.colorscheme 'catppuccin'
