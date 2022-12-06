@@ -28,7 +28,11 @@ require('plugins')
 -- Set Leader key first thing!
 vim.g.mapleader = ' '       -- LEADER is SPACE!
 
-vim.keymap.set('n', '<Leader>w', '<cmd>write<cr>', {desc = 'Save'})
+vim.keymap.set('n', '<leader>a', '<cmd>keepjumps normal! ggVG<cr>', {desc = 'Select all'})
+vim.keymap.set('n', '<leader>q', ':source $MYVIMRC<cr>', {desc = 'Reload config, sync plugins'})
+vim.keymap.set('n', '<leader>qq', '<cmd>source $MYVIMRC | PackerSync<cr>', {desc = 'Reload config, sync plugins'})
+vim.keymap.set('n', '<leader>w', '<cmd>write<cr>', {desc = 'Save'})
+vim.keymap.set('n', '<leader>x', '<cmd>NvimTreeToggle<cr>', {desc = 'Toggle Explorer'})
 
 -- Appearance/Behavior
 vim.opt.number = true       -- show line numbers
@@ -46,7 +50,7 @@ vim.opt.splitbelow = true   -- default hsplit is below active window
 vim.opt.splitright = true   -- default vsplit is right of active window
 vim.opt.termguicolors = true -- truly no idea but it's important for at least one plugin and general rendering?
 
--- Vibes (namely, plugins)
+-- Vibes (namely, plugins) 
 vim.cmd.colorscheme 'catppuccin'
 
 require('Comment').setup()
