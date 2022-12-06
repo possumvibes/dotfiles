@@ -15,7 +15,7 @@ alias la='ls -la'
 # dotfiles management
 alias cm='chezmoi'
 alias cme='chezmoi edit' 
-alias cmr='chezmoi re-add'
+alias cmr='~/scripts/readd_dots'
 
 alias cma='chezmoi add'
 alias cmc='chezmoi cd'
