@@ -76,17 +76,13 @@ return require('packer').startup(function(use)
     }
   }
 
-  -- Bracket and Quote Auto-Pairing
---  use 'm4xshen/autoclose.nvim'
-  use({
-    "kylechui/nvim-surround",
-    config = function()
-        require("nvim-surround").setup({
-            -- Configuration here, or leave empty to use defaults
-        })
-    end
-  })
-  
+  -- Bracket Pairing
+  use {
+	  "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  }
+
+
   -- Commenting
   use {
     'numToStr/Comment.nvim',
