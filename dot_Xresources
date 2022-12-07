@@ -18,8 +18,8 @@ URxvt*scrollBar:       false
 URxvt.scrollBar_right: false
 
 ! Fonts
-urxvt.font:	 xft:CascadiaMonoPl-SemiLight:pixelsize=16:antialias=true
-urxvt.boldFont:  xft:CascadiaMonoPl-SemiBold:pixelsize=16:antialias=true
+urxvt.font:	 xft:cascadia mono pl:semilight:pixelsize=16:antialias=true
+urxvt.boldFont:  xft:cascadia mono pl:semibold:pixelsize=16:antialias=true
 
 ! Transparency (apparently needs to be a line apart from background?)
 URxvt*depth: 32
