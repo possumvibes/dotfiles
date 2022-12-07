@@ -53,9 +53,14 @@ vim.opt.termguicolors = true -- truly no idea but it's important for at least on
 -- Vibes (namely, plugins) 
 vim.cmd.colorscheme 'catppuccin'
 
-require('Comment').setup()
-
 require('nvim-tree').setup()
+
+require('mini.comment').setup()
+require('mini.fuzzy').setup()
+require('mini.indentscope').setup()
+require('mini.pairs').setup()
+require('mini.surround').setup()
+require('mini.tabline').setup()
 
 require('nvim-treesitter.configs').setup({
   highlight = {
@@ -70,12 +75,9 @@ require('nvim-treesitter.configs').setup({
   }
 })
 
-
 require('lualine').setup({
   options = {
     theme = 'catppuccin'
   }
 })
-
-
 

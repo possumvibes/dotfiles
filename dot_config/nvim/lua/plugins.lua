@@ -76,8 +76,10 @@ return require('packer').startup(function(use)
     }
   }
 
-  -- Bracket Pairing
+  -- Using the mini.nvim library for Probably Many Things
+  use 'echasnovski/mini.nvim'
 
+  -- Bracket Pairing
 
   -- use({
   --   "kylechui/nvim-surround", -- this keeps failing outside the first reloaded session?
@@ -90,21 +92,21 @@ return require('packer').startup(function(use)
   -- })
 
 
-  use {
-  	"windwp/nvim-autopairs",
-      config = function() require("nvim-autopairs").setup {} end
-  }
+  -- use {
+  -- 	"windwp/nvim-autopairs",
+  --     config = function() require("nvim-autopairs").setup {} end
+  -- }
 
 
 
 
-  -- Commenting
-  use {
-    'numToStr/Comment.nvim',
-    config = function()
-        require('Comment').setup()
-    end
-  }
+  -- -- Commenting
+  -- use {
+  --   'numToStr/Comment.nvim',
+  --   config = function()
+  --       require('Comment').setup()
+  --   end
+  -- }
 
 
   -- Automatically set up your configuration after cloning packer.nvim
