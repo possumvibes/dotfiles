@@ -32,8 +32,7 @@ bspc rule -a Wrapper-2.0 state=floating border=off focus=on
 
 bspc rule -a Gimp-2.10 desktop='^8' state=floating follow=on
 bspc rule -a Emacs desktop='^6' state=tiled follow=on
-#bspc rule -a Chromium desktop='^2'
-#bspc rule -a mplayer2 state=floating
+#bspc rule -a Galculator state=floating
 #bspc rule -a Kupfer.py focus=on
 #bspc rule -a Screenkey manage=off
 
