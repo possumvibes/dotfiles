@@ -3,11 +3,12 @@ alias vi='nvim'
 alias vim='nvim'
 alias view='nvim -R'
 
-# Nvim init.lua
+# Config files
 alias vimrc='nvim ~/.config/nvim/init.lua'
+alias aliases='nvim $ZSH_CUSTOM/aliases.zsh'
 
 # Reload Configs
-alias xup='xrdb -load ~/.Xresources "reloaded .Xresources"'
+alias xup='xrdb -load ~/.Xresources && echo "reloaded .Xresources"'
 alias zup='source ~/.zshrc && echo "reloaded zshrc"'
 
 # navigation and listing

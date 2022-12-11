@@ -13,7 +13,7 @@ URxvt.lineSpace: 0
 URxvt.internalBorder: 10
 URxvt.cursorBlink: false
 URxvt.cursorUnderline: false
-URxvt.saveline: 2048
+URxvt.saveline: 1024
 URxvt*scrollBar:       false
 URxvt.scrollBar_right: false
 

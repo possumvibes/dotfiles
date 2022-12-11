@@ -5,8 +5,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+####################################
+########  My User Settings! ########
+####################################
+#
 # Add to PATH:
 typeset -U path PATH
 path+=(~/.local/bin)
@@ -18,38 +20,38 @@ HISTFILE=~/.config/zsh/histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
+# Aliases and keybindings are in $ZSH_CUSTOM.
+
+####################################
+####  oh-my-zsh specific-config ####
+####################################
+#
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.config/zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
+# ZSH Theme
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="robbyrussell"
+#ZSH_THEME="powerlevel10k/powerlevel10k"
 
-
-# Uncomment one of the following lines to change the auto-update behavior
-zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-zstyle ':omz:update' frequency 7
+# omz update config
+zstyle ':omz:update' mode auto # automatic updates 
+zstyle ':omz:update' frequency 1 # daily
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $SH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+# Enter separated by space or line (not comma).
 plugins=(copybuffer)
 
-# Load the omz startup/config script
+# Load the omz startup/config script.
+# This will load *.zsh in $ZSH_CUSTOM. 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-# Aliases are stored in $ZSH_CUSTOM/aliases
-
+# More powerlevel10k stuff
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
