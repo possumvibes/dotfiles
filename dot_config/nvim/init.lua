@@ -29,9 +29,6 @@ require('plugins')
 vim.g.mapleader = ' '       -- LEADER is SPACE!
 
 vim.keymap.set('n', '<leader>a', '<cmd>keepjumps normal! ggVG<cr>', {desc = 'Select all'})
-vim.keymap.set('n', '<leader>e', 'gc', {desc = 'Comment selection'})
-vim.keymap.set('n', '<leader>ee', 'gcc', {desc = 'Comment line'})
---todo: map <leader>m to C-w for buffer movement
 vim.keymap.set('n', '<leader>q', ':source $MYVIMRC<cr>', {desc = 'Reload config, sync plugins'})
 vim.keymap.set('n', '<leader>qq', '<cmd>source $MYVIMRC | PackerSync<cr>', {desc = 'Reload config, sync plugins'})
 vim.keymap.set('n', '<leader>w', '<cmd>write<cr>', {desc = 'Save'})
@@ -58,7 +55,14 @@ vim.cmd.colorscheme 'catppuccin'
 
 require('nvim-tree').setup()
 
-require('mini.comment').setup()
+require('mini.comment').setup({
+  mappings = {
+    -- changing comment from gc to mc
+    comment = 'mc',
+    comment_line = 'mcc',
+    textobject = 'mc' 
+  }
+})
 require('mini.fuzzy').setup()
 require('mini.indentscope').setup()
 require('mini.pairs').setup()
