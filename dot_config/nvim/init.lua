@@ -29,6 +29,9 @@ require('plugins')
 vim.g.mapleader = ' '       -- LEADER is SPACE!
 
 vim.keymap.set('n', '<leader>a', '<cmd>keepjumps normal! ggVG<cr>', {desc = 'Select all'})
+vim.keymap.set('n', '<leader>e', 'gc', {desc = 'Comment selection'})
+vim.keymap.set('n', '<leader>ee', 'gcc', {desc = 'Comment line'})
+--todo: map <leader>m to C-w for buffer movement
 vim.keymap.set('n', '<leader>q', ':source $MYVIMRC<cr>', {desc = 'Reload config, sync plugins'})
 vim.keymap.set('n', '<leader>qq', '<cmd>source $MYVIMRC | PackerSync<cr>', {desc = 'Reload config, sync plugins'})
 vim.keymap.set('n', '<leader>w', '<cmd>write<cr>', {desc = 'Save'})
@@ -63,9 +66,17 @@ require('mini.surround').setup()
 require('mini.tabline').setup()
 
 require('nvim-treesitter.configs').setup({
+
+  -- Parsers to auto-install
+  ensure_installed = {"bash", "c", "diff", "lua"},
+  sync_install = false, 
+
+  -- highlight module
   highlight = {
     enable = true
   },
+
+  -- textobjects module
   textobjects = {
     select = {
       enable = true,

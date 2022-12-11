@@ -3,6 +3,8 @@ alias vi='nvim'
 alias vim='nvim'
 alias view='nvim -R'
 
+alias vimrc='nvim ~/.config/nvim/init.lua'
+
 alias xup='xrdb -load ~/.Xresources'
 
 # navigation and listing
