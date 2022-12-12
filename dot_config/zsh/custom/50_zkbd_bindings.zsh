@@ -5,8 +5,7 @@
 # Line-editor mode
 bindkey -e
 
-# Ctrl+Arrows By Terminal
-## Urxvt
+## Urxvt bindings
 bindkey "^[Od" backward-word
 bindkey "^[Oc" forward-word
 
