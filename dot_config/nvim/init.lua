@@ -69,6 +69,8 @@ require('mini.pairs').setup()
 require('mini.surround').setup()
 require('mini.tabline').setup()
 
+require('colorizer').setup()
+
 require('nvim-treesitter.configs').setup({
 
   -- Parsers to auto-install

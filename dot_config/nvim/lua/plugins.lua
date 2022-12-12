@@ -79,6 +79,9 @@ return require('packer').startup(function(use)
   -- Using the mini.nvim library for Many Things
   use 'echasnovski/mini.nvim'
 
+  -- color highlighter
+  use 'norcalli/nvim-colorizer.lua'
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
