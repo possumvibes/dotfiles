@@ -15,3 +15,7 @@ polybar example &
 
 # notifications
 dunst &
+
+# Redshift
+redshift &
+
