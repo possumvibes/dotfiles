@@ -1,7 +1,45 @@
-#
-# wm independent hotkeys
+# Set sxhkd to always use sh as its execution shell
+set -U SXHKD_SHELL sh
+
+#     ########################
+#  ##############################
+# ####                        ####
+####    sxhkd hot key daemon    #### 
+# ####                        ####
+#  ##############################
+#     ########################
 #
 
+#
+#######################
+##  session hotkeys  ##
+#######################
+#
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# Log out of session 
+super + alt +{_,shift + }q
+	{xfce4-session-logout, bspc quit}
+
+# lock session
+ctrl + alt +{_,shift + }l
+	{ xflock4, $HOME/scripts/locker.sh }
+
+# quit/restart bspwm
+super + alt + r
+	bspc wm -r
+
+# close and kill applications
+super + {_,shift + }w
+	bspc node -{c,k}
+
+
+####################
+####  PROGRAMS  ####
+####################
+#
 # terminal emulator
 super +{_,shift +,ctrl + }Return
 	{ urxvt, kitty, alacritty }
@@ -32,35 +70,6 @@ super + shift + r
 	redshift -PO 2200 -b 0.6
 super + ctrl + r
 	redshift -x
-
-#
-# session hotkeys
-#
-
-# make sxhkd reload its configuration files:
-super + Escape
-	pkill -USR1 -x sxhkd
-
-# log out of xfce
-super + alt +{_,shift + }q
-	{xfce4-session-logout, bspc quit}
-
-# lock xfce
-ctrl + alt +{_,shift + }l
-	{ xflock4, $HOME/scripts/locker.sh }
-
-#
-# bspwm hotkeys
-#
-
-# quit/restart bspwm
-super + alt + r
-	bspc wm -r
-
-# close and kill
-super + {_,shift + }w
-	bspc node -{c,k}
-
 
 #
 # state/flags
