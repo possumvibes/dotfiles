@@ -47,7 +47,7 @@ super + alt +{_,shift + }q
 
 # lock xfce
 ctrl + alt +{_,shift + }l
-	{ xflock4, ~/scripts/locker.sh}
+	{ xflock4, $HOME/scripts/locker.sh }
 
 #
 # bspwm hotkeys
