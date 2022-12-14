@@ -1,20 +1,6 @@
---------------
--- init.lua --
---------------
-
--- How To Update This File With Chezmoi
--- 1. cme .config/nvim/init.lua
--- 2. Write changes 
--- 3. IN A SEPARATE TERMINAL INSTANCE (or after :wq):
---    a. call cmap to apply changes
---    b. open a new nvim instance
---    c. run `:source $MYVIMRC` to reload init.lua
--- 4. Return to editing instance, if not complete.
-
--- The nvim instance will not pick up the changes
--- because the actual init.lua change happens through chezmoi
--- so the fastest way to get the package sync to happen
--- is to use a separate terminal
+------------------------
+-- Ye Olde (Neo)Vimrc --
+------------------------
 
 ------------------------
 ---- Import Modules ----
@@ -28,11 +14,22 @@ require('plugins')
 -- Set Leader key first thing!
 vim.g.mapleader = ' '       -- LEADER is SPACE!
 
-vim.keymap.set('n', '<leader>a', '<cmd>keepjumps normal! ggVG<cr>', {desc = 'Select all'})
+-- Window navigation
+vim.keymap.set('n', '<leader>n', '<cmd>wincmd h<cr>', {desc = 'window: left'})
+vim.keymap.set('n', '<leader>e', '<cmd>wincmd j<cr>', {desc = 'window: down'})
+vim.keymap.set('n', '<leader>u', '<cmd>wincmd k<cr>', {desc = 'window: up'})
+vim.keymap.set('n', '<leader>a', '<cmd>wincmd l<cr>', {desc = 'window: right'})
+vim.keymap.set('n', '<leader>d', '<cmd>wincmd w<cr>', {desc = 'window: next'})
+
+vim.keymap.set('n', '<leader>t', '<cmd>NvimTreeFocus<cr>', {desc = 'Reload config, sync plugins'})
+vim.keymap.set('n', '<leader>m', '<cmd>NvimTreeToggle<cr>', {desc = 'Reload config, sync plugins'})
 vim.keymap.set('n', '<leader>q', ':source $MYVIMRC<cr>', {desc = 'Reload config, sync plugins'})
 vim.keymap.set('n', '<leader>qq', '<cmd>source $MYVIMRC | PackerSync<cr>', {desc = 'Reload config, sync plugins'})
-vim.keymap.set('n', '<leader>w', '<cmd>write<cr>', {desc = 'Save'})
 vim.keymap.set('n', '<leader>x', '<cmd>NvimTreeToggle<cr>', {desc = 'Toggle Explorer'})
+
+-- vim.keymap.set("i", '<C-S>', '<cmd>write<cr>')
+vim.keymap.set("n", '<C-S>', '<cmd>write<cr>')
+vim.keymap.set("i", '<C-S>', '<c-o>:update<cr>')
 
 -- Appearance/Behavior
 vim.opt.number = true       -- show line numbers
