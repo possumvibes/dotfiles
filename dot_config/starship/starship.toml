@@ -64,6 +64,9 @@ style = "fg:text bg:teal"
 [character] # The name of the module we are configuring is 'character'
 success_symbol = '[➜](bold green)' 
 
+[cmd_duration]
+disabled = true
+
 [palettes.m365princess]
 maroon = '#9A348E'
 salmon = '#DA627D'

@@ -15,39 +15,11 @@ SAVEHIST=1000
 
 # Aliases and keybindings are in $ZSH_CUSTOM.
 
-####################################
-####  oh-my-zsh specific-config ####
-####################################
-#
-# Path to your oh-my-zsh installation.
 export ZSH="$HOME/.config/zsh"
 source ~/.config/zsh/custom/aliases.zsh
 source ~/.config/zsh/custom/50_zkbd_bindings.zsh
-# ZSH Theme
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
-# ZSH_THEME="muse"
 
-# omz update config
-#zstyle ':omz:update' mode auto # automatic updates 
-#zstyle ':omz:update' frequency 1 # daily
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $SH_CUSTOM/plugins/
-# Enter separated by space or line (not comma).
-# plugins=(
-#   copybuffer 
-#   copypath
-# )
-
-# Load the omz startup/config script.
-# This will load *.zsh in $ZSH_CUSTOM. 
-# source $ZSH/oh-my-zsh.sh
-
+### Starship Prompt config
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 eval "$(starship init zsh)"

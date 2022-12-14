@@ -12,19 +12,19 @@ require('plugins')
 -------------------
 
 -- Set Leader key first thing!
-vim.g.mapleader = ' '       -- LEADER is SPACE!
+vim.g.mapleader = ','       
 
 -- Window navigation
-vim.keymap.set('n', '<leader>n', '<cmd>wincmd h<cr>', {desc = 'window: left'})
-vim.keymap.set('n', '<leader>e', '<cmd>wincmd j<cr>', {desc = 'window: down'})
-vim.keymap.set('n', '<leader>u', '<cmd>wincmd k<cr>', {desc = 'window: up'})
-vim.keymap.set('n', '<leader>a', '<cmd>wincmd l<cr>', {desc = 'window: right'})
-vim.keymap.set('n', '<leader>d', '<cmd>wincmd w<cr>', {desc = 'window: next'})
+vim.keymap.set('n', '<leader>s', '<cmd>wincmd h<cr>', {desc = 'window: left'})
+vim.keymap.set('n', '<leader>t', '<cmd>wincmd j<cr>', {desc = 'window: down'})
+vim.keymap.set('n', '<leader>d', '<cmd>wincmd k<cr>', {desc = 'window: up'})
+vim.keymap.set('n', '<leader>h', '<cmd>wincmd l<cr>', {desc = 'window: right'})
+vim.keymap.set('n', '<leader>\'', '<cmd>wincmd w<cr>', {desc = 'window: next'})
 
-vim.keymap.set('n', '<leader>t', '<cmd>NvimTreeFocus<cr>', {desc = 'Reload config, sync plugins'})
-vim.keymap.set('n', '<leader>m', '<cmd>NvimTreeToggle<cr>', {desc = 'Reload config, sync plugins'})
-vim.keymap.set('n', '<leader>q', ':source $MYVIMRC<cr>', {desc = 'Reload config, sync plugins'})
-vim.keymap.set('n', '<leader>qq', '<cmd>source $MYVIMRC | PackerSync<cr>', {desc = 'Reload config, sync plugins'})
+vim.keymap.set('n', '<leader>m', '<cmd>NvimTreeFocus<cr>', {desc = 'Reload config, sync plugins'})
+vim.keymap.set('n', '<leader>mh', '<cmd>NvimTreeToggle<cr>', {desc = 'Reload config, sync plugins'})
+vim.keymap.set('n', '<leader>v', ':source $MYVIMRC<cr>', {desc = 'Reload config, sync plugins'})
+vim.keymap.set('n', '<leader>vp', '<cmd>source $MYVIMRC | PackerSync<cr>', {desc = 'Reload config, sync plugins'})
 vim.keymap.set('n', '<leader>x', '<cmd>NvimTreeToggle<cr>', {desc = 'Toggle Explorer'})
 
 -- vim.keymap.set("i", '<C-S>', '<cmd>write<cr>')
@@ -71,7 +71,7 @@ require('colorizer').setup()
 require('nvim-treesitter.configs').setup({
 
   -- Parsers to auto-install
-  ensure_installed = {"bash", "c", "diff", "lua"},
+  ensure_installed = {"bash", "c", "fish", "diff", "lua"},
   sync_install = false, 
 
   -- highlight module
