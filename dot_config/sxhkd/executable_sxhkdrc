@@ -42,7 +42,7 @@ super + {_,shift + }w
 #
 # terminal emulator
 super +{_,shift +,ctrl + }Return
-	{ urxvt, kitty, alacritty }
+	{ urxvt, alacritty, kitty }
 
 # program launcher
 super + @space
