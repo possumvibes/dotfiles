@@ -2,10 +2,13 @@ env:
   TERM: xterm-256color
 
 window:
-  opacity: .9
+  opacity: .8
 
 font:
-  size: 12.0
+  size: 10
+  normal:
+    family: CaskaydiaCove Nerd Font
+    style: SemiLight
   
 import:
-  - ~/.config/alacritty/themes/gruvbox_hard.yml
+  - ~/.config/alacritty/themes/catppuccin-mocha.yml
