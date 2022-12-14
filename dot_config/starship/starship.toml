@@ -3,6 +3,7 @@
 
 format = """
 [](maroon)\
+$shell\
 $username\
 [](bg:salmon fg:maroon)\
 $directory\
@@ -50,8 +51,9 @@ format = '[ $time ]($style)'
 
 [shell]
 disabled = false
-style= "fg:text bg:turquoise"
-format = '[ $indicator ]($style)'
+# style= "fg:text bg:turquoise"
+style= "bold fg:text bg:maroon"
+format = '[$indicator ]($style)'
 
 [sudo]
 disabled = false
