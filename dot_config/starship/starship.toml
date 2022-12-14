@@ -1,0 +1,70 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[](maroon)\
+$username\
+[](bg:salmon fg:maroon)\
+$directory\
+[](fg:salmon bg:peach)\
+$git_branch\
+$git_status\
+[](fg:peach bg:sky)\
+$time\
+[](fg:sky bg:turquoise)\
+[](fg:turquoise bg:teal)\
+$sudo\
+[ ](fg:teal)
+$character
+"""
+
+# Inserts a blank line between shell prompts
+add_newline = true
+palette='m365princess'
+
+[username]
+show_always = true
+style_user = "bold fg:text bg:maroon"
+style_root = "bg:maroon fg:black"
+format = '[❃ possum ❃ ]($style)'
+disabled = false
+
+[directory]
+style = "bold black bg:salmon"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+style = "fg:black bg:peach"
+format = '[ $symbol$branch ]($style)'
+
+[git_status]
+style = "fg:black bg:peach"
+format = '[$all_status$ahead_behind ]($style)'
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "fg:black bg:sky"
+format = '[ $time ]($style)'
+
+[sudo]
+disabled = false
+symbol = '♥ '
+format = '[ $symbol]($style)'
+style = "fg:text bg:teal"
+
+[character] # The name of the module we are configuring is 'character'
+success_symbol = '[➜](bold green)' 
+
+[palettes.m365princess]
+maroon = '#9A348E'
+salmon = '#DA627D'
+peach = '#FCA17D'
+sky = '#86BBD8'
+turquoise = '#06969A'
+teal = '#33658A'
+text = '#cdd6f4'
+black = '#1e1e2e'
+
