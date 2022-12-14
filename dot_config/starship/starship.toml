@@ -10,7 +10,6 @@ $directory\
 $git_branch\
 $git_status\
 [](fg:peach bg:sky)\
-$time\
 [](fg:sky bg:turquoise)\
 [](fg:turquoise bg:teal)\
 $sudo\
@@ -26,7 +25,7 @@ palette='m365princess'
 show_always = true
 style_user = "bold fg:text bg:maroon"
 style_root = "bg:maroon fg:black"
-format = '[❃ possum ❃ ]($style)'
+format = '[♥ ]($style)'
 disabled = false
 
 [directory]
@@ -49,9 +48,14 @@ time_format = "%R" # Hour:Minute Format
 style = "fg:black bg:sky"
 format = '[ $time ]($style)'
 
+[shell]
+disabled = false
+style= "fg:text bg:turquoise"
+format = '[ $indicator ]($style)'
+
 [sudo]
 disabled = false
-symbol = '♥ '
+symbol = '❃'
 format = '[ $symbol]($style)'
 style = "fg:text bg:teal"
 
