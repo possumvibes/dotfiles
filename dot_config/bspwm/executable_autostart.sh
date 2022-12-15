@@ -11,8 +11,7 @@ xss-lock --transfer-sleep-lock -- i3lock -i $imagepath -M -n &
 # picom &
 
 # panel
-# todo use launch.sh instead
-polybar possumtest &
+~/.config/polybar/launch.sh &
 
 # notifications
 dunst &

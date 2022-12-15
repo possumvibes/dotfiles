@@ -34,5 +34,7 @@ if [ -f ~/.bash_aliases ]; then
 	. ~/.bash_aliases
 fi
 
+## Starship Prompt config
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
 eval "$(starship init bash)"
 

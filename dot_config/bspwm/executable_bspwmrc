@@ -4,6 +4,7 @@
 sxhkd &
 # todo: call ./autostart.sh instead of calling these individually
 picom &
+# ~/.config/bspwm/autostart.sh &
 
 ## one monitor only
 bspc monitor -d I II III IV V VI VII VIII IX X
