@@ -2,9 +2,14 @@
 
 # let's! get! this! hotkey daemon.
 sxhkd &
-# todo: call ./autostart.sh instead of calling these individually
 picom &
-# ~/.config/bspwm/autostart.sh &
+
+# if it's a bspwm-only  session,
+# start up the environment :)
+if [ "$GDMSESSION" == "bspwm" ]
+then
+ ~/.config/bspwm/autostart.sh &
+fi
 
 ## one monitor only
 bspc monitor -d I II III IV V VI VII VIII IX X

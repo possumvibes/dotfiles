@@ -21,6 +21,9 @@ vim.keymap.set('n', '<leader>d', '<cmd>wincmd k<cr>', {desc = 'window: up'})
 vim.keymap.set('n', '<leader>h', '<cmd>wincmd l<cr>', {desc = 'window: right'})
 vim.keymap.set('n', '<leader>\'', '<cmd>wincmd w<cr>', {desc = 'window: next'})
 
+vim.keymap.set("n", '<C-H>', '<C-W>')
+vim.keymap.set("n", '<C-H>h', '<C-W>w')
+
 vim.keymap.set('n', '<leader>m', '<cmd>NvimTreeFocus<cr>', {desc = 'focus nvimTree'})
 vim.keymap.set('n', '<leader>mh', '<cmd>NvimTreeToggle<cr>', {desc = 'toggle nvimTree'})
 vim.keymap.set('n', '<leader>v', ':source $MYVIMRC<cr>', {desc = 'Reload config, sync plugins'})
@@ -56,9 +59,9 @@ require('nvim-tree').setup()
 require('mini.comment').setup({
   mappings = {
     -- changing comment from gc to mc
-    comment = 'mc',
-    comment_line = 'mcc',
-    textobject = 'mc' 
+    comment = '<leader>c',
+    comment_line = '<leader>cc',
+    textobject = '<leader>c' 
   }
 })
 require('mini.fuzzy').setup()

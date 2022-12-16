@@ -10,4 +10,4 @@ polybar-msg cmd quit
 barname="possumtest"
 
 echo "---" | tee -a /tmp/$barname.log
-polybar $barname 2>&1 | tee -a /tmp/$barname.log & disown
+polybar $barname -r 2>&1 | tee -a /tmp/$barname.log & disown
