@@ -2,78 +2,134 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](maroon)\
 $shell\
 $username\
-[](bg:salmon fg:maroon)\
 $directory\
-[](fg:salmon bg:peach)\
 $git_branch\
 $git_status\
-[](fg:peach bg:sky)\
-[](fg:sky bg:turquoise)\
-[](fg:turquoise bg:teal)\
-$sudo\
-[ ](fg:teal)
+$sudo
 $character
 """
 
 # Inserts a blank line between shell prompts
 add_newline = true
-palette='m365princess'
-
-[username]
-show_always = true
-style_user = "bold fg:text bg:maroon"
-style_root = "bg:maroon fg:black"
-format = '[♥ ]($style)'
-disabled = false
-
-[directory]
-style = "bold black bg:salmon"
-format = "[ $path ]($style)"
-truncation_length = 3
-truncation_symbol = "…/"
-
-[git_branch]
-style = "fg:black bg:peach"
-format = '[ $symbol$branch ]($style)'
-
-[git_status]
-style = "fg:black bg:peach"
-format = '[$all_status$ahead_behind ]($style)'
-
-[time]
-disabled = false
-time_format = "%R" # Hour:Minute Format
-style = "fg:black bg:sky"
-format = '[ $time ]($style)'
+palette='catppuccin-macchiato'
 
 [shell]
 disabled = false
-# style= "fg:text bg:turquoise"
-style= "bold fg:text bg:maroon"
-format = '[$indicator ]($style)'
+fish_indicator = ''
+bash_indicator = '❃'
+zsh_indicator = ''
+powershell_indicator = ''
+cmd_indicator = ''
+format = '[$indicator]($style)'
+style = 'pink'
+
+[username]
+show_always = false
+style_user = "bold fg:rosewater"
+style_root = "bold fg:rosewater"
+format = ' [$user]($style): '
+disabled = false
+
+[directory]
+style = "bold fg:teal"
+format = " [$path]($style) "
+truncation_length = 8
+truncate_to_repo = true
+truncation_symbol = ""
+
+[git_branch]
+style = "fg:subtext0"
+symbol = ""
+format = '[$branch]($style)'
+
+[git_status]
+style = "fg:rosewater"
+format = '[$all_status]($style)[$ahead_behind](blue) '
 
 [sudo]
-disabled = false
-symbol = '❃'
-format = '[ $symbol]($style)'
-style = "fg:text bg:teal"
+disabled = true
+symbol = ''
+format = '[$symbol]($style)'
+style = "fg:yellow"
 
-[character] # The name of the module we are configuring is 'character'
+[character] 
 success_symbol = '[➜](bold green)' 
+error_symbol = '[➜](bold red)' 
 
 [cmd_duration]
 disabled = true
 
-[palettes.m365princess]
-maroon = '#9A348E'
-salmon = '#DA627D'
-peach = '#FCA17D'
-sky = '#86BBD8'
-turquoise = '#06969A'
-teal = '#33658A'
-text = '#cdd6f4'
-black = '#1e1e2e'
+# ;-------------------------
+# ; Catppuccin Mocha Palette
+# ; Maintainer: justTOBBI
+# ;--------------------------
+[palettes.catppuccin-mocha]
+ base = '#1e1e2e'
+ mantle = '#181825'
+ crust = '#11111b'
 
+ text = '#cdd6f4'
+ subtext0 = '#a6adc8'
+ subtext1 = '#bac2de'
+
+ surface0 = '#313244'
+ surface1 = '#45475a'
+ surface2 = '#585b70'
+ 
+ overlay0 = '#6c7086'
+ overlay1 = '#7f849c'
+ overlay2 = '#9399b2'
+ 
+
+ blue = '#89b4fa'
+ lavender = '#b4befe'
+ sapphire = '#74c7ec'
+ sky = '#89dceb'
+ teal = '#94e2d5'
+ green = '#a6e3a1'
+ yellow = '#f9e2af'
+ peach = '#fab387'
+ maroon = '#eba0ac'
+ red = '#f38ba8'
+ mauve = '#cba6f7'
+ pink = '#f5c2e7'
+ flamingo = '#f2cdcd'
+ rosewater = '#f5e0dc'
+
+ transparent = '#FF00000'
+
+ [palettes.catppuccin-macchiato]
+ base = '#24273a'
+ mantle = '#1e2030'
+ crust = '#181926'
+
+ text = '#cad3f5'
+ subtext0 = '#a5adcb'
+ subtext1 = '#b8c0e0'
+
+ surface0 = '#363a4f'
+ surface1 = '#494d64'
+ surface2 = '#5b6078'
+ 
+ overlay0 = '#6e738d'
+ overlay1 = '#8087a2'
+ overlay2 = '#939ab7'
+ 
+ blue = '#8aadf4'
+ lavender = '#b7bdf8'
+ sapphire = '#7dc4e4'
+ sky = '#91d7e3'
+ teal = '#8bd5ca'
+ green = '#a6da95'
+ yellow = '#eed49f'
+ peach = '#f5a97f'
+ maroon = '#ee99a0'
+ red = '#ed8796'
+ mauve = '#c6a0f6'
+ pink = '#f5bde6'
+ flamingo = '#f0c6c6'
+ rosewater = '#f4dbd6'
+
+ transparent = '#FF00000'
