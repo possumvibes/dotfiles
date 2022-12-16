@@ -8,7 +8,7 @@ window:
     y: 10
 
 font:
-  size: 12
+  size: 11
   normal:
     family: CaskaydiaCove Nerd Font
     style: SemiLight

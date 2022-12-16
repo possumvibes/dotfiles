@@ -18,7 +18,7 @@ URxvt*scrollBar:       false
 URxvt.scrollBar_right: false
 
 ! Fonts
-urxvt.font:	 xft:CaskaydiaCove Nerd Font Mono:SemiLight:pixelsize=16:antialias=true
+urxvt.font:	 xft:CaskaydiaCove Nerd Font Mono:SemiLight:pixelsize=16:antialias=true,xft:Noto Emoji
 urxvt.boldFont:  xft:CaskaydiaCove Nerd Font Mono:SemiBold:pixelsize=16:antialias=true
 
 ! Transparency (apparently needs to be a line apart from background?)
