@@ -5,10 +5,9 @@ source ~/.config/fish/env_vars.fish
 source ~/.config/fish/abbreviations.fish
 
 if status is-interactive
-    # neofetch
+  set fish_greeting
 
-    # set custom prompt
-   set fish_greeting
-   # starship init fish | source
+  ## Starship Prompt config
+  starship init fish | source
 end
 
