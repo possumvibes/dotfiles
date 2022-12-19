@@ -2,6 +2,7 @@
 alias vi='nvim'
 alias vim='nvim'
 alias view='nvim -R'
+alias aa='nvim .bash_aliases'
 
 # navigation and listing
 alias la='ls -la'
