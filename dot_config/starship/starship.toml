@@ -7,8 +7,8 @@ $username\
 $directory\
 $git_branch\
 $git_status\
-$sudo
-$character
+$sudo\
+$character\
 """
 
 # Inserts a blank line between shell prompts
@@ -18,10 +18,8 @@ palette='catppuccin-macchiato'
 [shell]
 disabled = false
 fish_indicator = '❃'
-bash_indicator = ''
-zsh_indicator = ''
-powershell_indicator = ''
-cmd_indicator = ''
+bash_indicator = '\$'
+zsh_indicator = '%'
 format = '[$indicator]($style)'
 style = 'pink'
 
