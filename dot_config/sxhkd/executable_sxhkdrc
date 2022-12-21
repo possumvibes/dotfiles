@@ -24,8 +24,8 @@ super + alt +{_,shift + }q
 	{xfce4-session-logout, bspc quit}
 
 # lock session
-ctrl + alt +{_,shift + }l
-	{ xflock4, $HOME/scripts/locker.sh }
+ctrl + alt + l
+	{ lock-screen }
 
 # quit/restart bspwm
 super + alt + r

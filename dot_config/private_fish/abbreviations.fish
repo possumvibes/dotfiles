@@ -11,7 +11,7 @@ abbr -a md	'mkdir -p'
 # chezmoi dotfiles management
 abbr -a cma	'cm add'
 abbr -a cmc	'cm cd'
-abbr -a cmr	'~/scripts/readd_dots'
+abbr -a cmr	'cm-readd-dots'
 
 ### editing through chezmoi
 abbr -a cme	'chezmoi edit' 
