@@ -14,8 +14,7 @@ alias aa='nvim ~/.bash_aliases'
 
 # Reload Configs
 alias xup='xrdb -load ~/.Xresources && echo "reloaded .Xresources"'
-alias sup='source $FSHDIR/config.fish && echo reloaded config.fish'
-# alias zup 'source ~/.zshrc && echo reloaded zshrc'
+alias sup='source ~/.bashrc && "echo reloaded .bashrc"'
 
 # navigation and listing
 alias la='ls -lah'
