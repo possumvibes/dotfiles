@@ -1,32 +1,35 @@
 # workflow apps
-alias e $EDITOR
-alias vi "nvim"
-alias vim "nvim"
-alias view "nvim -R"
-
-# package updates
-alias uu	'sudo dnf upgrade --refresh -y'
+abbr -a e $EDITOR
+abbr -a er "$EDITOR -R"
 
 # Config files
-alias vimrc 'nvim ~/.config/nvim/init.lua'
-alias aa	'nvim $FSHDIR/abbreviations.fish'
+abbr -a vimrc 'nvim ~/.config/nvim/init.lua'
+abbr -a aa	'nvim $FSHDIR/abbreviations.fish'
 
-# Reload Configs
-alias xup 'xrdb -load ~/.Xresources && echo "reloaded .Xresources"'
-alias sup 'source $FSHDIR/config.fish && echo reloaded config.fish'
-
-# navigation and listing
-alias la	'ls -lah'
-alias ll	'ls -lh'
-alias md	'mkdir -p'
+abbr -a md	'mkdir -p'
 
 # chezmoi dotfiles management
-alias cm	'chezmoi'
-alias cma	'chezmoi add'
-alias cmc	'chezmoi cd'
-alias cmr	'~/scripts/readd_dots'
+abbr -a cma	'cm add'
+abbr -a cmc	'cm cd'
+abbr -a cmr	'~/scripts/readd_dots'
 
 ### editing through chezmoi
-alias cme	'chezmoi edit' 
-alias cmp	'chezmoi apply && echo chezmoi diff applied'
+abbr -a cme	'chezmoi edit' 
+abbr -a cmp	'cm apply && echo chezmoi diff applied'
 
+
+###########
+# Aliases added via alias --save
+
+# package updates
+#alias uu	'sudo dnf upgrade --refresh -y'
+
+# Reload Configs
+#alias xup 'xrdb -load ~/.Xresources && echo "reloaded .Xresources"'
+#alias sup 'source $FSHDIR/config.fish && echo reloaded config.fish'
+
+# navigation and listing
+#alias la	'ls -lah'
+#alias ll	'ls -lh'
+
+#alias cm	'chezmoi'
