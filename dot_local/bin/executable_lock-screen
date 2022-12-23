@@ -24,6 +24,5 @@ if [ "$nofork" = "nofork" ];
     i3lock_cmd+=" $nofork_cmd"
 fi
   
-sleep 0.5
 i3lock $i3lock_cmd
 
