@@ -10,6 +10,8 @@ require('plugins')
 -------------------
 ---- Settings! ----
 -------------------
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- Set Leader key first thing!
 vim.g.mapleader = ','       
@@ -52,25 +54,31 @@ vim.opt.splitright = true   -- default vsplit is right of active window
 vim.opt.termguicolors = true -- truly no idea but it's important for at least one plugin and general rendering?
 
 -- Vibes (namely, plugins) 
-vim.cmd.colorscheme 'catppuccin'
+vim.cmd.colorscheme 'catppuccin' --  Catppuccin mocha my beloved
 
-require('nvim-tree').setup()
+require('nvim-tree').setup() -- File Explorer tree
 
+-- mini library: Using A Bunch Of 'Em
+-- comments babyyyyyy may yet replace this if i can't set comment symbols for additional languages
 require('mini.comment').setup({
   mappings = {
-    -- changing comment from gc to mc
+    -- default mapping is a line-jump SFB so leader key it is!
     comment = '<leader>c',
     comment_line = '<leader>cc',
     textobject = '<leader>c' 
   }
 })
-require('mini.fuzzy').setup()
-require('mini.indentscope').setup()
-require('mini.pairs').setup()
-require('mini.surround').setup()
-require('mini.tabline').setup()
-require('colorizer').setup()
+require('mini.completion').setup() -- autocompletion.
+-- require('mini.fuzzy').setup() -- may be useful with telescope, if i install that
+require('mini.indentscope').setup() -- visual of the current indent-scope
+require('mini.pairs').setup() -- AUTOPAIRING BAYBEYYYYYY
+-- require('mini.status').setup() -- under consideration for ide-like purposes
+require('mini.surround').setup() -- surround objects/selections with brackets/quotes
+require('mini.tabline').setup() -- moveable tab line of all open tabs.
 
+require('colorizer').setup() -- highlights hex codes with the color
+
+-- nvim treesitter! i still don't understand what this does but i like syntax highlighting :)
 require('nvim-treesitter.configs').setup({
 
   -- Parsers to auto-install
@@ -92,6 +100,7 @@ require('nvim-treesitter.configs').setup({
   }
 })
 
+-- status bar because #aestheticOrDeath
 require('lualine').setup({
   options = {
     theme = 'catppuccin'
