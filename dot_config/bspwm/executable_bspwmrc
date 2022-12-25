@@ -1,8 +1,8 @@
 #!/usr/bin/sh
 
 # let's! get! this! hotkey daemon.
-sxhkd &
-picom &
+pgrep -x sxhkd > /dev/null || sxhkd &
+pgrep -x picom > /dev/null || picom &
 
 # if it's a bspwm-only  session,
 # start up the environment :)

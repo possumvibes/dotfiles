@@ -21,12 +21,8 @@ xset s 600 &
 xss-lock --transfer-sleep-lock -- ~/scripts/locker.sh nofork &
 
 # notifications
-killall -q dunst 
-dunst &
-
-# Redshift
-killall -q redshift 
-redshift &
+pgrep -x dunst > /dev/null || dunst &
+pgrep -x redshift > /dev/null || redshift &
 
 #### SOUP ####
 
