@@ -7,6 +7,7 @@ abbr -a vimrc 'nvim ~/.config/nvim/init.lua'
 abbr -a aa	'nvim $FSHDIR/abbreviations.fish'
 
 abbr -a md	'mkdir -p'
+abbr -a rm  'rm -i'
 
 # chezmoi dotfiles management
 abbr -a cma	'cm add'
