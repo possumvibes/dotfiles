@@ -18,7 +18,7 @@ wallpaperdir=$HOME/.local/share/wallpapers/current
 
 # screensaver and locker of choice
 xset s 600 &
-xss-lock --transfer-sleep-lock -- ~/scripts/locker.sh nofork &
+xss-lock -l -- lock-screen nofork &
 
 # notifications
 pgrep -x dunst > /dev/null || dunst &

@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 # My preferred settings for i3lock-color.
 # settings commented out are default in my branch as of 12/3/22.
 # Someday perhaps i will mod my fork to read from a config file instead!
