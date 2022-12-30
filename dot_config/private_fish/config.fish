@@ -1,7 +1,7 @@
 # update PATH if not already present
 # technically only needs to happen once ever but
 # it's easier to have it here for reference/replication
-fish_add_path ~/.local/bin ~/bin 
+fish_add_path ~/.local/bin ~/.bin 
 
 # environment variables
 source ~/.config/fish/env_vars.fish
