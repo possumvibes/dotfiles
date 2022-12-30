@@ -21,7 +21,7 @@ xset s 300 5 &
 
 # xsecurelock config, temp
 pkill xss-lock 
-xss-lock -l -- ~/scripts/xsecurelock-conf &
+xss-lock -l -- lock-screen-xsecurelock &
 
 # notifications
 pgrep -x dunst > /dev/null || dunst &
