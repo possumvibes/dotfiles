@@ -33,5 +33,8 @@ pgrep -x redshift > /dev/null || redshift &
 feh --bg-scale $wallpaperdir/deep_space_51_nologo.jpg
 
 # panel
-~/.config/polybar/launch.sh &
 
+if [ "$GDMSESSION" == "bspwm" ]
+then
+  ~/.config/polybar/launch.sh 
+fi
