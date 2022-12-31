@@ -24,8 +24,7 @@ vim.keymap.set('n', '<leader>h', '<cmd>wincmd l<cr>', {desc = 'window: right'})
 vim.keymap.set('n', '<leader>\'', '<cmd>wincmd w<cr>', {desc = 'window: next'})
 vim.keymap.set('n', '<leader>.', '<C-W>', {desc = 'window'})
 
-vim.keymap.set('n', '<leader>m', '<cmd>NvimTreeFocus<cr>', {desc = 'focus nvimTree'})
-vim.keymap.set('n', '<leader>mh', '<cmd>NvimTreeToggle<cr>', {desc = 'toggle nvimTree'})
+vim.keymap.set('n', '<leader>m', '<cmd>NvimTreeToggle<cr>', {desc = 'toggle nvimTree'})
 vim.keymap.set('n', '<leader>v', ':source $MYVIMRC<cr>', {desc = 'Reload config, sync plugins'})
 vim.keymap.set('n', '<leader>vp', '<cmd>source $MYVIMRC | PackerSync<cr>', {desc = 'Reload config, sync plugins'})
 vim.keymap.set('n', '<leader>x', '<cmd>NvimTreeToggle<cr>', {desc = 'Toggle Explorer'})
@@ -34,6 +33,12 @@ vim.keymap.set('n', 'Y', 'yy', {desc = "Y copies the full line"})
 -- vim.keymap.set("i", '<C-S>', '<cmd>write<cr>')
 vim.keymap.set("n", '<C-S>', '<cmd>write<cr>')
 vim.keymap.set("i", '<C-S>', '<c-o>:update<cr>')
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 -- Appearance/Behavior
 vim.opt.number = true       -- show line numbers

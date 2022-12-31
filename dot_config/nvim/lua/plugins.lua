@@ -48,14 +48,19 @@ return require('packer').startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
 
-  -- duck! O> :)
   use {
-    'tamton-aquib/duck.nvim',
-    config = function()
-        vim.keymap.set('n', '<leader>dd', function() require("duck").hatch() end, {})
-        vim.keymap.set('n', '<leader>dk', function() require("duck").cook() end, {})
-    end
+    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    requires = { {'nvim-lua/plenary.nvim'} }
   }
+
+  -- -- duck! O> :)
+  -- use {
+  --   'tamton-aquib/duck.nvim',
+  --   config = function()
+  --       vim.keymap.set('n', '<leader>dd', function() require("duck").hatch() end, {})
+  --       vim.keymap.set('n', '<leader>dk', function() require("duck").cook() end, {})
+  --   end
+  -- }
 
   -- Treesitter!
   use {
