@@ -1,6 +1,7 @@
 #!/usr/bin/sh
 
 # let's! get! this! hotkey daemon.
+export SXHKD_SHELL sh
 pgrep -x sxhkd > /dev/null || sxhkd &
 pgrep -x picom > /dev/null || picom &
 

@@ -1,9 +1,7 @@
 # workflow apps
 
 alias e="$EDITOR"
-alias vi='nvim'
-alias vim='nvim'
-alias view='nvim -R'
+alias er='nvim -R'
 
 # package updates
 alias uu='sudo dnf upgrade --refresh -y'
@@ -14,8 +12,7 @@ alias aa='nvim ~/.bash_aliases'
 
 # Reload Configs
 alias xup='xrdb -load ~/.Xresources && echo "reloaded .Xresources"'
-alias sup='source $FSHDIR/config.fish && echo reloaded config.fish'
-alias zup 'source ~/.zshrc && echo reloaded zshrc'
+alias zup='source ~/.zshenv && echo reloaded profile'
 
 # navigation and listing
 alias la='ls -lah'
@@ -31,7 +28,7 @@ alias .....='cd ../../../..'
 alias cm='chezmoi'
 alias cma='chezmoi add'
 alias cmc='chezmoi cd'
-alias cmr='~/scripts/readd_dots'
+alias cmr='cm-readd-dots'
 
 ### editing through chezmoi
 alias cme='chezmoi edit' 

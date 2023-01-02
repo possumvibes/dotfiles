@@ -1,0 +1,20 @@
+# ZSH ENVIRONMENT
+
+## XDG Base Directories
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
+export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
+
+## zsh will be XDG-compliant so help me god
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+## Editor
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+## Terminal
+# export TERM="rxvt-unicode"
+
+## My environment setup :)
+export SXHKD_SHELL="sh"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml

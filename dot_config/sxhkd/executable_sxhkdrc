@@ -1,6 +1,5 @@
-# Set sxhkd to always use sh as its execution shell
-set -U SXHKD_SHELL sh
-
+#!/bin/sh
+#
 #     ########################
 #  ##############################
 # ####                        ####
