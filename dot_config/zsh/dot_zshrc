@@ -27,7 +27,7 @@ setopt PUSHD_SILENT         # Do not print the directory stack after pushd or po
 ## Add user directories to PATH
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+    PATH="$HOME/.local/bin:$HOME/.bin:$PATH"
 fi
 export PATH
 
