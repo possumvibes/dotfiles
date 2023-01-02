@@ -24,6 +24,10 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
+# Directory history
+alias d='dirs -v'
+for index ({1..9}) alias "$index"="cd +${index}"; unset index
+
 # chezmoi dotfiles management
 alias cm='chezmoi'
 alias cma='chezmoi add'
