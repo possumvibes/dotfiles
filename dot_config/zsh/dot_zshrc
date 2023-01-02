@@ -47,6 +47,11 @@ autoload -Uz compinit; compinit
 ################
 #
 
+source $ZDOTDIR/plugins/zsh-autopair/autopair.zsh
+source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZDOTDIR/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# source syntax highlighting last
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ## starship prompt: Let's Get Pretty
