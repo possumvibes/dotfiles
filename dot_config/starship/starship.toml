@@ -19,7 +19,7 @@ palette='catppuccin-macchiato'
 disabled = false
 fish_indicator = '❃'
 bash_indicator = '\$'
-zsh_indicator = '%'
+zsh_indicator = ''
 format = '[$indicator]($style)'
 style = 'pink'
 
