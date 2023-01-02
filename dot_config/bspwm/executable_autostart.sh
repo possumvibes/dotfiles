@@ -12,30 +12,24 @@
 
 #### VARIABLES ####
 #
-wallpaperdir=$HOME/.local/share/wallpapers/current
-
-# cleanup :) 
-pkill xss-lock 
-pkill redshift
-pkill dunst
-sleep 0.01
 
 #### UTILITIES ####
 
 # screensaver and locker of choice
 xset s 300 5 &
-
-# xsecurelock config, temp
 xss-lock -l -- lock-screen-xsecurelock &
 
 # notifications
-dunst &
+pgrep -x dunst > /dev/null || dunst &
 
 #### SOUP ####
+pgrep -x picom > /dev/null || picom &
+
 # night color adjustment
-redshift &
+pgrep -x redshift > /dev/null || redshift &
+
 # background! this will be fancy someday
-feh --bg-scale $wallpaperdir/deep_space_51_nologo.jpg
+feh --bg-scale $WALLPAPER_DIR/current/deep_space_51_nologo.jpg
 
 # panel, if bspwm session
 if [ "$GDMSESSION" == "bspwm" ]

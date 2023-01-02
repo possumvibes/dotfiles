@@ -7,7 +7,7 @@ then
 fi
 
 # constants
-imagepath=$HOME/.local/share/wallpapers/xfce-101-no-logo.png
+imagepath=$WALLPAPER_DIR/xfce-101-no-logo.png
 wrong_text="Incorrect."
 verif_text=""
 

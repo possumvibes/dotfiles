@@ -16,3 +16,5 @@ export VISUAL="nvim"
 ## My environment setup :)
 export SXHKD_SHELL="sh"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
+export WALLPAPER_DIR="$HOME/.local/share/wallpapers"
