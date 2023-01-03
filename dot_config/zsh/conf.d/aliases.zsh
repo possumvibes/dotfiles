@@ -1,7 +1,7 @@
 # workflow apps
 
 alias e="$EDITOR"
-alias er='nvim -R'
+alias er="$EDITOR -R"
 
 # package updates
 alias uu='sudo dnf upgrade --refresh -y'
