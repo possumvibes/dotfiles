@@ -53,14 +53,14 @@ return require('packer').startup(function(use)
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  -- -- duck! O> :)
-  -- use {
-  --   'tamton-aquib/duck.nvim',
-  --   config = function()
-  --       vim.keymap.set('n', '<leader>dd', function() require("duck").hatch() end, {})
-  --       vim.keymap.set('n', '<leader>dk', function() require("duck").cook() end, {})
-  --   end
-  -- }
+  -- duck! O> 
+  use {
+    'tamton-aquib/duck.nvim',
+    config = function()
+        vim.keymap.set('n', '<leader>nd', function() require("duck").hatch() end, {})
+        vim.keymap.set('n', '<leader>nk', function() require("duck").cook() end, {})
+    end
+  }
 
   -- Treesitter!
   use {
@@ -86,6 +86,15 @@ return require('packer').startup(function(use)
 
   -- color highlighter
   use 'norcalli/nvim-colorizer.lua'
+
+
+  -- LSP
+  use { 
+    'neovim/nvim-lspconfig',
+    -- config = function()
+    --   require('lspconfig').marksman.setup()
+    -- end
+  }-- Configurations for Nvim LSP
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
