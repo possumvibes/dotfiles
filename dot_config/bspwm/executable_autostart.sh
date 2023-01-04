@@ -17,7 +17,7 @@
 
 # screensaver and locker of choice
 xset s 300 5 &
-xss-lock -l -- lock-screen-xsecurelock &
+pgrep -x xss-lock > /dev/null || xss-lock -l -- lock-screen-xsecurelock &
 
 # notifications
 pgrep -x dunst > /dev/null || dunst &
