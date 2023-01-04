@@ -3,12 +3,14 @@
 alias e="$EDITOR"
 alias er="$EDITOR -R"
 
+alias b='bat'
+
 # package updates
 alias uu='sudo dnf upgrade --refresh -y'
 
 # Config files
 alias vimrc='nvim ~/.config/nvim/init.lua'
-alias aa='nvim ~/.bash_aliases'
+alias aa="nvim $ZDOTDIR/conf.d/aliases.zsh"
 
 # Reload Configs
 alias xup='xrdb -load ~/.Xresources && echo "reloaded .Xresources"'
@@ -36,4 +38,4 @@ alias cmr='cm-readd-dots'
 
 ### editing through chezmoi
 alias cme='chezmoi edit' 
-alias cmp='chezmoi apply && echo chezmoi diff applied'
+alias cmp='chezmoi -R apply && echo chezmoi diff applied; externals reloaded'
