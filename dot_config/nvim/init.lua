@@ -35,10 +35,15 @@ vim.keymap.set("n", '<C-S>', '<cmd>write<cr>')
 vim.keymap.set("i", '<C-S>', '<c-o>:update<cr>')
 
 local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>fb', builtin.builtin, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fc', builtin.commands, {})
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>fm', builtin.marks, {})
+vim.keymap.set('n', '<leader>fp', builtin.planets, {})
+vim.keymap.set('n', '<leader>fz', builtin.current_buffer_fuzzy_find, {})
 
 -- Appearance/Behavior
 vim.opt.number = true       -- show line numbers
@@ -59,7 +64,14 @@ vim.opt.termguicolors = true -- truly no idea but it's important for at least on
 -- Vibes (namely, plugins) 
 vim.cmd.colorscheme 'catppuccin' --  Catppuccin mocha my beloved
 
-require('nvim-tree').setup() -- File Explorer tree
+require('colorizer').setup() -- highlights hex codes with the color
+--
+-- status bar because #aestheticOrDeath
+require('lualine').setup({
+  options = {
+    theme = 'catppuccin'
+  }
+})
 
 -- mini library: Using A Bunch Of 'Em
 -- comments babyyyyyy may yet replace this if i can't set comment symbols for additional languages
@@ -72,28 +84,22 @@ require('mini.comment').setup({
   }
 })
 require('mini.completion').setup() -- autocompletion.
--- require('mini.fuzzy').setup() -- may be useful with telescope, if i install that
+require('mini.fuzzy').setup() -- fuzzy finder for telescope
 require('mini.indentscope').setup() -- visual of the current indent-scope
 require('mini.pairs').setup() -- AUTOPAIRING BAYBEYYYYYY
 -- require('mini.status').setup() -- under consideration for ide-like purposes
 require('mini.surround').setup() -- surround objects/selections with brackets/quotes
 require('mini.tabline').setup() -- moveable tab line of all open tabs.
 
-require('colorizer').setup() -- highlights hex codes with the color
 
--- nvim treesitter! i still don't understand what this does but i like syntax highlighting :)
+require('nvim-tree').setup() -- File Explorer tree
 require('nvim-treesitter.configs').setup({
-
   -- Parsers to auto-install
-  ensure_installed = {"bash", "c", "fish", "diff", "lua", "markdown", "markdown_inline"},
+  ensure_installed = {"bash", "c", "diff", "lua", "markdown", "markdown_inline"},
   sync_install = false, 
-
-  -- highlight module
   highlight = {
     enable = true
   },
-
-  -- textobjects module
   textobjects = {
     select = {
       enable = true,
@@ -103,13 +109,12 @@ require('nvim-treesitter.configs').setup({
   }
 })
 
--- status bar because #aestheticOrDeath
-require('lualine').setup({
-  options = {
-    theme = 'catppuccin'
+require('telescope').setup{
+  defaults = {
+    generic_sorter = require('mini.fuzzy').get_telescope_sorter
   }
-})
 
+}
 -- LSP Configuration
 -- pulled from right exactly here https://github.com/neovim/nvim-lspconfig/#suggested-configuration
 -- keybinds for lsp completion/diagnostic

@@ -2,16 +2,6 @@
 -- Plugins.lua --
 -----------------
 
--- How To Update This File With Chezmoi
--- 1. cme .config/nvim/lua/plugins.lua
--- 2. Add the plugin to the packer startup function.
--- 3. Write changes 
--- 4. IN A SEPARATE TERMINAL INSTANCE (or after :wq):
---    a. call chezmoi apply to apply changes
---    b. open a new nvim instance
---    c. run `:PackerSync` to install new plugins
--- 4. NOW you can add the usage into the init.lua.
-
 -------------------------------------
 ---- Plugin Manager Self-Install ----
 -------------------------------------
@@ -36,33 +26,26 @@ local packer_bootstrap = ensure_packer()
 ------------------------------
 
 return require('packer').startup(function(use)
-  -- Plugin manager self-manages!
-  use 'wbthomason/packer.nvim'
+  use 'wbthomason/packer.nvim' -- Plugin manager self-manages!
   
-  -- Catppuccin Theme
-  use { "catppuccin/nvim", as = "catppuccin" }
+  -- General Appearances and tools
+  use { "catppuccin/nvim", as = "catppuccin" } -- Catppuccin Theme
+  use 'echasnovski/mini.nvim'
+  use 'norcalli/nvim-colorizer.lua'
+  use 'nvim-tree/nvim-tree.lua'
+  use 'nvim-tree/nvim-web-devicons' -- web devicons, required by many things
+  use 'nvim-lualine/lualine.nvim' -- Status bar
 
-  -- Lualine status bar
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  }
-
+  -- Telescope and extensions
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.0',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  -- duck! O> 
-  use {
-    'tamton-aquib/duck.nvim',
-    config = function()
-        vim.keymap.set('n', '<leader>nd', function() require("duck").hatch() end, {})
-        vim.keymap.set('n', '<leader>nk', function() require("duck").cook() end, {})
-    end
-  }
+  -- LSP 
+  use 'neovim/nvim-lspconfig'
 
-  -- Treesitter!
+  -- Treesitter and extensions
   use {
     'nvim-treesitter/nvim-treesitter',
       run = function()
@@ -73,31 +56,16 @@ return require('packer').startup(function(use)
   }
   use 'nvim-treesitter/nvim-treesitter-textobjects'
 
-  -- Tree File Explorer
+  -- and most importantly: 🦆
   use {
-    'nvim-tree/nvim-tree.lua',
-    requires = {
-       'nvim-tree/nvim-web-devicons', -- optional, for file icons
-    }
+    'tamton-aquib/duck.nvim',
+    config = function()
+        vim.keymap.set('n', '<leader>nd', function() require("duck").hatch() end, {})
+        vim.keymap.set('n', '<leader>nk', function() require("duck").cook() end, {})
+    end
   }
 
-  -- Using the mini.nvim library for Many Things
-  use 'echasnovski/mini.nvim'
-
-  -- color highlighter
-  use 'norcalli/nvim-colorizer.lua'
-
-
-  -- LSP
-  use { 
-    'neovim/nvim-lspconfig',
-    -- config = function()
-    --   require('lspconfig').marksman.setup()
-    -- end
-  }-- Configurations for Nvim LSP
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
+  -- Packer Bootstrapping: sync after cloning
   if packer_bootstrap then
     require('packer').sync()
   end
