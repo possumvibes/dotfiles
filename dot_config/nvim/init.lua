@@ -12,6 +12,7 @@ require('plugins')
 -------------------
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.opt.showmode = false
 
 -- Set Leader key first thing!
 vim.g.mapleader = ','       
@@ -41,9 +42,7 @@ vim.keymap.set('n', '<leader>fc', builtin.commands, {})
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>fm', builtin.marks, {})
 vim.keymap.set('n', '<leader>fp', builtin.planets, {})
-vim.keymap.set('n', '<leader>fz', builtin.current_buffer_fuzzy_find, {})
 
 -- Appearance/Behavior
 vim.opt.number = true       -- show line numbers

@@ -5,8 +5,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 ## zsh will be XDG-compliant so help me god
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export VIMDIR="$XDG_CONFIG_HOME/nvim"
 
-## Editor
+# Editor
 export EDITOR="nvim"
 export VISUAL="nvim"
 

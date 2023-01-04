@@ -42,6 +42,24 @@ return require('packer').startup(function(use)
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+  -- Markdown Notebook Infrastructure
+  use({'jakewvincent/mkdnflow.nvim',
+    config = function()
+      require('mkdnflow').setup({
+        links = {
+          conceal = true
+        },
+        mappings = {
+          MkdnEnter = {{'i', 'n', 'v'}, '<CR>'},
+          MkdnGoBack = {'n', '<M-Left>'},
+          MkdnGoForward = {'n', '<M-Right>'},
+          MkdnFoldSection = {'n', '<leader>Fc'},
+          MkdnUnfoldSection = {'n', '<leader>Fo'}
+        }
+      })
+     end
+  })
+
   -- LSP 
   use 'neovim/nvim-lspconfig'
 
