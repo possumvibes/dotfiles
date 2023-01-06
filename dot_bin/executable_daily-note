@@ -1,0 +1,27 @@
+#!/bin/bash
+####
+## Script to open today's daily note and create it if it doesn't exist
+#####
+
+# Get today's date and generate the note path
+curr_date=`date +%F`
+note_path="$NOTEBOOK_DIR/dailies/$curr_date.md"
+echo $note_path
+
+# if the note doesn't exist, create it
+if [ ! -f "$note_path" ]; then
+  template_path="$NOTEBOOK_DIR/.app/snippets/daily-note.md"
+  date_template_str='yyyy-MM-dd HH:mm'
+
+  creation_time=`date '+%F %H:%m'`
+
+  touch $note_path
+  cat $template_path | sed "s/$date_template_str/$creation_time/" > $note_path
+
+  echo "we did it bitches good luck"
+fi
+
+# move to the notebook dir and open the note
+cd $NOTEBOOK_DIR
+nvim $note_path
+
