@@ -14,7 +14,7 @@ alias aa="nvim $ZDOTDIR/conf.d/aliases.zsh"
 
 # Reload Configs
 alias xup='xrdb -load ~/.Xresources && echo "reloaded .Xresources"'
-alias zup="source $ZDOTDIR/.zshrc && echo reloaded profile"
+alias zup="source ~/.zshenv && source $ZDOTDIR/.zshrc && echo reloaded profile"
 
 # navigation and listing
 alias la='ls -lah'
