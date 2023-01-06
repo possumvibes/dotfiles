@@ -38,4 +38,4 @@ alias cmr='cm-readd-dots'
 
 ### editing through chezmoi
 alias cme='chezmoi edit' 
-alias cmp='chezmoi -R apply && echo chezmoi diff applied; externals reloaded'
+alias cmp='chezmoi -R apply && echo chezmoi diff applied, externals reloaded'
