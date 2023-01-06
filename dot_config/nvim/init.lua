@@ -13,6 +13,10 @@ require('plugins')
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.showmode = false
+vim.cmd[[
+  set nocompatible
+  filetype plugin on
+]]
 
 -- Set Leader key first thing!
 vim.g.mapleader = ','       
