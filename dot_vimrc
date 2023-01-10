@@ -5,9 +5,22 @@ filetype plugin on
 set number
 set tabstop=2
 set shiftwidth=2
+set expandtab
+set ignorecase
+set smartcase
+" set termguicolors
 
 " cursors for insert vs normal mode
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
 
+" bindings necessary for my hands to stay attached
+
+let mapleader=","
+map <leader>s :wincmd h<CR>
+map <leader>t :wincmd j<CR>
+map <leader>d :wincmd k<CR>
+map <leader>h :wincmd l<CR>
+map <leader>' :wincmd w<CR>
+map <leader>. <C-w>
 
