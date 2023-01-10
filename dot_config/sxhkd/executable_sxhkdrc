@@ -63,6 +63,9 @@ super + k
 super + v
 	code
 
+super + shift + s
+  flameshot gui
+
 super + r
 	redshift -PO 2400 
 super + shift + r
