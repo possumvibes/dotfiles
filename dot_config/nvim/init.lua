@@ -6,6 +6,7 @@
 ---- Import Modules ----
 ------------------------
 require('plugins')
+require('keymap')
 
 -------------------
 ---- Settings! ----
@@ -14,36 +15,6 @@ vim.cmd[[
   set nocompatible
   filetype plugin on
 ]]
-
--- Set Leader key first thing!
-vim.g.mapleader = ','       
-
--- Window navigation
-vim.keymap.set('n', '<leader>s', '<cmd>wincmd h<cr>', {desc = 'window: left'})
-vim.keymap.set('n', '<leader>t', '<cmd>wincmd j<cr>', {desc = 'window: down'})
-vim.keymap.set('n', '<leader>d', '<cmd>wincmd k<cr>', {desc = 'window: up'})
-vim.keymap.set('n', '<leader>h', '<cmd>wincmd l<cr>', {desc = 'window: right'})
-vim.keymap.set('n', '<leader>\'', '<cmd>wincmd w<cr>', {desc = 'window: next'})
-vim.keymap.set('n', '<leader>.', '<C-W>', {desc = 'window'})
-
-vim.keymap.set('n', '<leader>m', '<cmd>NvimTreeToggle<cr>', {desc = 'toggle nvimTree'})
-vim.keymap.set('n', '<leader>v', ':source $MYVIMRC<cr>', {desc = 'Reload config'})
-vim.keymap.set('n', '<leader>vp', '<cmd>PackerSync<cr>', {desc = 'Sync plugins'})
-vim.keymap.set('n', '<leader>x', '<cmd>NvimTreeToggle<cr>', {desc = 'Toggle Explorer'})
-
-vim.keymap.set('n', 'Y', 'yy', {desc = "Y copies the full line"})
--- vim.keymap.set("i", '<C-S>', '<cmd>write<cr>')
-vim.keymap.set("n", '<C-S>', '<cmd>write<cr>')
-vim.keymap.set("i", '<C-S>', '<c-o>:update<cr>')
-
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>fb', builtin.builtin, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fc', builtin.commands, {})
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>fp', builtin.planets, {})
 
 -- Appearance/Behavior
 vim.opt.number = true         -- show line numbers
@@ -62,6 +33,9 @@ vim.opt.splitright = true     -- default vsplit is right of active window
 
 vim.opt.showmode = false      -- Hide default mode indicator
 vim.opt.termguicolors = true  -- truly no idea but it's important for at least one plugin and general rendering?
+
+-- Autocommands because this vimrc is getting out of control
+vim.api.nvim_exec([[ autocmd FileType bash setlocal commentstring=# %s ]], false)
 
 -- Vibes (namely, plugins) 
 vim.cmd.colorscheme 'catppuccin' --  Catppuccin mocha my beloved
@@ -89,7 +63,6 @@ require('mini.completion').setup() -- autocompletion.
 require('mini.fuzzy').setup() -- fuzzy finder for telescope
 require('mini.indentscope').setup() -- visual of the current indent-scope
 require('mini.pairs').setup() -- AUTOPAIRING BAYBEYYYYYY
--- require('mini.status').setup() -- under consideration for ide-like purposes
 require('mini.surround').setup() -- surround objects/selections with brackets/quotes
 
 
@@ -116,14 +89,8 @@ require('telescope').setup{
 }
 
 -- LSP Configuration
--- pulled from right exactly here https://github.com/neovim/nvim-lspconfig/#suggested-configuration
--- keybinds for lsp completion/diagnostic
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-
+-- See https://github.com/neovim/nvim-lspconfig/#suggested-configuration
+--
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -157,6 +124,6 @@ local lsp_flags = {
 
 require'lspconfig'.marksman.setup{
   on_attach = on_attach,
-  flags = lsp_flag
+  flags = lsp_flags
 }
 

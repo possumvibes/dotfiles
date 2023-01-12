@@ -35,6 +35,10 @@ return require('packer').startup(function(use)
   use 'nvim-tree/nvim-web-devicons' -- web devicons, required by many things
   use 'nvim-lualine/lualine.nvim' -- Status bar
 
+  -- some actual vim plugins
+  use 'tpope/vim-unimpaired'
+  use 'tpope/vim-repeat'
+
   -- Telescope and extensions
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.0',
