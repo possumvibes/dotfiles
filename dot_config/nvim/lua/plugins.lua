@@ -32,7 +32,6 @@ return require('packer').startup(function(use)
   use { "catppuccin/nvim", as = "catppuccin" } -- Catppuccin Theme
   use 'echasnovski/mini.nvim'
   use 'norcalli/nvim-colorizer.lua'
-  use 'nvim-tree/nvim-tree.lua'
   use 'nvim-tree/nvim-web-devicons' -- web devicons, required by many things
   use 'nvim-lualine/lualine.nvim' -- Status bar
 
