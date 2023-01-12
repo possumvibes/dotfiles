@@ -6,7 +6,7 @@
 ---- Import Modules ----
 ------------------------
 require('plugins')
-require('keymap')
+require('keybinds')
 
 -------------------
 ---- Settings! ----
@@ -85,6 +85,11 @@ require('nvim-treesitter.configs').setup({
 require('telescope').setup{
   defaults = {
     generic_sorter = require('mini.fuzzy').get_telescope_sorter
+  },
+  pickers = {
+    planets = {
+      show_pluto = true
+    }
   }
 }
 
@@ -100,21 +105,21 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<space>ka', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>kr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>kl', function()
+  vim.keybinds.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keybinds.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keybinds.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  vim.keybinds.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keybinds.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  vim.keybinds.set('n', '<space>ka', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keybinds.set('n', '<space>kr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keybinds.set('n', '<space>kl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
-  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+  vim.keybinds.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keybinds.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+  vim.keybinds.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keybinds.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keybinds.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
 local lsp_flags = {

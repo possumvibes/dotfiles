@@ -49,7 +49,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 --------------------
 vim.keymap.set("n", '<F5>', '<cmd>noh<cr>')
 vim.keymap.set('n', 'Y', 'yy', {desc = "Y copies the full line"})
-vim.keymap.set("n", '<C-S>', '<cmd>write<cr>')
+vim.keymap.set("n", '<C-S>', vim.cmd.update, { silent = true })
 vim.keymap.set("i", '<C-S>', '<c-o>:update<cr>')
 
 
