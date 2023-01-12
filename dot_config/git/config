@@ -10,5 +10,6 @@
 	psu = push --set-upstream
 	psuo = push --set-upstream origin
 	rpo = remote prune origin
+  stat = status -s
 [init]
 	defaultBranch = main
