@@ -47,9 +47,14 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 --------------------
 ---  Convenience ---
 --------------------
+vim.cmd[[
+  cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+]]
+vim.api.nvim_set_keymap('i', '<Tab>',   [[pumvisible() ? "\<C-n>" : "\<Tab>"]],   { noremap = true, expr = true })
+vim.api.nvim_set_keymap('i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { noremap = true, expr = true })
+
 vim.keymap.set("n", '<F5>', '<cmd>noh<cr>')
 vim.keymap.set('n', 'Y', 'yy', {desc = "Y copies the full line"})
 vim.keymap.set("n", '<C-S>', vim.cmd.update, { silent = true })
 vim.keymap.set("i", '<C-S>', '<c-o>:update<cr>')
-
 

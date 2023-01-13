@@ -63,8 +63,6 @@ require('mini.completion').setup() -- autocompletion.
 require('mini.fuzzy').setup() -- fuzzy finder for telescope
 require('mini.indentscope').setup() -- visual of the current indent-scope
 require('mini.pairs').setup() -- AUTOPAIRING BAYBEYYYYYY
-require('mini.surround').setup() -- surround objects/selections with brackets/quotes
-
 
 require('nvim-treesitter.configs').setup({
   -- Parsers to auto-install
