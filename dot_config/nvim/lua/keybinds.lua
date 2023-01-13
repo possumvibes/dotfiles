@@ -2,35 +2,42 @@
 --  Keybindings! --
 -------------------
 
+-- Convenience function
+local map = vim.keymap.set
+
 -------------------
 ---  Leader Key --- 
 -------------------
 vim.g.mapleader = ','
 
+-- ensure that leader key original function isn't shadowed
+map('n', '\\', ',', { noremap = true})
+
+
 -- Window navigation
-vim.keymap.set('n', '<leader>s', '<cmd>wincmd h<cr>', {desc = 'window: left'})
-vim.keymap.set('n', '<leader>t', '<cmd>wincmd j<cr>', {desc = 'window: down'})
-vim.keymap.set('n', '<leader>d', '<cmd>wincmd k<cr>', {desc = 'window: up'})
-vim.keymap.set('n', '<leader>h', '<cmd>wincmd l<cr>', {desc = 'window: right'})
-vim.keymap.set('n', '<leader>\'', '<cmd>wincmd w<cr>', {desc = 'window: next'})
-vim.keymap.set('n', '<leader>.', '<C-W>', {desc = 'window'})
+map('n', '<leader>s', '<cmd>wincmd h<cr>', {desc = 'window: left'})
+map('n', '<leader>t', '<cmd>wincmd j<cr>', {desc = 'window: down'})
+map('n', '<leader>d', '<cmd>wincmd k<cr>', {desc = 'window: up'})
+map('n', '<leader>h', '<cmd>wincmd l<cr>', {desc = 'window: right'})
+map('n', '<leader>\'', '<cmd>wincmd w<cr>', {desc = 'window: next'})
+map('n', '<leader>.', '<C-W>', {desc = 'window'})
 
 
 -- File explorer
-vim.keymap.set('n', '<leader>m', '<cmd>Vexplore<cr>', {desc = 'VSplit Netrw'})
-vim.keymap.set('n', '<leader>v', ':source $MYVIMRC<cr>', {desc = 'Reload config'})
-vim.keymap.set('n', '<leader>vp', '<cmd>PackerSync<cr>', {desc = 'Sync plugins'})
+map('n', '<leader>m', '<cmd>Vexplore<cr>', {desc = 'VSplit Netrw'})
+map('n', '<leader>v', ':source $MYVIMRC<cr>', {desc = 'Reload config'})
+map('n', '<leader>vp', '<cmd>PackerSync<cr>', {desc = 'Sync plugins'})
 
 -- Telescope Pickers
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>fa', builtin.builtin, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fc', builtin.commands, {})
-vim.keymap.set('n', '<leader>fcc', builtin.command_history, {})
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>fp', builtin.planets, {})
+map('n', '<leader>fa', builtin.builtin, {})
+map('n', '<leader>fb', builtin.buffers, {})
+map('n', '<leader>fc', builtin.commands, {})
+map('n', '<leader>fcc', builtin.command_history, {})
+map('n', '<leader>ff', builtin.find_files, {})
+map('n', '<leader>fg', builtin.live_grep, {})
+map('n', '<leader>fh', builtin.help_tags, {})
+map('n', '<leader>fp', builtin.planets, {})
 
 
 ------------------------
@@ -38,10 +45,10 @@ vim.keymap.set('n', '<leader>fp', builtin.planets, {})
 ------------------------
 -- See https://github.com/neovim/nvim-lspconfig/#suggested-configuration
 local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+map('n', '<space>e', vim.diagnostic.open_float, opts)
+map('n', '[d', vim.diagnostic.goto_prev, opts)
+map('n', ']d', vim.diagnostic.goto_next, opts)
+map('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 
 --------------------
@@ -53,8 +60,8 @@ vim.cmd[[
 vim.api.nvim_set_keymap('i', '<Tab>',   [[pumvisible() ? "\<C-n>" : "\<Tab>"]],   { noremap = true, expr = true })
 vim.api.nvim_set_keymap('i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { noremap = true, expr = true })
 
-vim.keymap.set("n", '<F5>', '<cmd>noh<cr>')
-vim.keymap.set('n', 'Y', 'yy', {desc = "Y copies the full line"})
-vim.keymap.set("n", '<C-S>', vim.cmd.update, { silent = true })
-vim.keymap.set("i", '<C-S>', '<c-o>:update<cr>')
+map("n", '<F5>', '<cmd>noh<cr>')
+map('n', 'Y', 'yy', {desc = "Y copies the full line"})
+map("n", '<C-S>', vim.cmd.update, { silent = true })
+map("i", '<C-S>', '<c-o>:update<cr>')
 
