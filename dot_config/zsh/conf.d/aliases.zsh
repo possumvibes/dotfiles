@@ -9,7 +9,7 @@ alias b='bat'
 alias uu='sudo dnf upgrade --refresh -y'
 
 # Config files
-alias vimrc='nvim ~/.config/nvim/init.lua'
+alias vimrc='cd ~/.config/nvim && nvim ~/.config/nvim/init.lua'
 alias aa="nvim $ZDOTDIR/conf.d/aliases.zsh"
 
 # Reload Configs
