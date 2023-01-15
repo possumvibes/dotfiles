@@ -19,6 +19,7 @@ let &t_EI = "\e[2 q"
 " bindings necessary for my hands to stay attached
 
 let mapleader=","
+nnoremap \ ,
 map <leader>s :wincmd h<CR>
 map <leader>t :wincmd j<CR>
 map <leader>d :wincmd k<CR>
@@ -26,3 +27,7 @@ map <leader>h :wincmd l<CR>
 map <leader>' :wincmd w<CR>
 map <leader>. <C-w>
 
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+nnoremap <C-s> :write<cr>
+inoremap <C-s> <C-o>:update<cr>
