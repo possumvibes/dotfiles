@@ -66,6 +66,7 @@ return {
       }
     }
   },
+
   -- surround plugin
   {
     "kylechui/nvim-surround",

@@ -20,11 +20,14 @@ vim.opt.splitright = true     -- default vsplit is right of active window
 vim.opt.showmode = false      -- Hide default mode indicator
 vim.opt.termguicolors = true  -- truly no idea but it's important for at least one plugin and general rendering?
 
--- Autocommands because this vimrc is getting out of control
-vim.api.nvim_exec([[ autocmd FileType bash setlocal commentstring=# %s ]], false)
--------------------------------------
----- Plugin Manager Self-Install ----
--------------------------------------
+-- set leader before loading plugins
+vim.g.mapleader = ','
+
+
+------------------------
+---- Import Modules ----
+------------------------
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -38,14 +41,28 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-------------------------
----- Import Modules ----
-------------------------
--- require('plugins')
 
--- set leader before loading plugins
-vim.g.mapleader = ','
-require('lazy').setup("plugins")
+-------------------------------
+--- lazy.nvim configuration ---
+-------------------------------
+
+require("lazy").setup("plugins")
+
+-- require("lazy").setup("plugins", {
+--   defaults = {
+--     lazy = true,
+--   },
+--   install = {
+--     colorscheme = {"catppuccin"},
+--   },
+--   change_detection = {
+--     notify = false
+--   }
+-- })
+
+--------------------------
+--  the rest of my shit -- 
+--------------------------
 
 
 -- and the autocommands
@@ -61,3 +78,5 @@ vim.cmd[[
 
 -- load the rest of the keybinds
 require('keybinds')
+
+
