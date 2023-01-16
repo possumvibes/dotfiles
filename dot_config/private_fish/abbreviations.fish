@@ -12,7 +12,7 @@ abbr -a rm  'rm -i'
 
 # chezmoi dotfiles management
 abbr -a cma	'cm add'
-abbr -a cmc	'cm cd'
+abbr -a cmc	"cd $DOTS_DIR"
 abbr -a cmr	'cm-readd-dots'
 
 ### editing through chezmoi

@@ -55,6 +55,7 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export WALLPAPER_DIR="$HOME/.local/share/wallpapers"
 
 export NOTEBOOK_DIR="$HOME/ari-common/ari_yelling"
+export DOTS_DIR="$HOME/.local/share/chezmoi"
 
 ## Starship Prompt config
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
