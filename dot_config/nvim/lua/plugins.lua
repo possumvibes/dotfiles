@@ -21,9 +21,33 @@ return {
   -- dependencies
   'nvim-tree/nvim-web-devicons', -- web devicons, required by many things
   'nvim-lua/plenary.nvim', --required by telescope 
+
+ {
+    "echasnovski/mini.align", 
+    config = function() require('mini.align').setup() end 
+  },
   {
     "echasnovski/mini.completion",
     config = function() require('mini.completion').setup() end
+  },
+  {
+    'echasnovski/mini.comment',
+    opts = {
+      hooks = {
+        pre = function()
+          require('ts_context_commentstring.internal').update_commentstring();
+        end
+      },
+      mappings = {
+        -- default mapping is a line-jump SFB so leader key it is!
+        comment = '<leader>c',
+        comment_line = '<leader>cc',
+        textobject = '<leader>c' 
+      }
+    },
+    config = function(_, opts)
+      require('mini.comment').setup(opts)
+    end
   },
   {
     "echasnovski/mini.fuzzy", 
