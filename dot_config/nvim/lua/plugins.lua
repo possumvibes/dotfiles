@@ -44,6 +44,7 @@ return {
     'echasnovski/mini.nvim',
     config = function()
       require('mini.align').setup()
+      require('mini.bufremove').setup()
       require('mini.comment').setup({
         hooks = {
           pre = function()
