@@ -2,53 +2,6 @@
 -- Ye Olde (Neo)Vimrc --
 ------------------------
 
-<<<<<<< Updated upstream
--------------------------------------
----- Plugin Manager Self-Install ----
--------------------------------------
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-------------------------
----- Import Modules ----
-------------------------
--- require('plugins')
-
--- set leader before loading plugins
-vim.g.mapleader = ','
-require('lazy').setup("plugins")
-
--- load the rest of the keybinds
-require('keybinds')
-<<<<<<< Updated upstream
-
--- and the autocommands
-require('config.autocmds')
-
--------------------
----- Settings! ----
--------------------
-vim.cmd[[
-  set nocompatible
-  filetype plugin on
-]]
-
-=======
-=======
->>>>>>> Stashed changes
 -- Appearance/Behavior
 vim.opt.number = true         -- show line numbers
 vim.opt.ignorecase = true     -- ignore uppercase in searches
@@ -94,7 +47,9 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = ','
 require('lazy').setup("plugins")
 
->>>>>>> Stashed changes
+
+-- and the autocommands
+require('config.autocmds')
 
 -------------------
 ---- Settings! ----
