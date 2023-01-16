@@ -41,7 +41,7 @@ super + {_,shift + }w
 #
 # terminal emulator
 super +{_,shift +,ctrl + }Return
-	{ urxvt, alacritty, kitty }
+	{ alacritty, urxvt -e /bin/fish, kitty }
 
 # program launcher
 super + @space

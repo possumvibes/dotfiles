@@ -1,6 +1,9 @@
 env:
   TERM: xterm-256color
 
+shell:
+  program: /bin/fish
+
 window:
   opacity: .8
   padding:
