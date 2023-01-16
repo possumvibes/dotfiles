@@ -2,11 +2,36 @@
 -- Ye Olde (Neo)Vimrc --
 ------------------------
 
+-------------------------------------
+---- Plugin Manager Self-Install ----
+-------------------------------------
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
 ------------------------
 ---- Import Modules ----
 ------------------------
-require('plugins')
+-- require('plugins')
+
+-- set leader before loading plugins
+vim.g.mapleader = ','
+require('lazy').setup("plugins")
+
+-- load the rest of the keybinds
 require('keybinds')
+
+-- and the autocommands
+require('config.autocmds')
 
 -------------------
 ---- Settings! ----

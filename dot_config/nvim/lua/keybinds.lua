@@ -8,7 +8,6 @@ local map = vim.keymap.set
 -------------------
 ---  Leader Key --- 
 -------------------
-vim.g.mapleader = ','
 
 -- ensure that leader key original function isn't shadowed
 map('n', '\\', ',', { noremap = true})
