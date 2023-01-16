@@ -4,7 +4,7 @@ abbr -a er "$EDITOR -R"
 abbr -a b bat
 
 # Config files
-abbr -a vimrc 'cd ~.config/nvim; nvim ~/.config/nvim/init.lua'
+abbr -a vimrc 'cd ~/.config/nvim; nvim ~/.config/nvim/init.lua'
 abbr -a aa	'nvim $FSHDIR/abbreviations.fish'
 
 abbr -a md	'mkdir -p'
