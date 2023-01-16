@@ -31,7 +31,7 @@ require("lazy").setup({
     colorscheme = catppuccin,
   },
   change_detection = {
-    notify = true,
+    notify = false,
   },
 })
 
