@@ -38,7 +38,7 @@ vim.opt.termguicolors = true  -- truly no idea but it's important for at least o
 vim.api.nvim_exec([[ autocmd FileType bash setlocal commentstring=# %s ]], false)
 
 -- Vibes (namely, plugins) 
-vim.cmd.colorscheme 'catppuccin' --  Catppuccin mocha my beloved
+vim.cmd.colorscheme 'catppuccin-mocha' --  Catppuccin mocha my beloved
 
 require('colorizer').setup() -- highlights hex codes with the color
 --
@@ -50,8 +50,13 @@ require('lualine').setup({
 })
 
 -- mini library: Using A Bunch Of 'Em
--- comments babyyyyyy may yet replace this if i can't set comment symbols for additional languages
+require('mini.align').setup() -- table alignment
 require('mini.comment').setup({
+  hooks = {
+    pre = function()
+      require('ts_context_commentstring.internal').update_commentstring();
+    end
+  },
   mappings = {
     -- default mapping is a line-jump SFB so leader key it is!
     comment = '<leader>c',
@@ -59,15 +64,20 @@ require('mini.comment').setup({
     textobject = '<leader>c' 
   }
 })
-require('mini.completion').setup() -- autocompletion.
-require('mini.fuzzy').setup() -- fuzzy finder for telescope
-require('mini.indentscope').setup() -- visual of the current indent-scope
-require('mini.pairs').setup() -- AUTOPAIRING BAYBEYYYYYY
+require('mini.completion').setup() 
+require('mini.fuzzy').setup() 
+require('mini.indentscope').setup() 
+require('mini.pairs').setup() 
 
 require('nvim-treesitter.configs').setup({
   -- Parsers to auto-install
-  ensure_installed = {"bash", "c", "diff", "lua", "markdown", "markdown_inline"},
+  ensure_installed = {"bash", "c", "fish", "diff", "lua", "markdown", "markdown_inline"},
   sync_install = false, 
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
+
+  },
   highlight = {
     enable = true
   },
@@ -102,22 +112,31 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keybinds.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keybinds.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keybinds.set('n', 'K', vim.lsp.buf.hover, bufopts)
-  vim.keybinds.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keybinds.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keybinds.set('n', '<space>ka', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keybinds.set('n', '<space>kr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keybinds.set('n', '<space>kl', function()
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<space>ka', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>kr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>kl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
-  vim.keybinds.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keybinds.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keybinds.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keybinds.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keybinds.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
+
+local on_attach_wkspc_only = function(client, bufnr)
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    vim.keymap.set('n', '<space>ka', vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set('n', '<space>kr', vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set('n', '<space>kl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, bufopts)
+  end
 
 local lsp_flags = {
   -- This is the default in Nvim 0.7+
@@ -125,7 +144,7 @@ local lsp_flags = {
 }
 
 require'lspconfig'.marksman.setup{
-  on_attach = on_attach,
+  on_attach = on_attach_wkspc_only,
   flags = lsp_flags
 }
 

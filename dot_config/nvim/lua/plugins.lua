@@ -28,18 +28,33 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Plugin manager self-manages!
   
-  -- General Appearances and tools
+  -- Themes
   use { "catppuccin/nvim", as = "catppuccin" } -- Catppuccin Theme
+
+  -- General Appearances and tools
   use 'echasnovski/mini.nvim'
   use 'norcalli/nvim-colorizer.lua'
   use 'nvim-tree/nvim-web-devicons' -- web devicons, required by many things
   use 'nvim-lualine/lualine.nvim' -- Status bar
 
   -- some actual vim plugins
+  use 'tpope/vim-fugitive'
   use 'tpope/vim-unimpaired'
   use 'tpope/vim-repeat'
 
-
+  use {
+    'sindrets/diffview.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+    config = function()
+      require("diffview").setup({
+        view = {
+          merge_tool = {
+            layout = "diff4_mixed"
+          }
+        }
+      })
+    end
+  }
   -- surround plugin
   use({
     "kylechui/nvim-surround",
@@ -88,6 +103,7 @@ return require('packer').startup(function(use)
       end,
   }
   use 'nvim-treesitter/nvim-treesitter-textobjects'
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
 
   -- and most importantly: 🦆
   use {
