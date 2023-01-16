@@ -30,7 +30,7 @@ alias .....='cd ../../../..'
 alias cm='chezmoi'
 alias cma='chezmoi add'
 alias cmc='chezmoi cd'
-alias cmr='~/scripts/readd_dots'
+alias cmr='cm-readd-dots'
 
 ### editing through chezmoi
 alias cme='chezmoi edit' 
