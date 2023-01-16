@@ -2,44 +2,33 @@
 -- Plugins.lua --
 -----------------
 
------------------------------------------
----- Plugins Not Otherwise Specified ----
------------------------------------------
+---- PLUGIN OVERVIEW ----
+-- This file has the editing/typing experience. 
+-- The rest is in lua/plugins/ by topic:
+--
+-- --------------------------------,
+--   TOPIC     |  FILE             |
+-- ------------+-------------------'
+-- Colors      |  plugins.appearance
+-- LSP         |  plugins.lsp
+-- Telescope   |  plugins.telescope
+-- Treesitter  |  plugins.treesitter
+--
 
 return { 
-  -- dependencies
-  'nvim-tree/nvim-web-devicons', -- web devicons, required by many things
 
-  {
-    'norcalli/nvim-colorizer.lua',
-    config = true
-  },
-
-  { 
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'catppuccin/nvim', 'nvim-tree/nvim-web-devicons'},
-    opts = {
-      theme = 'catppuccin'
-    }
-  }, -- Status bar
-
-  -- some actual vim plugins
-  'tpope/vim-fugitive',
+  ----------------
+  --  Movement  --
+  ----------------
+  
   'tpope/vim-unimpaired',
   'tpope/vim-repeat',
 
-  {
-    'sindrets/diffview.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = {
-      view = {
-        merge_tool = { layout = "diff4_mixed" }
-      }
-    }
-  },
+  -------------------------
+  --  Editing and Coding --
+  -------------------------
 
-
-  -- Mini.Nvim: A Whole Bunch Of Useful Things
+  -- Mini.Nvim: The Editor Experience
   {
     'echasnovski/mini.nvim',
     config = function()
@@ -59,31 +48,10 @@ return {
         }
       })
       require('mini.completion').setup()
-      require("mini.fuzzy").setup()
+      require("mini.fuzzy").setup() -- for Telescope integration
       require('mini.indentscope').setup() 
       require('mini.pairs').setup() 
       require('mini.surround').setup() 
-    end
-  },
-
-  -- Telescope and extensions
-  {
-    'nvim-telescope/telescope.nvim',
-		version = '0.1.0',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'echasnovski/mini.nvim'
-    },
-    config = function()
-      local telescope = require("telescope")
-      telescope.setup({
-        defaults = {
-          generic_sorter = require('mini.fuzzy').get_telescope_sorter
-        },
-        pickers = {
-          planets = {show_pluto = true}
-        }
-    })
     end
   },
 
@@ -104,44 +72,22 @@ return {
 		}
 	},
 
-	-- Treesitter and extensions
-	'nvim-treesitter/nvim-treesitter-textobjects',
-	'JoosepAlviste/nvim-ts-context-commentstring',
+  -- colors on hex codes
+  { 'norcalli/nvim-colorizer.lua', config = true },
 
-	{
-		'nvim-treesitter/nvim-treesitter',
+  -----------------------
+  --  Git integration  --
+  -----------------------
+
+  'tpope/vim-fugitive',
+  {
+    'sindrets/diffview.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
-      ensure_installed = {
-        "bash",
-        "c",
-        "fish",
-        "diff",
-        "lua",
-        "markdown",
-        "markdown_inline",
-        "vim"
-      },
-      sync_install = false,
-      context_commentstring = {
-        enable = true,
-        enable_autocmd = false,
-
-      },
-      highlight = {
-        enable = true
-      },
-      textobjects = {
-        select = {
-          enable = true,
-          lookahead = true
-        }
+      view = {
+        merge_tool = { layout = "diff4_mixed" }
       }
-    },
-		build = function()
-			-- automatically run update on install so packer doesn't error
-			local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-			ts_update()
-		end,
-	},
+    }
+  },
 }
 
