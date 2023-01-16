@@ -1,9 +1,10 @@
 # workflow apps
 abbr -a e $EDITOR
 abbr -a er "$EDITOR -R"
+abbr -a b bat
 
 # Config files
-abbr -a vimrc 'nvim ~/.config/nvim/init.lua'
+abbr -a vimrc 'cd ~.config/nvim; nvim ~/.config/nvim/init.lua'
 abbr -a aa	'nvim $FSHDIR/abbreviations.fish'
 
 abbr -a md	'mkdir -p'
@@ -16,7 +17,7 @@ abbr -a cmr	'cm-readd-dots'
 
 ### editing through chezmoi
 abbr -a cme	'chezmoi edit' 
-abbr -a cmp	'cm apply && echo chezmoi diff applied'
+abbr -a cmp	'chezmoi -R apply && echo chezmoi diff applied, externals reloaded'
 
 
 ###########
