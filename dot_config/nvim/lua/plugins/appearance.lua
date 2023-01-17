@@ -23,7 +23,8 @@ return {
     dependencies = { 'catppuccin/nvim', 'nvim-tree/nvim-web-devicons'},
     opts = {
       theme = 'catppuccin'
-    }
+    },
+    event = "BufEnter"
   },
 
   -----------------
@@ -36,9 +37,17 @@ return {
  -- and most importantly: 🦆
   {
     'tamton-aquib/duck.nvim',
-    config = function()
-        vim.keymap.set('n', '<leader>nd', function() require("duck").hatch() end, {})
-        vim.keymap.set('n', '<leader>nk', function() require("duck").cook() end, {})
-    end
+    keys = {
+      { 
+        '<leader>nd', 
+        function() require("duck").hatch("🦆", 3) end,
+        {desc = "hatch a duck!"} 
+      },
+      { 
+        '<leader>nk', 
+        function() require("duck").cook() end,
+        {desc = "goodbye duck"}
+      }
+    }
   } 
 }

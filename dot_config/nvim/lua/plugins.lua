@@ -21,8 +21,8 @@ return {
   --  Movement  --
   ----------------
   
-  'tpope/vim-unimpaired',
-  'tpope/vim-repeat',
+  { 'tpope/vim-unimpaired', event="BufEnter" },
+  { 'tpope/vim-repeat', event="BufEnter" },
 
   -------------------------
   --  Editing and Coding --
@@ -69,17 +69,18 @@ return {
 				MkdnFoldSection = {'n', '<leader>Fc'},
 				MkdnUnfoldSection = {'n', '<leader>Fo'}
 			}
-		}
+		},
+    ft = "md"
 	},
 
   -- colors on hex codes
-  { 'norcalli/nvim-colorizer.lua', config = true },
+  { 'norcalli/nvim-colorizer.lua', config = true, event = "BufEnter"},
 
   -----------------------
   --  Git integration  --
   -----------------------
+  { 'tpope/vim-fugitive', event = "VeryLazy" },
 
-  'tpope/vim-fugitive',
   {
     'sindrets/diffview.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
@@ -87,7 +88,8 @@ return {
       view = {
         merge_tool = { layout = "diff4_mixed" }
       }
-    }
+    },
+    event = "VeryLazy"
   },
 }
 

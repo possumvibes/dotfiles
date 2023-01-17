@@ -38,6 +38,7 @@ return {
           vim.keymap.set('n', '<space>kl', function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
           end, bufopts)
+          vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
         end
 
       local lsp_flags = {
