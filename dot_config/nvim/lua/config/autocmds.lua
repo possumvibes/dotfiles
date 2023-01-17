@@ -18,5 +18,18 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 
--- Set commentstrings for filetypes that don't have them automatically
-vim.api.nvim_exec([[ autocmd FileType bash setlocal commentstring=# %s ]], false)
+-- Set # commentstring filetypes
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "bash", "fish" },
+  callback = function()
+    vim.opt_local.commentstring = '# %s'
+  end,
+})
+
+-- Set // commentstring filetypes
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = {"c"},
+  callback = function()
+    vim.opt_local.commentstring = '// %s'
+  end,
+})
