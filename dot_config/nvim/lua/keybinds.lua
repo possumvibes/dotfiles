@@ -24,20 +24,19 @@ map('n', '<leader>.', '<C-W>', {desc = 'window'})
 
 -- File explorer
 map('n', '<leader>m', '<cmd>Vexplore<cr>', {desc = 'VSplit Netrw'})
-map('n', '<leader>v', ':source $MYVIMRC<cr>', {desc = 'Reload config'})
-map('n', '<leader>vp', '<cmd>PackerSync<cr>', {desc = 'Sync plugins'})
+map('n', '<leader>v', '<cmd>Lazy<cr>', {desc = 'Open lazy.nvim'})
+map('n', '<leader>vv', ':source $MYVIMRC<cr>', {desc = 'Source init.lua'})
 
 -- Telescope Pickers
 local builtin = require('telescope.builtin')
-map('n', '<leader>fa', builtin.builtin, {})
-map('n', '<leader>fb', builtin.buffers, {})
-map('n', '<leader>fc', builtin.commands, {})
-map('n', '<leader>fcc', builtin.command_history, {})
-map('n', '<leader>ff', builtin.find_files, {})
-map('n', '<leader>fg', builtin.live_grep, {})
-map('n', '<leader>fh', builtin.help_tags, {})
-map('n', '<leader>fp', builtin.planets, {})
-
+map('n', '<leader>fa', builtin.builtin, {desc = "telescope builtin picker"})
+map('n', '<leader>fb', builtin.buffers, {desc = "telescope buffers picker"})
+map('n', '<leader>fc', builtin.commands, {desc = "telescope commands picker"})
+map('n', '<leader>fcc', builtin.command_history, {desc = "telescope command_history picker"})
+map('n', '<leader>ff', builtin.find_files, {desc = "telescope find_files picker"})
+map('n', '<leader>fg', builtin.live_grep, {desc = "telescope {}) picker"})
+map('n', '<leader>fh', builtin.help_tags, {desc = "telescope help_tags picker"})
+map('n', '<leader>fp', builtin.planets, {desc = "telescope planets picker"})
 
 ------------------------
 ---  LSP Diagnostics  ---
