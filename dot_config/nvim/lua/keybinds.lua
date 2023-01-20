@@ -14,6 +14,13 @@ map('n', '\\', ',', { noremap = true})
 
 
 -- Window navigation
+map('n', '<C-Left>', '<cmd>wincmd h<cr>', {desc = 'window: left'})
+map('n', '<C-Down>', '<cmd>wincmd j<cr>', {desc = 'window: down'})
+map('n', '<C-Up>', '<cmd>wincmd k<cr>', {desc = 'window: up'})
+map('n', '<C-Right>', '<cmd>wincmd l<cr>', {desc = 'window: right'})
+-- map('n', '<leader>\'', '<cmd>wincmd w<cr>', {desc = 'window: next'})
+-- map('n', '<leader>.', '<C-W>', {desc = 'window'})
+
 map('n', '<leader>s', '<cmd>wincmd h<cr>', {desc = 'window: left'})
 map('n', '<leader>t', '<cmd>wincmd j<cr>', {desc = 'window: down'})
 map('n', '<leader>d', '<cmd>wincmd k<cr>', {desc = 'window: up'})
@@ -21,6 +28,11 @@ map('n', '<leader>h', '<cmd>wincmd l<cr>', {desc = 'window: right'})
 map('n', '<leader>\'', '<cmd>wincmd w<cr>', {desc = 'window: next'})
 map('n', '<leader>.', '<C-W>', {desc = 'window'})
 
+-- Never Pressing Y Again
+map('n', '<leader>n', 'y')
+map('n', '<leader>nn', 'yy')
+map('n', '<leader>N', 'Y')
+-- map('n', '<leader><C-n>', '<C-y>')
 
 -- File explorer
 map('n', '<leader>m', '<cmd>Vexplore<cr>', {desc = 'VSplit Netrw'})
