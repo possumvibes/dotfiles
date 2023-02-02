@@ -1,7 +1,6 @@
 #!/usr/bin/sh
 
 # let's! get! this! hotkey daemon.
-export SXHKD_SHELL sh
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 # start up the environment :)
