@@ -5,7 +5,7 @@ abbr -a b bat
 
 # Config files
 abbr -a vimrc 'cd ~/.config/nvim; nvim ~/.config/nvim/init.lua'
-abbr -a aa	'nvim $FSHDIR/abbreviations.fish'
+abbr -a aa	"nvim $FSHDIR/abbreviations.fish"
 
 abbr -a md	'mkdir -p'
 abbr -a rm  'rm -i'

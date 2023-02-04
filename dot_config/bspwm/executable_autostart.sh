@@ -37,4 +37,6 @@ then
   ~/.config/polybar/launch.sh 
 fi
 
+$HOME/scripts/reload_profile.fish
+
 notify-send "Autostart Complete" "BSPWM session is up and running!"
