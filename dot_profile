@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 
 export SXHKD_SHELL='/usr/bin/sh'
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
@@ -14,9 +14,5 @@ export TERM="xterm-256color"
 ## My environment setup :)
 
 export WALLPAPER_DIR="$HOME/.local/share/wallpapers"
-
 export NOTEBOOK_DIR="$HOME/ari-common/ari_yelling"
 export DOTS_DIR="$HOME/.local/share/chezmoi"
-
-## afaict this only affects the login screen at this point?
-feh --bg-scale ~/.local/share/wallpaper/Colorful.jpg
