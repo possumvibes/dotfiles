@@ -34,14 +34,6 @@ if [ -f ~/.bash_aliases ]; then
 	. ~/.bash_aliases
 fi
 
-## XDG Base Directories
-export XDG_CONFIG_HOME="$HOME/.config"
-
-export VIMDIR="$XDG_CONFIG_HOME/nvim"
-
-## zsh will be XDG-compliant so help me god
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-
 ## Starship Prompt config
 eval "$(starship init bash)"
 

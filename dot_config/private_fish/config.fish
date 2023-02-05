@@ -9,6 +9,10 @@ source ~/.config/fish/env_vars.fish
 # abbreviations
 source ~/.config/fish/abbreviations.fish
 
+if status is-login
+  bash2env source /etc/profile
+end
+
 if status is-interactive
   set fish_greeting
  # set fish_autosuggestion_enabled 0
