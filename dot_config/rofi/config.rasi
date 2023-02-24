@@ -3,6 +3,4 @@ configuration {
   show-icons: true;
   terminal: "urxvt";
 }
-//@theme "/usr/share/rofi/themes/gruvbox-light-soft.rasi"
-//@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
 @theme "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"

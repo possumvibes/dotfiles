@@ -44,8 +44,11 @@ super +{_,shift +,ctrl + }Return
 	{ alacritty, urxvt, kitty }
 
 # program launcher
-super + @space
-	rofi -modi run,drun,window -show drun 
+# super + @space
+# 	rofi -modi run,drun,window -show drun 
+super +{_,shift +,ctrl + } space
+   sh $HOME/.config/rofi/bin/{launcher,runner,powermenu}
+
 
 # programs
 super + d
