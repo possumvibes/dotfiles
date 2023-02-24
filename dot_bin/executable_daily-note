@@ -13,7 +13,7 @@ if [ ! -f "$note_path" ]; then
   template_path="$NOTEBOOK_DIR/.app/snippets/daily-note.md"
   date_template_str='yyyy-MM-dd HH:mm'
 
-  creation_time=`date '+%F %H:%m'`
+  creation_time=`date '+%F %H:%M'`
 
   touch $note_path
   cat $template_path | sed "s/$date_template_str/$creation_time/" > $note_path
