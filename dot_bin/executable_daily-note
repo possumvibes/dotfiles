@@ -18,7 +18,6 @@ if [ ! -f "$note_path" ]; then
   touch $note_path
   cat $template_path | sed "s/$date_template_str/$creation_time/" > $note_path
 
-  echo "we did it bitches good luck"
 fi
 
 # move to the notebook dir and open the note
