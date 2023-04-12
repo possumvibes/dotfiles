@@ -52,7 +52,8 @@ return {
       require('mini.indentscope').setup() 
       require('mini.pairs').setup() 
       require('mini.surround').setup() 
-    end
+    end,
+    event = "BufEnter"
   },
 
   -- Markdown Notebook Infrastructure
