@@ -28,11 +28,10 @@ map('n', '<leader>h', '<cmd>wincmd l<cr>', {desc = 'window: right'})
 map('n', '<leader>\'', '<cmd>wincmd w<cr>', {desc = 'window: next'})
 map('n', '<leader>.', '<C-W>', {desc = 'window'})
 
--- Never Pressing Y Again
-map('n', '<leader>n', 'y')
-map('n', '<leader>nn', 'yy')
-map('n', '<leader>N', 'Y')
--- map('n', '<leader><C-n>', '<C-y>')
+-- Registers
+map('n', '<leader>c', '"+')
+map('n', '<leader>cc', '"*')
+map('n', '<leader>C', '"_')
 
 -- File explorer
 map('n', '<leader>m', '<cmd>Vexplore<cr>', {desc = 'VSplit Netrw'})
