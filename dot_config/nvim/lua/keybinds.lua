@@ -29,9 +29,13 @@ map('n', '<leader>\'', '<cmd>wincmd w<cr>', {desc = 'window: next'})
 map('n', '<leader>.', '<C-W>', {desc = 'window'})
 
 -- Registers
-map('n', '<leader>c', '"+')
-map('n', '<leader>cc', '"*')
-map('n', '<leader>C', '"_')
+map({'n', 'v'}, '<leader>*', '"*') -- Middle Click register
+map({'n', 'v'}, '<leader>-', '"+') -- System Clipboard register
+map({'n', 'v'}, '<leader>q', '"_') -- Null register
+
+map({'n', 'v'}, '<C-Insert>', '"+y') -- yank to system clipboard
+map({'n', 'v'}, '<S-Del>', '"+d')    -- "cut" to system clipboard
+-- <S-Insert> (Paste System Clipboard) is handled by the terminal directly
 
 -- File explorer
 map('n', '<leader>m', '<cmd>Vexplore<cr>', {desc = 'VSplit Netrw'})
