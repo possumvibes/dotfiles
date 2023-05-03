@@ -35,5 +35,7 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 ## Starship Prompt config
-eval "$(starship init bash)"
+if which starship >/dev/null 2>&1; then
+  eval "$(starship init bash)"
+fi
 
