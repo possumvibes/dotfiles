@@ -4,6 +4,7 @@
 format = """
 $shell\
 $username\
+$hostname\
 $directory\
 $git_branch\
 $git_status\
@@ -17,17 +18,24 @@ palette='catppuccin-macchiato'
 
 [shell]
 disabled = false
-fish_indicator = '❃'
-bash_indicator = '\$'
-zsh_indicator = ''
+fish_indicator = '❃ '
+bash_indicator = '\$ '
+zsh_indicator = '  '
+powershell_indicator = 'ᓚᘏᗢ '
 format = '[$indicator]($style)'
 style = 'pink'
 
 [username]
 show_always = false
-style_user = "bold fg:rosewater"
+style_user = "bold fg:flamingo"
 style_root = "bold fg:rosewater"
-format = ' [$user]($style): '
+format = '[$user]($style): '
+disabled = false
+
+[hostname]
+ssh_only = true
+style = "bold fg:mauve"
+format = '[$ssh_symbol]($style)[@](fg:rosewater)[$hostname]($style) '
 disabled = false
 
 [directory]
