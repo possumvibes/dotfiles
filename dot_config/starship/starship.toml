@@ -29,7 +29,7 @@ style = 'pink'
 show_always = false
 style_user = "bold fg:flamingo"
 style_root = "bold fg:rosewater"
-format = '[$user]($style): '
+format = '[$user]($style) '
 disabled = false
 
 [hostname]
