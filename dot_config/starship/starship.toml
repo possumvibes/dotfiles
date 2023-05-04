@@ -35,12 +35,13 @@ disabled = false
 [hostname]
 ssh_only = true
 style = "bold fg:mauve"
-format = '[$ssh_symbol]($style)[@](fg:rosewater)[$hostname]($style) '
+ssh_symbol = ""
+format = '[$ssh_symbol](fg: blue) [$hostname]($style) '
 disabled = false
 
 [directory]
 style = "bold fg:teal"
-format = " [$path]($style) "
+format = "[$path]($style) "
 truncation_length = 8
 truncate_to_repo = true
 truncation_symbol = ""
