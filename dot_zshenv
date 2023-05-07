@@ -21,3 +21,4 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export WALLPAPER_DIR="$HOME/.local/share/wallpapers"
 
 export NOTEBOOK_DIR="$HOME/ari-common/ari_yelling"
+. "$HOME/.cargo/env"
