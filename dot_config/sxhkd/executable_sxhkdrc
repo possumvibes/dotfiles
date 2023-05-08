@@ -19,12 +19,12 @@ super + Escape
 	pkill -USR1 -x sxhkd
 
 # Log out of session 
-super + alt +{_,shift + }q
-	{xfce4-session-logout, bspc quit}
+super + alt + q
+	bspc quit
 
 # lock session
-ctrl + alt +{_,shift +} l
-	{ xset s activate, xflock4 }
+ctrl + alt + l
+	xset s activate
 
 # quit/restart bspwm
 super + alt + r
@@ -44,10 +44,8 @@ super +{_,shift +,ctrl + }Return
 	{ alacritty, urxvt, kitty }
 
 # program launcher
-# super + @space
-# 	rofi -modi run,drun,window -show drun 
-super +{_,shift +,ctrl + } space
-   sh $HOME/.config/rofi/bin/{launcher,runner,powermenu}
+super +{_,shift + } space
+   sh $HOME/.config/rofi/bin/{launcher,runner}
 
 
 # programs
