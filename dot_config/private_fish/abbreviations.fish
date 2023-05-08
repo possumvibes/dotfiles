@@ -9,6 +9,7 @@ abbr -a aa	"nvim $FSHDIR/abbreviations.fish"
 
 abbr -a md	'mkdir -p'
 abbr -a rm  'rm -i'
+abbr -a tr  'trash'
 
 # chezmoi dotfiles management
 abbr -a cma	'cm add'
