@@ -17,6 +17,11 @@ if status is-interactive
   set fish_greeting
  # set fish_autosuggestion_enabled 0
 
+  # if set -q ZELLIJ
+  # else
+  #   zellij
+  # end
+
   ## Starship Prompt config
   if command -sq starship
     and starship init fish | source
