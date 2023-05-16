@@ -77,4 +77,6 @@ map("n", '<F5>', '<cmd>noh<cr>')
 map('n', 'Y', 'yy', {desc = "Y copies the full line"})
 map("n", '<C-S>', vim.cmd.update, { silent = true })
 map("i", '<C-S>', '<c-o>:update<cr>')
+map("n", "<M-x>", vim.cmd.update, { silent = true })
+map("i", '<M-x>', '<esc><cmd>:update<cr>')
 

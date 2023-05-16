@@ -26,8 +26,17 @@ add-highlighter global/ wrap -word -indent
 
 ## Mappings
 #
+# general remapping
 map global normal '#' :comment-line<ret> -docstring 'comment line'
 map global normal '<a-#>' :comment-block<ret> -docstring 'comment block'
+map global normal '<a-x>' ':w<ret>'
+map global insert '<a-x>' '<a-;>:w<ret>'
+map global insert '<c-w>' '<esc>bc' -docstring 'convenience shortcut to change previous word in insert mode'
+
+# user mode
+map global user s '<esc>:w<ret>'
+map global user q '<esc>:q!<ret>'
+map global user z '<esc>:wq<ret>'
 
 ## Hooks
 #
