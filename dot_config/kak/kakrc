@@ -34,9 +34,9 @@ map global insert '<a-x>' '<a-;>:w<ret>'
 map global insert '<c-w>' '<esc>bc' -docstring 'convenience shortcut to change previous word in insert mode'
 
 # user mode
-map global user s '<esc>:w<ret>'
-map global user q '<esc>:q!<ret>'
-map global user z '<esc>:wq<ret>'
+map global user s '<esc>:w<ret>' -docstring 'writes file; :w' 
+map global user q '<esc>:wq<ret>' -docstring 'saves and exits, :wq'
+map global user z '<esc>:q!<ret>' -docstring 'exits without saving; :q!'
 
 ## Hooks
 #
