@@ -1,0 +1,48 @@
+theme = "catppuccin_mocha"
+
+[editor]
+line-number = "relative"
+cursorline = true
+color-modes = true
+bufferline = "multiple"
+
+[editor.cursor-shape]
+select = "underline"
+
+[editor.indent-guides]
+render = true
+charcter = "┊"
+
+[keys.normal]
+# rebinds for my fucking hands
+"'" = "collapse_selection"
+"A-'" = "flip_selections"
+
+C-s = ":w" # Maps Ctrl-S to :w, because i have a shortcut for it and cannot be assed to change the muscle memory
+
+[keys.normal."space"]
+a = ":qa!"
+"." = ":wqa!"
+
+## space mode: consider rearranging this heavily to separate out user modes
+# f ile picker
+# F at cwd
+# b uffer picker
+# j umplist picker
+# s ymbol picker
+# S symbol picker workspace
+# d diagnostic picker
+# D diagnostic picker workspace
+# ' last picker
+# g Debug (experimental)
+# w indow
+# y join+yank to clipboard
+# Y yank main selection to clipboard
+# p aste clipboard after selections
+# P aste clipboard before selections
+# R eplace selections by clip content
+# / Global serach in workspace folder
+# k show docs for item under cursor
+# r ename symbol
+# h select symbol references
+# ? open command palette
