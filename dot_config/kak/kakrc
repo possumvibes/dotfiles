@@ -1,45 +1,114 @@
 # Aesthetic or death
 colorscheme catppuccin_mocha
 
-## Options
-#
-# Tabs
+# To begin
+
+evaluate-commands %sh{
+  kak-lsp --kakoune --session "$kak_session"
+}
+lsp-enable
+
+
+## Options ----------------------------
+
+# UI options
 set-option global tabstop 2
 set-option global indentwidth 2
 
-# keep one line and three columns displayed around the cursor
-set-option global scrolloff 1,3
-
-# change assistant
+set-option global scrolloff 5,3
 set-option global ui_options terminal_assistant=cat terminal_status_on_top=true
 
-## Highlighters
-#
-# line numbers
-add-highlighter global/ number-lines -hlcursor
+add-highlighter global/word-wrap wrap -word -indent
+add-highlighter global/show-matching show-matching
+add-highlighter global/number-lines number-lines -hlcursor
 
-# highlight matching symbols
-add-highlighter global/ show-matching
+# Commands ----------------------------
+define-command enter_lsp_mode %{
+  enter-user-mode lsp
+}
 
-# soft-wrap lines
-add-highlighter global/ wrap -word -indent
+# Creates a buffer from the given string.
+# https://github.com/mawww/kakoune/blob/master/src/buffer_utils.cc#:~:text=create_buffer_from_string
+define-command create_buffer_from_string -params 2 %{
+  edit -scratch %arg{1}
+  set-register dquote %arg{2}
+  execute-keys '%R'
+}
 
-## Mappings
-#
-# general remapping
+alias global buffer_str create_buffer_from_string
+
+
+# https://github.com/alexherbo2/dotfiles/blob/master/.config/kak/kakrc
+define-command open_config %{
+  edit "%val{config}/kakrc"
+}
+
+# https://github.com/alexherbo2/dotfiles/blob/master/.config/kak/kakrc
+define-command pwd %{
+  echo -markup "{Information}%sh{pwd}"
+}
+
+# Prompt Commands ----------------------------
+
+# define-command show_definition_preview_hover %{
+#   lsp-hover
+# }
+
+# define-command open_buffer_picker %{
+#   prompt open: -menu -buffer-completion %{
+#     buffer %val{text}
+#   }
+# }
+
+# define-command open_document_symbol_picker %{
+#   lsp-goto-document-symbol
+# }
+
+# define-command open_file_picker %{
+#   prompt open: -menu -shell-script-candidates 'fd --type=file --hidden' %{
+#     edit -existing %val{text}
+#   }
+# }
+
+# define-command open_workspace_symbol_picker %{
+#   lsp-workspace-symbol-incr
+# }
+
+# Mappings ----------------------------
+
+# Normal mode
+
+map global normal <ret> : -docstring 'enter command mode' 
 map global normal '#' :comment-line<ret> -docstring 'comment line'
 map global normal '<a-#>' :comment-block<ret> -docstring 'comment block'
-map global normal '<a-x>' ':w<ret>'
-map global insert '<a-x>' '<a-;>:w<ret>'
+
+# User mode
 map global insert '<c-w>' '<esc>bc' -docstring 'convenience shortcut to change previous word in insert mode'
 
 # user mode
+# # map global user m ':open_document_symbol_picker<ret>' -docstring 'open document symbol picker' 
+# # map global user M ':open_workspace_symbol_picker<ret>' -docstring 'open workspace symbol picker' 
+# # map global user k ':show_definition_preview_hover<ret>' -docstring 'show definition preview hover' 
+# map global user l ':enter_lsp_mode<ret>' -docstring 'enter lsp mode' 
+# map global user f ':open_file_picker<ret>' -docstring 'open file picker' 
+# map global user b ':open_buffer_picker<ret>' -docstring 'open buffer picker' 
+
+map global user l ':enter_lsp_mode<ret>' -docstring 'enter LSP mode'
 map global user s '<esc>:w<ret>' -docstring 'writes file; :w' 
 map global user q '<esc>:wq<ret>' -docstring 'saves and exits, :wq'
 map global user z '<esc>:q!<ret>' -docstring 'exits without saving; :q!'
 
+
 ## Hooks
 #
+map global insert <tab> '<a-;>:try lsp-snippets-select-next-placeholders catch %{ execute-keys -with-hooks <lt>tab> }<ret>' -docstring 'Select next snippet placeholder'
+map global object a '<a-semicolon>lsp-object<ret>' -docstring 'LSP any symbol'
+map global object <a-a> '<a-semicolon>lsp-object<ret>' -docstring 'LSP any symbol'
+map global object e '<a-semicolon>lsp-object Function Method<ret>' -docstring 'LSP function or method'
+map global object k '<a-semicolon>lsp-object Class Interface Struct<ret>' -docstring 'LSP class interface or struct'
+map global object d '<a-semicolon>lsp-diagnostic-object --include-warnings<ret>' -docstring 'LSP errors and warnings'
+map global object D '<a-semicolon>lsp-diagnostic-object<ret>' -docstring 'LSP errors'
+
 # tabs for autocomplete
 hook global InsertCompletionShow .* %{
   try %{
@@ -56,3 +125,6 @@ hook global InsertCompletionShow .* %{
     }
   }
 }
+
+## Autoloads
+enable-auto-pairs
