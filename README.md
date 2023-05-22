@@ -1,6 +1,8 @@
 # dotfiles
+This folder contains dotfiles to set up my [bspwm](https://github.com/baskerville/bspwm) environment, currently on Fedora Linux.
 
-This folder contains dotfiles, currently managed with [chezmoi](https://www.chezmoi.io). 
+I use [Alacritty](https://alacritty.org/) as my terminal emulator, [Fish](fishshell.com/) as my shell, and [Neovim](neovim.io/) as my primary editor, and I have configs for a variety of other terminals, editors, and suchlike as I investigate them.
 
-It also contains scripts for my in-progress [bspwm](https://github.com/baskerville/bspwm) environment.
+I am managing dotfiles with [chezmoi](https://www.chezmoi.io). 
 
+(I do not recommend installing this. it is not "organized" or "complete" and there are absolutely no guarantees about it working.) 
