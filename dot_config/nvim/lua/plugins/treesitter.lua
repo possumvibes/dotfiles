@@ -14,6 +14,7 @@ return {
         "lua",
         "markdown",
         "markdown_inline",
+        "rust",
         "vim"
       },
       sync_install = false,
@@ -22,7 +23,7 @@ return {
         enable_autocmd = false,
       },
       highlight = { enable = true },
-      indent = { enable = true },
+      -- indent = { enable = true },
       incremental_selection = {
         enable = true,
         keymaps = {
@@ -39,8 +40,9 @@ return {
         }
       }
     },
-    build = ":TSUpdate",
-    event = "BufReadPost",
+    build = function()
+      require("nvim-treesitter.install").update({ with_sync = true })
+    end,
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
     end

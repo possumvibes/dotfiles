@@ -10,16 +10,11 @@ local map = vim.keymap.set
 -------------------
 
 -- ensure that leader key original function isn't shadowed
-map('n', '\\', ',', { noremap = true})
+map('n', '\\', ' ', { noremap = true})
 
 
 -- Window navigation
-map('n', '<C-Left>', '<cmd>wincmd h<cr>', {desc = 'window: left'})
-map('n', '<C-Down>', '<cmd>wincmd j<cr>', {desc = 'window: down'})
-map('n', '<C-Up>', '<cmd>wincmd k<cr>', {desc = 'window: up'})
-map('n', '<C-Right>', '<cmd>wincmd l<cr>', {desc = 'window: right'})
--- map('n', '<leader>\'', '<cmd>wincmd w<cr>', {desc = 'window: next'})
--- map('n', '<leader>.', '<C-W>', {desc = 'window'})
+map('n', '<leader>g', '<cmd>write<CR>', {desc = 'write file'})
 
 map('n', '<leader>s', '<cmd>wincmd h<cr>', {desc = 'window: left'})
 map('n', '<leader>t', '<cmd>wincmd j<cr>', {desc = 'window: down'})
@@ -77,6 +72,4 @@ map("n", '<F5>', '<cmd>noh<cr>')
 map('n', 'Y', 'yy', {desc = "Y copies the full line"})
 map("n", '<C-S>', vim.cmd.update, { silent = true })
 map("i", '<C-S>', '<c-o>:update<cr>')
-map("n", "<M-x>", vim.cmd.update, { silent = true })
-map("i", '<M-x>', '<esc><cmd>:update<cr>')
 

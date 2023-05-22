@@ -26,7 +26,7 @@ opt.cursorline = true     -- Highlight line cursor is on
 opt.termguicolors = true  -- Use true color in terminal
 
 -- set leader before loading plugins
-vim.g.mapleader = ','
+vim.g.mapleader = ' '
 
 -- load plugins
 require('config.lazy')
