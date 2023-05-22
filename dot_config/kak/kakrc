@@ -8,6 +8,14 @@ evaluate-commands %sh{
 }
 lsp-enable
 
+# Plugin manager: kak-bundle
+source "%val{config}/bundle/kak-bundle/rc/kak-bundle.kak"
+bundle-noload kak-bundle https://git.sr.ht/~jdugan6240/kak-bundle
+
+bundle auto-pairs.kak https://github.com/alexherbo2/auto-pairs.kak 
+enable-auto-pairs
+
+bundle kakoune-filetree https://github.com/occivink/kakoune-filetree
 
 ## Options ----------------------------
 
@@ -50,29 +58,30 @@ define-command pwd %{
 
 # Prompt Commands ----------------------------
 
-# define-command show_definition_preview_hover %{
-#   lsp-hover
-# }
+define-command show_definition_preview_hover %{
+  lsp-hover
+}
 
-# define-command open_buffer_picker %{
-#   prompt open: -menu -buffer-completion %{
-#     buffer %val{text}
-#   }
-# }
+define-command open_document_symbol_picker %{
+  lsp-goto-document-symbol
+}
 
-# define-command open_document_symbol_picker %{
-#   lsp-goto-document-symbol
-# }
+define-command open_workspace_symbol_picker %{
+  lsp-workspace-symbol-incr
+}
 
-# define-command open_file_picker %{
-#   prompt open: -menu -shell-script-candidates 'fd --type=file --hidden' %{
-#     edit -existing %val{text}
-#   }
-# }
+define-command open_buffer_picker %{
+  prompt open: -menu -buffer-completion %{
+    buffer %val{text}
+  }
+}
 
-# define-command open_workspace_symbol_picker %{
-#   lsp-workspace-symbol-incr
-# }
+define-command open_file_picker %{
+  prompt open: -menu -shell-script-candidates 'fd --type=file --hidden' %{
+    edit -existing %val{text}
+  }
+}
+
 
 # Mappings ----------------------------
 
@@ -81,23 +90,24 @@ define-command pwd %{
 map global normal <ret> : -docstring 'enter command mode' 
 map global normal '#' :comment-line<ret> -docstring 'comment line'
 map global normal '<a-#>' :comment-block<ret> -docstring 'comment block'
+map global normal m ":enter_match_mode<ret>" -docstring 'enter match mode'
+map global normal "'" ";" -docstring 'duplicate ;;'
+map global normal "<a-'>" "<a-;>" -docstring 'duplicate <a-;>'
 
 # User mode
 map global insert '<c-w>' '<esc>bc' -docstring 'convenience shortcut to change previous word in insert mode'
 
 # user mode
-# # map global user m ':open_document_symbol_picker<ret>' -docstring 'open document symbol picker' 
-# # map global user M ':open_workspace_symbol_picker<ret>' -docstring 'open workspace symbol picker' 
-# # map global user k ':show_definition_preview_hover<ret>' -docstring 'show definition preview hover' 
-# map global user l ':enter_lsp_mode<ret>' -docstring 'enter lsp mode' 
-# map global user f ':open_file_picker<ret>' -docstring 'open file picker' 
-# map global user b ':open_buffer_picker<ret>' -docstring 'open buffer picker' 
+map global user m ':open_document_symbol_picker<ret>' -docstring 'open document symbol picker' 
+map global user M ':open_workspace_symbol_picker<ret>' -docstring 'open workspace symbol picker' 
+map global user k ':show_definition_preview_hover<ret>' -docstring 'show definition preview hover' 
+map global user f ':open_file_picker<ret>' -docstring 'open file picker' 
+map global user b ':open_buffer_picker<ret>' -docstring 'open buffer picker' 
 
+map global user g '<esc>:w<ret>' -docstring 'writes file; :w'  
 map global user l ':enter_lsp_mode<ret>' -docstring 'enter LSP mode'
-map global user s '<esc>:w<ret>' -docstring 'writes file; :w' 
-map global user q '<esc>:wq<ret>' -docstring 'saves and exits, :wq'
-map global user z '<esc>:q!<ret>' -docstring 'exits without saving; :q!'
-
+map global user s ':enter_surround_mode<ret>' -docstring 'enter surround mode'
+map global user ~ ':enter_letter_case_mode<ret>' -docstring 'enter letter_case mode'
 
 ## Hooks
 #
@@ -111,20 +121,10 @@ map global object D '<a-semicolon>lsp-diagnostic-object<ret>' -docstring 'LSP er
 
 # tabs for autocomplete
 hook global InsertCompletionShow .* %{
-  try %{
-    # this command temporarily removes cursors preceded by whitespace;
-    # if there are no cursors left, it raises an error, does not
-    # continue to execute the mapping commands, and the error is eaten
-    # by the `try` command so no warning appears.
-    execute-keys -draft 'h<a-K>\h<ret>'
-    map window insert <tab> <c-n>
-    map window insert <s-tab> <c-p>
-    hook -once -always window InsertCompletionHide .* %{
-      unmap window insert <tab> <c-n>
-      unmap window insert <s-tab> <c-p>
-    }
+  map window insert <tab> <c-n>
+  map window insert <s-tab> <c-p>
+  hook -once window InsertCompletionHide .* %{
+    unmap window insert <tab>
+    unmap window insert <s-tab>
   }
 }
-
-## Autoloads
-enable-auto-pairs
