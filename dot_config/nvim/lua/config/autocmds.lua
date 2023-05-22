@@ -17,14 +17,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
-vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
-  group = vim.api.nvim_create_augroup("syntax_toml_templ", {clear = true}),
-  callback = function()
-    vim.opt_local.syntax = "toml"
-  end,
-})
-
-
 -- Set # commentstring filetypes
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "bash", "fish" },
