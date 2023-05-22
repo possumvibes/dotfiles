@@ -1,0 +1,7 @@
+#!/bin/bash
+
+chezmoi re-add
+cd ~/.local/share/chezmoi
+echo 'chezmoi status:'
+git status -s
+echo "...you're not in the dots directory yet :)"
