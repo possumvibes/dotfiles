@@ -1,6 +1,6 @@
 [user]
-	name = Possumvibes
-	email = 90935434+possumvibes@users.noreply.github.com
+	name = {{ .name | quote }}
+	email = {{ .email | quote }}
 [alias]
 	cam = commit -a -m
 	cm = commit -m
