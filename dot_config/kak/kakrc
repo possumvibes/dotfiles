@@ -87,12 +87,13 @@ define-command open_file_picker %{
 
 # Normal mode
 
-map global normal <ret> : -docstring 'enter command mode' 
-map global normal '#' :comment-line<ret> -docstring 'comment line'
-map global normal '<a-#>' :comment-block<ret> -docstring 'comment block'
-map global normal m ":enter_match_mode<ret>" -docstring 'enter match mode'
-map global normal "'" ";" -docstring 'duplicate ;;'
-map global normal "<a-'>" "<a-;>" -docstring 'duplicate <a-;>'
+map global normal <ret>   :                       -docstring 'enter command mode' 
+map global normal '#'     :comment-line<ret>      -docstring 'comment line'
+map global normal '<a-#>' :comment-block<ret>     -docstring 'comment block'
+map global normal m       :enter_match_mode<ret>  -docstring 'enter match mode'
+map global normal "'"     ";"                     -docstring 'duplicate ;;'
+map global normal "<a-'>" "<a-;>"                 -docstring 'duplicate <a-;>'
+map global normal <esc>   ";,"                    -docstring 'clear all selections to current cursor'
 
 # User mode
 map global insert '<c-w>' '<esc>bc' -docstring 'convenience shortcut to change previous word in insert mode'
@@ -108,6 +109,7 @@ map global user g '<esc>:w<ret>' -docstring 'writes file; :w'
 map global user l ':enter_lsp_mode<ret>' -docstring 'enter LSP mode'
 map global user s ':enter_surround_mode<ret>' -docstring 'enter surround mode'
 map global user ~ ':enter_letter_case_mode<ret>' -docstring 'enter letter_case mode'
+map global user <space> "<a-;>" -docstring "switch selection direction"
 
 ## Hooks
 #
