@@ -25,6 +25,11 @@ opt.showmode = false      -- Hide default mode indicator
 opt.cursorline = true     -- Highlight line cursor is on
 opt.termguicolors = true  -- Use true color in terminal
 
+-- netrw but make it fancy
+vim.g.netrw_liststyle = 3
+vim.g.netrw_browse_split = 4
+vim.g.netrw_altv = 1
+
 -- set leader before loading plugins
 vim.g.mapleader = ' '
 

@@ -1,8 +1,9 @@
 return {
 
-  ------------
-  -- Themes --
-  ------------
+  -------------
+  -- Theming --
+  -------------
+  -- catppuccin my beloved
   { 
     "catppuccin/nvim", name = "catppuccin",
     lazy = false,
@@ -13,11 +14,7 @@ return {
     end
   },
 
-
-
-  ----------------
-  -- Status Bar --
-  ----------------
+  -- Status Bar 
   { 
     'nvim-lualine/lualine.nvim',
     dependencies = { 'catppuccin/nvim', 'nvim-tree/nvim-web-devicons'},
@@ -27,12 +24,11 @@ return {
     event = "BufEnter"
   },
 
-  -----------------
-  --  Eye Candy  --
-  -----------------
-  
   -- icons and emojis
-  'nvim-tree/nvim-web-devicons',
+  { 'nvim-tree/nvim-web-devicons', event = "VeryLazy" },
+
+  -- colors on hex codes
+  { 'norcalli/nvim-colorizer.lua', config = true, event = "BufEnter"},
 
  -- and most importantly: 🦆
   {
@@ -52,9 +48,10 @@ return {
   },
 
   -------------------
-  --  Convenience  --
+  --  Keybindings  --
   -------------------
   --
+  -- keybind help (user-mode-like)
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -68,4 +65,9 @@ return {
       -- refer to the configuration section below
     }
   },
+
+  -- Unimpaired 
+  { 'tpope/vim-unimpaired', event="BufEnter" },
+  { 'tpope/vim-repeat', event="BufEnter" },
+
 }
