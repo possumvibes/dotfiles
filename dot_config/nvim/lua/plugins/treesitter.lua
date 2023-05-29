@@ -1,7 +1,7 @@
 return {
 	-- Treesitter and extensions
-  { 'nvim-treesitter/nvim-treesitter-textobjects', event = "BufReadPost"},
-  { 'JoosepAlviste/nvim-ts-context-commentstring', event = "BufReadPost" },
+  { 'nvim-treesitter/nvim-treesitter-textobjects', event = "BufEnter"},
+  { 'JoosepAlviste/nvim-ts-context-commentstring', event = "BufEnter" },
 
 	{
 		'nvim-treesitter/nvim-treesitter',
