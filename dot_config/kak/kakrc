@@ -1,5 +1,5 @@
 # Aesthetic or death
-colorscheme catppuccin_mocha
+colorscheme 'catppuccin_mocha'
 
 # To begin
 
@@ -28,7 +28,7 @@ set-option global ui_options terminal_assistant=cat terminal_status_on_top=true
 
 add-highlighter global/word-wrap wrap -word -indent
 add-highlighter global/show-matching show-matching
-add-highlighter global/number-lines number-lines -hlcursor
+add-highlighter global/number-lines number-lines -hlcursor -relative
 
 # Commands ----------------------------
 define-command enter_lsp_mode %{
@@ -39,7 +39,7 @@ define-command enter_lsp_mode %{
 # https://github.com/mawww/kakoune/blob/master/src/buffer_utils.cc#:~:text=create_buffer_from_string
 define-command create_buffer_from_string -params 2 %{
   edit -scratch %arg{1}
-  set-register dquote %arg{2}
+  set-register dQuote %arg{2}
   execute-keys '%R'
 }
 
@@ -87,16 +87,26 @@ define-command open_file_picker %{
 
 # Normal mode
 
-map global normal <ret>   :                       -docstring 'enter command mode' 
+map global normal <ret>   :                       -docstring 'enter command mode'
 map global normal '#'     :comment-line<ret>      -docstring 'comment line'
 map global normal '<a-#>' :comment-block<ret>     -docstring 'comment block'
-map global normal m       :enter_match_mode<ret>  -docstring 'enter match mode'
 map global normal "'"     ";"                     -docstring 'duplicate ;;'
 map global normal "<a-'>" "<a-;>"                 -docstring 'duplicate <a-;>'
 map global normal <esc>   ";,"                    -docstring 'clear all selections to current cursor'
+map global normal ~       ':enter-user-mode -lock mirror<ret>' -docstring 'enter mirror mode'
+
+map global normal m :enter_match_mode<ret>  -docstring 'enter match mode'
+map global normal q :enter_extend_mode<ret> -docstring 'enter extend mode'
+
+# clipboard.kak: clipboard sync on explicit yank
+map global normal Y y -docstring 'yank and sync to system clipboard'
+## TODO: get this to respect Y so it's available from normal but not by default
+hook global NormalKey y clipboard-sync
 
 # User mode
 map global insert '<c-w>' '<esc>bc' -docstring 'convenience shortcut to change previous word in insert mode'
+
+map global match s ':enter_surround_mode<ret>' -docstring 'enter surround mode'
 
 # user mode
 map global user m ':open_document_symbol_picker<ret>' -docstring 'open document symbol picker' 
@@ -110,6 +120,9 @@ map global user l ':enter_lsp_mode<ret>' -docstring 'enter LSP mode'
 map global user s ':enter_surround_mode<ret>' -docstring 'enter surround mode'
 map global user ~ ':enter_letter_case_mode<ret>' -docstring 'enter letter_case mode'
 map global user <space> "<a-;>" -docstring "switch selection direction"
+
+map global user q q -docstring "replay macro"
+map global user Q Q -docstring "record/stop recording macro"
 
 ## Hooks
 #
@@ -130,3 +143,12 @@ hook global InsertCompletionShow .* %{
     unmap window insert <s-tab>
   }
 }
+
+## toggle absolute line numbers in insert mode
+hook global ModeChange .*:insert %{
+  add-highlighter -override window/number-lines number-lines -hlcursor
+}
+hook global ModeChange .*:insert:.* %{
+  add-highlighter -override window/number-lines number-lines -hlcursor -relative
+}
+
