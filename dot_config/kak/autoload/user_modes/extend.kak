@@ -22,3 +22,8 @@ map global extend N   <a-N>   -docstring 'previous match'
 # map global extend t   T       -docstring 'til next char'
 # map global extend t   <a-T>   -docstring 'til previous char'
 map global extend ';' '<a-;>' -docstring 'flip selections'
+
+# define-command -hidden fhook %{
+#   execute-keys ":hook buffer -once -always NormalIdle .* %{ enter-user-mode extend }<ret>F"
+# }
+# map global extend f ":hook buffer -once -always NormalIdle .* %{ enter-user-mode extend } <ret>F" -docstring "aaaaaaa"

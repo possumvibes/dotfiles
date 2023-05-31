@@ -86,19 +86,26 @@ define-command open_file_picker %{
 # Mappings ----------------------------
 
 # Normal mode
+# remapping for my hands not to fall off
+map global normal "'"     ";"                     -docstring 'reduce selections to their cursor'
+map global normal "<a-'>" "<a-;>"                 -docstring 'swap cursors and anchors'
 
 map global normal <ret>   :                       -docstring 'enter command mode'
 map global normal '#'     :comment-line<ret>      -docstring 'comment line'
 map global normal '<a-#>' :comment-block<ret>     -docstring 'comment block'
-map global normal "'"     ";"                     -docstring 'duplicate ;;'
-map global normal "<a-'>" "<a-;>"                 -docstring 'duplicate <a-;>'
 map global normal <esc>   ";,"                    -docstring 'clear all selections to current cursor'
 map global normal ~       ':enter-user-mode -lock mirror<ret>' -docstring 'enter mirror mode'
 
+# vim-like W, E, B behavior
+map global normal W <a-w> -docstring "vim-like: WORD"
+map global normal E <a-e> -docstring "vim-like: WORD End"
+map global normal B <a-b> -docstring "vim-like: WORD Beginning"
+
+# Normal mode user mode entry
 map global normal m :enter_match_mode<ret>  -docstring 'enter match mode'
 map global normal q :enter_extend_mode<ret> -docstring 'enter extend mode'
 
-# clipboard.kak: clipboard sync on explicit yank
+  # clipboard.kak: clipboard sync on explicit yank
 map global normal Y y -docstring 'yank and sync to system clipboard'
 ## TODO: get this to respect Y so it's available from normal but not by default
 hook global NormalKey y clipboard-sync
@@ -152,3 +159,4 @@ hook global ModeChange .*:insert:.* %{
   add-highlighter -override window/number-lines number-lines -hlcursor -relative
 }
 
+require-module fandt
