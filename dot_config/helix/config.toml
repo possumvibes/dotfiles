@@ -1,4 +1,4 @@
-theme = "fleet_dark"
+theme = "catppuccin_mocha"
 
 [editor]
 line-number = "relative"
@@ -15,8 +15,8 @@ character = "┊"
 
 [keys.normal]
 # rebinds for my fucking hands
-"'" = "collapse_selection"
-"A-'" = "flip_selections"
+'#' = "flip_selections"
+ "'" = "collapse_selection"
 
 space.space = "flip_selections"
 space.g = ":write"
@@ -30,6 +30,9 @@ M.a = "rotate_selection_contents_forward"
 M.q = "move_line_up"
 
 [keys.select]
+'#' = "flip_selections"
+ "'" = "collapse_selection"
+
 space.x = ["extend_line_below", "trim_selections"]
 ## space mode: consider rearranging this heavily to separate out user modes
 # b uffer picker
