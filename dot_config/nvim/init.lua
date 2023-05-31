@@ -27,7 +27,7 @@ opt.termguicolors = true  -- Use true color in terminal
 
 -- netrw but make it fancy
 vim.g.netrw_liststyle = 3
-vim.g.netrw_browse_split = 4
+-- vim.g.netrw_browse_split = 4
 vim.g.netrw_altv = 1
 
 -- set leader before loading plugins

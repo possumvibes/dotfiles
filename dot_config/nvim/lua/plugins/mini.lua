@@ -8,10 +8,10 @@ return {
       -- require('mini.ai').setup()
       require('mini.bufremove').setup()
       require('mini.comment').setup({
-        hooks = {
-          pre = function()
-            require('ts_context_commentstring.internal').update_commentstring();
-          end
+        options = {
+          custom_commentstring = function()
+            return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
+          end,
         },
         mappings = {
           -- default mapping is a line-jump SFB so leader key it is!

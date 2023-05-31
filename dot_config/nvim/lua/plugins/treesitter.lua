@@ -1,7 +1,12 @@
 return {
 	-- Treesitter and extensions
-  { 'nvim-treesitter/nvim-treesitter-textobjects', event = "BufEnter"},
   { 'JoosepAlviste/nvim-ts-context-commentstring', event = "BufEnter" },
+  { 'nvim-treesitter/nvim-treesitter-textobjects', event = "BufEnter"},
+
+  {
+    'nvim-treesitter/nvim-treesitter-context', event = "BufEnter",
+    dependencies = {'nvim-treesitter/nvim-treesitter'},
+  },
 
 	{
 		'nvim-treesitter/nvim-treesitter',
@@ -15,7 +20,9 @@ return {
         "markdown",
         "markdown_inline",
         "rust",
-        "vim"
+        "toml",
+        "vim",
+        "yaml",
       },
       sync_install = false,
       context_commentstring = {
