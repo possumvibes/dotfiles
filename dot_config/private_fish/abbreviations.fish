@@ -2,6 +2,7 @@
 abbr -a e $EDITOR
 abbr -a er "$EDITOR -R"
 abbr -a b bat
+abbr -a k kak
 
 # Config files
 abbr -a vimrc 'cd ~/.config/nvim; nvim ~/.config/nvim/init.lua'
