@@ -1,4 +1,10 @@
 # https://github.com/caksoylar/dotfiles/blob/main/kak/autoload/inc-dec.kak
+declare-user-mode math
+
+define-command enter_math_mode %{
+  enter-user-mode math -lock
+}
+
 define-command -params 3 inc-dec %{
     try %{
         evaluate-commands %sh{
@@ -12,7 +18,6 @@ define-command -params 3 inc-dec %{
     (default: 1) if sequential is zero, or count times selection index otherwise
 }
 
-declare-user-mode math
 map global math <ret> %{_|xargs -I@ fish -Nc "builtin math '@'"<ret>} -docstring "evaluate selected math expression"
 map global math a ':inc-dec %val{count} + 0<ret>' -docstring "increment by count"
 map global math x ':inc-dec %val{count} - 0<ret>' -docstring "decrement by count"

@@ -8,7 +8,7 @@ evaluate-commands %sh{
 }
 lsp-enable
 
-# Plugin manager: kak-bundle
+# Plugins -----------------------------------------------------------
 source "%val{config}/bundle/kak-bundle/rc/kak-bundle.kak"
 bundle-noload kak-bundle https://git.sr.ht/~jdugan6240/kak-bundle
 
@@ -17,7 +17,10 @@ enable-auto-pairs
 
 bundle kakoune-filetree https://github.com/occivink/kakoune-filetree
 
-## Options ----------------------------
+# Modules -----------------------------------------------------------
+require-module fandt
+
+## Options ----------------------------------------------------------
 
 # UI options
 set-option global tabstop 2
@@ -28,118 +31,78 @@ set-option global ui_options terminal_assistant=cat terminal_status_on_top=true
 
 add-highlighter global/word-wrap wrap -word -indent
 add-highlighter global/show-matching show-matching
+
+# ## line numbers: relative by default; absolute in insert mode.
 add-highlighter global/number-lines number-lines -hlcursor -relative
 
-# Commands ----------------------------
-define-command enter_lsp_mode %{
-  enter-user-mode lsp
+## toggle absolute line numbers in insert mode
+hook global -group relative-line-numbers ModeChange .*:insert %{
+  add-highlighter -override window/number-lines number-lines -hlcursor
+}
+hook global -group relative-line-numbers ModeChange .*:insert:.* %{
+  add-highlighter -override window/number-lines number-lines -hlcursor -relative
 }
 
-# Creates a buffer from the given string.
-# https://github.com/mawww/kakoune/blob/master/src/buffer_utils.cc#:~:text=create_buffer_from_string
-define-command create_buffer_from_string -params 2 %{
-  edit -scratch %arg{1}
-  set-register dQuote %arg{2}
-  execute-keys '%R'
-}
+# Mappings ----------------------------------------------------------
 
-alias global buffer_str create_buffer_from_string
+# Normal mode -------------------------------------------------------
 
+# Bindings to reduce injury
+map global normal "'"     ";"       -docstring 'reduce selections to their cursor'
+map global normal <#>     "<a-;>"   -docstring 'flip selection direction'
+map global normal <minus>	"<a-:>"		-docstring 'ensure forward selection direction'
+map global normal <esc>   ";,"      -docstring 'clear all selections to current cursor'
+map global normal D 			"xd"			-docstring 'delete current line'
 
-# https://github.com/alexherbo2/dotfiles/blob/master/.config/kak/kakrc
-define-command open_config %{
-  edit "%val{config}/kakrc"
-}
+map global normal <a-%> '*%s<ret>'              -docstring "select all occurrences of selection"
+map global normal ^ ':enter_format_mode<ret>'   -docstring 'enter format mode'
+map global normal m ':enter_match_mode<ret>'    -docstring 'enter match mode'
+map global normal q ':enter_mirror_mode<ret>'   -docstring 'enter extend mode'
+map global normal Q ':enter_surround_mode<ret>' -docstring 'enter surround mode'
+map global normal v <a-i>                       -docstring 'select inner surrounding objects'
+map global normal V <a-a>                       -docstring 'select outer surrounding objects'
 
-# https://github.com/alexherbo2/dotfiles/blob/master/.config/kak/kakrc
-define-command pwd %{
-  echo -markup "{Information}%sh{pwd}"
-}
+# rebind macros
+map global normal <a-q> q -docstring "replay recorded macro"
+map global normal <a-Q> Q -docstring "start/end macro recording"
 
-# Prompt Commands ----------------------------
+# increment and decrement numbers
+map global normal <c-a> ':increment_selected_numbers %val{count}<ret>'
+map global normal <c-x> ':decrement_selected_numbers %val{count}<ret>'
 
-define-command show_definition_preview_hover %{
-  lsp-hover
-}
-
-define-command open_document_symbol_picker %{
-  lsp-goto-document-symbol
-}
-
-define-command open_workspace_symbol_picker %{
-  lsp-workspace-symbol-incr
-}
-
-define-command open_buffer_picker %{
-  prompt open: -menu -buffer-completion %{
-    buffer %val{text}
-  }
-}
-
-define-command open_file_picker %{
-  prompt open: -menu -shell-script-candidates 'fd --type=file --hidden' %{
-    edit -existing %val{text}
-  }
-}
-
-
-# Mappings ----------------------------
-
-# Normal mode
-# remapping for my hands not to fall off
-map global normal "'"     ";"                     -docstring 'reduce selections to their cursor'
-map global normal "<a-'>" "<a-;>"                 -docstring 'swap cursors and anchors'
-
-map global normal <ret>   :                       -docstring 'enter command mode'
-map global normal '#'     :comment-line<ret>      -docstring 'comment line'
-map global normal '<a-#>' :comment-block<ret>     -docstring 'comment block'
-map global normal <esc>   ";,"                    -docstring 'clear all selections to current cursor'
-map global normal ~       ':enter-user-mode -lock mirror<ret>' -docstring 'enter mirror mode'
-
-# vim-like W, E, B behavior
-map global normal W <a-w> -docstring "vim-like: WORD"
-map global normal E <a-e> -docstring "vim-like: WORD End"
-map global normal B <a-b> -docstring "vim-like: WORD Beginning"
-
-# Normal mode user mode entry
-map global normal m :enter_match_mode<ret>  -docstring 'enter match mode'
-map global normal q :enter_extend_mode<ret> -docstring 'enter extend mode'
-
-  # clipboard.kak: clipboard sync on explicit yank
-map global normal Y y -docstring 'yank and sync to system clipboard'
-## TODO: get this to respect Y so it's available from normal but not by default
-hook global NormalKey y clipboard-sync
-
-# User mode
-map global insert '<c-w>' '<esc>bc' -docstring 'convenience shortcut to change previous word in insert mode'
-
+# Match mode --------------------------------------------------------
+ 
 map global match s ':enter_surround_mode<ret>' -docstring 'enter surround mode'
 
-# user mode
-map global user m ':open_document_symbol_picker<ret>' -docstring 'open document symbol picker' 
-map global user M ':open_workspace_symbol_picker<ret>' -docstring 'open workspace symbol picker' 
-map global user k ':show_definition_preview_hover<ret>' -docstring 'show definition preview hover' 
-map global user f ':open_file_picker<ret>' -docstring 'open file picker' 
-map global user b ':open_buffer_picker<ret>' -docstring 'open buffer picker' 
+# User mode ---------------------------------------------------------
 
-map global user g '<esc>:w<ret>' -docstring 'writes file; :w'  
-map global user l ':enter_lsp_mode<ret>' -docstring 'enter LSP mode'
-map global user s ':enter_surround_mode<ret>' -docstring 'enter surround mode'
-map global user ~ ':enter_letter_case_mode<ret>' -docstring 'enter letter_case mode'
-map global user <space> "<a-;>" -docstring "switch selection direction"
+map global user b ':open_buffer_picker<ret>'            -docstring 'open buffer picker' 
+map global user c ':comment-line<ret>'                  -docstring 'comment line'
+map global user C ':comment-block<ret>'                 -docstring 'comment block'
+map global user f ':open_file_picker<ret>'              -docstring 'open file picker' 
+map global user g ':w<ret>'                             -docstring 'writes file; :w'
+map global user k ':show_lsp_hover_info<ret>'           -docstring 'show LSP docs for selection' 
+map global user l ':enter_lsp_mode<ret>'                -docstring 'enter LSP mode'
+map global user m ':open_document_symbol_picker<ret>'   -docstring 'open document symbol picker' 
+map global user M ':open_workspace_symbol_picker<ret>'  -docstring 'open workspace symbol picker' 
+map global user o ':enter_letter_case_mode<ret>'        -docstring 'enter letter_case mode'
+map global user v <v> -docstring 'enter view mode'
+map global user V <V> -docstring 'enter view mode (locked)'
 
-map global user q q -docstring "replay macro"
-map global user Q Q -docstring "record/stop recording macro"
 
-## Hooks
-#
-map global insert <tab> '<a-;>:try lsp-snippets-select-next-placeholders catch %{ execute-keys -with-hooks <lt>tab> }<ret>' -docstring 'Select next snippet placeholder'
-map global object a '<a-semicolon>lsp-object<ret>' -docstring 'LSP any symbol'
-map global object <a-a> '<a-semicolon>lsp-object<ret>' -docstring 'LSP any symbol'
-map global object e '<a-semicolon>lsp-object Function Method<ret>' -docstring 'LSP function or method'
-map global object k '<a-semicolon>lsp-object Class Interface Struct<ret>' -docstring 'LSP class interface or struct'
-map global object d '<a-semicolon>lsp-diagnostic-object --include-warnings<ret>' -docstring 'LSP errors and warnings'
-map global object D '<a-semicolon>lsp-diagnostic-object<ret>' -docstring 'LSP errors'
+# Prompt mode ------------------------------------------------------------------
+
+map -docstring 'buffer directory' global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
+
+# Add search flags
+map global prompt <c-i> '<home>(?i)<end>'
+map global prompt <c-s> '<home>(?S)<end>'
+map global prompt <c-k> '<home>\Q<end>'
+
+#Insert mode --------------------------------------------------------
+
+map global insert '<c-w>' '<esc>bc' -docstring 'convenience shortcut to change previous word in insert mode'
+map global insert <c-y> '<c-r>"'
 
 # tabs for autocomplete
 hook global InsertCompletionShow .* %{
@@ -151,12 +114,3 @@ hook global InsertCompletionShow .* %{
   }
 }
 
-## toggle absolute line numbers in insert mode
-hook global ModeChange .*:insert %{
-  add-highlighter -override window/number-lines number-lines -hlcursor
-}
-hook global ModeChange .*:insert:.* %{
-  add-highlighter -override window/number-lines number-lines -hlcursor -relative
-}
-
-require-module fandt

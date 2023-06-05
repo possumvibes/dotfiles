@@ -2,6 +2,10 @@
 # based on https://github.com/Delapouite/kakoune-mirror
 declare-user-mode mirror
 
+define-command enter_mirror_mode %{
+  enter-user-mode -lock mirror
+}
+
 # grow/shrink
 map global mirror c 'C<a-;><a-C><a-;>'  -docstring column
 map global mirror h 'H<a-;>L<a-;>'      -docstring character
@@ -38,4 +42,4 @@ map global mirror '<a-S>' '<a-S>'       -docstring 'select sels boundaries'
 
 # Suggested mapping
 
-#map global normal "'" ': enter-user-mode -lock mirror<ret>' -docstring 'mirror lock'
+#map global normal "'" 'enter_mirror_mode' -docstring 'mirror lock'
