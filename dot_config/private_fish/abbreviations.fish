@@ -5,8 +5,9 @@ abbr -a b bat
 abbr -a k kak
 
 # Config files
-abbr -a vimrc 'cd ~/.config/nvim; nvim ~/.config/nvim/init.lua'
 abbr -a aa	"nvim $FSHDIR/abbreviations.fish"
+abbr -a vimrc "cd $XDG_CONFIG_HOME/nvim; nvim init.lua"
+abbr -a kakrc "cd $XDG_CONFIG_HOME/kak; kak kakrc"
 
 abbr -a md	'mkdir -p'
 abbr -a rm  'rm -i'

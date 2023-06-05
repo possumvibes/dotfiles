@@ -24,12 +24,12 @@ map('n', '<leader>\'', '<cmd>wincmd w<cr>', {desc = 'window: next'})
 map('n', '<leader>.', '<C-W>', {desc = 'window'})
 
 -- Registers
-map({'n', 'v'}, '<leader>*', '"*') -- Middle Click register
-map({'n', 'v'}, '<leader>-', '"+') -- System Clipboard register
-map({'n', 'v'}, '<leader>q', '"_') -- Null register
+map({'n', 'v'}, '<leader>*', '"*', {desc = "middle click register"}) -- Middle Click register
+map({'n', 'v'}, '<leader>-', '"+', {desc = "system clipboard register"}) -- System Clipboard register
+map({'n', 'v'}, '<leader>q', '"_', {desc = "null register"}) -- Null register
 
-map({'n', 'v'}, '<C-Insert>', '"+y') -- yank to system clipboard
-map({'n', 'v'}, '<S-Del>', '"+d')    -- "cut" to system clipboard
+map({'n', 'v'}, '<C-Insert>', '"+y', {desc = "yank to system clipboard"}) 
+map({'n', 'v'}, '<S-Del>', '"+d', {desc = "'cut' to system clipboard"})
 -- <S-Insert> (Paste System Clipboard) is handled by the terminal directly
 
 -- File explorer
@@ -39,14 +39,12 @@ map('n', '<leader>vv', ':source $MYVIMRC<cr>', {desc = 'Source init.lua'})
 
 -- Telescope Pickers
 local builtin = require('telescope.builtin')
-map('n', '<leader>fa', builtin.builtin, {desc = "telescope builtin picker"})
-map('n', '<leader>fb', builtin.buffers, {desc = "telescope buffers picker"})
-map('n', '<leader>fc', builtin.commands, {desc = "telescope commands picker"})
-map('n', '<leader>fcc', builtin.command_history, {desc = "telescope command_history picker"})
-map('n', '<leader>ff', builtin.find_files, {desc = "telescope find_files picker"})
-map('n', '<leader>fg', builtin.live_grep, {desc = "telescope {}) picker"})
-map('n', '<leader>fh', builtin.help_tags, {desc = "telescope help_tags picker"})
-map('n', '<leader>fp', builtin.planets, {desc = "telescope planets picker"})
+map('n', '<leader>ka', builtin.builtin, {desc = "telescope builtin picker"})
+map('n', '<leader>b', builtin.buffers, {desc = "telescope buffers picker"})
+map('n', '<leader>f', builtin.find_files, {desc = "telescope find_files picker"})
+map('n', '<leader>k', builtin.live_grep, {desc = "telescope {}) picker"})
+-- map('n', '<leader>fh', builtin.help_tags, {desc = "telescope help_tags picker"})
+map('n', '<leader>kp', builtin.planets, {desc = "telescope planets picker"})
 
 ------------------------
 ---  LSP Diagnostics  ---

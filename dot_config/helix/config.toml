@@ -13,6 +13,9 @@ select = "underline"
 render = true
 character = "┊"
 
+[editor.lsp]
+snippets = true
+
 [keys.normal]
 # rebinds for my fucking hands
 '#' = "flip_selections"
@@ -34,23 +37,3 @@ M.q = "move_line_up"
  "'" = "collapse_selection"
 
 space.x = ["extend_line_below", "trim_selections"]
-## space mode: consider rearranging this heavily to separate out user modes
-# b uffer picker
-# f ile picker
-# F at cwd
-# d diagnostic picker
-# D diagnostic picker workspace
-# h select symbol references
-# j umplist picker
-# k show docs for item under cursor
-# p aste clipboard after selections
-# P aste clipboard before selections
-# r ename symbol
-# R eplace selections by clip content
-# s ymbol picker
-# S symbol picker workspace# ' last picker
-# w indow
-# y join+yank to clipboard
-# Y yank main selection to clipboard
-# / Global serach in workspace folder
-# ? open command palette
