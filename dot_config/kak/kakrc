@@ -12,10 +12,20 @@ lsp-enable
 source "%val{config}/bundle/kak-bundle/rc/kak-bundle.kak"
 bundle-noload kak-bundle https://git.sr.ht/~jdugan6240/kak-bundle
 
+# Auto-pairing
 bundle auto-pairs.kak https://github.com/alexherbo2/auto-pairs.kak 
 enable-auto-pairs
 
+# File tree buffer
 bundle kakoune-filetree https://github.com/occivink/kakoune-filetree
+
+# Custom snippets
+# bundle kakoune-snippets https://github.com/occivink/kakoune-snippets
+
+# Selection expansion and manipulation
+bundle kakoune-expand https://github.com/occivink/kakoune-expand
+bundle kakoune-phantom-selection https://github.com/occivink/kakoune-phantom-selection
+bundle kakoune-vertical-selection https://github.com/occivink/kakoune-vertical-selection
 
 # Modules -----------------------------------------------------------
 require-module fandt
@@ -55,6 +65,8 @@ map global normal <esc>   ";,"      -docstring 'clear all selections to current 
 map global normal D 			"xd"			-docstring 'delete current line'
 
 map global normal <a-%> '*%s<ret>'              -docstring "select all occurrences of selection"
+map global normal <ret> ':expand<ret>'          -docstring 'expand selection to next outer region'
+
 map global normal ^ ':enter_format_mode<ret>'   -docstring 'enter format mode'
 map global normal m ':enter_match_mode<ret>'    -docstring 'enter match mode'
 map global normal q ':enter_mirror_mode<ret>'   -docstring 'enter extend mode'
@@ -69,6 +81,16 @@ map global normal <a-Q> Q -docstring "start/end macro recording"
 # increment and decrement numbers
 map global normal <c-a> ':increment_selected_numbers %val{count}<ret>'
 map global normal <c-x> ':decrement_selected_numbers %val{count}<ret>'
+
+declare-user-mode vertical-selection
+map global normal C ':enter-user-mode -lock vertical-selection<ret>' -docstring 'enter vertical-selection mode'
+map global vertical-selection n C -docstring 'copy selection on line below'
+map global vertical-selection e <a-C> -docstring 'copy selection on line above'
+map global vertical-selection a 'C<a-c>' -docstring 'copy selection above and below'
+map global vertical-selection N ':vertical-selection-down<ret>' -docstring 'copy all matching selections below'
+map global vertical-selection E ':vertical-selection-up<ret>' -docstring 'copy all matching selections above'
+map global vertical-selection A ':vertical-selection-up-and-down<ret>' -docstring 'copy all matching selections above and below'
+
 
 # Match mode --------------------------------------------------------
  
