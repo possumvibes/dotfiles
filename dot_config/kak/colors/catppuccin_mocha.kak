@@ -31,12 +31,12 @@ declare-option	str	background			%opt{black2}
 
 # Markup
 set-face	global	title				"%opt{rosewater}"
-set-face	global	header				"%opt{bright_red}"
+set-face	global	header				"%opt{mauve}"
 set-face	global	bold				"%opt{mauve}"
 set-face	global	italic				"%opt{lavender}"
 set-face	global	mono				"%opt{green}"
 set-face	global	block				"%opt{cyan}"
-set-face	global	link				"%opt{green}"
+set-face	global	link				"%opt{blue}"
 set-face	global	bullet				"%opt{green}"
 set-face	global	list				"%opt{white}"
 

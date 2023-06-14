@@ -9,9 +9,13 @@ abbr -a aa	"nvim $FSHDIR/abbreviations.fish"
 abbr -a vimrc "cd $XDG_CONFIG_HOME/nvim; nvim init.lua"
 abbr -a kakrc "cd $XDG_CONFIG_HOME/kak; kak kakrc"
 
+# Utilities
 abbr -a md	'mkdir -p'
 abbr -a rm  'rm -i'
 abbr -a t  'trash'
+
+# zoom
+abbr -a notes "cd $NOTEBOOK_DIR; nvim scratchpad.md"
 
 # chezmoi dotfiles management
 abbr -a cma	'cm add'
