@@ -1,5 +1,5 @@
 # workflow apps
-abbr -a e $EDITOR
+abbr -a e   $EDITOR
 abbr -a er "$EDITOR -R"
 abbr -a b bat
 abbr -a k kak
@@ -12,7 +12,7 @@ abbr -a kakrc "cd $XDG_CONFIG_HOME/kak; kak kakrc"
 # Utilities
 abbr -a md	'mkdir -p'
 abbr -a rm  'rm -i'
-abbr -a t  'trash'
+abbr -a t   'trash'
 
 # zoom
 abbr -a notes "cd $NOTEBOOK_DIR; nvim scratchpad.md"
