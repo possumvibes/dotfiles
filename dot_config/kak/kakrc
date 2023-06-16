@@ -91,6 +91,9 @@ map global vertical-selection N ':vertical-selection-down<ret>' -docstring 'copy
 map global vertical-selection E ':vertical-selection-up<ret>' -docstring 'copy all matching selections above'
 map global vertical-selection A ':vertical-selection-up-and-down<ret>' -docstring 'copy all matching selections above and below'
 
+# Goto mode ---------------------------------------------------------
+map global goto n ':bn<ret>' -docstring 'go to next buffer'
+map global goto p ':bp<ret>' -docstring 'go to previous buffer'
 
 # Match mode --------------------------------------------------------
  
@@ -106,15 +109,15 @@ map global user g ':w<ret>'                             -docstring 'writes file;
 map global user k ':show_lsp_hover_info<ret>'           -docstring 'show LSP docs for selection' 
 map global user l ':enter_lsp_mode<ret>'                -docstring 'enter LSP mode'
 map global user m ':open_document_symbol_picker<ret>'   -docstring 'open document symbol picker' 
-map global user M ':open_workspace_symbol_picker<ret>'  -docstring 'open workspace symbol picker' 
+map global user M ':open_workspace_symbol_picker<ret>'  -docstring 'open workspace symbol picker'
 map global user o ':enter_letter_case_mode<ret>'        -docstring 'enter letter_case mode'
 map global user v <v> -docstring 'enter view mode'
 map global user V <V> -docstring 'enter view mode (locked)'
-
+map global user y ':yank_selection_to_clipboard<ret>'    -docstring 'yank to terminal clipboard'
 
 # Prompt mode ------------------------------------------------------------------
 
-map -docstring 'buffer directory' global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'
+map global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/' -docstring 'buffer directory' 
 
 # Add search flags
 map global prompt <c-i> '<home>(?i)<end>'
@@ -123,8 +126,8 @@ map global prompt <c-k> '<home>\Q<end>'
 
 #Insert mode --------------------------------------------------------
 
-map global insert '<c-w>' '<esc>bc' -docstring 'convenience shortcut to change previous word in insert mode'
-map global insert <c-y> '<c-r>"'
+map global insert <c-w> '<esc>bc' -docstring 'convenience shortcut to change previous word in insert mode'
+map global insert <c-y> '<c-r>"' -docstring 'paste selection register (")'
 
 # tabs for autocomplete
 hook global InsertCompletionShow .* %{

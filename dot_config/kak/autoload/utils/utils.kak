@@ -43,9 +43,9 @@ define-command mkdir %{
 }
 
 #https://github.com/alexherbo2/dotfiles/blob/95ed5e5339218fe2b02105b6d192c84c938d4f69/.config/kak/autoload/utils.kak
-define-command rm %{
+define-command tp %{
   evaluate-commands %sh{
-    rm -- "$kak_buffile" ||
+    trash -- "$kak_buffile" ||
     printf "fail 'ERROR: rm exited with: %d.'" "$?"
   }
   delete-buffer
@@ -73,3 +73,9 @@ define-command increment_selected_numbers -params 0..1 %{
 define-command decrement_selected_numbers -params 0..1 %{
   execute-keys "a-%sh{expr $1 '|' 1}<esc>|{ cat; echo; } | bc<ret>"
 }
+
+# https://github.com/alexherbo2/dotfiles/blob/e225d7da7e53dad45920ea65236d9ecf84779587/.config/kak/autoload/windowing/terminal.kak
+define-command yank_selected_text_to_clipboard %{
+  execute-keys 'y:edit -scratch<ret><a-R>a<ret><esc><a-_><a-|>{ printf ''\033]52;c;''; base64; printf ''\a''; } <gt> /dev/tty<ret>:delete-buffer<ret>'
+}
+
