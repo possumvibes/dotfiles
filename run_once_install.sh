@@ -69,4 +69,9 @@ if test $(chezmoi data | jq ".isHeadless") = "false"; then
   echo "restart is required."
 fi
 
+# Add kak autoload symlink
+mkdir -p "${XDG_CONFIG_HOME:-${HOME}/.config}"/kak/autoload
+ln -s /usr/share/kak/rc "${XDG_CONFIG_HOME:-${HOME}/.config}"/kak/autoload
+
+
 echo "basic machine application install complete!"
