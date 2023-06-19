@@ -113,7 +113,7 @@ map global user M ':open_workspace_symbol_picker<ret>'  -docstring 'open workspa
 map global user o ':enter_letter_case_mode<ret>'        -docstring 'enter letter_case mode'
 map global user v <v> -docstring 'enter view mode'
 map global user V <V> -docstring 'enter view mode (locked)'
-map global user y ':yank_selection_to_clipboard<ret>'    -docstring 'yank to terminal clipboard'
+map global user y ':yank_selected_text_to_clipboard<ret>'    -docstring 'yank to terminal clipboard'
 
 # Prompt mode ------------------------------------------------------------------
 
