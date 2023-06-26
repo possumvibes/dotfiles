@@ -1,5 +1,5 @@
 # Aesthetic or death
-colorscheme 'catppuccin_mocha'
+colorscheme 'zenburn'
 
 # To begin
 
@@ -11,6 +11,13 @@ lsp-enable
 # Plugins -----------------------------------------------------------
 source "%val{config}/bundle/kak-bundle/rc/kak-bundle.kak"
 bundle-noload kak-bundle https://git.sr.ht/~jdugan6240/kak-bundle
+
+# colorscheme
+bundle-noload kakoune-mysticaltutor "https://github.com/caksoylar/kakoune-mysticaltutor" '' %{
+    mkdir -p "${kak_config}/colors"
+    ln -sf "${kak_opt_bundle_path}/kakoune-mysticaltutor/mysticaltutor.kak" "${kak_config}/colors/"
+}
+# try %{ colorscheme mysticaltutor }
 
 # Auto-pairing
 bundle auto-pairs.kak https://github.com/alexherbo2/auto-pairs.kak 
