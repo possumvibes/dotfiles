@@ -16,7 +16,7 @@ PACKAGES=(
 	python3 python3-pip # languages
   gcc cmake # build tools
   fish neovim helix kakoune tmux # shell
-  bat exa fd htop ripgrep # terminal tools
+  bat exa fd fzf htop ripgrep # terminal tools
   starship nerd-fonts # shell prettification
   restic borg syncthing pass # sync and backup
   git delta # source control
