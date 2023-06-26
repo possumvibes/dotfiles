@@ -1,14 +1,14 @@
-env:
-  TERM: xterm-256color
+# env:
+  # TERM: xterm-256color
 
 shell:
   program: /bin/fish
 
 window:
-  opacity: .8
+  opacity: .90
   padding:
-    x: 10
-    y: 10
+    x: 5
+    y: 5
 
 font:
   size: 12
@@ -17,4 +17,5 @@ font:
     style: SemiLight
   
 import:
-  - ~/.config/alacritty/themes/catppuccin-mocha.yml
+  - ~/.config/alacritty/themes/everforest_dark.yaml
+
