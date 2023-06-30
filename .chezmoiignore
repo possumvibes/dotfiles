@@ -3,7 +3,7 @@ LICENSE
 /etc
 /udev
 
-{{- if .chezmoi.isHeadless }}
+{{- if .isHeadless }}
 dot_config/alacritty/
 dot_config/bspwm/
 dot_config/dunst/

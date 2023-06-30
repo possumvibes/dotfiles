@@ -74,7 +74,6 @@ map global normal D 			"xd"			-docstring 'delete current line'
 map global normal <a-%> '*%s<ret>'              -docstring "select all occurrences of selection"
 map global normal <ret> ':expand<ret>'          -docstring 'expand selection to next outer region'
 
-map global normal ^ ':enter_format_mode<ret>'   -docstring 'enter format mode'
 map global normal m ':enter_match_mode<ret>'    -docstring 'enter match mode'
 map global normal q ':enter_mirror_mode<ret>'   -docstring 'enter extend mode'
 map global normal Q ':enter_surround_mode<ret>' -docstring 'enter surround mode'
@@ -89,38 +88,36 @@ map global normal <a-Q> Q -docstring "start/end macro recording"
 map global normal <c-a> ':increment_selected_numbers %val{count}<ret>'
 map global normal <c-x> ':decrement_selected_numbers %val{count}<ret>'
 
-declare-user-mode vertical-selection
-map global normal C ':enter-user-mode -lock vertical-selection<ret>' -docstring 'enter vertical-selection mode'
-map global vertical-selection n C -docstring 'copy selection on line below'
-map global vertical-selection e <a-C> -docstring 'copy selection on line above'
-map global vertical-selection a 'C<a-c>' -docstring 'copy selection above and below'
-map global vertical-selection N ':vertical-selection-down<ret>' -docstring 'copy all matching selections below'
-map global vertical-selection E ':vertical-selection-up<ret>' -docstring 'copy all matching selections above'
-map global vertical-selection A ':vertical-selection-up-and-down<ret>' -docstring 'copy all matching selections above and below'
-
 # Goto mode ---------------------------------------------------------
-map global goto n ':bn<ret>' -docstring 'go to next buffer'
-map global goto p ':bp<ret>' -docstring 'go to previous buffer'
+map global goto n '<esc>:bn<ret>' -docstring 'go to next buffer'
+map global goto p '<esc>:bp<ret>' -docstring 'go to previous buffer'
 
 # Match mode --------------------------------------------------------
  
 map global match s ':enter_surround_mode<ret>' -docstring 'enter surround mode'
 
 # User mode ---------------------------------------------------------
+## w g d f b  q l u o y
+#  r s t h k  j n e a i
+#  x c m p v    ' , . 
 
-map global user b ':open_buffer_picker<ret>'            -docstring 'open buffer picker' 
-map global user c ':comment-line<ret>'                  -docstring 'comment line'
-map global user C ':comment-block<ret>'                 -docstring 'comment block'
-map global user f ':open_file_picker<ret>'              -docstring 'open file picker' 
-map global user g ':w<ret>'                             -docstring 'writes file; :w'
-map global user k ':show_lsp_hover_info<ret>'           -docstring 'show LSP docs for selection' 
-map global user l ':enter_lsp_mode<ret>'                -docstring 'enter LSP mode'
-map global user m ':open_document_symbol_picker<ret>'   -docstring 'open document symbol picker' 
-map global user M ':open_workspace_symbol_picker<ret>'  -docstring 'open workspace symbol picker'
-map global user o ':enter_letter_case_mode<ret>'        -docstring 'enter letter_case mode'
-map global user v <v> -docstring 'enter view mode'
-map global user V <V> -docstring 'enter view mode (locked)'
-map global user y ':yank_selected_text_to_clipboard<ret>'    -docstring 'yank to terminal clipboard'
+map global user b     ':open_buffer_picker<ret>'             -docstring 'open buffer picker' 
+map global user c     ':comment-line<ret>'                   -docstring 'comment line'
+map global user <a-c> ':comment-block<ret>'                  -docstring 'comment block'
+map global user C     '<a-C>C'                               -docstring 'copy selection up and down'
+map global user f     ':open_file_picker<ret>'               -docstring 'open file picker' 
+map global user g     ':w<ret>'                              -docstring 'writes file; :w'
+map global user k     ':show_lsp_hover_info<ret>'            -docstring 'show LSP docs for selection' 
+map global user l     ':enter_lsp_mode<ret>'                 -docstring 'enter LSP mode'
+map global user m     ':open_document_symbol_picker<ret>'    -docstring 'open document symbol picker' 
+map global user M     ':open_workspace_symbol_picker<ret>'   -docstring 'open workspace symbol picker'
+map global user o     ':enter_letter_case_mode<ret>'         -docstring 'enter letter_case mode'
+map global user v     <v>                                    -docstring 'enter view mode'
+map global user s     ':vertical-selection-down<ret>'        -docstring 'copy matching selections below' 
+map global user <a-s> ':vertical-selection-up<ret>'          -docstring 'copy matching selections above' 
+map global user S     ':vertical-selection-up-and-down<ret>' -docstring 'copy matching selections above and below' 
+map global user V     <V>                                    -docstring 'enter view mode (locked)'
+map global user y     ':clipboard_yank_selections<ret>'      -docstring 'yank to terminal clipboard'
 
 # Prompt mode ------------------------------------------------------------------
 
