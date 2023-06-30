@@ -28,7 +28,18 @@ bundle kakoune-filetree https://github.com/occivink/kakoune-filetree
 
 # Selection expansion and manipulation
 bundle kakoune-expand https://github.com/occivink/kakoune-expand
-bundle kakoune-phantom-selection https://github.com/occivink/kakoune-phantom-selection
+bundle kakoune-phantom-selection https://github.com/occivink/kakoune-phantom-selection %{
+	declare-user-mode phantom-selection
+	map global phantom-selection a ':phantom-selection-add-selection<ret>' -docstring 'add selection to phantom list'
+	map global phantom-selection A ':phantom-selection-select-all<ret>' -docstring 'select all phantoms'
+	map global phantom-selection n ':phantom-selection-iterate-next<ret>' -docstring 'iterate to next phantom'
+	map global phantom-selection e ':phantom-selection-iterate-prev<ret>' -docstring 'iterate to previous phantom'
+	map global phantom-selection j ':phantom-selection-clear<ret>' -docstring 'clear phantom selections'
+
+	define-command enter-phantom-select-mode %{
+  	enter-user-mode phantom-selection
+	}
+}
 bundle kakoune-vertical-selection https://github.com/occivink/kakoune-vertical-selection
 
 # Custom snippets
@@ -67,18 +78,18 @@ hook global -group relative-line-numbers ModeChange .*:insert:.* %{
 # Bindings to reduce injury
 map global normal "'"     ";"       -docstring 'reduce selections to their cursor'
 map global normal <#>     "<a-;>"   -docstring 'flip selection direction'
-map global normal <minus>	"<a-:>"		-docstring 'ensure forward selection direction'
+map global normal <^>   	"<a-:>"		-docstring 'ensure forward selection direction'
 map global normal <esc>   ";,"      -docstring 'clear all selections to current cursor'
 map global normal D 			"xd"			-docstring 'delete current line'
+map global normal v       <a-i>     -docstring 'select inner surrounding objects'
+map global normal V       <a-a>     -docstring 'select outer surrounding objects'
 
-map global normal <a-%> '*%s<ret>'              -docstring "select all occurrences of selection"
-map global normal <ret> ':expand<ret>'          -docstring 'expand selection to next outer region'
-
-map global normal m ':enter_match_mode<ret>'    -docstring 'enter match mode'
-map global normal q ':enter_mirror_mode<ret>'   -docstring 'enter extend mode'
-map global normal Q ':enter_surround_mode<ret>' -docstring 'enter surround mode'
-map global normal v <a-i>                       -docstring 'select inner surrounding objects'
-map global normal V <a-a>                       -docstring 'select outer surrounding objects'
+map global normal <a-%>   '*%s<ret>'                        -docstring "select all occurrences of selection"
+map global normal <ret>   ':expand<ret>'                    -docstring 'expand selection to next outer region'
+map global normal <minus> ':enter-phantom-select-mode<ret>' -docstring 'enter phantom selection mode'
+map global normal m       ':enter_match_mode<ret>'          -docstring 'enter match mode'
+map global normal q       ':enter_mirror_mode<ret>'         -docstring 'enter extend mode'
+map global normal Q       ':enter_surround_mode<ret>'       -docstring 'enter surround mode'
 
 # rebind macros
 map global normal <a-q> q -docstring "replay recorded macro"
