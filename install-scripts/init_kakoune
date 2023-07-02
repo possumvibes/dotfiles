@@ -1,0 +1,10 @@
+#!/bin/bash
+# To set up kakoune after the packages are installed.
+
+## Symlink rc autoload to my user autoload
+ln -s $(readlink -f "$(dirname $(type -p kak))"/../share/kak/autoload) ~/.config/kak/autoload/system
+
+## Install kak-bundle package manager
+mkdir -p ~/.config/kak/bundle
+git clone https://github.com/jdugan6240/kak-bundle ~/.config/kak/bundle/kak-bundle
+
