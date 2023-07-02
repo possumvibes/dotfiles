@@ -4,12 +4,11 @@ colorscheme 'zenburn'
 # To begin
 
 evaluate-commands %sh{
-  if command -v kak-lsp &> /dev/null
-  then
+  if command -v kak-lsp &> /dev/null; then 
     kak-lsp --kakoune --session "$kak_session"
+    lsp-enable
   fi
 }
-lsp-enable
 
 # Plugins -----------------------------------------------------------
 source "%val{config}/bundle/kak-bundle/rc/kak-bundle.kak"
