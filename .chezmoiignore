@@ -1,7 +1,6 @@
 README.md
 LICENSE
-/etc
-/udev
+install-scripts/
 
 {{- if .isHeadless }}
 dot_config/alacritty/
