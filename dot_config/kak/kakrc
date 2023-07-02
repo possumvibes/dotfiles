@@ -4,7 +4,10 @@ colorscheme 'zenburn'
 # To begin
 
 evaluate-commands %sh{
-  kak-lsp --kakoune --session "$kak_session"
+  if command -v kak-lsp &> /dev/null
+  then
+    kak-lsp --kakoune --session "$kak_session"
+  fi
 }
 lsp-enable
 
