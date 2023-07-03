@@ -5,7 +5,7 @@ abbr -a b bat
 abbr -a k kak
 
 # Config files
-abbr -a aa	"nvim $FSHDIR/abbreviations.fish"
+abbr -a aa	"$EDITOR $FSHDIR/abbreviations.fish"
 abbr -a vimrc "cd $XDG_CONFIG_HOME/nvim; nvim init.lua"
 abbr -a kakrc "cd $XDG_CONFIG_HOME/kak; kak kakrc"
 
@@ -15,7 +15,7 @@ abbr -a rm  'rm -i'
 abbr -a t   'trash'
 
 # zoom
-abbr -a notes "cd $NOTEBOOK_DIR; nvim scratchpad.md"
+abbr -a notes "cd $NOTEBOOK_DIR; $EDITOR scratchpad.md"
 
 # chezmoi dotfiles management
 abbr -a cma	'cm add'

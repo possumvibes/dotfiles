@@ -34,10 +34,28 @@ vim.g.netrw_altv = 1
 vim.g.mapleader = ' '
 
 -- load plugins
-require('config.lazy')
+-- require('config.lazy')
+---------------------------------
+-- install lazy if not present --
+---------------------------------
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup('plugins')
 
 -- and the autocommands
-require('config.autocmds')
+require('autocmds')
 
 -- load the rest of the keybinds
 require('keybinds')
