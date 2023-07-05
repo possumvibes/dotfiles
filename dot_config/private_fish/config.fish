@@ -3,12 +3,6 @@
 # it's easier to have it here for reference/replication
 fish_add_path ~/.cargo/bin ~/.local/bin ~/bin 
 
-# environment variables
-source ~/.config/fish/env_vars.fish
-
-# abbreviations
-source ~/.config/fish/abbreviations.fish
-
 if status is-login
   bash2env source /etc/profile
 end
