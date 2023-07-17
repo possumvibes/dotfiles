@@ -23,4 +23,3 @@ map global math a ':inc-dec %val{count} + 0<ret>' -docstring "increment by count
 map global math x ':inc-dec %val{count} - 0<ret>' -docstring "decrement by count"
 map global math A ':inc-dec %val{count} + 1<ret>' -docstring "increment by count times selection index"
 map global math X ':inc-dec %val{count} - 1<ret>' -docstring "decrement by count times selection index"
-map global normal = ':enter-user-mode math<ret>'       -docstring "enter math mode"

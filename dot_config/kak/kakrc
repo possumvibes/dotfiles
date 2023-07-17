@@ -90,12 +90,7 @@ map global normal <a-%>   '*%s<ret>'                        -docstring "select a
 map global normal <ret>   ':expand<ret>'                    -docstring 'expand selection to next outer region'
 map global normal <minus> ':enter-phantom-select-mode<ret>' -docstring 'enter phantom selection mode'
 map global normal m       ':enter_match_mode<ret>'          -docstring 'enter match mode'
-map global normal q       ':enter_mirror_mode<ret>'         -docstring 'enter extend mode'
-map global normal Q       ':enter_surround_mode<ret>'       -docstring 'enter surround mode'
-
-# rebind macros
-map global normal <a-q> q -docstring "replay recorded macro"
-map global normal <a-Q> Q -docstring "start/end macro recording"
+map global normal =       ':enter_mirror_mode<ret>'         -docstring 'enter mirror mode'
 
 # increment and decrement numbers
 map global normal <c-a> ':increment_selected_numbers %val{count}<ret>'
@@ -131,6 +126,7 @@ map global user <a-s> ':vertical-selection-up<ret>'          -docstring 'copy ma
 map global user S     ':vertical-selection-up-and-down<ret>' -docstring 'copy matching selections above and below' 
 map global user V     <V>                                    -docstring 'enter view mode (locked)'
 map global user y     ':clipboard_yank_selections<ret>'      -docstring 'yank to terminal clipboard'
+map global user =     ':enter_math_mode<ret>'     					 -docstring 'enter math mode'
 
 # Prompt mode ------------------------------------------------------------------
 
