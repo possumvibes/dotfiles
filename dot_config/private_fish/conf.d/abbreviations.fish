@@ -1,11 +1,11 @@
 # workflow apps
-abbr -a e   $EDITOR
+abbr -a e $EDITOR
 abbr -a b bat
 abbr -a k kak
 
 # Config files
-abbr -a aa	"cd $XDG_CONFIG_HOME/fish; kak conf.d/abbreviations.fish"
-abbr -a fishconf "cd $XDG_CONFIG_HOME/fish; kak config.fish"
+abbr -a aa	"cd $FSHDIR; kak conf.d/abbreviations.fish"
+abbr -a fishconf "cd $FSHDIR; kak config.fish"
 abbr -a vimrc "cd $XDG_CONFIG_HOME/nvim; nvim init.lua"
 abbr -a kakrc "cd $XDG_CONFIG_HOME/kak; kak kakrc"
 
