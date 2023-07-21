@@ -1,4 +1,4 @@
-# Aesthetic or death
+# initial colorscheme in case something goes funky with the plugins
 colorscheme 'zenburn'
 
 # To begin
@@ -16,14 +16,15 @@ bundle-noload kak-bundle https://git.sr.ht/~jdugan6240/kak-bundle
 
 # colorscheme
 bundle-noload kakoune-mysticaltutor "https://github.com/caksoylar/kakoune-mysticaltutor" '' %{
-    mkdir -p "${kak_config}/colors/plugin"
-    ln -sf "${kak_opt_bundle_path}/kakoune-mysticaltutor/mysticaltutor.kak" "${kak_config}/colors/plugin/"
+  mkdir -p "${kak_config}/colors/plugin"
+  ln -sf "${kak_opt_bundle_path}/kakoune-mysticaltutor/mysticaltutor.kak" "${kak_config}/colors/plugin/"
 }
 try %{ colorscheme mysticaltutor }
 
 # Auto-pairing
-bundle auto-pairs.kak https://github.com/alexherbo2/auto-pairs.kak 
-enable-auto-pairs
+bundle auto-pairs.kak https://github.com/alexherbo2/auto-pairs.kak  %{
+  enable-auto-pairs
+}
 
 # File tree buffer
 bundle kakoune-filetree https://github.com/occivink/kakoune-filetree
@@ -43,12 +44,12 @@ bundle kakoune-phantom-selection https://github.com/occivink/kakoune-phantom-sel
 	}
 }
 bundle kakoune-vertical-selection https://github.com/occivink/kakoune-vertical-selection
+bundle kakoune-fandt https://gitlab.com/listentolist/kakoune-fandt %{
+  require-module fandt
+} 
 
 # Custom snippets
 # bundle kakoune-snippets https://github.com/occivink/kakoune-snippets
-
-# Modules -----------------------------------------------------------
-require-module fandt
 
 ## Options ----------------------------------------------------------
 
@@ -73,6 +74,11 @@ hook global -group relative-line-numbers ModeChange .*:insert:.* %{
   add-highlighter -override window/number-lines number-lines -hlcursor -relative
 }
 
+# User modes --------------------------------------------------------
+declare-user-mode window
+define-command enter-window-mode %{ enter-user-mode window}
+hook global ModuleLoaded tmux %{ require-module tmux-windowing }
+
 # Mappings ----------------------------------------------------------
 
 # Normal mode -------------------------------------------------------
@@ -80,7 +86,7 @@ hook global -group relative-line-numbers ModeChange .*:insert:.* %{
 # Bindings to reduce injury
 map global normal "'"     ";"       -docstring 'reduce selections to their cursor'
 map global normal <#>     "<a-;>"   -docstring 'flip selection direction'
-map global normal <^>   	"<a-:>"		-docstring 'ensure forward selection direction'
+map global normal <a-#>  	"<a-:>"		-docstring 'ensure forward selection direction'
 map global normal <esc>   ";,"      -docstring 'clear all selections to current cursor'
 map global normal D 			"xd"			-docstring 'delete current line'
 map global normal v       <a-i>     -docstring 'select inner surrounding objects'
@@ -88,7 +94,7 @@ map global normal V       <a-a>     -docstring 'select outer surrounding objects
 
 map global normal <a-%>   '*%s<ret>'                        -docstring "select all occurrences of selection"
 map global normal <ret>   ':expand<ret>'                    -docstring 'expand selection to next outer region'
-map global normal <minus> ':enter-phantom-select-mode<ret>' -docstring 'enter phantom selection mode'
+map global normal <minus> ':enter-window-mode<ret>' -docstring 'enter window mode'
 map global normal m       ':enter_match_mode<ret>'          -docstring 'enter match mode'
 map global normal =       ':enter_mirror_mode<ret>'         -docstring 'enter mirror mode'
 
@@ -117,9 +123,10 @@ map global user f     ':open_file_picker<ret>'               -docstring 'open fi
 map global user g     ':w<ret>'                              -docstring 'writes file; :w'
 map global user k     ':show_lsp_hover_info<ret>'            -docstring 'show LSP docs for selection' 
 map global user l     ':enter_lsp_mode<ret>'                 -docstring 'enter LSP mode'
-map global user m     ':open_document_symbol_picker<ret>'    -docstring 'open document symbol picker' 
-map global user M     ':open_workspace_symbol_picker<ret>'   -docstring 'open workspace symbol picker'
+map global user m     ':open_document_symbol_picker<ret>'    -docstring 'LSP: open document symbol picker' 
+map global user M     ':open_workspace_symbol_picker<ret>'   -docstring 'LSP: open workspace symbol picker'
 map global user o     ':enter_letter_case_mode<ret>'         -docstring 'enter letter_case mode'
+	map global user p     ':enter-phantom-select-mode<ret>'      -docstring 'enter phantom selection mode'
 map global user v     <v>                                    -docstring 'enter view mode'
 map global user s     ':vertical-selection-down<ret>'        -docstring 'copy matching selections below' 
 map global user <a-s> ':vertical-selection-up<ret>'          -docstring 'copy matching selections above' 
@@ -133,7 +140,7 @@ map global user =     ':enter_math_mode<ret>'     					 -docstring 'enter math m
 map global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/' -docstring 'buffer directory' 
 
 # Add search flags
-map global prompt <c-i> '<home>(?i)<end>'
+map global prompt <c-n> '<home>(?i)<end>'
 map global prompt <c-s> '<home>(?S)<end>'
 map global prompt <c-k> '<home>\Q<end>'
 
