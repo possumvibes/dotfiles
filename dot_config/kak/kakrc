@@ -98,6 +98,10 @@ map global normal <minus> ':enter-window-mode<ret>' -docstring 'enter window mod
 map global normal m       ':enter_match_mode<ret>'          -docstring 'enter match mode'
 map global normal =       ':enter_mirror_mode<ret>'         -docstring 'enter mirror mode'
 
+# extend full-line selection up and down: https://discuss.kakoune.com/t/improved-and-consistent-line-selection-with-x-and-a-x/2243
+map global normal <a-X> %{<a-:><a-;><a-H>Kx} -docstring 'extend lines upwards' 
+map global normal X %{<a-:>F<ret>x}          -docstring 'extend lines downwards' 
+
 # increment and decrement numbers
 map global normal <c-a> ':increment_selected_numbers %val{count}<ret>'
 map global normal <c-x> ':decrement_selected_numbers %val{count}<ret>'
