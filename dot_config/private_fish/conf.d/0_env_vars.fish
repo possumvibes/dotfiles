@@ -2,6 +2,8 @@
 set -xg SXHKD_SHELL '/usr/bin/sh'
 
 # Editor
+
+set -eg EDITOR
 set -xg EDITOR "kak"
 set -xg VISUAL "kak"
 

@@ -4,10 +4,10 @@ abbr -a b bat
 abbr -a k kak
 
 # Config files
-abbr -a aa	"$EDITOR $FSHDIR/conf.d/abbreviations.fish"
+abbr -a aa	"cd $XDG_CONFIG_HOME/fish; kak conf.d/abbreviations.fish"
+abbr -a fishconf "cd $XDG_CONFIG_HOME/fish; kak config.fish"
 abbr -a vimrc "cd $XDG_CONFIG_HOME/nvim; nvim init.lua"
 abbr -a kakrc "cd $XDG_CONFIG_HOME/kak; kak kakrc"
-abbr -a fishconf "cd $XDG_CONFIG_HOME/fish; kak config.fish"
 
 # Utilities
 abbr -a md	'mkdir -p'
