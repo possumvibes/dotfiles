@@ -2,11 +2,8 @@
 set -xg SXHKD_SHELL '/usr/bin/sh'
 
 # Editor
-set -xg EDITOR "nvim"
-set -xg VISUAL "nvim"
-
-## Terminal
-set -xg TERM "xterm-256color"
+set -xg EDITOR "kak"
+set -xg VISUAL "kak"
 
 # Convenience Directories
 set -xg DOTS_DIR "$HOME/.local/share/chezmoi"
