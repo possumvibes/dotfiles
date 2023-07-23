@@ -52,6 +52,7 @@ bundle kakoune-fandt https://gitlab.com/listentolist/kakoune-fandt %{
 # bundle kakoune-snippets https://github.com/occivink/kakoune-snippets
 
 ## Options ----------------------------------------------------------
+set-option global grepcmd 'rg --column --smart-case --sort path'
 
 # UI options
 set-option global tabstop 2
