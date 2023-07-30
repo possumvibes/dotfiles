@@ -26,6 +26,7 @@ end
 
 if test -n $bootstrapped
   echo "reinstalling plugins..."
-  mv fish_plugins.bak fish_plugins
+  cd ~/.config/fish
+  cp fish_plugins.bak fish_plugins
   fisher update
 end
