@@ -14,7 +14,7 @@ $character\
 
 # Inserts a blank line between shell prompts
 add_newline = true
-palette='catppuccin-macchiato'
+palette='tempus_autumn'
 
 [shell]
 disabled = false
@@ -23,36 +23,36 @@ bash_indicator = '\$ '
 zsh_indicator = '  '
 powershell_indicator = 'ᓚᘏᗢ '
 format = '[$indicator]($style)'
-style = 'pink'
+style = 'magenta'
 
 [username]
 show_always = false
-style_user = "bold fg:flamingo"
-style_root = "bold fg:rosewater"
+style_user = "bold fg:yellow"
+style_root = "bold fg:brightyellow"
 format = '[$user]($style) '
 disabled = false
 
 [hostname]
 ssh_only = true
-style = "bold fg:mauve"
+style = "bold fg:green"
 ssh_symbol = ""
-format = '[$ssh_symbol](fg: blue) [$hostname]($style) '
+format = '[$ssh_symbol](fg:brightgreen) [$hostname]($style) '
 disabled = false
 
 [directory]
-style = "bold fg:teal"
+style = "bold fg:brightblue"
 format = "[$path]($style) "
 truncation_length = 8
 truncate_to_repo = true
 truncation_symbol = ""
 
 [git_branch]
-style = "fg:subtext0"
+style = "fg:brightwhite"
 symbol = ""
 format = '[$branch]($style)'
 
 [git_status]
-style = "fg:rosewater"
+style = "fg:green"
 format = '[$all_status]($style)[$ahead_behind](blue) '
 
 [sudo]
@@ -62,8 +62,8 @@ format = '[$symbol]($style)'
 style = "fg:yellow"
 
 [character] 
-success_symbol = '[➜](bold green)' 
-error_symbol = '[➜](bold red)' 
+success_symbol = '[➜](bold brightgreen)'
+error_symbol = '[➜](bold brightred)'
 
 [cmd_duration]
 disabled = true
@@ -140,3 +140,22 @@ disabled = true
  rosewater = '#f4dbd6'
 
  transparent = '#FF00000'
+
+ [palettes.tempus_autumn]
+black         = "#302420"
+red           = "#f46f55"
+green         = "#85a400"
+yellow        = "#b09640"
+blue          = "#799aca"
+magenta       = "#df798e"
+cyan          = "#52a885"
+white         = "#a8948a"
+brightblack   = "#36302a"
+brightred     = "#e27e3d"
+brightgreen   = "#43aa7a"
+brightyellow  = "#ba9400"
+brightblue    = "#958fdf"
+brightmagenta = "#ce7dc4"
+brightcyan    = "#2fa6b7"
+brightwhite   = "#a9a2a6"
+
