@@ -11,7 +11,7 @@ set -xg VISUAL "kak"
 set -xg DOTS_DIR "$HOME/.local/share/chezmoi"
 set -xg FSHDIR $XDG_CONFIG_HOME/fish
 set -xg NOTEBOOK_DIR "$HOME/ari-common/ari_yelling"
-set -xg WALLPAPER_DIR "$HOME/.local/share/wallpapers"
+set -xg WALLPAPER_DIR "$HOME/Pictures/wallpapers"
 
 
 # XDG Compliance
