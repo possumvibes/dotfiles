@@ -2,20 +2,27 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-$shell\
 $username\
 $hostname\
 $directory\
 $git_branch\
 $git_status\
-$sudo\
+$sudo
+$shell\
 $character\
 """
 
-# Inserts a blank line between shell prompts
-add_newline = true
+# Color theme
+#
 palette='tempus_autumn'
 
+# Inserts a blank line between shell prompts
+#
+add_newline = true
+
+
+# Modules I am using
+#
 [shell]
 disabled = false
 fish_indicator = '❃ '
@@ -23,47 +30,48 @@ bash_indicator = '\$ '
 zsh_indicator = '  '
 powershell_indicator = 'ᓚᘏᗢ '
 format = '[$indicator]($style)'
-style = 'magenta'
+style = 'brightmagenta'
 
 [username]
 show_always = false
-style_user = "bold fg:yellow"
-style_root = "bold fg:brightyellow"
-format = '[$user]($style) '
+style_user = "fg:brightblue"
+style_root = "fg:cyan"
+format = '[$user ]($style)'
 disabled = false
 
 [hostname]
 ssh_only = true
-style = "bold fg:green"
-ssh_symbol = ""
-format = '[$ssh_symbol](fg:brightgreen) [$hostname]($style) '
+style = "fg:blue"
+ssh_symbol = " "
+format = '[$ssh_symbol](fg:brightgreen)[$hostname]($style) '
 disabled = false
 
 [directory]
-style = "bold fg:brightblue"
+before_repo_root_style = "bold fg:brightcyan"
+repo_root_style = "bold fg:brightblue"
 format = "[$path]($style) "
 truncation_length = 8
-truncate_to_repo = true
+truncate_to_repo = false
 truncation_symbol = ""
 
 [git_branch]
-style = "fg:brightwhite"
+style = "fg:white"
 symbol = ""
-format = '[$branch]($style)'
+format = '$symbol [$branch]($style)'
 
 [git_status]
 style = "fg:green"
 format = '[$all_status]($style)[$ahead_behind](blue) '
 
 [sudo]
-disabled = true
-symbol = ''
+disabled = false
+symbol = ''
 format = '[$symbol]($style)'
-style = "fg:yellow"
+style = "fg:brightred"
 
 [character] 
-success_symbol = '[➜](bold brightgreen)'
-error_symbol = '[➜](bold brightred)'
+success_symbol = '[➜](brightgreen)'
+error_symbol = '[➜](brightred)'
 
 [cmd_duration]
 disabled = true
