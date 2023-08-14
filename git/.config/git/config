@@ -1,0 +1,31 @@
+[user]
+	name = "Possumvibes"
+	email = "90935434+possumvibes@users.noreply.github.com"
+[alias]
+	cam = commit -a -m
+	cm = commit -m
+	camm = add . && git commit -m
+	cb = checkout -b
+	nuke = branch -D
+	psu = push --set-upstream
+	psuo = push --set-upstream origin
+	rpo = remote prune origin
+  s = status -s
+[init]
+	defaultBranch = main
+[pull]
+  rebase = false
+[core]
+  excludesFile = ~/.gitignore
+  pager = delta
+[pager]
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
+[delta]
+  navigate = true
+  line-numbers = true
+	side-by-side=true
+[interactive]
+  diffFilter = delta --color-only

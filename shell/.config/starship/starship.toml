@@ -1,0 +1,188 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$sudo
+$shell\
+$character\
+"""
+
+# Color theme
+#
+palette='tempus_autumn'
+
+# Inserts a blank line between shell prompts
+#
+add_newline = true
+
+
+# Modules I am using
+#
+[shell]
+disabled = false
+fish_indicator = '❃ '
+bash_indicator = '\$ '
+zsh_indicator = 'ᓚᘏᗢ '
+powershell_indicator = 'ᓚᘏᗢ '
+format = '[$indicator]($style)'
+style = 'brightmagenta'
+
+[username]
+show_always = false
+style_user = "fg:brightblue"
+style_root = "fg:cyan"
+format = '[$user ]($style)'
+disabled = false
+
+[hostname]
+ssh_only = true
+style = "fg:blue"
+ssh_symbol = " "
+format = '[$ssh_symbol](fg:brightgreen)[$hostname]($style) '
+disabled = false
+
+[directory]
+style = "bold fg:brightblue"
+# before_repo_root_style = "bold fg:brightcyan"
+# repo_root_style = "bold fg:brightblue"
+format = "[$path]($style) "
+truncation_length = 8
+truncate_to_repo = false
+truncation_symbol = ""
+
+[git_branch]
+style = "fg:white"
+symbol = ""
+format = '$symbol [$branch]($style)'
+
+[git_status]
+style = "fg:brightyellow"
+format = '[$all_status]($style)[$ahead_behind](blue) '
+
+[sudo]
+disabled = false
+symbol = ''
+format = '[$symbol]($style)'
+style = "fg:brightred"
+
+[character] 
+success_symbol = '[➜](brightgreen)'
+error_symbol = '[➜](brightred)'
+vimcmd_symbol = '[](brightyellow)'
+
+[cmd_duration]
+disabled = true
+
+# ;-------------------------
+# ; Catppuccin Mocha Palette
+# ; Maintainer: justTOBBI
+# ;--------------------------
+[palettes.catppuccin-mocha]
+ base = '#1e1e2e'
+ mantle = '#181825'
+ crust = '#11111b'
+
+ text = '#cdd6f4'
+ subtext0 = '#a6adc8'
+ subtext1 = '#bac2de'
+
+ surface0 = '#313244'
+ surface1 = '#45475a'
+ surface2 = '#585b70'
+ 
+ overlay0 = '#6c7086'
+ overlay1 = '#7f849c'
+ overlay2 = '#9399b2'
+ 
+
+ blue = '#89b4fa'
+ lavender = '#b4befe'
+ sapphire = '#74c7ec'
+ sky = '#89dceb'
+ teal = '#94e2d5'
+ green = '#a6e3a1'
+ yellow = '#f9e2af'
+ peach = '#fab387'
+ maroon = '#eba0ac'
+ red = '#f38ba8'
+ mauve = '#cba6f7'
+ pink = '#f5c2e7'
+ flamingo = '#f2cdcd'
+ rosewater = '#f5e0dc'
+
+ transparent = '#FF00000'
+
+ [palettes.catppuccin-macchiato]
+ base = '#24273a'
+ mantle = '#1e2030'
+ crust = '#181926'
+
+ text = '#cad3f5'
+ subtext0 = '#a5adcb'
+ subtext1 = '#b8c0e0'
+
+ surface0 = '#363a4f'
+ surface1 = '#494d64'
+ surface2 = '#5b6078'
+ 
+ overlay0 = '#6e738d'
+ overlay1 = '#8087a2'
+ overlay2 = '#939ab7'
+ 
+ blue = '#8aadf4'
+ lavender = '#b7bdf8'
+ sapphire = '#7dc4e4'
+ sky = '#91d7e3'
+ teal = '#8bd5ca'
+ green = '#a6da95'
+ yellow = '#eed49f'
+ peach = '#f5a97f'
+ maroon = '#ee99a0'
+ red = '#ed8796'
+ mauve = '#c6a0f6'
+ pink = '#f5bde6'
+ flamingo = '#f0c6c6'
+ rosewater = '#f4dbd6'
+ transparent = '#FF00000'
+
+ [palettes.tempus_autumn]
+black         = "#302420"
+red           = "#f46f55"
+green         = "#85a400"
+yellow        = "#b09640"
+blue          = "#799aca"
+magenta       = "#df798e"
+cyan          = "#52a885"
+white         = "#a8948a"
+brightblack   = "#36302a"
+brightred     = "#e27e3d"
+brightgreen   = "#43aa7a"
+brightyellow  = "#ba9400"
+brightblue    = "#958fdf"
+brightmagenta = "#ce7dc4"
+brightcyan    = "#2fa6b7"
+brightwhite   = "#a9a2a6"
+
+[palettes.mysticaltutor]
+black         = '#1e2227'
+red           = '#e07093'
+green         = '#8bbe67'
+yellow        = '#bb8e67'
+blue          = '#5c8ec7'
+magenta       = '#8b5fc7'
+cyan          = '#5cbe97'
+white         = '#d9d9d9'
+brightblack   = '#30343c'
+brightred     = '#dfb4c9'
+brightgreen   = '#b1c6ac'
+brightyellow  = '#c3b470'
+brightblue    = '#a0b4cf'
+brightmagenta = '#b1a3df'
+brightcyan    = '#a0c4bd'
+brightwhite   = '#ffffff'
+

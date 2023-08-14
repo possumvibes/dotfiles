@@ -1,0 +1,14 @@
+window:
+  opacity: .95
+  padding:
+    x: 5
+    y: 5
+
+font:
+  size: 12
+  normal:
+    family: CaskaydiaCove Nerd Font
+    style: SemiLight
+  
+import:
+  - ~/.config/alacritty/themes/tempus_autumn.yml

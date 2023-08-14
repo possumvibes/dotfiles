@@ -1,0 +1,17 @@
+# shell
+
+## zsh
+shell/.config/zsh/.zcompdump
+shell/.config/zsh/.zkbd
+
+## fish
+fish/.config/fish/completions
+fish/.config/fish/fisher_plugins
+fish/.config/fish/fish_variables
+fish/.config/fish/q
+
+# kakoune
+kakoune/.config/kak/autoload/standard-library
+kakoune/.config/kak/bundle
+kakoune/.config/kak/colors/plugin
+

@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+
+# cd $(fd . -t d | fzf)
+#
+
+kak $(fd . -t f | fzf -m)
+
+dirsearchoptions="-m \
+--border=top \
+--border-label=\"Choose files to edit with $EDITOR\" \
+--marker='! '
+
+"
+
+
