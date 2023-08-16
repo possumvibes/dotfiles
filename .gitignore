@@ -3,6 +3,7 @@
 ## zsh
 shell/.config/zsh/.zcompdump
 shell/.config/zsh/.zkbd
+*.zwc
 
 ## fish
 fish/.config/fish/completions

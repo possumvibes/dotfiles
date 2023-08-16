@@ -1,7 +1,8 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
-# Completion settings and zstyles
+fpath=($ZDOTDIR/completions $fpath)
 
+# Completion styles
 # Fuzzy match mistyped completions.
 zstyle ':completion:*' completer _extensions _complete _list _match _approximate
 zstyle ':completion:*:match:*' original only
@@ -37,6 +38,15 @@ zstyle ':completion::*:(-command-|export):*' fake-parameters ${${${_comps[(I)-va
 # Sort array completion candidates
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
+# Group matches and describe.
+zstyle ':completion:*:corrections' format '%B%F{green}%d (errors: %e)%f%b'
+zstyle ':completion:*:messages' format '%B%F{yellow}%d%f%b'
+zstyle ':completion:*:warnings' format '%B%F{red}No such %d%f%b'
+zstyle ':completion:*:errors' format '%B%F{red}No such %d%f%b'
+
+# Merge multiple, consecutive slashes in paths
+zstyle ':completion:*' squeeze-slashes true
+
 # Group completions by tags
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
@@ -44,12 +54,13 @@ zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions co
 ## Application-specific completion
 
 # cd
-zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
-zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
 zstyle ':completion:*:*:cd:*' ignore-parents parent pwd
-zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
 
-# Kill
+# Ignore multiple entries.
+zstyle ':completion:*:(rm|kill|diff):*' ignore-line other
+zstyle ':completion:*:rm:*' file-patterns '*:all-files'
+
+# PID completion for kill
 zstyle ':completion:*:*:*:*:processes' command 'ps -u $LOGNAME -o pid,user,command -w'
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;36=0=01'
 zstyle ':completion:*:*:kill:*' menu yes select
@@ -59,5 +70,4 @@ zstyle ':completion:*:*:kill:*' insert-ids single
 # Man
 zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.(^1*)' insert-sections true
-
 

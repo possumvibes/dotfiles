@@ -1,34 +1,16 @@
+#!/usr/bin/env zsh
+
 # Source the common environment, which includes the PATH
 if [ -z "$ZSHENV_SOURCED" ]; then
   echo "something is awry: sourcing ZDOTDIR/zshenv"
   . $ZDOTDIR/.zshenv
 fi
 
-# Source common aliases
-. ~/.config/shell.d/aliases.sh
-
-# Source additional customizations
-if [ -d $ZDOTDIR/conf.d ]; then
-  for i in $ZDOTDIR/conf.d/*.zsh; do
-    source "$i"
-  done
-fi
-
-# Source my completions
-if [[ -d $ZDOTDIR/completions ]]; then
-  fpath=($ZDOTDIR/completions $fpath)
-fi
-
-# Source plugins: manually managed.
-# This includes plugin git repos and package-manager-installed programs.
-[ -f $ZDOTDIR/plugins.zsh ] && source $ZDOTDIR/plugins.zsh
-
-# Autoload
-autoload -U zmv # One day I will get rid of all the Windows "Capitalized And Spaced" names
-
 # Settings
-setopt notify
 setopt NO_beep          # pls do not beep :(
+
+WORDCHARS='_-*?[]~&.;!#$%^(){}<>' # Treat these characters as part of a word.
+setopt rc_quotes 		          # Allow combining quotes to escape ('ty''s ties' rather than 'ty'\''s ties')
 
 # History
 HISTFILE=$ZSH_DATA_DIR/zsh_history
@@ -49,7 +31,7 @@ setopt hist_beep                 # Beep when accessing non-existent history.
 
 # Directory
 DIRSTACKSIZE=9
-setopt auto_cd            # Implicit CD slows down plugins
+setopt auto_cd              # Implicit CD slows down plugins
 setopt cdable_vars          # Change directory to a path stored in a variable.
 setopt extended_glob        # Use extended globbing syntax.
 setopt auto_pushd           # Push the old directory onto the stack on cd.
@@ -57,11 +39,12 @@ setopt pushd_ignore_dups    # Do not store duplicates in the stack.
 setopt pushd_silent         # Do not print the directory stack after pushd or popd.
 setopt pushd_to_home        # Push to home directory when no argument is given.
 
-# Completion
-zmodload zsh/complist       # Enable completion menu-specific keybindings
-autoload -Uz compinit       # Load zsh completion
-compinit;                   # Enable completion after sourcing all completions
+# Jobs
+setopt auto_resume          # Attempt to resume existing jobs before creating a new process.
+setopt long_list_jobs        # List jobs in the long format by default
+setopt notify               # Report status of background jobs immediately.
 
+# Completion
 _comp_options+=(globdots)   # Include hidden files in completions
 setopt always_to_end        # Move cursor to the end of a completed word.
 setopt auto_menu            # Show completion menu on a successive tab press.
@@ -73,15 +56,65 @@ setopt NO_flow_control      # Disable start/stop characters in shell editor.
 setopt NO_menu_complete     # Do not autoselect the first completion entry.
 setopt path_dirs            # Perform path search even on command names with slashes.
 
+# Load Plugins
+# zgen
+export ZGEN_DIR=$XDG_DATA_HOME/zgenom
+export ZGEN_AUTOLOAD_COMPINIT=0
+
+if [ ! -d "$ZGEN_DIR" ]; then
+    echo "Installing jandamm/zgenom"
+    git clone https://github.com/jandamm/zgenom $ZGEN_DIR
+fi
+source $ZGEN_DIR/zgenom.zsh
+
+# Check for plugin and zgenom updates every 7 days
+# This does not increase the startup time.
+zgenom autoupdate
+
+if ! zgenom saved; then
+    echo "Initializing zgenom"
+
+    zgenom load /usr/share/fzf/shell/key-bindings.zsh
+    zgenom load jeffreytse/zsh-vi-mode
+    zgenom load zdharma-continuum/fast-syntax-highlighting
+    zgenom load zsh-users/zsh-completions 
+    zgenom load hlissner/zsh-autopair autopair.zsh
+
+    zgenom save
+    zgenom compile $ZDOTDIR
+fi
+
+# Autoload
+
+# Enable completion menu-specific keybindings
+zmodload zsh/complist          # Enable completion menu-specific keybindings. enable before compinit
+autoload -U zmv                # fancy file renaming
+
+# load compinit last of this section
+autoload -Uz compinit && compinit -u -d $ZSH_CACHE_DIR/zcompdump
+
+# Source common aliases
+. ~/.config/shell.d/aliases.sh
+
+# Source additional customizations
+if [ -d $ZDOTDIR/conf.d ]; then
+  for i in $ZDOTDIR/conf.d/*.zsh; do
+    source "$i"
+  done
+fi
+
 # Keybindings
 bindkey -v
-## Readline-ish <c-a/e>
-bindkey '^A' beginning-of-line
-bindkey '^E' end-of-line
+# bindkey '^A' beginning-of-line
+# bindkey '^E' end-of-line
 
-export KEYTIMEOUT=1         # Faster mode switch between insert and normal modes
+# export KEYTIMEOUT=1         # Faster mode switch between insert and normal modes
+ZVM_VI_SURROUND_BINDKEY="s-prefix"
+
+
 # todo: menuselect bindings (enabled with complist)
 
+autopair-init
 
 # Prompt
 setopt prompt_subst        # allow prompt substring to support vcs-info
