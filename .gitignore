@@ -16,3 +16,5 @@ kakoune/.config/kak/autoload/standard-library
 kakoune/.config/kak/bundle
 kakoune/.config/kak/colors/plugin
 
+# General no-go
+*.work
