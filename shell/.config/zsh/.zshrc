@@ -74,14 +74,16 @@ zgenom autoupdate
 if ! zgenom saved; then
     echo "Initializing zgenom"
 
-    zgenom load /usr/share/fzf/shell/key-bindings.zsh
     zgenom load jeffreytse/zsh-vi-mode
-    zgenom load zdharma-continuum/fast-syntax-highlighting
+
+    # fzf must load after zsh-vi-mode to correctly override the bindings
+    zgenom load /usr/share/fzf/shell/key-bindings.zsh
+
     zgenom load zsh-users/zsh-completions 
+    zgenom load zdharma-continuum/fast-syntax-highlighting
     zgenom load hlissner/zsh-autopair autopair.zsh
 
     zgenom save
-    zgenom compile $ZDOTDIR
 fi
 
 # Autoload
@@ -105,10 +107,6 @@ fi
 
 # Keybindings
 bindkey -v
-# bindkey '^A' beginning-of-line
-# bindkey '^E' end-of-line
-
-# export KEYTIMEOUT=1         # Faster mode switch between insert and normal modes
 ZVM_VI_SURROUND_BINDKEY="s-prefix"
 
 
