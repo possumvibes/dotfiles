@@ -10,6 +10,39 @@
 #
 
 #
+## Quick Reference
+
+# Directions: {n, e, u, a}
+
+# move window: super +         Directions
+# swap window: super + shift + Directions
+
+# rotate tree:   super + r ;                Directions
+# resize window: super + shift + r ;        Directions
+# resize window: super + shift + ctrl + r ; Directions
+
+# tiling and flags: super + t ;
+#  - tiling:       t
+#  - pseudo_tiled: s
+#  - floating:     l
+#  - fullscreen:   f
+#  - flag locked:  l
+#  - flag marked:  m
+#  - flag private: p
+#  - flag sticky:  s
+
+# preselect: super+j ;
+#  - direction:   neua
+#  - ratio:       1-9
+#  - cancel node: space
+#  - cancel desk: d
+
+#  visual adjustments: super + v ;
+#  - redshift warmer:   g
+#  - redshift migraine: d
+#  - redshift reset:    f
+
+#
 #######################
 ##  session hotkeys  ##
 #######################
@@ -62,7 +95,7 @@ super + shift + s
   flameshot gui
 
 # blue-light adjustments for migraine, *very* migraine, and revert-to-normal
-super + r ; {g,d,f}
+super + v ; {g,d,f}
 	redshift { -PO 2400, -PO 2200 -b 0.6, -x}
 
 
@@ -70,16 +103,16 @@ super + r ; {g,d,f}
 # tiling state
 # -----------
 
-# set the window tiling state. ~
-super + t ; {t,s,l,f}
-	bspc node -t ~{tiled,pseudo_tiled,floating,fullscreen}
-
 # alternate between tiling and monocle layouts
 super + m
 	bspc desktop -l next
 
+# set the window tiling state. ~
+super + t ; {t,s,l,f}
+	bspc node -t ~{tiled,pseudo_tiled,floating,fullscreen}
+
 # set the node flags
-super + v ; {l,m,s,p}
+super + t ; {l,m,s,p}
 	bspc node -g {locked,marked,sticky,private}
 
 #
@@ -148,7 +181,7 @@ super + {_,ctrl + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
 # send and follow to the given desktops
-super + shift + {1-9,0}
+super + alt + {1-9,0}
 	bspc node -d '^{1-9,10}' --follow
 
 # focus the most recent previous node/desktop
@@ -192,11 +225,11 @@ super + j; d
 # the bindings on the left of the colon create a locked mode; exit with <esc>.
 
 # resize a window in the given direction 
-super + ctrl + c : {n,e,u,a}
+super + shift + r : {n,e,u,a}
 	bspwm_smart_resize {west,south,north,east} 50
 
 # resize a floating window in the given direction
-super + ctrl + shift + c : {n,e,u,a}
+super + ctrl + shift + r : {n,e,u,a}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 
