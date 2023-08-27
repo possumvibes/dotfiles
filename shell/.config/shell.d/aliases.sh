@@ -32,7 +32,7 @@ alias md='mkdir -p'
 alias rm='rm -i'
 
 # navigation and listing
-alias l='ls'
+alias l='ls -1'
 alias la='ls -lah'
 alias ll='ls -lh'
 
