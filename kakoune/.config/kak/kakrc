@@ -8,11 +8,24 @@ set-option global indentwidth 4
 set-option global scrolloff 5,10
 set-option global ui_options terminal_assistant=cat terminal_status_on_top=true
 
-add-highlighter global/show-matching show-matching
+# Apply formatting by default to every buffer, named or not
+hook global BufCreate ^.*$ %{
+	add-highlighter buffer/show-matching show-matching
+	add-highlighter buffer/word-wrap wrap -word -indent
 
-enable-relative-line-numbers
+    add-highlighter buffer/numbers number-lines -hlcursor -relative
 
-add-highlighter global/word-wrap wrap -word -indent
+	# relative-insert-numbers: Switch between relative and absolute number-lines
+	# NORMAL mode uses relative numbers
+	# INSERT mode uses absolute numbers
+    hook buffer -group relative-insert-numbers ModeChange .*:insert %{
+        add-highlighter -override buffer/numbers number-lines -hlcursor 
+    }
+
+    hook buffer -group relative-insert-numbers ModeChange .*:insert:.* %{
+        add-highlighter -override buffer/numbers number-lines -hlcursor -relative
+    }
+}
 
 # Mappings ----------------------------------------------------------
 
@@ -50,6 +63,8 @@ hook global NormalKey y clipboard-sync
 # Goto mode ---------------------------------------------------------
 map global goto n '<esc>:bn<ret>' -docstring 'go to next buffer'
 map global goto p '<esc>:bp<ret>' -docstring 'go to previous buffer'
+
+map global view z v -docstring 'center cursor (vertically)'
 
 # User mode ---------------------------------------------------------
 ## w g d f b q l u o y
@@ -118,7 +133,16 @@ bundle auto-pairs.kak https://github.com/alexherbo2/auto-pairs.kak %{
 }
 
 # File tree buffer
-bundle kakoune-filetree https://github.com/occivink/kakoune-filetree
+# bundle kakoune-filetree https://github.com/occivink/kakoune-filetree
+bundle kaktree https://github.com/possumvibes/kaktree %{
+    hook global WinSetOption filetype=kaktree %{
+        remove-highlighter buffer/numbers
+        remove-hooks buffer relative-insert-numbers
+        remove-highlighter buffer/wrap
+        remove-highlighter  buffer/show-matching
+    }
+    kaktree-enable
+} 
 
 # Selection expansion and manipulation
 bundle kakoune-expand https://github.com/occivink/kakoune-expand
@@ -152,19 +176,15 @@ evaluate-commands %sh{
 }
 
 # Filetype hooks
-hook global WinSetOption filetype=(rust|markdown) %{
-    lsp-enable-window
+hook global WinSetOption filetype=rust %{
+    lsp-init
+}
 
-    map window user d ':lsp-diagnostics<ret>'           -docstring "LSP diagnostics"
-    map global user k ':show_lsp_hover_info<ret>'       -docstring 'show LSP docs for selection' 
-    map global user l ':enter-user-mode lsp<ret>'       -docstring 'enter LSP mode'
-    map global user m ':lsp-goto-document-symbol<ret>'  -docstring 'LSP: open document symbol picker' 
-    map global user M ':lsp-workspace-symbol-incr<ret>' -docstring 'LSP: open workspace symbol picker'
+hook global WinSetOption filetype=markdown %{
+    # Markdown uses tab width 2
 
-    map global insert <tab> '<a-;>:try lsp-snippets-select-next-placeholders catch %{ execute-keys -with-hooks <lt>tab> }<ret>' -docstring 'Select next snippet placeholder'
+    set-option buffer tabstop 2
+    set-option buffer indentwidth 2
 
-    set-option window lsp_diagnostic_line_error_sign "!"
-    set-option window lsp_diagnostic_line_warning_sign "?"
-    set-face window  DiagnosticError default+u
-    set-face window  DiagnosticWarning default+u
+    lsp-init
 }

@@ -38,7 +38,7 @@ complete-command mv file
 define-command tp %{
     evaluate-commands %sh{
         trash -- "$kak_buffile" ||
-        printf "fail 'ERROR: rm exited with: %d.'" "$?"
+        printf "fail 'ERROR: trash exited with: %d.'" "$?"
     }
     delete-buffer
 }
