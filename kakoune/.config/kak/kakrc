@@ -9,21 +9,21 @@ set-option global scrolloff 5,10
 set-option global ui_options terminal_assistant=cat terminal_status_on_top=true
 
 # Apply formatting by default to every buffer, named or not
-hook global BufCreate ^.*$ %{
-	add-highlighter buffer/show-matching show-matching
-	add-highlighter buffer/word-wrap wrap -word -indent
+hook global WinCreate ^.*$ %{
+	add-highlighter window/show-matching show-matching
+	add-highlighter window/word-wrap wrap -word -indent
 
-    add-highlighter buffer/numbers number-lines -hlcursor -relative
+    add-highlighter window/numbers number-lines -hlcursor -relative
 
 	# relative-insert-numbers: Switch between relative and absolute number-lines
 	# NORMAL mode uses relative numbers
 	# INSERT mode uses absolute numbers
-    hook buffer -group relative-insert-numbers ModeChange .*:insert %{
-        add-highlighter -override buffer/numbers number-lines -hlcursor 
+    hook window -group relative-insert-numbers ModeChange .*:insert %{
+        add-highlighter -override window/numbers number-lines -hlcursor 
     }
 
-    hook buffer -group relative-insert-numbers ModeChange .*:insert:.* %{
-        add-highlighter -override buffer/numbers number-lines -hlcursor -relative
+    hook window -group relative-insert-numbers ModeChange .*:insert:.* %{
+        add-highlighter -override window/numbers number-lines -hlcursor -relative
     }
 }
 
@@ -33,13 +33,13 @@ hook global BufCreate ^.*$ %{
 map global normal <#>     "<a-;>"                    -docstring 'flip selection direction'
 map global normal <a-#>   "<a-:>"                    -docstring 'ensure forward selection direction'
 map global normal <esc>   ";,"                       -docstring 'clear all selections to current cursor'
-map global normal D       "xd"                       -docstring 'delete current line'
 
 map global normal <a-%>   '*%s<ret>'                 -docstring "select all occurrences of selection"
 map global normal <ret>   ':expand<ret>'             -docstring 'expand selection to next outer region'
-map global normal <minus> ':enter-window-mode<ret>'  -docstring 'enter window mode: tmux movements'
 map global normal "'"     ':enter_mirror_mode<ret>'  -docstring 'enter mirror mode: expand and surround selections'
+map global normal "<a-'>" '\'                        -docstring 'remove hooks'
 map global normal =       ':enter_math_mode<ret>'    -docstring 'enter math mode: increment and decrement counts'
+map global normal <a-=> ':enter-phantom-select-mode<ret>'-docstring 'enter phantom selection mode'
 
 # map m to <a-a/i>, and replace v with m's previous functionality; view mode moves to userspace
 map global normal m       <a-i>                      -docstring 'select inner surrounding objects'
@@ -53,12 +53,10 @@ map global normal <a-V>   <a-M>                      -docstring 'extend to previ
 map global normal <a-X> %{<a-:><a-;><a-H>Kx} -docstring 'extend lines upwards' 
 map global normal X %{<a-:>F<ret>x}          -docstring 'extend lines downwards' 
 
-# increment and decrement numbers
-map global normal <c-a> ':increment_selected_numbers %val{count}<ret>'
-map global normal <c-x> ':decrement_selected_numbers %val{count}<ret>'
-
 # clipboard.kak: clipboard sync on explicit yank
 hook global NormalKey y clipboard-sync
+map global normal Y ":clipboard_yank_selections" -docstring 'yank all selections to clipboard'
+
 
 # Goto mode ---------------------------------------------------------
 map global goto n '<esc>:bn<ret>' -docstring 'go to next buffer'
@@ -69,19 +67,25 @@ map global view z v -docstring 'center cursor (vertically)'
 # User mode ---------------------------------------------------------
 ## w g d f b q l u o y
 #  r s t h k j n e a i
-#  x c m p v  ' , . 
+#  x c m p v  ' , .  
 
 map global user b     ':open_buffer_picker<ret>'             -docstring 'open buffer picker' 
 map global user c     ':comment-line<ret>'                   -docstring 'comment line'
-map global user <a-c> ':comment-block<ret>'                  -docstring 'comment block'
-map global user C     '<a-C>C'                               -docstring 'copy selection up and down'
+map global user C     ':comment-block<ret>'                  -docstring 'comment block'
 map global user f     ':open_file_picker<ret>'               -docstring 'open file picker' 
 map global user g     ':w<ret>'                              -docstring 'writes file; :w'
+
+# Pasting from clipboard
+evaluate-commands %sh{
+	paste="xclip -o";
+	# todo: conditionally set wsl clipboard
+    printf "map global user -docstring 'paste (after) from clipboard' p '<a-!>%s<ret>'\n" "$paste"
+    printf "map global user -docstring 'paste (before) from clipboard' P '!%s<ret>'\n" "$paste"
+    printf "map global user -docstring 'replace from clipboard' R '|%s<ret>'\n" "$paste"
+}
+
 map global user o     ':enter_letter_case_mode<ret>'         -docstring 'enter letter_case mode'
-map global user p     ':enter-phantom-select-mode<ret>'      -docstring 'enter phantom selection mode'
-map global user s     ':vertical-selection-down<ret>'        -docstring 'copy matching selections below' 
-map global user <a-s> ':vertical-selection-up<ret>'          -docstring 'copy matching selections above' 
-map global user S     ':vertical-selection-up-and-down<ret>' -docstring 'copy matching selections above and below' 
+# map global user p     ':enter-phantom-select-mode<ret>'      -docstring 'enter phantom selection mode'
 map global user z     <v>                                    -docstring 'enter view mode'
 map global user Z     <V>                                    -docstring 'enter view mode (locked)'
 # d, k, l, m are currently reserved for lsp actions
@@ -112,8 +116,8 @@ hook global InsertCompletionShow .* %{
 }
 
 # User modes --------------------------------------------------------
-declare-user-mode window
-define-command enter-window-mode %{ enter-user-mode window}
+# declare-user-mode window
+# define-command enter-window-mode %{ enter-user-mode window}
 hook global ModuleLoaded tmux %{ require-module tmux-windowing }
 
 # Plugins -----------------------------------------------------------
@@ -136,10 +140,10 @@ bundle auto-pairs.kak https://github.com/alexherbo2/auto-pairs.kak %{
 # bundle kakoune-filetree https://github.com/occivink/kakoune-filetree
 bundle kaktree https://github.com/possumvibes/kaktree %{
     hook global WinSetOption filetype=kaktree %{
-        remove-highlighter buffer/numbers
-        remove-hooks buffer relative-insert-numbers
-        remove-highlighter buffer/wrap
-        remove-highlighter  buffer/show-matching
+        remove-highlighter window/numbers
+        remove-hooks window relative-insert-numbers
+        remove-highlighter window/wrap
+        remove-highlighter  window/show-matching
     }
     kaktree-enable
 } 
@@ -168,14 +172,8 @@ bundle kakoune-fandt https://gitlab.com/listentolist/kakoune-fandt %{
 
 # Custom snippets
 # bundle kakoune-snippets https://github.com/occivink/kakoune-snippets
-## LSP setup
-evaluate-commands %sh{
-    if command -v kak-lsp &> /dev/null; then 
-        kak-lsp --kakoune --session "$kak_session"
-    fi
-}
 
-# Filetype hooks
+# Filetype hooks: enable lsp *last*
 hook global WinSetOption filetype=rust %{
     lsp-init
 }

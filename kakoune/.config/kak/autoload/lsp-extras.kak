@@ -2,8 +2,17 @@
 #
 
 define-command lsp-init %{
+    # will reconnect to the existing session
+    evaluate-commands %sh{
+        if command -v kak-lsp &> /dev/null; then 
+            kak-lsp --kakoune --session "$kak_session"
+        fi
+    }
+
+	# enable LSP for the window
     lsp-enable-window
 
+	# Map the lsp-specific bindings only if we're LSP'd
     map window user d ':lsp-diagnostics<ret>'           -docstring "LSP diagnostics"
     map global user k ':show_lsp_hover_info<ret>'       -docstring 'show LSP docs for selection' 
     map global user l ':enter-user-mode lsp<ret>'       -docstring 'enter LSP mode'

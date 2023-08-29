@@ -21,3 +21,7 @@ define-command -hidden clipboard-sync \
         printf "\e]52;;%s\e\\" "$encoded" >"/proc/$kak_client_pid/fd/0"
     }
 }
+
+# todo Set paste command per system
+
+
