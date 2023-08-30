@@ -16,13 +16,11 @@ abbr -a t   'trash'
 
 # tools
 abbr -a notes "cd $NOTEBOOK_DIR; $EDITOR scratchpad.md"
+abbr -a note  "cd $NOTEBOOK_DIR"
 
-# chezmoi dotfiles management
-abbr -a cma	'cm add'
-abbr -a cmc	"cd $DOTS_DIR"
-abbr -a cmr	'cm-readd-dots'
+# Config Management
+abbr -a cmc	"cd $STOWDIR" #config-management cd
 
-### editing through chezmoi
-abbr -a cme	'chezmoi edit' 
-abbr -a cmp	'chezmoi -R apply && echo chezmoi diff applied, externals reloaded'
+# Shell With Secrets In (requires pass)
+abbr -a priv 'secretshell'
 

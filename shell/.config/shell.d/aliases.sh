@@ -23,6 +23,7 @@ alias kakrc="cd ~/.config/kak; kak kakrc"
 
 # Notes
 alias notes="cd $NOTEBOOK_DIR; $EDITOR scratchpad.md"
+alias note="cd $NOTEBOOK_DIR"
 
 # Reload Xresources
 alias xup='xrdb -load ~/.Xresources && echo "reloaded .Xresources"'
@@ -43,4 +44,7 @@ alias .....='cd ../../../..'
 
 # Config Management
 alias cmc="cd $STOWDIR" # config-management cd
+
+# Shell With Secrets In (requires pass)
+alias priv="secretshell"
 
