@@ -184,5 +184,5 @@ hook global WinSetOption filetype=markdown %{
     set-option buffer tabstop 2
     set-option buffer indentwidth 2
 
-    lsp-init
+    # lsp-init
 }
