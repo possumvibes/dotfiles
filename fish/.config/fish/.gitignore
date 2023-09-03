@@ -1,0 +1,14 @@
+# fish-specific gitignore
+
+## fish
+
+# env stays private please
+fish_variables
+
+# plugins stay out of my tree results please
+fisher_plugins
+
+# misc things that don't necessarily need to travel with me
+completions
+q
+

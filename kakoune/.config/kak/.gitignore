@@ -1,0 +1,10 @@
+# kak-specific gitignore
+# ignore the default autoload rc
+autoload/standard-library
+
+# pls stop appearing in my tree results
+bundle
+
+# plugin colors get ignored
+# colors/plugin
+
