@@ -28,8 +28,10 @@ if [ -f ~/.config/shell.d/aliases.sh ]; then
 	. ~/.config/shell.d/aliases.sh
 fi
 
-if [ -f ~/.config/shell.d/bash_aliases ]; then
-	. ~/.config/shell.d/bash_aliases
+if [ -d ~/.config/shell.d/bash ]; then
+	for i in ~/.config/shell.d/bash/*.bash; do
+    	. "$i"
+	done
 fi
 
 ## fzf for completion
