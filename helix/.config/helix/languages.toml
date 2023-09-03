@@ -1,0 +1,6 @@
+[[language]]
+name = "c-sharp"
+roots = ["sln"]
+indent = { tab-width = 4, unit = "    "}
+rulers = [120]
+
