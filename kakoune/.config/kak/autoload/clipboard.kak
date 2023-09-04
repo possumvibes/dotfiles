@@ -22,6 +22,30 @@ define-command -hidden clipboard-sync \
     }
 }
 
-# todo Set paste command per system
+declare-option str clipboard_paste
+declare-option str primary_paste
 
+# Pasting from clipboard
+evaluate-commands %sh{
+    if [ -n "$WSL_DISTRO_NAME" ]; then
+        clippaste="powershell.exe -noprofile Get-Clipboard | tr -d \"\r\""
+        primpaste="powershell.exe -noprofile Get-Clipboard | tr -d \"\r\""
+    else
+    	# OSC-52 yanks to clipboard (as opposed to primary), so we will paste from clipboard
+    	clippaste="xclip -o -selection clipboard";
+    	primpaste="xclip -o"
+    fi
+    printf "set-option global clipboard_paste '%s'\n" "$clippaste"
+    printf "set-option global primary_paste '%s'\n" "$primpaste"
+
+}
+
+declare-user-mode paste
+define-command enter-paste-mode %{ enter-user-mode paste }
+map global paste -docstring 'paste (after) from clipboard (OSC-52)'  p  "<a-!>%opt{clipboard_paste}<ret>"
+map global paste -docstring 'paste (before) from clipboard (OSC-52)' P  "!%opt{clipboard_paste}<ret>"
+map global paste -docstring 'replace from clipboard (OSC-52)'        r  "|%opt{clipboard_paste}<ret>"
+map global paste -docstring 'paste (after) from primary clipboard'   m     "<a-!>%opt{primary_paste}<ret>"
+map global paste -docstring 'paste (before) from primary clipboard'  M     "!%opt{primary_paste}<ret>"
+map global paste -docstring 'replace from primary clipboard'         R     "|%opt{primary_paste}<ret>"
 

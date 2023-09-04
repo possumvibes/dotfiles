@@ -74,18 +74,10 @@ map global user c     ':comment-line<ret>'                   -docstring 'comment
 map global user C     ':comment-block<ret>'                  -docstring 'comment block'
 map global user f     ':open_file_picker<ret>'               -docstring 'open file picker' 
 map global user g     ':w<ret>'                              -docstring 'writes file; :w'
-
-# Pasting from clipboard
-evaluate-commands %sh{
-	paste="xclip -o";
-	# todo: conditionally set wsl clipboard
-    printf "map global user -docstring 'paste (after) from clipboard' p '<a-!>%s<ret>'\n" "$paste"
-    printf "map global user -docstring 'paste (before) from clipboard' P '!%s<ret>'\n" "$paste"
-    printf "map global user -docstring 'replace from clipboard' R '|%s<ret>'\n" "$paste"
-}
-
-map global user o     ':enter_letter_case_mode<ret>'         -docstring 'enter letter_case mode'
-# map global user p     ':enter-phantom-select-mode<ret>'      -docstring 'enter phantom selection mode'
+map global user m     ':enter-paste-mode<ret>'               -docstring 'enter paste (from system clipboard) mode'
+map global user p     "<a-!>%opt{clipboard_paste}<ret>"      -docstring 'paste (after) from clipboard (OSC-52)'  
+map global user P     "!%opt{clipboard_paste}<ret>"          -docstring 'paste (before) from clipboard (OSC-52)' 
+map global user r     "|%opt{clipboard_paste}<ret>"          -docstring 'replace from clipboard (OSC-52)'        
 map global user z     <v>                                    -docstring 'enter view mode'
 map global user Z     <V>                                    -docstring 'enter view mode (locked)'
 # d, k, l, m are currently reserved for lsp actions
