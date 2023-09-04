@@ -146,6 +146,8 @@ bundle kaktree https://github.com/possumvibes/kaktree %{
         remove-highlighter  window/show-matching
     }
     kaktree-enable
+    map global user n ':kaktree-toggle<ret>' -docstring "toggle kaktree to the side"
+    map global user "'" ':kaktree-focus<ret>' -docstring "focus the kaktree window"
 } 
 
 # Selection expansion and manipulation
