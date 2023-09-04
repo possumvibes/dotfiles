@@ -2,6 +2,12 @@
 #
 # Scripts to bootstrap the environment. Use `stow-headless` for a headless install, and use `stow-full-desktop` for a GUI desktop install.
 
+# 10_stow-dots
+#
+# Prerequisites:
+# - git
+# - stow
+# Installs dotfiles.
 
 stow-shell() {
     echo "stowing git and shell configs..."
@@ -13,10 +19,6 @@ stow-editors() {
     stow kakoune nvim vim
 
 	echo "setting up kakoune autoload and plugin manager..."
-	## kak: symlink standard autoload into local autoload
-    # symlink standard lib
-    ln -s $(readlink -f "$(dirname $(type -p kak))"/../share/kak/autoload) ~/.config/kak/autoload/standard-library
-
     ## Install kak-bundle package manager
     mkdir -p ~/.config/kak/bundle
     git clone https://github.com/jdugan6240/kak-bundle ~/.config/kak/bundle/kak-bundle

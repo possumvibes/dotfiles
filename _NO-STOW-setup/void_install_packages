@@ -1,0 +1,165 @@
+#!/bin/sh
+
+# PACKAGE INSTALL for VOID LINUX
+# Installs package manager and manual-install applications
+# for headless and graphical cases.
+#
+# Headless installs terminal tools.
+# Graphical installs headless tools and GUI tools.
+#
+# Requirements:
+# - Dotfiles already in place (checks with kakrc)
+# - git
+# - wget
+# - xbps-install
+
+# ------------------
+#  SETUP FUNCTIONS
+# ------------------
+
+# Usage guidelines for this script
+_print_usage() {
+    printf "Usage:
+     systeminstall     -- installs headless packages
+     systeminstall -g  -- installs graphical and headless packages"
+}
+
+# ----------------------------
+#  YE OLDE ENVIRONMENT SETUP
+# ----------------------------
+
+# define package collections
+HEADLESS_PACKAGES=(
+    python3 python3-pip # languages
+    gcc lib32stdc++-10-dev g++ # c/cpp toolchain for kak and general building
+    gdb make cmake ninja-build # more c toolchain for kak
+    fish zsh neovim helix tmux # shell
+    bat exa fd fzf ripgrep # rust/go fancy terminal tools
+    restic syncthing pass # sync and backup
+    delta # source control
+    curl wget rsync unzip zip # utilities
+    htop tree bc trash-cli # more utilities
+)
+
+GRAPHICAL_PACKAGES=(
+    bspwm sxhkd polybar rofi # WM
+    dunst xss-lock xsecurelock flameshot # utilities
+    picom feh redshift # prettification
+    alacritty keepassxc firefox thunar # apps
+    zathura gnumeric libreoffice thunderbird # file edit/view
+    flatpak  # for discord etc
+)
+
+# -------------------------
+#  INSTALLATION FUNCTIONS
+# -------------------------
+_install_manual() {
+    echo "Downloading and installing non-package-manager programs..."
+
+	# Repos to be installed
+    # kakoune: clone and make (this installs the man pages as well)
+    echo "installing kakoune..."
+    git clone https://github.com/mawww/kakoune $XDG_DATA_HOME/kakoune
+    cd $XDG_DATA_HOME/kakoune
+    make && sudo make install
+
+    ## symlink kak installed autoload to local config
+    ln -s $(readlink -f "$(dirname $(type -p kak))"/../share/kak/autoload) $XDG_CONFIG_HOME/kak/autoload/standard-library
+
+	# Binaries/Packages to be downloaded
+	DL="$HOME/.dl"
+
+    # kak-lsp: download and move to /bin
+    echo "installing kak-lsp..."
+    mkdir -p $DL/kak-lsp; cd $DL/kak-lsp
+    wget https://github.com/kak-lsp/kak-lsp/releases/download/v14.2.0/kak-lsp-v14.2.0-x86_64-unknown-linux-musl.tar.gz
+    tar xzvf kak-lsp-v14.2.0-x86_64-unknown-linux-musl.tar.gz
+    sudo mv kak-lsp $XDG_BIN_HOME
+
+    # clean up the download folder
+    [ -d "$DL" ] && rm -rf $DL
+
+}
+
+_install_headless() {
+    echo "Installing package manager packages for headless install..."
+    sudo xbps-install -Sy "${HEADLESS_PACKAGES[@]}"
+    echo "${HEADLESS_PACKAGES[@]}"
+}
+
+_install_graphical() {
+    echo "Installing package manager packages for graphical install..."
+    sudo xbps-install -Sy "${GRAPHICAL_PACKAGES[@]}"
+    echo "${GRAPHICAL_PACKAGES[@]}"
+
+    echo "configuring flathub..."
+
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    echo "note: restart required before flatpak is usable."
+}
+
+# ---------------------------------
+#  YE OLDE PUBLIC-FACING FUNCTION
+# ---------------------------------
+
+install_void_packages(){
+	# Check dotfiles dependency
+	if ! command -v checkexec > /dev/null ; then
+		echo "Dots not yet installed. Stow the dots and re-source the bash config first"
+		return 1
+	fi
+	
+	# check package manager dependency
+    if ! checkexec fish
+    then
+        echo "xbps-install isn't here. Are you running this on something beside Void?"
+        return 1
+    fi
+    echo "running on Void!"
+    echo "(hey reminder you've bypassed the xbps-install check!)
+    "
+
+	# check other dependencies
+    if ! checkexec git || ! checkexec wget
+    then
+        echo "missing dependencies. ensure git and wget are installed."
+        return 1
+    fi
+
+	# What kind of install was requested?
+	installmsg="headless install requested."
+    while getopts g flag
+    do
+        case "${flag}" in
+            g) is_graphical='true'
+               installmsg="graphical install requested.";;
+            *) _print_usage
+               return 2 ;;
+        esac
+    done
+    echo "$installmsg"
+
+	# All flows install the headless packages.
+	_install_headless || return 1
+	_install_manual || return 1
+
+	reboot_status="recommended"
+
+    if [ -n "$is_graphical" ]; then
+		_install_graphical || return 1
+		reboot_status="required"
+    fi
+
+    echo "packages installed! Reboot $reboot_status."
+}
+
+# -----------------------------
+#  AND THE EXECUTION THEREOF.
+# -----------------------------
+
+# initialize base folders in case they're not already present.
+mkdir -p $XDG_CACHE_HOME $XDG_CONFIG_HOME $XDG_DATA_HOME $XDG_BIN_HOME $MAN_HOME
+
+# and install!
+install_void_packages "$@"
+
