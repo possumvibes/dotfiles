@@ -1,0 +1,70 @@
+#!/bin/sh
+
+# Post-install fanciness I can run if I want to!
+# Installs package manager and manual-install applications
+# for headless and graphical cases.
+#
+# Headless installs terminal tools.
+# Graphical installs headless tools and GUI tools.
+#
+# Requirements:
+# - Dotfiles already in place 
+# - Programs installed
+# - python3 pip
+# - flatpak with flathub
+# - ssh keys for cloning repositories
+
+install_keeb_environment() {
+    # What shall we install on the python toolchain today...
+    PYTHON_PACKAGES=(
+    	pipx qmk
+    )
+
+    # Python installs
+    echo "installing python packages (keyboard time :3)"
+    for app in "${PYTHON_PACKAGES[@]}"; do
+        python3 -m pip install --user $app
+    done
+    pipx install git+https://github.com/caksoylar/keymap-drawer.git
+
+    # Basic repo setup
+    repos_dir=$HOME/src
+    mkdir -p $repos_dir && cd $repos_dir
+
+    git clone git@github.com:possumvibes/keyboard-layout.git
+
+    echo "cloning qmk and recursing submodules...."
+    git clone --recurse-submodules git@github.com:possumvibes/qmk_firmware.git
+
+    # todo: this is temporary
+    echo "we made it! checking out possumdev..."
+    cd $repos_dir/qmk_firmware
+    git checkout possumdev
+
+    echo "test-compiling from the possumvibes userspace..."
+    qmk compile users/possumvibes/keymaps/cradio.json
+
+    echo "keeb setup good to go!"
+}
+
+install_default_flatpaks() {
+    FLATHUB_PACKAGES=(
+      com.github.tchx84.Flatseal
+      com.discordapp.Discord
+      org.kde.krita
+    )
+
+    # Flathub Installs
+    echo "installing flathub packages"
+    for app in "${FLATHUB_PACKAGES[@]}"; do
+        flatpak install flathub $app
+    done
+}
+
+install_arts_programs() {
+    # Calibre is a direct install
+    echo "downloading calibre..."
+    sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+}
+
+
