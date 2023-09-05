@@ -12,8 +12,8 @@ if status is-interactive
  # set fish_autosuggestion_enabled 0
 
   ## Starship Prompt config
-  if command -sq starship
-    and starship init fish | source
-  end
+  # if command -sq starship
+  #   and starship init fish | source
+  # end
 end
 
