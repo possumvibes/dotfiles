@@ -7,6 +7,7 @@ This repo contains dotfiles to set up my [bspwm](https://github.com/baskerville/
 - Dotfiles Management: [GNU Stow](https://www.gnu.org/software/stow/)
 - Window Manager: [bspwm](https://github.com/baskerville/bspwm), currently riding on the coattails of XFCE on Fedora 38.
 - Terminal Emulator: [Alacritty](https://alacritty.org/)
+- Multiplexer: Tmux
 - Editor: [kakoune](https://kakoune.org/) and (n)vim
 - Shell: ZSH and [Fish](https://fishshell.com/)
 
