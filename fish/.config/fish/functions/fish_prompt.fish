@@ -1,99 +1,69 @@
-function fish_prompt
-    # Set return color based on previous status
-    set -l retc brred
-    test $status = 0; and set retc brgreen
+set fish_prompt_pwd_dir_length 0
 
-    echo # newline
+# Git prompt
+set __fish_git_prompt_showuntrackedfiles 'yes'
+set __fish_git_prompt_showdirtystate 'yes'
+set __fish_git_prompt_showupstream 'yes'
+set __fish_git_prompt_showstashstate 'yes'
 
-	set -l baseprompt ""
+set __fish_git_prompt_color_merging magenta
+set __fish_git_prompt_color_untrackedfiles yellow
+set __fish_git_prompt_color_dirtystate yellow
+set __fish_git_prompt_color_stashstate yellow
+set __fish_git_prompt_color_stagedstate cyan
+set __fish_git_prompt_color_upstream blue
 
-    set -g VIRTUAL_ENV_DISABLE_PROMPT true
-    # set -q VIRTUAL_ENV; and echo -n (set_color white)'['(basename "$VIRTUAL_ENV")'] '
-    set -q VIRTUAL_ENV; and set -l baseprompt "$baseprompt"(set_color white)'['(basename "$VIRTUAL_ENV")'] '
+# Git Characters
+set __fish_git_prompt_char_untrackedfiles '?'
+set __fish_git_prompt_char_stateseparator ''
+set __fish_git_prompt_char_dirtystate '!'
+set __fish_git_prompt_char_stagedstate '+'
+set __fish_git_prompt_char_stashstate '$'
+set __fish_git_prompt_char_upstream_prefix ''
+set __fish_git_prompt_char_upstream_equal ''
+set __fish_git_prompt_char_upstream_ahead '⇡'
+set __fish_git_prompt_char_upstream_behind '⇣'
+set __fish_git_prompt_char_upstream_diverged '⇕'
 
-    if test -n "$SSH_TTY"; or fish_is_root_user;
-        set baseprompt "$baseprompt"(set_color blue)$USER
-        set baseprompt "$baseprompt"(set_color brwhite)"@"
-        set baseprompt "$baseprompt"(set_color green)(prompt_hostname)
-        set baseprompt "$baseprompt"(set_color brwhite)":"
-    end
-
-	set -l workingdir (set_color brblue)(prompt_pwd -D 64)" "
-    # echo -n (set_color brblue)(prompt_pwd -D 64)
-    # echo -n ' '
-    set baseprompt "$baseprompt$workingdir"
-    echo -n $baseprompt
-
-
-	set -l git_info
-        # set -l prompt_git (set_color white)(fish_git_prompt '%s')
-        # echo -n $prompt_git
-    set -l git_branch (git --no-optional-locks branch --show-current 2> /dev/null)
-    if test -n "$git_branch"
-        set -l git_status (git --no-optional-locks status --porcelain 2> /dev/null | tail -n 1)
-
-        set  git_info "$git_info"(set_color white)$git_branch
-        echo -n $git_info
-
-        # todo only continue if there is some change
-        # if test "$ahead" -gt 0; or test "$behind" -gt 0
-		# ahead/behind status
-
-        set -l porcelain_status (command git status --porcelain 2>/dev/null | string sub -l2)
-		set -l dirty
-
-		set -l untracked_status
-        if string match -qe '\?\?' $porcelain_status
-            set untracked_status (set_color yellow)"?"
-        end
-        # echo -n $untracked_status
-
-		set -l modified_status
-        if string match -qr '[MT]$' $porcelain_status
-            # modified
-            set modified_status (set_color yellow)"!"
-        else if string match -qr '[ ACMRT]D' $porcelain_status
-            # deleted
-            set modified_status (set_color yellow)"!"
-        else if string match -qe R $porcelain_status
-            # renamed
-            set modified_status (set_color yellow)"!"
-        end
-        # echo -n $modified_status
-
-		set -l add_status
-        if string match -qr '[ACDMT][ MT]|[ACMT]D' $porcelain_status
-            # added
-            set add_status (set_color cyan)"+"
-        end
-        # echo -n $add_status
-
-
-		set -l upstream (set_color blue)
-		command git rev-list --count --left-right @{upstream}...@ 2>/dev/null |
-                read behind ahead
-        if test "$ahead" -gt 0; and test "$behind" -gt 0
-            set upstream "$upstream⇕" 
-        else if test $ahead -gt 0
-            set upstream "$upstream⇡"
-        else if test $behind -gt 0
-            set upstream "$upstream⇣"
-        end
-
-        set dirty "$untracked_status$modified_status$add_status$upstream"
-        echo -n $dirty
-
-    end
-
+function _print_in_color
+    set_color $argv[2]
+    printf $argv[1]
     set_color normal
-    echo  # new line
+end
 
-    set_color $retc
-    if functions -q fish_is_root_user; and fish_is_root_user
-        echo -n '# '
+function _prompt_color_for_status
+    if test $argv[1] -eq 0
+        echo brgreen
     else
-        echo -n '$ '
+        echo brred
+    end
+end
+
+function fish_prompt
+    set -l last_status $status
+
+    # if test "$CMD_DURATION" -gt 300000
+    #     _print_in_color "INFO: The last command took "(math "$CMD_DURATION/60000")" minutes\n" yellow
+    # end
+
+    printf "\n"
+
+    if test -n "$SSH_TTY"
+        _print_in_color $USER blue
+        _print_in_color "@" brwhite
+        _print_in_color (prompt_hostname) green
+        _print_in_color ":" brwhite
     end
 
-    set_color normal
+    _print_in_color (prompt_pwd -D 64) brblue
+
+    # if test -n "$fish_private_mode"
+        # _print_in_color "private " brblack
+    # end
+
+    if not type -q ignore_git; or not ignore_git
+        fish_git_prompt " %s"
+    end
+    _print_in_color "\n\$ " (_prompt_color_for_status $last_status)
+
 end

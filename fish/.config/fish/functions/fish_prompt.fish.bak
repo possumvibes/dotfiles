@@ -1,0 +1,84 @@
+#!/usr/bin/env fish
+
+# fish prompt: based on Aphrodite, adjusted to match my zsh prompt
+# gets git info by hand
+
+function _print_in_color
+    set_color $argv[2]
+    printf $argv[1]
+    set_color normal
+end
+
+function _prompt_color_for_status
+    if test $argv[1] -eq 0
+        echo brgreen
+    else
+        echo brred
+    end
+end
+
+function _print_git_repo_status
+    if git branch --show-current 2>/dev/null | read -l location
+        _print_in_color " $location" brwhite
+
+        set -l porcelain_status (command git status --porcelain 2>/dev/null | string sub -l2)
+
+        if test -n "$porcelain_status"
+            # Untracked
+            if string match -qe '\?\?' $porcelain_status
+                _print_in_color '?' yellow
+            end
+
+            # # Modified (modified, deleted, or renamed)
+            if string match -qr '[MT]$' $porcelain_status;
+                or string match -qr '[ ACMRT]D' $porcelain_status;
+                or string match -qe R $porcelain_status
+                # modified
+                _print_in_color '!' yellow
+            end
+
+            if string match -qr '[ACDMT][ MT]|[ACMT]D' $porcelain_status
+                _print_in_color '+' cyan
+            end
+        end
+
+    	command git rev-list --count --left-right @{upstream}...@ 2>/dev/null |
+            read behind ahead
+
+        if test "$ahead" -gt 0; and test "$behind" -gt 0
+            _print_in_color "⇕" blue
+        else if test $ahead -gt 0
+            _print_in_color "⇡"blue
+        else if test $behind -gt 0
+            _print_in_color "⇣"blue
+        end
+    end
+end
+
+
+function fish_prompt
+    set -l last_status $status
+
+    # if test "$CMD_DURATION" -gt 300000
+    #     _print_in_color "INFO: The last command took "(math "$CMD_DURATION/60000")" minutes\n" yellow
+    # end
+
+    printf "\n"
+
+    if test -n "$SSH_TTY"
+        _print_in_color $USER blue
+        _print_in_color "@" brwhite
+        _print_in_color (prompt_hostname) green
+        _print_in_color ":" brwhite
+    end
+
+    _print_in_color (prompt_pwd -D 64) brblue
+
+    if git branch --show-current 2>/dev/null | read -l location
+        _print_in_color " $location" brwhite
+        _print_git_repo_status
+    end
+
+    _print_in_color "\n\$ " (_prompt_color_for_status $last_status)
+
+end
