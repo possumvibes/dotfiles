@@ -8,7 +8,7 @@ if status is-login
 end
 
 if status is-interactive
-  set fish_greeting
+  set fish_greeting "go drink water."
 
   # Cursors
   set -g fish_cursor_default block
@@ -16,12 +16,5 @@ if status is-interactive
   set -g fish_cursor_visual underscore
 
   fish_vi_key_bindings
-
- # set fish_autosuggestion_enabled 0
-
-  ## Starship Prompt config
-  # if command -sq starship
-  #   and starship init fish | source
-  # end
 end
 
