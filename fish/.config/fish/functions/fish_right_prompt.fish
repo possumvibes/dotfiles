@@ -1,41 +1,27 @@
 #!/usr/bin/env fish
 
 function fish_right_prompt
-  # set_color -b black normal
-  # printf ' %s ' (basename (string replace -r \^$HOME \~ $PWD))
+    if test -n "$fish_private_mode"
+        _print_in_color "private " brblack
+    end
 
-  # # Git status
-  # set_color -b brblack normal
-  # git status --porcelain=v2 --branch 2>/dev/null | awk '
-  #   $1 == "#" && $2 == "branch.head" {
-  #     printf "  %s ", $3
-  #     git=1
-  #   }
-  #   $1~/1|2/ && $2~/[^.]./ {
-  #     staged++
-  #   }
-  #   $1~/1|2/ {
-  #     modified++
-  #   }
-  #   $1 == "?" {
-  #     untracked++
-  #   }
-  #   END {
-  #     if (git) {
-  #       if (staged)
-  #         printf "•%d ", staged
-  #       if (modified)
-  #         printf "+%d ", modified
-  #       if (untracked)
-  #         printf "~%d ", untracked
-  #       if (!(staged || modified || untracked))
-  #         printf "✔ "
-  #     }
-  #   }
-  # '
+    switch $fish_bind_mode
+        case default
+            set_color --bold brmagenta
+            printf 'NOR'
+        case insert
+            set_color --bold yellow
+            printf 'INS'
+        case replace_one
+            set_color --bold bryellow
+            printf 'REP'
+        case visual
+            set_color --bold green
+            printf 'VIS'
+        case '*'
+            set_color --bold red
+            printf '[?]'
+    end
 
-  # set_color -b normal blue
-  # set_color -ro
-  # printf ' %s ' $hostname
-  # set_color normal
+    set_color normal
 end

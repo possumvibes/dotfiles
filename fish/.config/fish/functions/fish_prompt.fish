@@ -1,7 +1,7 @@
 set fish_prompt_pwd_dir_length 0
 
 # Git prompt
-set __fish_git_prompt_showuntrackedfiles 'yes'
+set __fish_git_prompt_showuntrackedfiles 'no'
 set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_showupstream 'yes'
 set __fish_git_prompt_showstashstate 'yes'
@@ -57,9 +57,6 @@ function fish_prompt
 
     _print_in_color (prompt_pwd -D 64) brblue
 
-    # if test -n "$fish_private_mode"
-        # _print_in_color "private " brblack
-    # end
 
     if not type -q ignore_git; or not ignore_git
         fish_git_prompt " %s"

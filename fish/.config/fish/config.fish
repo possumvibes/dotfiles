@@ -9,6 +9,14 @@ end
 
 if status is-interactive
   set fish_greeting
+
+  # Cursors
+  set -g fish_cursor_default block
+  set -g fish_cursor_insert line
+  set -g fish_cursor_visual underscore
+
+  fish_vi_key_bindings
+
  # set fish_autosuggestion_enabled 0
 
   ## Starship Prompt config
