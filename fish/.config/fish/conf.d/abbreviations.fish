@@ -1,3 +1,5 @@
+status is-interactive || exit
+
 # workflow apps
 abbr -a e $EDITOR
 abbr -a b bat

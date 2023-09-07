@@ -1,3 +1,5 @@
+status is-interactive || exit
+
 set fisher_path ~/.config/fish/fisher_plugins
 
 set bootstrapped ''
