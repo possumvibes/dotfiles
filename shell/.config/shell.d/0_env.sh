@@ -22,6 +22,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_BIN_HOME="$HOME/.local/bin"
 
 export MAN_HOME="$XDG_DATA_HOME/man"
+export SOURCES_HOME="$HOME/sources"
 
 export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 
@@ -43,6 +44,8 @@ export STOWDIR="~/.dots"
 export NVIMDIR="$XDG_CONFIG_HOME/nvim"
 export KAKDIR="$XDG_CONFIG_HOME/kak"
 export NOTEBOOK_DIR="$HOME/ari-common/ari_yelling"
+
+export QMK_USERSPACE="$HOME/sources/qmk_userspace"
 
 # XDG COMPLIANCE AAAAAAA
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
