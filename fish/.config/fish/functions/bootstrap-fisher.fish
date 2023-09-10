@@ -1,25 +1,32 @@
 function bootstrap-fisher
-    set fisher_path ~/.config/fish/fisher_plugins
+	if type -q fisher
+    	printf "Fisher is already installed. To uninstall fisher and all plugins, run
+    	`fisher list | fisher remove`\n"
+    	printf "before calling this function again.\n"
+     	return 1
+	end
 
-    echo "Bootstrapping fisher..."
-    cp ~/.config/fish/fish_plugins ~/.config/fish/fish_plugins.bak
-    mkdir -p $fisher_path; cd fisher_path
+	printf "Installing fisher...\n"
 
+	# Back up existing fish_plugins
+	set -l pluginlist $__fish_config_dir/fish_plugins
+	test -f $pluginlist && cp $pluginlist $pluginlist.bak
+    
+	# Set preferred fisher_path
+    set fisher_path $__fish_config_dir/fisher_plugins
+    mkdir -p $fisher_path
+    
+	# Initial install (this overwrites fisher_plugins)
     curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 
-    # Ensure files in $fisher_path are accessible to fish
-    ! set --query fisher_path[1] || test "$fisher_path" = $__fish_config_dir && exit
-
-    set fish_complete_path $fish_complete_path[1] $fisher_path/completions $fish_complete_path[2..]
-    set fish_function_path $fish_function_path[1] $fisher_path/functions $fish_function_path[2..]
-
-    for file in $fisher_path/conf.d/*.fish
-        source $file
-    end
-
     echo "reinstalling plugins..."
-    cd ~/.config/fish
-    cp ~/.config/fish_plugins.bak ~/.config/fish_plugins
+    cd $__fish_config_dir
+
+	# Restore pluginlist from backup
+    test -f $pluginlist.bak && mv $pluginlist.bak $pluginlist
+
+    # install all plugins
     fisher update
 
+    printf "fisher and plugins installed. Re-source config.fish to use them." 
 end
