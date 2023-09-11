@@ -21,7 +21,7 @@
 _print_usage() {
     printf "Usage:
      systeminstall     -- installs headless packages
-     systeminstall -g  -- installs graphical and headless packages"
+     systeminstall -g  -- installs graphical and headless packages\n"
 }
 
 # ----------------------------
