@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# csharp-edit: a test about editing
+# determines the correct project root for kak
+# better intro coming once this thing works
+
+
+
+_print_usage() {
+    printf "Usage: csharp-edit -s <workspaceroot.sln> <filename>
+    -s <workspaceroot> -- specify workspace root for LSP explicitly. If not provided, will be fuzzy-picked.
+    <filename> -- must provide filename to be edited. Ensure the file is part of the workspace specified or chosen.\n"
+}
+
+default_extension=".vim"
+alt_extension=".notvim"
+base_search_cmd="fd --max-depth 1 -e $default_extension"
+
+csharp-edit(){
+	# Get specified_root, if present
+	while getopts "s:" opt; do
+    	case $opt in
+    		s) specified_root="$OPTARG"
+    		if [[ "$specified_root" != *"$default_extension" ]] >/dev/null; then
+        		printf "Invalid LSP project root: only files with extension $default_extension are valid.\n"
+        		exit 1
+    		fi;;
+			*) _print_usage
+				exit 1;;
+    	esac
+	done
+
+	shift $(($OPTIND -1))
+
+	if [ $# -lt 1 ];
+	then
+    	printf "File name is required.\n"
+    	exit 1
+    fi
+
+	files="$@"
+
+	if [ -z $specified_root ]; then
+
+    	slncount=$($base_search_cmd | wc -l)
+    	echo "slncount: $slncount"
+
+    	if [ $slncount -gt 1 ]; then
+        	# if there's only one project root, then there isn't a possible LSP conflict.
+        	# edit normally.
+        	selection=$($base_search_cmd | fzf --prompt='Pick LSP Root >' --reverse)
+
+			# If no selection, no editing. bail.
+        	[ -z "$selection" ] && exit
+
+        	specified_root="$selection"
+    	fi
+	fi
+
+	# If we don't have a specified root, there's only one possible root; edit normally
+	if [ -z $specified_root ]; then
+    	kak $files
+	else
+    	# otherwise, set the kak-lsp project root for the kak session.
+    	env KAK_LSP_PROJECT_ROOT_CSHARP=$specified_root kak $files
+    	# of note: this only will set the env var on the specific kak session window
+    	# it will not flow to additional tmux panes/windows
+    	# and if run outside tmux, will flow to new buffer splits but not to new REPLs
+    	# Probably need to adjust this to a tmux session for the given code project
+    	# which is annoying for the whole "in the same repo would like to have them alongside" case
+    	# but worst case i use helix for that specific task
+	fi
+}
+csharp-edit "$@"
+
