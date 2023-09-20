@@ -39,21 +39,22 @@ provide-module tmux-windowing %&
 
     # # IDE layout
     # # ----------
-    # define-command ide %{
-    #     rename-client main
-    #     tmux-terminal-horizontal kak -c %val{session} -e "rename-client docs"
-    #     tmux-terminal-vertical kak -c %val{session} -e "rename-client tools"
-    #     nop %sh{tmux swap-pane -s 0 -t 1}
-    #     tmux-focus main
-    #     set global docsclient docs
-    #     set global toolsclient tools
-    #     set global jumpclient main
-    #     nop %sh{
-    #         tmux resize-pane -t 0 -x 48
-    #         tmux resize-pane -t 3 -x 80
-    #         tmux resize-pane -t 2 -y 16
-    #         tmux select-pane -t 0
-    #     }
-    # }
+
+    define-command --override ide %{
+        rename-client main
+        tmux-terminal-horizontal kak -c %val{session} -e "rename-client docs"
+        tmux-terminal-vertical kak -c %val{session} -e "rename-client tools"
+        nop %sh{tmux swap-pane -s 0 -t 1}
+        tmux-focus main
+        set global docsclient docs
+        set global toolsclient tools
+        set global jumpclient main
+        nop %sh{
+            tmux resize-pane -t 0 -x 48
+            tmux resize-pane -t 3 -x 80
+            tmux resize-pane -t 2 -y 16
+            tmux select-pane -t 0
+        }
+    } -docstring "tmux-specific ide implementation."
 
 &

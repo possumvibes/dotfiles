@@ -34,12 +34,12 @@ map global mirror '"' '\a"<esc>\i"<esc>H<a-;>'        -docstring '"surround"'
 map global mirror "'" "\a'<esc>\i'<esc>H<a-;>"        -docstring "'surround'"
 map global mirror '`' '\a`<esc>\i`<esc>H<a-;>'        -docstring '`surround`'
 map global mirror ' ' '\a <esc>\i <esc>H<a-;>'        -docstring 'surround with space'
+map global mirror * '\a*<esc>\i*<esc>H<a-;>'          -docstring '*surround*'
+map global mirror _ '\a_<esc>\i_<esc>H<a-;>'          -docstring '_surround_'
 map global mirror d ': mirror-delete<ret>'            -docstring 'delete'
 define-command -hidden mirror-delete %{ execute-keys Z<a-S><a-d>z<a-:>H }
 
 # fallthrough
 map global mirror '<a-;>' '<a-;>'       -docstring 'swap anchor and cursor'
 map global mirror '<a-S>' '<a-S>'       -docstring 'select sels boundaries'
-
-# Suggested mapping
 

@@ -55,8 +55,6 @@ map global normal X %{<a-:>F<ret>x}          -docstring 'extend lines downwards'
 
 # clipboard.kak: clipboard sync on explicit yank
 hook global NormalKey y clipboard-sync
-map global normal Y ":clipboard_yank_selections" -docstring 'yank all selections to clipboard'
-
 
 # Goto mode ---------------------------------------------------------
 map global goto n '<esc>:bn<ret>' -docstring 'go to next buffer'
@@ -69,10 +67,10 @@ map global view z v -docstring 'center cursor (vertically)'
 #  r s t h k j n e a i
 #  x c m p v  ' , .  
 
-map global user b     ':open_buffer_picker<ret>'             -docstring 'open buffer picker' 
+map global user b     ':open-buffer-picker<ret>'             -docstring 'open buffer picker' 
 map global user c     ':comment-line<ret>'                   -docstring 'comment line'
 map global user C     ':comment-block<ret>'                  -docstring 'comment block'
-map global user f     ':open_file_picker<ret>'               -docstring 'open file picker' 
+map global user f     ':open-file-picker<ret>'               -docstring 'open file picker' 
 map global user g     ':w<ret>'                              -docstring 'writes file; :w'
 map global user m     ':enter-paste-mode<ret>'               -docstring 'enter paste (from system clipboard) mode'
 map global user p     "<a-!>%opt{clipboard_paste}<ret>"      -docstring 'paste (after) from clipboard (OSC-52)'  
@@ -167,6 +165,19 @@ bundle kakoune-fandt https://gitlab.com/listentolist/kakoune-fandt %{
 # Custom snippets
 # bundle kakoune-snippets https://github.com/occivink/kakoune-snippets
 
+define-command ide -params 0..1 %{
+    try %{ rename-session %arg{1} }
+
+    rename-client main
+    set-option global jumpclient main
+
+    new rename-client tools
+    set-option global toolsclient tools
+
+    new rename-client docs
+    set-option global docsclient docs
+} -docstring "generic IDE setup."
+
 # Filetype hooks: enable lsp *last*
 hook global WinSetOption filetype=rust %{
     lsp-init
@@ -180,3 +191,6 @@ hook global WinSetOption filetype=markdown %{
 
     # lsp-init
 }
+
+hook global -always BufOpenFifo '\*grep\*' %{ map global normal <minus> ': grep-next-match<ret>' }
+hook global -always BufOpenFifo '\*make\*' %{ map global normal <minus> ': make-next-error<ret>' }
