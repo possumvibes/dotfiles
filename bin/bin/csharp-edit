@@ -4,72 +4,117 @@
 # determines the correct project root for kak
 # better intro coming once this thing works
 
-
-
 _print_usage() {
     printf "Usage: csharp-edit -s <workspaceroot.sln> <filename>
     -s <workspaceroot> -- specify workspace root for LSP explicitly. If not provided, will be fuzzy-picked.
     <filename> -- must provide filename to be edited. Ensure the file is part of the workspace specified or chosen.\n"
 }
 
+_print_and_exit1() {
+    printf "$@\n"
+    exit 1
+}
+
 default_extension=".vim"
-alt_extension=".notvim"
-base_search_cmd="fd --max-depth 1 -e $default_extension"
 
-csharp-edit(){
-	# Get specified_root, if present
-	while getopts "s:" opt; do
-    	case $opt in
-    		s) specified_root="$OPTARG"
-    		if [[ "$specified_root" != *"$default_extension" ]] >/dev/null; then
-        		printf "Invalid LSP project root: only files with extension $default_extension are valid.\n"
-        		exit 1
-    		fi;;
-			*) _print_usage
-				exit 1;;
-    	esac
-	done
+# The actual selected root starts empty.
+selected_root=""
 
-	shift $(($OPTIND -1))
+# As does the file list to edit.
+files=""
 
-	if [ $# -lt 1 ];
-	then
-    	printf "File name is required.\n"
-    	exit 1
+# Choose the correct project root in the directory, with user input as necessary
+select-root-in-pwd(){
+    # Get all possible root files in the base directory
+    base_search_cmd="fd --max-depth 1 -e $default_extension"
+
+    # Count 'em for quick handling
+    slncount=$($base_search_cmd | wc -l)
+    [ $slncount -eq 0 ] && return 1
+
+    # if only one result, set selected_root directly and exit
+    if [ $slncount -eq 1 ]; then
+        selected_root=$($base_search_cmd)
+        return;
     fi
 
-	files="$@"
+    # Otherwise, there are multiple options and the user needs to pick!
+    fzf_selection=$($base_search_cmd | fzf --prompt='Pick LSP Root >' --reverse)
 
-	if [ -z $specified_root ]; then
+    [ -z $fzf_selection ] && exit
 
-    	slncount=$($base_search_cmd | wc -l)
-    	echo "slncount: $slncount"
+    # Set selected_root with the chosen root file
+    selected_root=$fzf_selection
+}
 
-    	if [ $slncount -gt 1 ]; then
-        	# if there's only one project root, then there isn't a possible LSP conflict.
-        	# edit normally.
-        	selection=$($base_search_cmd | fzf --prompt='Pick LSP Root >' --reverse)
+csharp-edit(){
+    # Get selected_root, if present
+    while getopts "s:" opt; do
+        case $opt in
+            s) selected_root="$OPTARG"
+            if [[ "$selected_root" != *"$default_extension" ]] >/dev/null; then
+                _print_and_exit1 "Invalid LSP project root: only files with extension $default_extension are valid."
+            fi;;
+            *) _print_usage
+                exit 1;;
+        esac
+    done
 
-			# If no selection, no editing. bail.
-        	[ -z "$selection" ] && exit
+    shift $(($OPTIND -1))
 
-        	specified_root="$selection"
-    	fi
-	fi
+    if [ $# -lt 1 ];
+    then
+        _print_and_exit1 "File name is required"
+    fi
 
-	# If we don't have a specified root, there's only one possible root; edit normally
-	if [ -z $specified_root ]; then
-    	kak $files
-	else
-    	# otherwise, set the kak-lsp project root for the kak session.
-    	env KAK_LSP_PROJECT_ROOT_CSHARP=$specified_root kak $files
-    	# of note: this only will set the env var on the specific kak session window
-    	# it will not flow to additional tmux panes/windows
-    	# and if run outside tmux, will flow to new buffer splits but not to new REPLs
-    	# Probably need to adjust this to a tmux session for the given code project
-    	# which is annoying for the whole "in the same repo would like to have them alongside" case
-    	# but worst case i use helix for that specific task
-	fi
+    files="$@"
+
+    # Pick root if not specified
+    [ -z $selected_root ] && select-root-in-pwd
+
+    # If we don't have a specified root at this point, there's nothing to be done!
+    if [ -z $selected_root ]; then
+        _print_and_exit1 "no $default_extension files available in this directory. Are you in the right place?"
+    fi
+
+    # TMUX TIME.
+
+	# sanitize the name for consistent tmux session creation
+	session=$(basename $selected_root $default_extension | tr -cd '[a-zA-Z0-9]_-')
+	echo $session
+	kak_cmd="kak -s $session $files"
+
+	# if not in tmux, easy: new session.
+	if [ -z "$TMUX" ]; then
+    	echo "creating tmux session $session..."
+        # Create our new session! if it's a duplicate,
+        # skill issue. check your dang tmux sessions first.
+        tmux new-session -d -s $session \
+        	-e KAK_LSP_PROJECT_ROOT_CSHARP=$selected_root
+
+		# set main window for kak, open repl window
+        tmux rename-window -t $session:0 'kak' 
+        tmux new-window -t $session:1 -n 'shell'
+
+		# enter insert mode (zsh-specific, likely needs changing for other shells with vi mode)
+        tmux send-keys -t $session:0 "i$kak_cmd" C-m
+
+		# attach to the session in the kak window
+        tmux select-window -t $session:0
+        tmux attach -t $session
+    elif [ $KAK_LSP_PROJECT_ROOT_CSHARP = $selected_root ]; then
+        # If in tmux and root already set, easy! let's get editing.
+        echo "session already set for selected root"
+        tmux rename-session $session
+        tmux rename-window 'kak'
+        $kak_cmd
+    else
+		# Otherwise, we are in an unrelated tmux session.
+		# We need to decide whether to commandeer this session or create a new one.
+		curr_session=$(tmux display-message -p '#S')
+		echo $curr_session
+		echo 'this is an unrelated tmux session! we haven''t dealt with this yet.'
+    fi
 }
 csharp-edit "$@"
 
