@@ -1,9 +1,5 @@
 status is-interactive || exit
 
-if ! type -q fisher
-    echo "Fisher is not installed. Please run bootstrap-fisher."
-end
-
 # Set a custom location for fisher plugins
 set fisher_path ~/.config/fish/fisher_plugins
 
@@ -15,3 +11,10 @@ set fish_function_path $fish_function_path[1] $fisher_path/functions $fish_funct
 for file in $fisher_path/conf.d/*.fish
     source $file
 end
+
+# And if after all that, fisher still doesn't test,
+# echo out a hint for what to check.
+if ! type -q fisher
+    echo "Fisher is not installed. Please run bootstrap-fisher."
+end
+
