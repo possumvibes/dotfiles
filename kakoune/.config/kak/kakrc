@@ -85,14 +85,16 @@ map global user Z     <V>                                    -docstring 'enter v
 map global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/' -docstring 'print current buffer directory' 
 
 # Add search flags
-map global prompt <a-i> '<home>(?i)<end>' -docstring 'case-insensitive search'
-map global prompt <a-s> '<home>(?S)<end>' -docstring "prevents '.' from matching newlines"
-map global prompt <a-q> '<home>\Q<end>'   -docstring "begins a quoted (literal) sequence. End with '\E'"
+map global prompt <a-i> '<home>(?i)<end>'          -docstring 'case-insensitive search'
+map global prompt <a-s> '<home>(?S)<end>'          -docstring "prevents '.' from matching newlines"
+map global prompt <a-q> '<home>\Q<end>'            -docstring "begins a quoted (literal) sequence. End with '\E'"
 
 #Insert mode --------------------------------------------------------
 
-map global insert <c-w> '<esc>bc' -docstring 'delete last word: readline-equivalent behavior'
-map global insert <c-y> '<c-r>"'  -docstring 'paste selection register (")'
+map global insert <c-w> '<esc>bc'                  -docstring 'delete last word: readline-equivalent behavior'
+map global insert <c-y> '<c-r>"'                   -docstring 'paste selection register (")'
+map global insert <a-gt> "<a-;><gt>"               -docstring 'increase indent'
+map global insert <a-lt> "<a-;><lt>"               -docstring 'decrease indent'
 
 
 # tabs for autocomplete
