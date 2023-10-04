@@ -1,13 +1,26 @@
 #!/bin/bash
 
-# csharp-edit: a test about editing
+# lsp-edit: a test about editing
 # determines the correct project root for kak
 # better intro coming once this thing works
+#
+# dependencies:
+# - fd
+# - fzf
+# - tmux
 
 _print_usage() {
-    printf "Usage: csharp-edit -s <workspaceroot.sln> <filename>
-    -s <workspaceroot> -- specify workspace root for LSP explicitly. If not provided, will be fuzzy-picked.
-    <filename> -- must provide filename to be edited. Ensure the file is part of the workspace specified or chosen.\n"
+    printf "lsp-edit is a wrapper around kakoune and tmux to easily specify the project root environment variable for kak-lsp.
+
+Usage: [OPTIONS] [FILES]...
+
+Arguments:
+	[FILES]...  If provided, the files to edit open in the new kakoune session
+
+Options:
+	-s <WORKSPACE_ROOT> Specify a file to use as the kak-lsp workspace root. Must match the language's roots in kak-lsp
+
+Requires: tmux, fd, and fzf\n"
 }
 
 _print_and_exit1() {
@@ -24,7 +37,7 @@ selected_root=""
 files=""
 
 # Choose the correct project root in the directory, with user input as necessary
-select-root-in-pwd(){
+_select_root_in_pwd(){
     # Get all possible root files in the base directory
     base_search_cmd="fd --max-depth 1 -e $default_extension"
 
@@ -47,7 +60,7 @@ select-root-in-pwd(){
     selected_root=$fzf_selection
 }
 
-csharp-edit(){
+lsp-edit(){
     # Get selected_root, if present
     while getopts "s:" opt; do
         case $opt in
@@ -61,60 +74,47 @@ csharp-edit(){
     done
 
     shift $(($OPTIND -1))
-
-    if [ $# -lt 1 ];
-    then
-        _print_and_exit1 "File name is required"
-    fi
-
     files="$@"
 
     # Pick root if not specified
-    [ -z $selected_root ] && select-root-in-pwd
+    [ -z $selected_root ] && _select_root_in_pwd
 
     # If we don't have a specified root at this point, there's nothing to be done!
-    if [ -z $selected_root ]; then
+    [ -z $selected_root ] &&
         _print_and_exit1 "no $default_extension files available in this directory. Are you in the right place?"
-    fi
 
     # TMUX TIME.
 
 	# sanitize the name for consistent tmux session creation
 	session=$(basename $selected_root $default_extension | tr -cd '[a-zA-Z0-9]_-')
-	echo $session
-	kak_cmd="kak -s $session $files"
+	SESSIONEXISTS=$(tmux list-sessions | grep $session)
+    [ ! -z "$files" ] && EDITOR_CMD="kak -s $session $files"
 
-	# if not in tmux, easy: new session.
-	if [ -z "$TMUX" ]; then
-    	echo "creating tmux session $session..."
-        # Create our new session! if it's a duplicate,
-        # skill issue. check your dang tmux sessions first.
+	if [ "$SESSIONEXISTS" = "" ]; then
         tmux new-session -d -s $session \
-        	-e KAK_LSP_PROJECT_ROOT_CSHARP=$selected_root
+        -e KAK_LSP_PROJECT_ROOT_CSHARP=$selected_root
 
-		# set main window for kak, open repl window
+        # set main window for kak, open repl window
         tmux rename-window -t $session:0 'kak' 
         tmux new-window -t $session:1 -n 'shell'
+	fi
 
-		# enter insert mode (zsh-specific, likely needs changing for other shells with vi mode)
-        tmux send-keys -t $session:0 "i$kak_cmd" C-m
+    # if we have files, open 'em in the session
+    if [ ! -z "$EDITOR_CMD" ]; then
+        # enter insert mode (zsh-problem-specific, likely needs changing for other shells with vi mode)
+        # tmux send-keys -t $session:0 "i"
 
-		# attach to the session in the kak window
-        tmux select-window -t $session:0
-        tmux attach -t $session
-    elif [ $KAK_LSP_PROJECT_ROOT_CSHARP = $selected_root ]; then
-        # If in tmux and root already set, easy! let's get editing.
-        echo "session already set for selected root"
-        tmux rename-session $session
-        tmux rename-window 'kak'
-        $kak_cmd
-    else
-		# Otherwise, we are in an unrelated tmux session.
-		# We need to decide whether to commandeer this session or create a new one.
-		curr_session=$(tmux display-message -p '#S')
-		echo $curr_session
-		echo 'this is an unrelated tmux session! we haven''t dealt with this yet.'
+        # now send the actual command
+		tmux send-keys -t $session:0 "$EDITOR_CMD" C-m
     fi
+
+	# if we're attached to a different session, switch
+	if [ -z "$TMUX" ]; then
+    	# attach to the session in the kak window
+        tmux attach -t $session:0
+	else
+    	tmux switch -t $session:0
+	fi
 }
-csharp-edit "$@"
+lsp-edit "$@"
 
