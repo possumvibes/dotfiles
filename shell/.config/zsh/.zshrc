@@ -31,7 +31,7 @@ setopt hist_beep                 # Beep when accessing non-existent history.
 
 # Directory
 DIRSTACKSIZE=9
-setopt auto_cd              # Implicit CD slows down plugins
+setopt no_auto_cd              # Implicit CD slows down plugins and tanks completion resolution
 setopt cdable_vars          # Change directory to a path stored in a variable.
 setopt extended_glob        # Use extended globbing syntax.
 setopt auto_pushd           # Push the old directory onto the stack on cd.
@@ -51,9 +51,9 @@ setopt auto_menu            # Show completion menu on a successive tab press.
 setopt auto_param_slash     # If completed parameter is a directory, add a trailing slash.
 setopt complete_in_word     # Complete from both ends of a word.
 setopt NO_case_glob 	      # Globbing should not be case sensitive.
-setopt NO_complete_aliases  # Don't treat aliases as full completions. (Do use the expansion for completion).
-setopt NO_flow_control      # Disable start/stop characters in shell editor.
-setopt NO_menu_complete     # Do not autoselect the first completion entry.
+setopt NO_complete_aliases    # Don't treat aliases as full completions. (Do use the expansion for completion).
+setopt NO_flow_control        # Disable start/stop characters in shell editor.
+setopt NO_menu_complete       # Do not autoselect the first completion entry.
 setopt path_dirs            # Perform path search even on command names with slashes.
 
 # Load Plugins
