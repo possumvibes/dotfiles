@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# KJP is Cem Aksoylar's kak-jetpack script, ported from their original vim-jetpack package manager:
+# https://github.com/caksoylar/dotfiles/blob/d71d511348adb4532a1c7d7812ce60de8cd732ec/kak/kjp
+# https://github.com/caksoylar/vim-jetpack
+# See ./plugins.txt for how to specify plugin destinations, sources, and branches as necessary.
+# (Guessing this is under the MIT license; will update once I have confirmed)
+
 set -o errexit -o nounset
 
 [[ $# -lt 2 || ! -f "$1" ]] && echo "USAGE: $0 plugin-list plugin-folder [parallel-workers]" && exit 1
