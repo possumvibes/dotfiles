@@ -3,9 +3,8 @@
 autoload/standard-library
 
 # pls stop appearing in my tree results
-bundle
+autoload/remote
+colors/remote
 
-# plugin colors get ignored
-# colors/plugin
-
+# and always exclude the local rc if it exists
 kakrc.local
