@@ -13,8 +13,8 @@ fish/.config/fish/q
 
 # kakoune
 kakoune/.config/kak/autoload/standard-library
-kakoune/.config/kak/bundle
-kakoune/.config/kak/colors/plugin
+kakoune/.config/kak/autoload/remote
+kakoune/.config/kak/colors/remote
 
 # General no-go
 *.work
