@@ -1,12 +1,8 @@
-# update PATH if not already present
-# technically only needs to happen once ever but
-# it's easier to have it here for reference/replication
-fish_add_path ~/.cargo/bin ~/.local/bin ~/bin 
 
-if status is-login
-  bash2env source /etc/profile
-end
+# config.fish is always sourced, so the bulk of logic is in conf.d scripts
+# that explicitly limit the settings to the appropriate context!
 
+# appearance and behavior
 if status is-interactive
   set fish_greeting "go drink water."
 
