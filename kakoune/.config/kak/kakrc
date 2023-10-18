@@ -156,9 +156,7 @@ try %{
 } catch %{ echo -debug "Error configuring kakoune-vertical-selection!" }
 
 # kakoune-fandt
-try %{
-    require-module fandt
-} catch %{ echo -debug "Error configuring kakoune-fandt!" } 
+try %{ require-module fandt } catch %{ echo -debug "Error configuring kakoune-fandt!" } 
 
 # Custom snippets
 # kakoune-snippets
@@ -176,6 +174,9 @@ define-command ide -params 0..1 %{
     set-option global docsclient docs
 } -docstring "generic IDE setup."
 
+# Enable kak-lsp for session
+evaluate-commands %sh{ kak-lsp --kakoune --session "$kak_session" }
+
 # Filetype hooks: enable lsp *last*
 hook global WinSetOption filetype=rust %{
     lsp-init
@@ -183,7 +184,6 @@ hook global WinSetOption filetype=rust %{
 
 hook global WinSetOption filetype=markdown %{
     # Markdown uses tab width 2
-
     set-option buffer tabstop 2
     set-option buffer indentwidth 2
 

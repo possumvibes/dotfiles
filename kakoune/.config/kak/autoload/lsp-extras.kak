@@ -2,13 +2,6 @@
 #
 
 define-command lsp-init %{
-    # will reconnect to the existing session
-    evaluate-commands %sh{
-        if command -v kak-lsp &> /dev/null; then 
-            kak-lsp --kakoune --session "$kak_session"
-        fi
-    }
-
 	# enable LSP for the window
     lsp-enable-window
 
