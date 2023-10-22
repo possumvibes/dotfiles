@@ -14,13 +14,25 @@ setopt auto_remove_slash
 setopt extended_glob        # Use extended globbing syntax.
 setopt complete_aliases
 _comp_options+=(globdots)   # Include hidden files in completions
+setopt no_case_glob
 
 setopt always_to_end        # Move cursor to the end of a completed word.
 setopt complete_in_word     # Complete from both ends of a word.
 
+setopt no_menu_complete
+setopt no_flow_control
+setopt no_list_ambiguous
+
 setopt list_packed
 
 ## Completion Styles ###################################################
+
+# Use the completion cache.
+zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR/zcompcache
+zstyle ':completion::complete:*' use-cache true
+
+# Case insensitive match, followed by partial word, and then substring completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 # Match display settings
 zstyle ':completion:*:*:*:*:*' menu select
@@ -41,14 +53,7 @@ zstyle ':completion:*' squeeze-slashes true
 
 # Grouping results
 zstyle ':completion:*:matches'      group 'yes'
-zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
-zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
-# Match pattern rules
-
-# Use case insensitive completion matching,
-# and fall back to partial word completion
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 
 # Don't complete private functions or Zsh's precmd/exec special functions,
 # and don't complete unavailable commands or internal environment vars.
@@ -57,19 +62,30 @@ zstyle ':completion:*:functions' ignored-patterns '(_*|.*|pre(cmd|exec))'
 zstyle ':completion::*:(-command-|export):*' fake-parameters ${${${_comps[(I)-value-*]#*,}%%,*}:#-*-}
 
 # Matcher styles
-zstyle ':completion:*' completer _extensions _complete _list _match _approximate
+zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
-zstyle ':completion:*:paths' path-completion yes
+# zstyle ':completion:*:paths' path-completion yes
 
 # Increase the number of permitted fuzzy match errors
 # based on the length of the typed word.
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
 
+# Don't complete uninteresting users...
+zstyle ':completion:*:*:*:users' ignored-patterns \
+  adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
+  dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
+  hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
+  mailman mailnull mldonkey mysql nagios \
+  named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
+  operator pcap postfix postgres privoxy pulse pvm quagga radvd \
+  rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs '_*'
+
+# ... unless we really want to.
+zstyle '*' single-ignored show
+
 ## Application-specific completion
 # ------------------------------------------------------------
-# cd
-zstyle ':completion:*:*:cd:*' ignore-parents parent pwd
 
 # Ignore duplicates in diff and destruction
 zstyle ':completion:*:(rm|kill|diff):*' ignore-line other
@@ -78,11 +94,16 @@ zstyle ':completion:*:rm:*' file-patterns '*:all-files'
 # Man
 zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.(^1*)' insert-sections true
+
+
+# History
+zstyle ':completion:*:history-words' stop yes
+zstyle ':completion:*:history-words' remove-all-dups yes
+zstyle ':completion:*:history-words' list false
+zstyle ':completion:*:history-words' menu yes
+
 # ----------------------------------------------------------
 
-# Use the completion cache.
-zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR/zcompcache
-zstyle ':completion::complete:*' use-cache true
 
 ## Enable Completion #########################################################
 # zmodload zsh/complist    # menu-specific bindings, load before compinit
