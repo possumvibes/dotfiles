@@ -6,12 +6,21 @@ if [ -z "$ZSHENV_SOURCED" ]; then
   . $ZDOTDIR/.zshenv
 fi
 
-# Autoload all the functions
-fpath=(
-	$ZDOTDIR/{functions,widgets,prompts}
-	$fpath
-)
+# Load config files.
+if [ -d $ZDOTDIR/conf.d ]; then
+  for i in $ZDOTDIR/conf.d/*.zsh; do
+    source "$i"
+  done
+fi
+
+# Autoload the functions.
+fpath=($ZDOTDIR/functions $fpath)
 autoload -Uz -- $fpath[1]/*(.:t)
+
+# Source common aliases.
+[ -f $XDG_CONFIG_HOME/shell.d/aliases.sh ] && . $XDG_CONFIG_HOME/shell.d/aliases.sh
+
+## Settings not otherwise stored ##############################################
 
 # pls do not beep :(
 setopt NO_beep
@@ -19,18 +28,9 @@ setopt NO_beep
 # Jobs
 setopt auto_resume     # Attempt to resume existing jobs before creating a new process.
 setopt long_list_jobs  # List jobs in the long format by default
-setopt notify          # Report status of background jobs immediately.
+
+
+## Widgets ###################################################################
 
 # Convenient file renaming, if I ever remember to use it
 autoload -U zmv
-
-# Source the config files!
-if [ -d $ZDOTDIR/conf.d ]; then
-  for i in $ZDOTDIR/conf.d/*.zsh; do
-    source "$i"
-  done
-fi
-
-# Source common aliases.
-. ~/.config/shell.d/aliases.sh
-

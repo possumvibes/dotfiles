@@ -27,13 +27,6 @@ readonly -A key=(
 	kcud1  down-line-or-beginning-search
 	kpp    beginning-of-buffer-or-history
 	knp    end-of-buffer-or-history
-
-	# Utilities
-	# '\ee'  edit-command-line
-	# '\eh'  open-manual
-	# '\el'  list-directory
-	# '\ep'  append-pager
-	# '\es'  prepend-sudo
 )
 
 ## Widgets #######################################################################
@@ -47,11 +40,6 @@ zle -N down-line-or-beginning-search
 
 autoload -Uz edit-command-line
 zle -N edit-command-line
-
-## Plugins ######################################################################
-
-ZVM_VI_SURROUND_BINDKEY="s-prefix"
-autopair-init
 
 ## Bind Processing ##############################################################
 

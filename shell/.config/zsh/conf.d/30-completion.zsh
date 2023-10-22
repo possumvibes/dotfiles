@@ -1,6 +1,10 @@
 #!/usr/bin/env zsh
+#######################################################################
+# Possum's Dotfiles -- Zsh -- Completion settings
+# https://github.com/possumvibes/dotfiles
+#######################################################################
 
-fpath=($ZDOTDIR/completions $fpath)
+fpath=( $ZDOTDIR/completions $fpath )
 
 # Handle slashes gracefully when completing paths,
 # and don't leave them there unnecessarily.
@@ -15,6 +19,8 @@ setopt always_to_end        # Move cursor to the end of a completed word.
 setopt complete_in_word     # Complete from both ends of a word.
 
 setopt list_packed
+
+## Completion Styles ###################################################
 
 # Match display settings
 zstyle ':completion:*:*:*:*:*' menu select
@@ -78,9 +84,8 @@ zstyle ':completion:*:manuals.(^1*)' insert-sections true
 zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR/zcompcache
 zstyle ':completion::complete:*' use-cache true
 
-
-## Enable completion menu-specific keybindings. enable before compinit
-# zmodload zsh/complist          
+## Enable Completion #########################################################
+# zmodload zsh/complist    # menu-specific bindings, load before compinit
 autoload -Uz compinit
 compinit -i -C -d $ZSH_CACHE_DIR/completions
 

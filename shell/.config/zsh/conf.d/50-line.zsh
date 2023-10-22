@@ -26,4 +26,6 @@ setopt rc_quotes
 # zsh-users/zsh-syntax-highlighting#295
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
-
+# Plugin line behavior: autopairing and better vim
+ZVM_VI_SURROUND_BINDKEY="s-prefix"
+autopair-init

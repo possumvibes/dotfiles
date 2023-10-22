@@ -32,5 +32,3 @@ setopt hist_reduce_blanks        # Minimize unnecessary whitespace
 # Jury's still out on whether I like these
 setopt hist_beep                 # Beep when accessing non-existent history.
 setopt hist_verify               # Do not execute immediately upon history expansion.
-
-
