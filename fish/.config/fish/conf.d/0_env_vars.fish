@@ -1,12 +1,26 @@
+#######################################
+# Possum Dotfiles
+# https://github.com/possumvibes/dotfiles
+# Fish Environment
+# #####################################
 
-status is-login || exit
+# Load existing fisher path/plugins
+# (so we can use 'em to source the environment)
+# TODO: move bash2env into ./functions and move this logic back to 20_plugins.fish (and put this file back to login only!!)
+set fisher_path ~/.config/fish/fisher_plugins
+if test -d $fisher_path
+    # Add fisher_path to completion and function paths
+	set fish_complete_path $fish_complete_path[1] $fisher_path/completions $fish_complete_path[2..]
+	set fish_function_path $fish_function_path[1] $fisher_path/functions $fish_function_path[2..]
 
-# 100% of the environment gets inherited from bash.
-# hooray for bash2env!
+    # Source installed fisher plugins
+    for file in $fisher_path/conf.d/*.fish
+        source $file
+    end
+end
 
-bash2env source /etc/profile
+if command -q bash2env
+    bash2env source /etc/profile
+    bash2env source $HOME/.config/shell.d/0_env.sh
+end
 
-# update PATH if not already present
-# technically only needs to happen once ever but
-# it's easier to have it here for reference/replication
-fish_add_path ~/.cargo/bin ~/.local/bin ~/bin 

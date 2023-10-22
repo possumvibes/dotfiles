@@ -22,6 +22,8 @@ abbr -a note  "cd $NOTEBOOK_DIR"
 abbr -a md	'mkdir -p'
 abbr -a rm  'rm -i'
 
+abbr -a d cdh
+
 # Config Management
 abbr -a cmc	"cd $STOWDIR" #config-management cd
 
