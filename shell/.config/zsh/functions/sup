@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+#######################################################################
+# Possum's Dotfiles -- Zsh -- Reload the zsh environment and config
+# https://github.com/possumvibes/dotfiles
+#######################################################################
+
+if [ -f ~/.zshenv ]; then
+    source ~/.zshenv
+fi
+
+source $ZDOTDIR/.zshrc
+echo "reloaded zsh"
+
