@@ -1,6 +1,11 @@
 #!/bin/sh
-#
+#######################################################################
+# Possum's Dotfiles -- Common Shell -- Environment
+# https://github.com/possumvibes/dotfiles
+#######################################################################
+
 # Common environment for POSIX-compliant shells
+# Including XDG compliance, because *get outta my home dir*
 
 ### Common Functions
 # Adds a directory to PATH if it exists and is not already present in PATH
@@ -39,8 +44,7 @@ do
 done
 
 # Frequently Accessed Directories
-export DOTS_DIR="$XDG_DATA_HOME/dotfiles"
-export STOWDIR="~/.dots"
+export DOTS_DIR="$HOME/.dots"
 export NVIMDIR="$XDG_CONFIG_HOME/nvim"
 export KAKDIR="$XDG_CONFIG_HOME/kak"
 export NOTEBOOK_DIR="$HOME/ari-common/ari_yelling"
@@ -48,13 +52,33 @@ export NOTEBOOK_DIR="$HOME/ari-common/ari_yelling"
 export QMK_USERSPACE="$HOME/sources/qmk_userspace"
 
 # XDG COMPLIANCE AAAAAAA
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
-export NETHACKOPTIONS=$XDG_CONFIG_HOME/nethack/nethackrc
 
+## Utilities #####################################################################
+# Less
+export LESSHISTFILE=$XDG_CACHE_HOME/less.history
+
+# Pass
+export PASSWORD_STORE_DIR=$XDG_DATA_HOME/password-store
+
+# Starship Prompt
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
+## Programming ###################################################################
+
+# Rust
 export RUSTUP_HOME=$XDG_DATA_HOME/rustup
 export CARGO_HOME=$XDG_DATA_HOME/cargo
-export LESSHISTFILE=$XDG_CACHE_HOME/less.history
-export PASSWORD_STORE_DIR=$XDG_DATA_HOME/password-store
+
+# Ruby
+export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/ruby/bundle"
+export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/ruby/bundle"
+export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/ruby/bundle"
+export GEM_HOME="$XDG_DATA_HOME/ruby/gem"
+export GEM_SPEC_CACHE="$XDG_CACHE_HOME/ruby/gem"
+
+## Games #########################################################################
+
+export NETHACKOPTIONS=$XDG_CONFIG_HOME/nethack/nethackrc
 
 # Update PATH
 pathadd $HOME/bin

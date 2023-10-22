@@ -1,4 +1,8 @@
 #!/bin/sh
+#######################################################################
+# Possum's Dotfiles -- Common Shell -- Aliases
+# https://github.com/possumvibes/dotfiles
+#######################################################################
 
 ## Common Aliases for Bash and Zsh
 
@@ -10,7 +14,12 @@ alias k='kak'
 alias t='trash'
 
 # package updates
-alias uu='sudo dnf upgrade --refresh -y'
+if checkexec dnf; then
+    alias uu='sudo dnf upgrade --refresh -y'
+elif checkexec apt; then
+    alias uu='sudo apt update && sudo apt upgrade -y'
+    alias UU='sudo apt update && sudo apt upgrade -y && sudo apt-get update && sudo apt-get upgrade -y'
+fi
 
 # Shell config files
 alias aa="cd ~/.config/shell.d/; kak aliases.sh"
@@ -30,20 +39,23 @@ alias xup='xrdb -load ~/.Xresources && echo "reloaded .Xresources"'
 
 # Utilities
 alias md='mkdir -p'
-alias rm='rm -i'
+alias rm='rm -I'
+alias cp='cp -r'
 
 # navigation and listing
-alias l='ls -1'
-alias la='ls -lah'
-alias ll='ls -lh'
+alias ls='ls -pv --color=auto --group-directories-first'
+alias l='ls -pv1 --color=auto --group-directories-first'
+alias la='ls -pvlah --color=auto --group-directories-first'
+alias ll='ls -pvlh --color=auto --group-directories-first'
 
+# dots navigation
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
 # Config Management
-alias cmc="cd $STOWDIR" # config-management cd
+alias cmc="cd ${DOTS_DIR:-$HOME/.dotfiles}" # config-management cd
 
 # Shell With Secrets In (requires pass)
 alias priv="secretshell"
