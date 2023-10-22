@@ -4,7 +4,7 @@
 #######################################################################
 
 # Enable version control information
-setopt prompt_subst        # allow prompt substring to support vcs-info
+setopt prompt_subst
 
 # I'm sure there's a cleaner way to actually handle enabling the prompt itself,
 # presumably with promptinit

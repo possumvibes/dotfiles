@@ -38,5 +38,3 @@ if ! zgenom saved; then
     zgenom save
 fi
 
-
-

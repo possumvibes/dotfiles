@@ -8,6 +8,7 @@ setopt auto_param_slash
 setopt auto_remove_slash
 
 setopt extended_glob        # Use extended globbing syntax.
+setopt complete_aliases
 _comp_options+=(globdots)   # Include hidden files in completions
 
 setopt always_to_end        # Move cursor to the end of a completed word.
