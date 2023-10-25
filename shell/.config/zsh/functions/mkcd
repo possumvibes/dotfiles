@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+#######################################################################
+# Possum's Dotfiles -- Zsh -- Create and switch into directory
+# https://github.com/possumvibes/dotfiles
+#######################################################################
+
+mkdir -pv -- "$@" && cd -- "$1"
+
