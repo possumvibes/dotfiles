@@ -6,6 +6,10 @@
 
 ## Common Aliases for Bash and Zsh
 
+_checkexec (){
+    command -v "$1" > /dev/null 
+}
+
 # workflow apps
 alias e="$EDITOR"
 
@@ -14,9 +18,9 @@ alias k='kak'
 alias t='trash'
 
 # package updates
-if checkexec dnf; then
+if _checkexec dnf; then
     alias uu='sudo dnf upgrade --refresh -y'
-elif checkexec apt; then
+elif _checkexec apt; then
     alias uu='sudo apt update && sudo apt upgrade -y'
     alias UU='sudo apt update && sudo apt upgrade -y && sudo apt-get update && sudo apt-get upgrade -y'
 fi
