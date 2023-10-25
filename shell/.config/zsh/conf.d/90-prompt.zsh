@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
 
+# Enable version control information
+setopt prompt_subst
+
+# Remove space after the right prompt.
+ZLE_RPROMPT_INDENT=0
+
 autoload -Uz vcs_info
 precmd () { vcs_info }
 

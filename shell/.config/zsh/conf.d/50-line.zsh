@@ -1,20 +1,7 @@
 #######################################################################
-# Possum's Dotfiles -- Zsh -- Prompt & Line Editing
+# Possum's Dotfiles -- Zsh -- Line Editing
 # https://github.com/possumvibes/dotfiles
 #######################################################################
-
-# Enable version control information
-setopt prompt_subst
-
-# I'm sure there's a cleaner way to actually handle enabling the prompt itself,
-# presumably with promptinit
-source $ZDOTDIR/theming/prompt.zsh
-
-# Remove space after the right prompt.
-ZLE_RPROMPT_INDENT=0
-
-
-## Line edits ##########################################################
 
 # Treat these characters as part of a word.
 WORDCHARS='_-*?[]~&.;!#$%^(){}<>' 
