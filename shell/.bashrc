@@ -37,8 +37,4 @@ fi
 ## fzf for completion
 [ -f /usr/share/fzf/shell/key-bindings.bash ] && . /usr/share/fzf/shell/key-bindings.bash
 
-## Starship Prompt config
-if command -v starship >/dev/null 2>&1; then
-  eval "$(starship init bash)"
-fi
 
