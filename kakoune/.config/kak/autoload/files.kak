@@ -44,7 +44,7 @@ define-command open-buffer-picker %{
 } -docstring "open a fuzzy buffer picker."
 
 define-command open-file-picker %{
-    prompt open: -menu -shell-script-candidates 'fd --type=file --hidden' %{
+    prompt open: -menu -shell-script-candidates 'fd --type=file --hidden -E .git' %{
         edit -existing %val{text}
     }
 } -docstring "open a fuzzy file picker. requires fd."
