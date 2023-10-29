@@ -50,3 +50,9 @@ define-command open-file-picker %{
 } -docstring "open a fuzzy file picker. requires fd."
 
 
+# this'll get overridden by the tmux module
+define-command open-fzf-file-picker %{
+    prompt open: -menu -shell-script-candidates 'fd --type=file --hidden -E .git' %{
+        edit -existing %val{text}
+    }
+} -docstring "open a fuzzy file picker. requires fd."

@@ -37,6 +37,13 @@ provide-module tmux-windowing %&
     alias global rb repl-below
     alias global rb repl-below
 
+	# fzf-tmux integration
+    define-command -override open-fzf-file-picker %{
+        edit %sh{
+            fzf-tmux --color=16 --preview "bat --style=numbers,changes --color always {}" -
+        }
+    } -docstring "open fzf fuzzy file picker. Requires fzf-tmux and tmux"
+
     # # IDE layout
     # # ----------
 
