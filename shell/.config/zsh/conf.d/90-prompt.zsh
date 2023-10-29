@@ -69,9 +69,12 @@ zstyle ':vcs_info:git:*' stagedstr "%F{6}$STATUS_ADDED"
 zstyle ':vcs_info:git:*' unstagedstr "%F{3}$STATUS_MODIFIED"
 zstyle ':vcs_info:git*+set-message:*' hooks untracked stashed outgoing
 
+## SecretShell custom prompt component
+base_secret_indicator="%B%F{1}[SECRET ENV ACTIVE]%f%b "
+secretshell_indicator=""
+[ "$SECRETSHELL_ACTIVE" = "1" ] && secretshell_indicator=$base_secret_indicator
 
 ## Setting the prompt itself:
-
 baseprompt="%F{12}%~%f"
 secondline="%(?.%F{10}.%F{9})%(!.#.$)%f"
 
@@ -79,5 +82,5 @@ secondline="%(?.%F{10}.%F{9})%(!.#.$)%f"
 # $
 
 export PROMPT='
-$baseprompt $vcs_info_msg_0_
+$secretshell_indicator$baseprompt $vcs_info_msg_0_
 $secondline '
