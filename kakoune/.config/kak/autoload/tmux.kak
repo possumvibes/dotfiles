@@ -47,7 +47,7 @@ provide-module tmux-windowing %&
     # # IDE layout
     # # ----------
 
-    define-command --override ide %{
+    define-command -override ide %{
         rename-client main
         tmux-terminal-horizontal kak -c %val{session} -e "rename-client docs"
         tmux-terminal-vertical kak -c %val{session} -e "rename-client tools"
