@@ -56,3 +56,14 @@ define-command open-fzf-file-picker %{
         edit -existing %val{text}
     }
 } -docstring "open a fuzzy file picker. requires fd."
+
+define-command -hidden open_rg_picker %{
+  prompt search: %{
+    prompt refine: -menu -shell-script-candidates "rg -in --column '%val{text}'" %{
+      evaluate-commands "edit -existing %sh{
+        IFS=':' read -r file line column rest <<< ""$kak_text""
+        echo \""$file\"" $line $column
+      }"
+    }
+  }
+} -docstring "open a fuzzy live grep picker"

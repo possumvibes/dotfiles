@@ -80,6 +80,7 @@ map global user r     "|%opt{clipboard_paste}<ret>"          -docstring 'replace
 map global user z     <v>                                    -docstring 'enter view mode'
 map global user Z     <V>                                    -docstring 'enter view mode (locked)'
 map global user <ret> ':expand<ret>'                         -docstring 'expand selection to next outer region'
+map global user /     ':open_rg_picker<ret>'                 -docstring 'search project'
 # d, k, l, m are currently reserved for lsp actions
 
 # Prompt mode ------------------------------------------------------------------
