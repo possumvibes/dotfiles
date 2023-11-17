@@ -1,0 +1,56 @@
+#!/bin/bash
+
+########################
+# Ratlink-md: based on Dave Gauer's Ratlink https://ratfactor.com/cards/ratlink
+# Updated for use with markdown syntax, using fd and fzf,
+# instead of asciidoc syntax with ag and zf in the original.
+# Designed to be called directly or from within an editor.
+#######################
+
+# First param: 'link' or 'image'
+kind="$1"
+
+# Second param: The absolute file path FROM WHICH we will be generating a link.
+# This will be used to create a relative link.
+from="$2"
+from_path=${from%/*}           # strip from last / to end
+
+ext="\.md|\.html"
+
+if [[ $kind == 'image' ]]
+then
+    ext="\.jpg|\.png|\.svg"
+fi
+
+# fd is a very fast find replacement
+# fzf is a fuzzy finder!
+match=$(fd --type file "($ext)\$" $NOTEBOOK_DIR | fzf)
+
+
+# You can cancel the fuzzy find with Esc, which will return a blank match
+if [[ -z $match ]]
+then
+    # Be sure to check the exit status in your editor so this doesn't do anything!
+    echo "No file to link selected. Bye!"
+    exit 1
+fi
+
+# Make relative path from input path/file to chosen path.
+# or https://stackoverflow.com/a/53191456/695615
+path=$(realpath --relative-to="$from_path" $match)
+
+# # Remove any .adoc extensions, or entire index.adoc!
+# # Will only apply to .adoc files Links
+# path=${path%index.adoc}
+# path=${path%.adoc}
+
+name=${path##*/}          # strip from last / to beginning
+name=${name%.md}          # strip page extension
+
+if [[ $kind == 'link' ]]
+then
+    printf "[$name]($path)"
+else
+    printf "\![$name]($path)"
+fi
+
