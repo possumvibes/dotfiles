@@ -15,6 +15,7 @@ fish/.config/fish/q
 kakoune/.config/kak/autoload/standard-library
 kakoune/.config/kak/autoload/remote
 kakoune/.config/kak/colors/remote
+kakoune/.config/kak/testing
 
 # General no-go
 *.work

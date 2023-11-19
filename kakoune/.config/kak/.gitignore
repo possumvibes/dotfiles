@@ -6,5 +6,8 @@ autoload/standard-library
 autoload/remote
 colors/remote
 
+# plugin testing dead zone
+testing
+
 # and always exclude the local rc if it exists
 kakrc.local

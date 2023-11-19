@@ -2,8 +2,8 @@
 set-option global grepcmd 'rg --column --smart-case --sort path'
 
 # UI options
-set-option global tabstop 4
-set-option global indentwidth 4
+set-option global tabstop 2
+set-option global indentwidth 2
 
 set-option global scrolloff 5,10
 set-option global ui_options terminal_assistant=cat terminal_status_on_top=true
@@ -159,8 +159,10 @@ try %{
     map global normal <a-^> ':vertical-selection-up<ret>'     -docstring 'copy matching selections above' 
 } catch %{ echo -debug "Error configuring kakoune-vertical-selection!" }
 
-# kakoune-fandt
+# gl/listentolist/kakoune-fandt
 try %{ require-module fandt } catch %{ echo -debug "Error configuring kakoune-fandt!" } 
+
+# # gh/possumvibes/wiki.kak
 
 # Custom snippets
 # kakoune-snippets
@@ -183,14 +185,14 @@ evaluate-commands %sh{ kak-lsp --kakoune --session "$kak_session" }
 
 # Filetype hooks: enable lsp *last*
 hook global WinSetOption filetype=rust %{
+    set-option buffer tabstop 4
+    set-option buffer indentwidth 4
     lsp-init
 }
 
 hook global WinSetOption filetype=markdown %{
-    # Markdown uses tab width 2
-    set-option buffer tabstop 2
-    set-option buffer indentwidth 2
 
+	# require-module better-mrkdown
     # lsp-init
 }
 
