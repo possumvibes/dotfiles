@@ -51,8 +51,7 @@ pgrep -x picom > /dev/null || picom &
 pgrep -x redshift > /dev/null || redshift &
 
 # background! this will be fancy someday
-export WALLPAPER_DIR="$HOME/Pictures/wallpapers"
-feh --bg-scale $WALLPAPER_DIR/current/Deep_Space_75_Withou_A_Logo.jpg
+feh --bg-scale ~/.local/share/wallpapers/current/Deep_Space_75_Withou_A_Logo.jpg
 
 # panel, if bspwm session
 if [ "$GDMSESSION" == "bspwm" ]

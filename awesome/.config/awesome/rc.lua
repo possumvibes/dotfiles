@@ -48,6 +48,7 @@ end
 beautiful.init(gears.filesystem.get_themes_dir() .. "zenburn/theme.lua")
 beautiful.useless_gap = 2
 beautiful.gap_single_client = true
+beautiful.get().wallpaper = gears.filesystem.get_xdg_data_home() .. "wallpapers/current/Deep_Space_72_Without_A_Logo.jpg"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"

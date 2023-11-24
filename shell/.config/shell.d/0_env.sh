@@ -50,6 +50,7 @@ export KAKDIR="$XDG_CONFIG_HOME/kak"
 export NOTEBOOK_DIR="$HOME/ari-common/ari_yelling"
 
 export QMK_USERSPACE="$HOME/sources/qmk_userspace"
+export WALLPAPER_DIR="$XDG_DATA_HOME/wallpapers/"
 
 # XDG COMPLIANCE AAAAAAA
 

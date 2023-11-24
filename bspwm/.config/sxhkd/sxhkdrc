@@ -163,8 +163,6 @@ super + {minus,asterisk}
 # focus the node in the given direction
 super + {_,shift + }{n,e,u,a}
 	bspc node -{f,s} {west,south,north,east}
-super + {_,shift + }{Left,Down,Up,Right}
-	bspc node -{f,s} {west,south,north,east}
 
 # focus the node for the given path jump
 super + {p,b,comma,period}
@@ -173,7 +171,7 @@ super + {p,b,comma,period}
 # focus the next/previous desktop in the current monitor
 super + {_,shift + }Tab
 	bspc desktop -f {next,prev}.local
-super + ctrl + {Right, Left}
+super + {Right, Left}
 	bspc desktop -f {next,prev}.local
 
 # focus or send to the given desktop
