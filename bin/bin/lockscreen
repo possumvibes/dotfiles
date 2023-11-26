@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#####################################################
+# Lock: the screenlocker. 
+# Uses XSecureLock.
+# Call on x startup with `xss-lock -l -- lockscreen`
+# Trigger with `xset s activate`
+#####################################################
+
+_lock(){
+  ## xsecurelock configuration and execution
+  env \
+  	XSECURELOCK_COMPOSITE_OBSCURER=0 \
+  	XSECURELOCK_AUTH_CURSOR_BLINK=0 \
+  	XSECURELOCK_SHOW_USERNAME=0 \
+  	XSECURELOCK_SHOW_HOSTNAME=0 \
+  	XSECURELOCK_SHOW_KEYBOARD_LAYOUT=0 \
+  	XSECURELOCK_SHOW_DATETIME=1 \
+  	XSECURELOCK_DATETIME_FORMAT='%d %b %Y %H:%M ' \
+  	XSECURELOCK_PASSWORD_PROMPT=time \
+  	XSECURELOCK_SAVER=saver_blank \
+    XSECURELOCK_FONT='Cantarell' \
+    xsecurelock
+}
+
+if [ $GDMSESSION == "bspwm"	]; then
+  ## pause notifications
+  dunstctl_state=$(dunstctl is-paused)
+  dunstctl set-paused true
+fi
+
+_lock
+
+if [ $GDMSESSION == "bspwm"	]; then
+  ## After unlocking, reset notifs to previous state
+  dunstctl set-paused ${dunstctl_state}
+fi

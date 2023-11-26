@@ -39,7 +39,7 @@ list_sxhkd_bindings(){
 
 # screensaver and locker of choice
 xset s 300 5 &
-xss-lock -l -- lock-screen-xsecurelock &
+xss-lock -l -- lockscreen &
 
 # notifications
 pgrep -x dunst > /dev/null || dunst &
