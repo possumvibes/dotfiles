@@ -77,8 +77,8 @@ super +{_,shift +,ctrl + }Return
 	{ alacritty, urxvt, kitty }
 
 # program launcher
-super +{_,shift + } space
-   sh $HOME/.config/rofi/bin/{launcher,runner}
+super + space
+   rofi -show combi -combi-modes 'window,drun,run'
 
 
 # programs
