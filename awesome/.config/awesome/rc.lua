@@ -435,6 +435,11 @@ globalkeys = gears.table.join(
 
     -- Launch: Control+Alt
     awful.key(
+        {"Control", "Mod1"}, "d",
+        function () awful.spawn("thunar") end,
+        {description = "launch thunar", group = "programs"}
+    ),
+    awful.key(
         {"Control", "Mod1"}, "h",
         function () awful.spawn("firefox") end,
         {description = "launch firefox", group = "programs"}
