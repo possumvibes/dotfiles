@@ -190,10 +190,13 @@ hook global WinSetOption filetype=rust %{
     lsp-init
 }
 
-hook global WinSetOption filetype=markdown %{
+hook global WinSetOption filetype=lua %{
+    set-option buffer tabstop 4
+    set-option buffer indentwidth 4
+}
 
-	# require-module better-mrkdown
-    # lsp-init
+hook global WinSetOption filetype=markdown %{
+    disable-auto-pairs
 }
 
 hook global -always BufOpenFifo '\*grep\*' %{ map global normal <minus> ': grep-next-match<ret>' }
