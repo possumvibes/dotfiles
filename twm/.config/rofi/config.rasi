@@ -1,6 +1,7 @@
 configuration {
   modi: "window,run,ssh,drun";
   show-icons: true;
-  terminal: "urxvt";
+  terminal: "alacritty";
+
 }
-@theme "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"
+@theme "./themes/catppuccin-mocha.rasi"
