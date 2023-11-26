@@ -436,9 +436,12 @@ globalkeys = gears.table.join(
         {"Control", "Mod1"}, "h",
         function () awful.spawn("firefox") end,
         {description = "launch firefox", group = "programs"}
+    ),
+    awful.key(
+      {"Control", "Mod1"}, "l",
+      function () awful.spawn.with_shell("xset s activate") end,
+      {description = "lock screen", group = "programs"}
     )
-
-
 )
 
 -- Bind all key numbers to tags.
@@ -693,3 +696,5 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+awful.spawn.with_shell("autostart-xsession")

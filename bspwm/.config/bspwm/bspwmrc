@@ -37,6 +37,6 @@ bspc rule -a polybar layer=above
 ## Autostart ------------------
 
 # start up the environment :)
-~/.config/bspwm/autostart.sh &
+autostart-xsession &
 
 
