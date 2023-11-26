@@ -56,4 +56,3 @@ then
 fi
 
 export SESSION_AUTOSTARTED="true"
-notify-send "Autostart Complete" "session is up and running!"

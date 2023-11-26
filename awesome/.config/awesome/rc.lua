@@ -403,7 +403,12 @@ globalkeys = gears.table.join(
     -- System launch: Gui
     -- Prompts and pickers
     awful.key({ modkey }, "p",
-        function() awful.spawn.with_shell("rofi -show combi combi-modes 'window,drun,run'") end,
+        function() awful.spawn.with_shell("rofi -show combi -combi-modes 'window,drun,run'") end,
+        {description = "launch rofi application picker", group = "launcher"}
+    ),
+    -- temp: G-space as backup picker
+    awful.key({ modkey }, "space",
+        function() awful.spawn.with_shell("rofi -show combi -combi-modes 'window,drun,run'") end,
         {description = "launch rofi application picker", group = "launcher"}
     ),
     awful.key({ modkey, "Shift" }, "r",
@@ -420,11 +425,6 @@ globalkeys = gears.table.join(
           }
         end,
         {description = "lua execute prompt", group = "awesome"}
-    ),
-    -- temp: G-space as backup picker
-    awful.key({ modkey }, "space",
-        function() awful.spawn.with_shell("rofi -show combi combi-modes 'window,drun,run'") end,
-        {description = "launch rofi application picker", group = "launcher"}
     ),
 
     -- Terminal
