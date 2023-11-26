@@ -438,6 +438,11 @@ globalkeys = gears.table.join(
         {description = "launch firefox", group = "programs"}
     ),
     awful.key(
+        {"Control", "Mod1"}, "k",
+        function () awful.spawn("keepassxc") end,
+        {description = "launch keepassxc", group = "programs"}
+    ),
+    awful.key(
       {"Control", "Mod1"}, "l",
       function () awful.spawn.with_shell("xset s activate") end,
       {description = "lock screen", group = "programs"}
