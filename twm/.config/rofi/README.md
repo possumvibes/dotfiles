@@ -26,4 +26,10 @@ rofi -show window
 Shows all open windows (across workspaces, if defined in wm)
 
 
+### Combine 'em all!
 
+```sh
+rofi -show combi combi-modes 'window,drun,run'
+```
+
+Opens a combined picker that starts with open windows, then desktop entries, and fills from those as well as executable names. This one rules.
