@@ -30,28 +30,28 @@ hook global WinCreate ^.*$ %{
 # Mappings ----------------------------------------------------------
 
 # Normal mode 
-map global normal <#>     "<a-;>"                    -docstring 'flip selection direction'
-map global normal <a-#>   "<a-:>"                    -docstring 'ensure forward selection direction'
-map global normal <esc>   ";,"                       -docstring 'clear all selections to current cursor'
+map global normal <#>     "<a-;>"                            -docstring 'flip selection direction'
+map global normal <a-#>   "<a-:>"                            -docstring 'ensure forward selection direction'
+map global normal <esc>   ";,"                               -docstring 'clear all selections to current cursor'
 
-map global normal <a-%>   '*%s<ret>'                 -docstring "select all occurrences of selection"
-map global user   <ret>   ':expand<ret>'             -docstring 'expand selection to next outer region'
-map global normal "'"     ':enter_mirror_mode<ret>'  -docstring 'enter mirror mode: expand and surround selections'
-map global normal "<a-'>" '\'                        -docstring 'remove hooks'
-map global normal =       ':enter_math_mode<ret>'    -docstring 'enter math mode: increment and decrement counts'
-map global normal <a-=> ':enter-phantom-select-mode<ret>'-docstring 'enter phantom selection mode'
+map global normal <a-%>   '*%s<ret>'                         -docstring "select all occurrences of selection"
+map global user   <ret>   ':expand<ret>'                     -docstring 'expand selection to next outer region'
+map global normal "'"     ':enter_mirror_mode<ret>'          -docstring 'enter mirror mode: expand and surround selections'
+map global normal "<a-'>" '\'                                -docstring 'remove hooks'
+map global normal <a-=>   ':enter_math_mode<ret>'            -docstring 'enter math mode: increment and decrement counts'
+map global normal =       ':enter-phantomsel-mode<ret>'      -docstring 'enter phantom selection mode'
 
 # map m to <a-a/i>, and replace v with m's previous functionality; view mode moves to userspace
-map global normal m       <a-i>                      -docstring 'select inner surrounding objects'
-map global normal M       <a-a>                      -docstring 'select outer surrounding objects'
-map global normal v       m                          -docstring 'select to next matching character'
-map global normal V       M                          -docstring 'extend to next matching character'
-map global normal <a-v>   <a-m>                      -docstring 'select to previous matching character'
-map global normal <a-V>   <a-M>                      -docstring 'extend to previous matching character'
+map global normal m       <a-i>                              -docstring 'select inner surrounding objects'
+map global normal M       <a-a>                              -docstring 'select outer surrounding objects'
+map global normal v       m                                  -docstring 'select to next matching character'
+map global normal V       M                                  -docstring 'extend to next matching character'
+map global normal <a-v>   <a-m>                              -docstring 'select to previous matching character'
+map global normal <a-V>   <a-M>                              -docstring 'extend to previous matching character'
 
 # extend full-line selection up and down: https://discuss.kakoune.com/t/improved-and-consistent-line-selection-with-x-and-a-x/2243
-map global normal <a-X> %{<a-:><a-;><a-H>Kx} -docstring 'extend lines upwards' 
-map global normal X %{<a-:>F<ret>x}          -docstring 'extend lines downwards' 
+map global normal <a-X> %{<a-:><a-;><a-H>Kx}                 -docstring 'extend lines upwards' 
+map global normal X %{<a-:>F<ret>x}                          -docstring 'extend lines downwards' 
 
 # clipboard.kak: clipboard sync on explicit yank
 hook global NormalKey y clipboard-sync
@@ -77,7 +77,9 @@ map global user m     ':enter-paste-mode<ret>'               -docstring 'enter p
 map global user p     "<a-!>%opt{clipboard_paste}<ret>"      -docstring 'paste (after) from clipboard (OSC-52)'  
 map global user P     "!%opt{clipboard_paste}<ret>"          -docstring 'paste (before) from clipboard (OSC-52)' 
 map global user r     "|%opt{clipboard_paste}<ret>"          -docstring 'replace from clipboard (OSC-52)'
+map global user s     ':w<ret>'                              -docstring 'writes file; :w'
 map global user w     ":enter-user-mode wiki<ret>"           -docstring 'wiki mode'
+map global user x     ":db<ret>"                             -docstring "close buffer"
 map global user z     <v>                                    -docstring 'enter view mode'
 map global user Z     <V>                                    -docstring 'enter view mode (locked)'
 map global user <ret> ':expand<ret>'                         -docstring 'expand selection to next outer region'
@@ -133,6 +135,13 @@ try %{
         remove-highlighter  window/show-matching
     }
     kaktree-enable
+
+    set-option global kaktree_double_click_duration '0.5'
+    set-option global kaktree_indentation 1
+    set-option global kaktree_dir_icon_open  '▾ 🗁 '
+    set-option global kaktree_dir_icon_close '▸ 🗀 '
+    set-option global kaktree_file_icon      '⠀⠀🖺'
+
     map global user n ':kaktree-toggle<ret>' -docstring "toggle kaktree to the side"
     map global user "'" ':kaktree-focus<ret>' -docstring "focus the kaktree window"
 } catch %{ echo -debug "Error configuring kaktree!" } 
@@ -150,7 +159,7 @@ try %{
     map global phantom-selection e ':phantom-selection-iterate-prev<ret>' -docstring 'iterate to previous phantom'
     map global phantom-selection j ':phantom-selection-clear<ret>' -docstring 'clear phantom selections'
 
-    define-command enter-phantom-select-mode %{ enter-user-mode phantom-selection }
+    define-command enter-phantomsel-mode %{ enter-user-mode phantom-selection }
 } catch %{ echo -debug "Error configuring kakoune-phantom-selection!" }
 
 # kakoune-vertical-selection
