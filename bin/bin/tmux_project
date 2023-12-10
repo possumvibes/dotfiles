@@ -1,0 +1,58 @@
+#!/bin/bash
+#
+# Opens a tmux session for dnd with the fuckaround&findout squad.
+# If session exists, switch to it. Otherwise, create and attach.
+
+
+_print_usage (){
+  printf "tmux_project is a tool to switch to dedicated tmux sessions for predefined projects.
+USAGE: tmux_project <SESSION>
+
+VALID SESSIONS:
+dnd  -- D&D session notes and character sheet for Fuckaround Squad\n"
+}
+
+_print_and_exit1() {
+  printf "$@\n"
+  exit 1
+}
+
+_tmux_attach_session_if_exists(){
+  # If the session doesn't exist, exit with error
+  tmux has-session -t $session &> /dev/null || return 1
+  
+  # otherwise, switch/attach
+  if [ -z "$TMUX" ]; then
+    tmux attach -t $session
+  else
+    tmux switch -t $session
+  fi
+}
+
+tmux_project(){
+  # set session information from arguments
+  case $1 in
+    "dnd" )
+      session="dnd-fuckaround-squad"
+      config_method=dnd;;
+    *) _print_usage
+       exit 1;;
+  esac
+
+  _tmux_attach_session_if_exists && return 0
+
+  $config_method
+
+  _tmux_attach_session_if_exists || _print_and_exit1 "Something went wrong creating session '$session'"
+}
+
+
+# TODO: move to dedicated directory
+dnd(){
+  root=$NOTEBOOK_DIR/../notebooks/things-i-do/fuckaround-squad/
+
+  # Create the session!
+  tmux new-session -d -s $session -c $root
+}
+
+tmux_project "$@"
