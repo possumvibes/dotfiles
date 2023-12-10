@@ -15,10 +15,10 @@ _print_usage() {
 Usage: [OPTIONS] [FILES]...
 
 Arguments:
-	[FILES]...  If provided, the files to edit open in the new kakoune session
+  [FILES]...  If provided, the files to edit open in the new kakoune session
 
 Options:
-	-s <WORKSPACE_ROOT> Specify a file to use as the kak-lsp workspace root. Must match the language's roots in kak-lsp
+  -s <WORKSPACE_ROOT> Specify a file to use as the kak-lsp workspace root. Must match the language's roots in kak-lsp
 
 Requires: tmux, fd, and fzf\n"
 }
@@ -85,19 +85,14 @@ lsp-edit(){
 
     # TMUX TIME.
 
-	# sanitize the name for consistent tmux session creation
-	session=$(basename $selected_root $default_extension | tr -cd '[a-zA-Z0-9]_-')
-	SESSIONEXISTS=$(tmux list-sessions | grep $session)
+    # sanitize the name for consistent tmux session creation
+    session=$(basename $selected_root $default_extension | tr -cd '[a-zA-Z0-9]_-')
+    SESSIONEXISTS=$(tmux list-sessions | grep $session)
     [ ! -z "$files" ] && EDITOR_CMD="kak -s $session $files"
 
-	if [ "$SESSIONEXISTS" = "" ]; then
-        tmux new-session -d -s $session \
-        -e KAK_LSP_PROJECT_ROOT_CSHARP=$selected_root
-
-        # set main window for kak, open repl window
-        tmux rename-window -t $session:0 'kak' 
-        tmux new-window -t $session:1 -n 'shell'
-	fi
+    if [ "$SESSIONEXISTS" = "" ]; then
+        tmux new-session -d -s $session -e KAK_LSP_PROJECT_ROOT_CSHARP=$selected_root 
+    fi
 
     # if we have files, open 'em in the session
     if [ ! -z "$EDITOR_CMD" ]; then
@@ -105,16 +100,16 @@ lsp-edit(){
         # tmux send-keys -t $session:0 "i"
 
         # now send the actual command
-		tmux send-keys -t $session:0 "$EDITOR_CMD" C-m
+        tmux send-keys -t $session:0 "$EDITOR_CMD" C-m
     fi
 
-	# if we're attached to a different session, switch
-	if [ -z "$TMUX" ]; then
-    	# attach to the session in the kak window
+    # if we're attached to a different session, switch
+    if [ -z "$TMUX" ]; then
+        # attach to the session in the kak window
         tmux attach -t $session:0
-	else
-    	tmux switch -t $session:0
-	fi
+    else
+        tmux switch -t $session:0
+    fi
 }
 lsp-edit "$@"
 
