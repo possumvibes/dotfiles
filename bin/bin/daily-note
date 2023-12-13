@@ -5,7 +5,7 @@
 
 # Get today's date and generate the note path
 curr_date=`date +%F`
-note_path="$NOTEBOOK_DIR/dailies/$curr_date.md"
+note_path="$NOTEBOOK_DIR/journal/$curr_date.md"
 echo $note_path
 
 # if the note doesn't exist, create it
