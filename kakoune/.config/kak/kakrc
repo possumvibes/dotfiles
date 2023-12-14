@@ -78,7 +78,8 @@ map global user p     "<a-!>%opt{clipboard_paste}<ret>"      -docstring 'paste (
 map global user P     "!%opt{clipboard_paste}<ret>"          -docstring 'paste (before) from clipboard (OSC-52)' 
 map global user r     "|%opt{clipboard_paste}<ret>"          -docstring 'replace from clipboard (OSC-52)'
 map global user s     ':w<ret>'                              -docstring 'writes file; :w'
-map global user w     ":enter-user-mode wiki<ret>"           -docstring 'wiki mode'
+map global user t     ':enter-user-mode kak-tasks<ret>'      -docstring 'task mode'
+# map global user w     ":enter-user-mode wiki<ret>"           -docstring 'wiki mode'
 map global user x     ":db<ret>"                             -docstring "close buffer"
 map global user z     <v>                                    -docstring 'enter view mode'
 map global user Z     <V>                                    -docstring 'enter view mode (locked)'
@@ -114,9 +115,10 @@ hook global InsertCompletionShow .* %{
 }
 
 # User modes --------------------------------------------------------
-# declare-user-mode window
-# define-command enter-window-mode %{ enter-user-mode window}
 hook global ModuleLoaded tmux %{ require-module tmux-windowing }
+
+# Autoload Plugins --------------------------------------------------
+set-option global kak_tasks_root %sh{ echo $NOTEBOOK_DIR }
 
 # Plugins -----------------------------------------------------------
 
