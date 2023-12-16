@@ -47,19 +47,19 @@ declare-option -hidden str kak_tasks_list_current_line
 ## Appearance: uses terminal colors
 set-face global kak_tasks_todo green
 set-face global kak_tasks_wip magenta
-set-face global kak_tasks_done black
-set-face global kak_tasks_done_text black
-set-face global kak_tasks_wontdo black
-set-face global kak_tasks_wontdo_text black+s
+set-face global kak_tasks_done bright-black
+set-face global kak_tasks_done_text bright-black
+set-face global kak_tasks_wontdo bright-black
+set-face global kak_tasks_wontdo_text bright-black+s
 set-face global kak_tasks_idea blue
-set-face global kak_tasks_task_list_delimiter black
+set-face global kak_tasks_task_list_delimiter bright-black
 set-face global kak_tasks_task_list_path blue
 set-face global kak_tasks_task_list_line white
 set-face global kak_tasks_task_list_col white
 set-face global kak_tasks_subtask_uncheck green
 set-face global kak_tasks_subtask_uncheck magenta
-set-face global kak_tasks_subtask_check black
-set-face global kak_tasks_subtask_text_check black
+set-face global kak_tasks_subtask_check bright-black
+set-face global kak_tasks_subtask_text_check bright-black
 set-face global kak_notes_tag green
 
 add-highlighter shared/kak-tasks group

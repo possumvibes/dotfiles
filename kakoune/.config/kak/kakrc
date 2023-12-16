@@ -1,134 +1,23 @@
-## Options ----------------------------------------------------------
-set-option global grepcmd 'rg --column --smart-case --sort path'
-
-# UI options
-set-option global tabstop 2
-set-option global indentwidth 2
-
-set-option global scrolloff 5,10
-set-option global ui_options terminal_assistant=cat terminal_status_on_top=true
-
-# Apply formatting by default to every buffer, named or not
-hook global WinCreate ^.*$ %{
-	add-highlighter window/show-matching show-matching
-	add-highlighter window/word-wrap wrap -word -indent
-
-    add-highlighter window/numbers number-lines -hlcursor -relative
-
-	# relative-insert-numbers: Switch between relative and absolute number-lines
-	# NORMAL mode uses relative numbers
-	# INSERT mode uses absolute numbers
-    hook window -group relative-insert-numbers ModeChange .*:insert %{
-        add-highlighter -override window/numbers number-lines -hlcursor 
-    }
-
-    hook window -group relative-insert-numbers ModeChange .*:insert:.* %{
-        add-highlighter -override window/numbers number-lines -hlcursor -relative
-    }
+evaluate-commands %sh{
+  kak-lsp --kakoune --session "$kak_session"
 }
-
-# Mappings ----------------------------------------------------------
-
-# Normal mode 
-map global normal <#>     "<a-;>"                            -docstring 'flip selection direction'
-map global normal <a-#>   "<a-:>"                            -docstring 'ensure forward selection direction'
-map global normal <esc>   ";,"                               -docstring 'clear all selections to current cursor'
-
-map global normal <a-%>   '*%s<ret>'                         -docstring "select all occurrences of selection"
-map global user   <ret>   ':expand<ret>'                     -docstring 'expand selection to next outer region'
-map global normal "'"     ':enter_mirror_mode<ret>'          -docstring 'enter mirror mode: expand and surround selections'
-map global normal "<a-'>" '\'                                -docstring 'remove hooks'
-map global normal <a-=>   ':enter_math_mode<ret>'            -docstring 'enter math mode: increment and decrement counts'
-map global normal =       ':enter-phantomsel-mode<ret>'      -docstring 'enter phantom selection mode'
-
-# map m to <a-a/i>, and replace v with m's previous functionality; view mode moves to userspace
-map global normal m       <a-i>                              -docstring 'select inner surrounding objects'
-map global normal M       <a-a>                              -docstring 'select outer surrounding objects'
-map global normal v       m                                  -docstring 'select to next matching character'
-map global normal V       M                                  -docstring 'extend to next matching character'
-map global normal <a-v>   <a-m>                              -docstring 'select to previous matching character'
-map global normal <a-V>   <a-M>                              -docstring 'extend to previous matching character'
-
-# extend full-line selection up and down: https://discuss.kakoune.com/t/improved-and-consistent-line-selection-with-x-and-a-x/2243
-map global normal <a-X> %{<a-:><a-;><a-H>Kx}                 -docstring 'extend lines upwards' 
-map global normal X %{<a-:>F<ret>x}                          -docstring 'extend lines downwards' 
-
-# clipboard.kak: clipboard sync on explicit yank
-hook global NormalKey y clipboard-sync
-
-# Goto mode ---------------------------------------------------------
-map global goto n '<esc>:bn<ret>' -docstring 'go to next buffer'
-map global goto p '<esc>:bp<ret>' -docstring 'go to previous buffer'
-
-map global view z v -docstring 'center cursor (vertically)'
-
-# User mode ---------------------------------------------------------
-## w g d f b q l u o y
-#  r s t h k j n e a i
-#  x c m p v  ' , .  
-
-map global user b     ':open-buffer-picker<ret>'             -docstring 'open buffer picker' 
-map global user c     ':comment-line<ret>'                   -docstring 'comment line'
-map global user C     ':comment-block<ret>'                  -docstring 'comment block'
-map global user f     ':open-file-picker<ret>'               -docstring 'open file picker'
-map global user F     ':open-fzf-file-picker<ret>'           -docstring 'open fuzzy finder file picker'
-map global user g     ':w<ret>'                              -docstring 'writes file; :w'
-map global user m     ':enter-paste-mode<ret>'               -docstring 'enter paste (from system clipboard) mode'
-map global user p     "<a-!>%opt{clipboard_paste}<ret>"      -docstring 'paste (after) from clipboard (OSC-52)'  
-map global user P     "!%opt{clipboard_paste}<ret>"          -docstring 'paste (before) from clipboard (OSC-52)' 
-map global user r     "|%opt{clipboard_paste}<ret>"          -docstring 'replace from clipboard (OSC-52)'
-map global user s     ':w<ret>'                              -docstring 'writes file; :w'
-map global user t     ':enter-user-mode kak-tasks<ret>'      -docstring 'task mode'
-# map global user w     ":enter-user-mode wiki<ret>"           -docstring 'wiki mode'
-map global user x     ":db<ret>"                             -docstring "close buffer"
-map global user z     <v>                                    -docstring 'enter view mode'
-map global user Z     <V>                                    -docstring 'enter view mode (locked)'
-map global user <ret> ':expand<ret>'                         -docstring 'expand selection to next outer region'
-map global user /     ':open_rg_picker<ret>'                 -docstring 'search project'
-# d, k, l, m are currently reserved for lsp actions
-
-# Prompt mode ------------------------------------------------------------------
-
-map global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/' -docstring 'print current buffer directory' 
-
-# Add search flags
-map global prompt <a-i> '<home>(?i)<end>'          -docstring 'case-insensitive search'
-map global prompt <a-s> '<home>(?S)<end>'          -docstring "prevents '.' from matching newlines"
-map global prompt <a-q> '<home>\Q<end>'            -docstring "begins a quoted (literal) sequence. End with '\E'"
-
-#Insert mode --------------------------------------------------------
-
-map global insert <c-w> '<esc>bc'                  -docstring 'delete last word: readline-equivalent behavior'
-map global insert <c-y> '<c-r>"'                   -docstring 'paste selection register (")'
-map global insert <a-gt> "<a-;><gt>"               -docstring 'increase indent'
-map global insert <a-lt> "<a-;><lt>"               -docstring 'decrease indent'
-
-
-# tabs for autocomplete
-hook global InsertCompletionShow .* %{
-    map window insert <tab> <c-n>
-    map window insert <s-tab> <c-p>
-    hook -once window InsertCompletionHide .* %{
-        unmap window insert <tab>
-        unmap window insert <s-tab>
-    }
-}
-
-# User modes --------------------------------------------------------
-hook global ModuleLoaded tmux %{ require-module tmux-windowing }
 
 # Autoload Plugins --------------------------------------------------
+# autoload/notes/tasks.kak
 set-option global kak_tasks_root %sh{ echo $NOTEBOOK_DIR }
 
-# Plugins -----------------------------------------------------------
+# autoload/tmux.kak
+hook global ModuleLoaded tmux %{ require-module tmux-windowing }
+
+# Remote Plugins ----------------------------------------------------
 
 # colorscheme: kakoune-mysticaltutor
 try %{ colorscheme mysticaltutor } catch %{ echo -debug "Error configuring kakoune-mysticaltutor!" }
 
-# Auto-pairing
+# auto-pairing: gh/alexherbo2/auto-pairs.kak
 try %{ enable-auto-pairs } catch %{ echo -debug "Error configuring auto-pairs.kak!" }
 
-# File tree buffer
+# File tree: gh/possumvibes/filetree.kak
 try %{
     hook global WinSetOption filetype=kaktree %{
         remove-highlighter window/numbers
@@ -149,10 +38,9 @@ try %{
 } catch %{ echo -debug "Error configuring kaktree!" } 
 
 # Selection expansion and manipulation
+# gh/occivink/kakoune-expand
 
-# kakoune-expand
-
-# kakoune-phantom-selection 
+# gh/occivink/kakoune-phantom-selection 
 try %{
     declare-user-mode phantom-selection
     map global phantom-selection a ':phantom-selection-add-selection<ret>' -docstring 'add selection to phantom list'
@@ -164,37 +52,53 @@ try %{
     define-command enter-phantomsel-mode %{ enter-user-mode phantom-selection }
 } catch %{ echo -debug "Error configuring kakoune-phantom-selection!" }
 
-# kakoune-vertical-selection
+# gh/occivink/kakoune-vertical-selection
 try %{
     map global normal ^     ':vertical-selection-down<ret>'   -docstring 'copy matching selections below' 
     map global normal <a-^> ':vertical-selection-up<ret>'     -docstring 'copy matching selections above' 
 } catch %{ echo -debug "Error configuring kakoune-vertical-selection!" }
 
-# gl/listentolist/kakoune-fandt
+# TODO POSSUM assess this
+# fancy f/t behavior: gl/listentolist/kakoune-fandt
 try %{ require-module fandt } catch %{ echo -debug "Error configuring kakoune-fandt!" } 
 
-# # gh/possumvibes/wiki.kak
+## Options ----------------------------------------------------------
+# use ripgrep instead of grep
+set-option global grepcmd 'rg --column --smart-case --sort path'
+declare-option -hidden str greplike_current_line
 
-# Custom snippets
-# kakoune-snippets
+# Default tab behavior
+set-option global tabstop 2
+set-option global indentwidth 2
 
-define-command ide -params 0..1 %{
-    try %{ rename-session %arg{1} }
+# UI settings
+set-option global scrolloff 5,10
+set-option global ui_options terminal_assistant=cat terminal_status_on_top=true
 
-    rename-client main
-    set-option global jumpclient main
+## autoreload on external change!
+set-option global autoreload yes
 
-    new rename-client tools
-    set-option global toolsclient tools
+# Filetype hooks ----------------------------------------------------
 
-    new rename-client docs
-    set-option global docsclient docs
-} -docstring "generic IDE setup."
+# Apply formatting by default to every buffer, named or not
+hook global WinCreate ^.*$ %{
+  add-highlighter window/show-matching show-matching
+  add-highlighter window/word-wrap wrap -word -indent
 
-# Enable kak-lsp for session
-evaluate-commands %sh{ kak-lsp --kakoune --session "$kak_session" }
+  add-highlighter window/numbers number-lines -hlcursor -relative
 
-# Filetype hooks: enable lsp *last*
+  # relative-insert-numbers: Switch between relative and absolute number-lines
+  # NORMAL mode uses relative numbers
+  # INSERT mode uses absolute numbers
+  hook window -group relative-insert-numbers ModeChange .*:insert %{
+      add-highlighter -override window/numbers number-lines -hlcursor 
+  }
+
+  hook window -group relative-insert-numbers ModeChange .*:insert:.* %{
+      add-highlighter -override window/numbers number-lines -hlcursor -relative
+  }
+}
+
 hook global WinSetOption filetype=rust %{
     set-option buffer tabstop 4
     set-option buffer indentwidth 4
@@ -210,5 +114,121 @@ hook global WinSetOption filetype=markdown %{
     disable-auto-pairs
 }
 
-hook global -always BufOpenFifo '\*grep\*' %{ map global normal <minus> ': grep-next-match<ret>' }
-hook global -always BufOpenFifo '\*make\*' %{ map global normal <minus> ': make-next-error<ret>' }
+# Grep-like buffers
+define-command -hidden goto-greplike-match %{
+  set-option buffer greplike_current_line %val{cursor_line}
+  execute-keys -with-hooks -save-regs 'flc' 'giT:"fyllT:"lyllT:"cy:edit "%reg{f}" %reg{l} %reg{c}<ret>'
+} -docstring "go to grep/make/greplike match in line"
+
+hook global -always BufOpenFifo '\*grep\*' %{
+  map global normal <=> ':grep-next-match<ret>'
+  map global normal <a-=> ':grep-previous-match<ret>'
+  map buffer normal <ret> ':goto-greplike-match<ret>'
+ }
+hook global -always BufOpenFifo '\*make\*' %{
+  map global normal <=> ':make-next-error<ret>'
+  map global normal <a-=> ':make-previous-error<ret>'
+  map buffer normal <ret> ':goto-greplike-match<ret>'
+}
+
+# Mappings ----------------------------------------------------------
+
+# Normal mode 
+map global normal <#>     "<a-;>"                            -docstring 'flip selection direction'
+map global normal <a-#>   "<a-:>"                            -docstring 'ensure forward selection direction'
+map global normal <esc>   ";,"                               -docstring 'clear all selections to current cursor'
+
+map global normal <a-%>   '*%s<ret>'                         -docstring "select all occurrences of selection"
+map global normal "'"     ':enter_mirror_mode<ret>'          -docstring 'enter mirror mode: expand and surround selections'
+map global normal Y       ':enter-phantomsel-mode<ret>'      -docstring 'enter phantom selection mode'
+
+map global normal <a-I>   '\i'                               -docstring 'insert without hooks before selection'
+map global normal <a-A>   '\a'                               -docstring 'insert without hooks after selection'
+# = and a-= are reserved for grep/make next/prev matches
+
+# map m to <a-a/i>, and replace v with m's previous functionality; view mode moves to a-q
+map global normal m       <a-i>                              -docstring 'select inner surrounding objects'
+map global normal M       <a-a>                              -docstring 'select outer surrounding objects'
+map global normal v       m                                  -docstring 'select to next matching character'
+map global normal V       M                                  -docstring 'extend to next matching character'
+map global normal <a-v>   <a-m>                              -docstring 'select to previous matching character'
+map global normal <a-V>   <a-M>                              -docstring 'extend to previous matching character'
+map global normal <a-q>   v                                  -docstring 'enter view mode'
+map global normal <a-Q>   V                                  -docstring 'enter view mode (locked)'
+
+# extend full-line selection up and down: https://discuss.kakoune.com/t/improved-and-consistent-line-selection-with-x-and-a-x/2243
+map global normal X     %{<a-:>F<ret>x}                      -docstring 'extend lines downwards' 
+map global normal <a-X> %{<a-:><a-;><a-H>Kx}                 -docstring 'extend lines upwards'
+
+# Search case-insensitive by default
+map global normal "/" "/(?i)"
+map global normal "?" "?(?i)"
+map global normal "<a-/>" "<a-/>(?i)"
+map global normal "<a-?>" "<a-?>(?i)"
+
+# clipboard.kak: clipboard sync on explicit yank
+hook global NormalKey y clipboard-sync
+
+# Goto mode ---------------------------------------------------------
+map global goto n '<esc>:bn<ret>' -docstring 'go to next buffer'
+map global goto p '<esc>:bp<ret>' -docstring 'go to previous buffer'
+
+# View mode ---------------------------------------------------------
+map global view q v -docstring 'center cursor (vertically)'
+
+# User mode ---------------------------------------------------------
+#    v q       
+# w c g d '  x l u o y
+# r s t h k  j n e a i
+#   b p f      m , .
+#      z
+
+map global user b     ':open-buffer-picker<ret>'               -docstring 'open buffer picker' 
+map global user c     ':comment-line<ret>'                     -docstring 'comment line'
+map global user C     ':comment-block<ret>'                    -docstring 'comment block'
+map global user f     ':open-file-picker<ret>'                 -docstring 'open file picker'
+map global user F     ':open-fzf-file-picker<ret>'             -docstring 'open fuzzy finder file picker'
+map global user g     ':w<ret>'                                -docstring 'writes file; :w'
+map global user m     ':enter-paste-mode<ret>'                 -docstring 'enter paste (from system clipboard) mode'
+map global user p     "<a-!>%opt{clipboard_paste}<ret>"        -docstring 'paste (after) from clipboard (OSC-52)'  
+map global user P     "!%opt{clipboard_paste}<ret>"            -docstring 'paste (before) from clipboard (OSC-52)' 
+map global user r     "|%opt{clipboard_paste}<ret>"            -docstring 'replace from clipboard (OSC-52)'
+map global user s     ':w<ret>'                                -docstring 'writes file; :w'
+map global user t     ':enter-user-mode kak-tasks<ret>'        -docstring 'task mode'
+# map global user w     ":enter-user-mode wiki<ret>"             -docstring 'wiki mode'
+map global user x     ":db<ret>"                               -docstring "close buffer"
+map global user <ret> ':expand<ret>'                           -docstring 'expand selection to next outer region'
+map global user /     ':open_rg_picker<ret>'                   -docstring 'search project'
+map global user =     ':enter_math_mode<ret>'                  -docstring 'enter math mode'
+# d, k, l, m are currently reserved for lsp actions
+
+# Prompt mode ------------------------------------------------------------------
+
+map global prompt <a-/> '%sh{dirname "$kak_bufname"}<a-!>/'    -docstring 'print current buffer directory' 
+
+# Add search flags
+map global prompt <a-i> '<home>(?i)<end>'                      -docstring 'case-insensitive search'
+map global prompt <a-s> '<home>(?S)<end>'                      -docstring "prevents '.' from matching newlines"
+map global prompt <a-q> '<home>\Q<end>'                        -docstring "begins a quoted (literal) sequence. End with '\E'"
+
+#Insert mode --------------------------------------------------------
+
+map global insert <c-w> '<esc>bc'                              -docstring 'delete last word: readline-equivalent behavior'
+map global insert <c-y> '<c-r>"'                               -docstring 'paste selection register (")'
+map global insert <a-gt> "<a-;><gt>"                           -docstring 'increase indent'
+map global insert <a-lt> "<a-;><lt>"                           -docstring 'decrease indent'
+
+
+# tabs for autocomplete
+hook global InsertCompletionShow .* %{
+    map window insert <tab> <c-n>
+    map window insert <s-tab> <c-p>
+    hook -once window InsertCompletionHide .* %{
+        unmap window insert <tab>
+        unmap window insert <s-tab>
+    }
+}
+
+
+
+
