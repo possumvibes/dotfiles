@@ -19,9 +19,9 @@ provide-module markdown-extended %{
   # Regexes, for use elsewhere as needed
   # ------------------------------------ 
   # todo possum move these to a md nav plugin
-  declare-option -hidden str markdown_link_regex '[^\]](\[([^\[\n]+)\])(\[[^\]\n]+\]|\([^\)\n]+\))'
-  declare-option -hidden str markdown_anchor_regex '[^\]](\[([^\[\n]+)\])[^\[\(:]'
-  declare-option -hidden str markdown_reflink_regex '\[[^\n]+\]: [^\n]*\n'
+  # declare-option -hidden str markdown_link_regex '[^\]](\[([^\[\n]+)\])(\[[^\]\n]+\]|\([^\)\n]+\))'
+  # declare-option -hidden str markdown_anchor_regex '[^\]](\[([^\[\n]+)\])[^\[\(:]'
+  # declare-option -hidden str markdown_reflink_regex '\[[^\n]+\]: [^\n]*\n'
 
   # Highlighters
   # ------------
