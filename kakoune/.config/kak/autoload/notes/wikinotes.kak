@@ -69,3 +69,8 @@ define-command wikinotes-process-link %{
   }
 }
 
+
+declare-user-mode wiki
+map global wiki n ':wikinotes-select-next-link<ret>' -docstring 'select next markdown link'
+map global wiki p ':wikinotes-select-prev-link<ret>' -docstring 'select prev markdown link'
+map global wiki g '<a-i>bgf' -docstring 'temporary: go to filepath in selected markdown link'

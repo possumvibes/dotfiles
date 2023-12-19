@@ -44,45 +44,53 @@ declare-option str kak_tasks_sym_idea 'IDEA'
 
 declare-option -hidden str kak_tasks_list_current_line
 
-## Appearance: uses terminal colors
+## Appearance: uses terminal colors by default
 set-face global kak_tasks_todo green
-set-face global kak_tasks_wip magenta
-set-face global kak_tasks_done bright-black
-set-face global kak_tasks_done_text bright-black
-set-face global kak_tasks_wontdo bright-black
-set-face global kak_tasks_wontdo_text bright-black+s
+set-face global kak_tasks_wip bright-magenta
+set-face global kak_tasks_done +i@comment
+set-face global kak_tasks_done_text +i@comment
+set-face global kak_tasks_wontdo +i@comment
+set-face global kak_tasks_wontdo_text +si@comment
 set-face global kak_tasks_idea blue
-set-face global kak_tasks_task_list_delimiter bright-black
+set-face global kak_tasks_task_list_delimiter +i@comment
 set-face global kak_tasks_task_list_path blue
 set-face global kak_tasks_task_list_line white
 set-face global kak_tasks_task_list_col white
-set-face global kak_tasks_subtask_uncheck green
-set-face global kak_tasks_subtask_uncheck magenta
-set-face global kak_tasks_subtask_check bright-black
-set-face global kak_tasks_subtask_text_check bright-black
-set-face global kak_notes_tag green
+set-face global kak_tasks_tag green
 
+# Highlighters
 add-highlighter shared/kak-tasks group
+
+# Tasks
 add-highlighter shared/kak-tasks/todo regex "-\s*(%opt{kak_tasks_sym_todo})\s*[^\n]*"\
   1:kak_tasks_todo
+
 add-highlighter shared/kak-tasks/wip regex "-\s*(%opt{kak_tasks_sym_wip})\s*[^\n]*"\
   1:kak_tasks_wip
+
 add-highlighter shared/kak-tasks/done regex "-\s*(%opt{kak_tasks_sym_done})\s*([^\n]*)"\
   1:kak_tasks_done 2:kak_tasks_done_text
+
 add-highlighter shared/kak-tasks/wontdo regex "-\s*(%opt{kak_tasks_sym_wontdo})\s*([^\n]*)"\
   1:kak_tasks_wontdo 2:kak_tasks_wontdo_text
+
 add-highlighter shared/kak-tasks/idea regex "-\s*(%opt{kak_tasks_sym_idea})\s*[^\n]*"\
   1:kak_tasks_idea
-add-highlighter shared/kak-tasks/issue regex " (#[0-9]+)"\
-  1:kak_tasks_issue
+
+# Checks
 add-highlighter shared/kak-tasks/subtask-uncheck regex "-\s* (\[ \])[^\n]*"\
-  1:kak_tasks_subtask_uncheck
+  1:kak_tasks_todo
+
 add-highlighter shared/kak-tasks/subtask-partialcheck regex "-\s* (\[-\])[^\n]*"\
-  1:kak_tasks_subtask_partialcheck
+  1:kak_tasks_wip
+
 add-highlighter shared/kak-tasks/subtask-check regex "-\s* (\[x\])\s*([^\n]*)"\
-  1:kak_tasks_subtask_check 2:kak_tasks_subtask_text_check
+  1:kak_tasks_done 2:kak_tasks_done_text
+
+# Tags
 add-highlighter shared/kak-tasks/tag regex " (:[^:]+:)" 0:kak_tasks_tag
 
+# Task List highlighting: same as grep highlighting
 add-highlighter shared/kak-tasks-list group
 add-highlighter shared/kak-tasks-list/path regex "^((?:\w:)?[^:\n]+):(\d+):(\d+)?" 1:cyan 2:green 3:green
 add-highlighter shared/kak-tasks-list/current-line line %{%opt{kak_tasks_list_current_line}} default+b
@@ -126,9 +134,10 @@ map global kak-tasks-list t ":kak-tasks-list-by-regex %opt{kak_tasks_sym_todo}<r
 map global kak-tasks-list w ":kak-tasks-list-by-regex %opt{kak_tasks_sym_wip}<ret>"    -docstring 'list wip tasks'
 
 hook -group kak-tasks global WinCreate \*kak-tasks-list\* %{
-  map buffer normal '<ret>' ':kak-tasks-goto-task<ret>'
   add-highlighter window/ ref kak-tasks
   add-highlighter window/ ref kak-tasks-list
+
+  map buffer normal <ret> ':kak-tasks-goto-task<ret>'
 }
 
 hook -group kak-tasks global WinCreate .*\.md %{
