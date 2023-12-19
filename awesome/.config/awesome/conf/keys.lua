@@ -194,7 +194,10 @@ keys.globalkeys = gears.table.join(
     -- Terminal
     awful.key({ modkey, }, "Return", function () awful.spawn(terminal) end,
         {description = "open a terminal", group = "launcher"}),
-
+    
+    -- Emoji picker
+    awful.key({ modkey, }, ".", function () awful.spawn("bemoji") end,
+        {description = "emoji picker", group = "programs"}),
 
     -- Launch: Control+Alt
     awful.key( {"Control", "Mod1"}, "d", function () awful.spawn("thunar") end,
