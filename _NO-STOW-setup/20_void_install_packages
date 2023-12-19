@@ -45,8 +45,8 @@ GRAPHICAL_PACKAGES=(
     bspwm sxhkd polybar rofi # WM
     dunst xss-lock xsecurelock flameshot # utilities
     picom feh redshift # prettification
-    alacritty keepassxc firefox thunar # apps
-    zathura gnumeric libreoffice thunderbird # file edit/view
+    alacritty keepassxc firefox thunar kdiff3 # apps
+    zathura okular gnumeric libreoffice thunderbird # file edit/view
     flatpak  # for discord etc
 )
 
