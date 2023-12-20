@@ -74,3 +74,5 @@ declare-user-mode wiki
 map global wiki n ':wikinotes-select-next-link<ret>' -docstring 'select next markdown link'
 map global wiki p ':wikinotes-select-prev-link<ret>' -docstring 'select prev markdown link'
 map global wiki g '<a-i>bgf' -docstring 'temporary: go to filepath in selected markdown link'
+map global wiki c 'ggO:title:<ret><esc>|date +%Y-%m-%d<ret>I:created: <esc>o:updated:<esc>ggA ' -docstring 'add title/created/updated card header'
+map global wiki D '|date +%Y-%m-%d<ret>' -docstring 'insert a yyyy-mm-dd date before selection'

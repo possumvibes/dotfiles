@@ -88,7 +88,7 @@ add-highlighter shared/kak-tasks/subtask-check regex "-\s* (\[x\])\s*([^\n]*)"\
   1:kak_tasks_done 2:kak_tasks_done_text
 
 # Tags
-add-highlighter shared/kak-tasks/tag regex " (:[^:]+:)" 0:kak_tasks_tag
+add-highlighter shared/kak-tasks/tag regex " (:[^:\n]+:)" 0:kak_tasks_tag
 
 # Task List highlighting: same as grep highlighting
 add-highlighter shared/kak-tasks-list group
