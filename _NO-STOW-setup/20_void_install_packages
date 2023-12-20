@@ -33,7 +33,7 @@ HEADLESS_PACKAGES=(
     python3 python3-pip # languages
     gcc lib32stdc++-10-dev g++ # c/cpp toolchain for kak and general building
     gdb make cmake ninja-build # more c toolchain for kak
-    fish zsh neovim helix tmux # shell
+    fish zsh tmux # shell
     bat exa fd fzf ripgrep # rust/go fancy terminal tools
     restic syncthing pass # sync and backup
     delta # source control
@@ -42,10 +42,11 @@ HEADLESS_PACKAGES=(
 )
 
 GRAPHICAL_PACKAGES=(
-    bspwm sxhkd polybar rofi # WM
-    dunst xss-lock xsecurelock flameshot # utilities
+    awesome rofi xss-lock xsecurelock # WM
+    dunst flameshot # wm/desktop utilities
     picom feh redshift # prettification
-    alacritty keepassxc firefox thunar kdiff3 # apps
+    alacritty keepassxc firefox # apps
+    kdiff3 thunar xarchiver # utilities
     zathura okular gnumeric libreoffice thunderbird # file edit/view
     flatpak  # for discord etc
 )
