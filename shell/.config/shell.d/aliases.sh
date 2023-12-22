@@ -38,6 +38,7 @@ alias kakrc="cd ~/.config/kak; kak kakrc"
 alias notes="cd $NOTEBOOK_DIR; $EDITOR scratchpad.md"
 alias note="cd $NOTEBOOK_DIR"
 
+alias src="cd $REPOSDIR"
 alias keeb="cd $QMK_USERSPACE/users/possumvibes"
 
 # Reload Xresources
