@@ -7,7 +7,8 @@
 # Trigger with `xset s activate`
 #####################################################
 
-_lock(){
+# My chosen locker configuration/command
+_lockscreen_cmd(){
   ## xsecurelock configuration and execution
   env \
   	XSECURELOCK_COMPOSITE_OBSCURER=0 \
@@ -23,15 +24,15 @@ _lock(){
     xsecurelock
 }
 
-if [ $GDMSESSION == "bspwm"	]; then
+if pgrep -x dunst > /dev/null ; then
   ## pause notifications
   dunstctl_state=$(dunstctl is-paused)
   dunstctl set-paused true
 fi
 
-_lock
+_lockscreen_cmd
 
-if [ $GDMSESSION == "bspwm"	]; then
+if pgrep -x dunst > /dev/null ; then
   ## After unlocking, reset notifs to previous state
   dunstctl set-paused ${dunstctl_state}
 fi
