@@ -351,4 +351,13 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
+-- XDG Desktop Autostart
+-- This checks xrdb for "awesome.started:true" and only executes the desktop entries if not present.
+local xresources_name = "awesome.started"
+local xresources = awful.util.pread("xrdb -query")
+if not xresources:match(xresources_name) then
+    awful.util.spawn_with_shell("xrdb -merge <<< " .. "'" .. xresources_name .. ":true'")
+    -- Execute once for X server
+    os.execute("dex --environment Awesome --autostart --search-paths $XDG_CONFIG_HOME/autostart")
+end
 awful.spawn.with_shell("autostart-xsession")
