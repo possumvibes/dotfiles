@@ -8,5 +8,5 @@ autoload/remote  https://github.com/occivink/kakoune-expand
 autoload/remote  https://github.com/occivink/kakoune-phantom-selection
 autoload/remote  https://github.com/occivink/kakoune-vertical-selection
 autoload/remote  https://gitlab.com/listentolist/kakoune-fandt
-autoload/remote  https://github.com/possumvibes/wiki.kak                 possumdev
+# autoload/remote  https://github.com/possumvibes/wiki.kak                 possumdev
  
