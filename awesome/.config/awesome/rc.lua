@@ -358,6 +358,5 @@ local xresources = awful.util.pread("xrdb -query")
 if not xresources:match(xresources_name) then
     awful.util.spawn_with_shell("xrdb -merge <<< " .. "'" .. xresources_name .. ":true'")
     -- Execute once for X server
-    os.execute("dex --environment Awesome --autostart --search-paths $XDG_CONFIG_HOME/autostart")
+    awful.spawn.with_shell("autostart-xsession")
 end
-awful.spawn.with_shell("autostart-xsession")
