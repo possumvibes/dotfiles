@@ -47,7 +47,7 @@ done
 export DOTS_DIR="$HOME/.dots"
 export NVIMDIR="$XDG_CONFIG_HOME/nvim"
 export KAKDIR="$XDG_CONFIG_HOME/kak"
-export NOTEBOOK_DIR="$HOME/ari-common/ari_yelling"
+export NOTEBOOK_DIR="$HOME/common/ari_yelling"
 
 export QMK_USERSPACE="$REPOSDIR/qmk_userspace"
 export WALLPAPER_DIR="$XDG_DATA_HOME/wallpapers/"
