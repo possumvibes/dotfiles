@@ -210,7 +210,11 @@ keys.globalkeys = gears.table.join(
         {description = "launch keepassxc", group = "programs"}),
 
     awful.key( {"Control", "Mod1"}, "l", function () awful.spawn.with_shell("xset s activate") end,
-        {description = "lock screen", group = "programs"})
+        {description = "lock screen", group = "programs"}),
+
+    awful.key( {"Control", "Mod1"}, "s", function () awful.spawn.with_shell("flameshot gui") end,
+        {description = "take a screenshot", group = "programs"})
+
 
 )
 
