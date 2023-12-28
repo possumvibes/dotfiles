@@ -18,7 +18,10 @@ alias k='kak'
 alias t='trash'
 
 # package updates
-if _checkexec dnf; then
+if _checkexec xbps-install; then
+    alias uu='sudo xbps-install -Su'
+    alias mup='sudo makewhatis /usr/share/man'
+elif _checkexec dnf; then
     alias uu='sudo dnf upgrade --refresh -y'
 elif _checkexec apt; then
     alias uu='sudo apt update && sudo apt upgrade -y'
