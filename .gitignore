@@ -19,3 +19,8 @@ kakoune/.config/kak/testing
 
 # General no-go
 *.work
+
+# runit
+
+# Supervision dir symlinks
+**/runit/*/supervise
