@@ -1,6 +1,7 @@
 #!/usr/bin/sh
 #
 # .profile is sourced at login for bash and (non-zsh) friends.
+# It is also sourced for zsh on account of I'm sourcing it in my .zprofile.
 
 
 # Ensure ssh-agent is started once and consistently
@@ -18,4 +19,6 @@ if [ $? -ge 2 ]; then
 fi
 
 
-
+if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
+  exec startx
+fi

@@ -46,8 +46,14 @@ alias xup='xrdb -load ~/.Xresources && echo "reloaded .Xresources"'
 
 # Utilities
 alias md='mkdir -p'
+
+# Better utility defaults
+alias cp='cp -rvi'
+alias mv='mv -i'
 alias rm='rm -I'
-alias cp='cp -r'
+
+# make 'sudo rm' less dangerous
+alias srm='sudo rm -i'
 
 # navigation and listing
 alias ls='ls -pv --color=auto --group-directories-first'
