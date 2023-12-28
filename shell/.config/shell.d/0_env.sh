@@ -52,6 +52,11 @@ export NOTEBOOK_DIR="$HOME/common/ari_yelling"
 export QMK_USERSPACE="$REPOSDIR/qmk_userspace"
 export WALLPAPER_DIR="$XDG_DATA_HOME/wallpapers/"
 
+# Update PATH
+pathadd $HOME/bin
+pathadd $HOME/.local/bin
+
+
 # XDG COMPLIANCE AAAAAAA
 
 ## Utilities #####################################################################
@@ -59,6 +64,9 @@ export WALLPAPER_DIR="$XDG_DATA_HOME/wallpapers/"
 # gnupg
 export GNUPGHOME=${XDG_CONFIG_HOME}/gnupg
 
+# gtk (colon-separated list)
+export GTK_RC_FILES="$XDG_CONFIG_HOME/gtkrc"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtkrc-2.0"
 # ICEauthority
 export ICEAUTHORITY=${XDG_CACHE_HOME}/ICEauthority
 
@@ -66,6 +74,9 @@ export ICEAUTHORITY=${XDG_CACHE_HOME}/ICEauthority
 export LESSHISTFILE=$XDG_CACHE_HOME/less.history
 export LESSKEY="${XDG_CONFIG_HOME}/less/keys"
 
+# nethack
+export NETHACKOPTIONS=$XDG_CONFIG_HOME/nethack/nethackrc
+# 
 # pass
 export PASSWORD_STORE_DIR=$XDG_DATA_HOME/password-store
 
@@ -76,11 +87,12 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 export VIMDOTDIR="$XDG_CONFIG_HOME/vim"
 
-## Programming ###################################################################
+## Programming Languages ########################################################
 
 # Rust
 export RUSTUP_HOME=$XDG_DATA_HOME/rustup
 export CARGO_HOME=$XDG_DATA_HOME/cargo
+pathadd $CARGO_HOME/bin
 
 # Ruby
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/ruby/bundle"
@@ -89,12 +101,4 @@ export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/ruby/bundle"
 export GEM_HOME="$XDG_DATA_HOME/ruby/gem"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/ruby/gem"
 
-## Games #########################################################################
-
-export NETHACKOPTIONS=$XDG_CONFIG_HOME/nethack/nethackrc
-
-# Update PATH
-pathadd $HOME/bin
-pathadd $HOME/.local/bin
-pathadd $CARGO_HOME/bin
 
