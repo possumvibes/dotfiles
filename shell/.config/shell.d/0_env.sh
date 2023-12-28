@@ -55,14 +55,26 @@ export WALLPAPER_DIR="$XDG_DATA_HOME/wallpapers/"
 # XDG COMPLIANCE AAAAAAA
 
 ## Utilities #####################################################################
-# Less
-export LESSHISTFILE=$XDG_CACHE_HOME/less.history
 
-# Pass
+# gnupg
+export GNUPGHOME=${XDG_CONFIG_HOME}/gnupg
+
+# ICEauthority
+export ICEAUTHORITY=${XDG_CACHE_HOME}/ICEauthority
+
+# less
+export LESSHISTFILE=$XDG_CACHE_HOME/less.history
+export LESSKEY="${XDG_CONFIG_HOME}/less/keys"
+
+# pass
 export PASSWORD_STORE_DIR=$XDG_DATA_HOME/password-store
 
-# Starship Prompt
+# starship prompt
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
+# vim
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+export VIMDOTDIR="$XDG_CONFIG_HOME/vim"
 
 ## Programming ###################################################################
 
