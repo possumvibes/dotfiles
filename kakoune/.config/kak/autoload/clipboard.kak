@@ -11,9 +11,14 @@ define-command -hidden clipboard-sync \
         done
         encoded=$(printf %s "$copy" | base64 | tr -d '\n')
 
-        printf "\e]52;;%s\e\\" "$encoded" >"/proc/$kak_client_pid/fd/0"
+        printf "\033]52;;%s\a" "$encoded" >"/proc/$kak_client_pid/fd/0"
     }
 }
+
+# # from taupiquer/alexherbo2. I prefer bravekarma's approach, but this is an always-works backup!
+# define-command yank_selected_text_to_terminal_clipboard %{
+#   execute-keys 'y:edit -scratch<ret><a-R>a<ret><esc><a-_>H<a-|>if [ -e "/proc/$kak_client_pid/fd/0" ]; then fd=/proc/$kak_client_pid/fd/0; else fd=/dev/tty; fi; { printf ''\033]52;c;''; base64; printf ''\a''; } <gt> "$fd"<ret>:delete-buffer<ret>'
+# }
 
 declare-option str clipboard_paste
 declare-option str primary_paste
