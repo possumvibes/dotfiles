@@ -5,7 +5,7 @@ window:
     y: 5
 
 font:
-  size: 9
+  size: 10
   normal:
     family: 0xProto
     style: Regular
