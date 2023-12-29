@@ -1,55 +1,56 @@
 #!/bin/bash
 
-##################################
-##################################
-####                          ####
-###   XOrg AutoStart Script    ###
-####                          ####
-##################################
-##################################
-
- 
-# Tools of note:
+## XOrg AutoStart Script #####################
 #
-# NAME        DESCRIPTION                                  WM/DE
-# -----------|--------------------------------------------|------|
-# picom       compositor (see ~/.config/picom/picom.conf)  all
-# xss-lock    to enable screensaver                        all
-# xsecurelock the actual screensaver                       all
-# Dunst       notifications (see ~/.config/dunst/dunstrc)  bspwm
-# feh         background and image viewer                  bspwm
-# polybar     bar (see ~/.config/polybar/config.ini)       bspwm
-# SXHKD       hotkey daemon (see ~/.config/sxhkd/sxhkdrc)  bspwm
-# pipewire    audio :)
 
+# Check Xresources for our autostart flag,
+# and only continue if it isn't present.
+xresource_name='session.autostarted'
+xrdb -query | grep "$xresource_name" >/dev/null && exit 0
 
-# If iterating a wm config, don't restart programs
-[ "$SESSION_AUTOSTARTED" == "true" ] && exit 0
-
-# Common programs
-
-_ensure_started(){
-  pgrep -x $@ > /dev/null || $@ &
+_check()
+{
+  command -v "$1" > /dev/null
 }
 
-_bspwm(){
-  export SXHKD_SHELL="sh" # important for speed
-  _ensure_started sxhkd &
-  _ensure_started dunst &
-  ~/.config/polybar/launch.sh
-  feh --bg-scale ~/.local/share/wallpapers/current/Deep_Space_75_Withou_A_Logo.jpg
-}
+## Sound
+_check pipewire && pipewire &
 
-# Common programs needed
-_ensure_started picom &
-_ensure_started redshift &
-_ensure_started pipewire &
+# Screensaver
+xset s 300 5
+_check xss-lock && xss-lock -l -- lockscreen &
 
-# screensaver and locker of choice
-xset s 300 5 &
-pgrep -x xss-lock > /dev/null || xss-lock -l -- lockscreen &
+## Compositor
+_check picom && picom &
 
-if [ "$GDMSESSION" == "bspwm" ]; then
-    _bspwm &
+## Blue light shift
+_check redshift &&  redshift &
+
+# Load Xresources
+xrdb -I "$HOME" -merge "$HOME"/.Xresources
+
+# WM-specific config
+#
+if [ "$DESKTOP_SESSION" == "bspwm" ]; then
+
+  # hotkey daemon
+  _check sxhkd && env SXHKD_SHELL='sh' sxhkd
+
+	# notifications
+  _check dunst && dunst &
+
+  # wallpaper!
+  _check feh && [ -f ~/.fehbg ] && ~/.fehbg &
+
+  if _check polybar
+  then
+    # Make sure there are no running instances
+    pkill -x polybar
+
+    ## Restart the sucker
+    ~/.config/polybar/launch.sh &
+  fi
 fi
-export SESSION_AUTOSTARTED="true"
+
+# Set the flag in xresources to prevent duplicate executions
+xrdb -merge <<< "$xresource_name":true
