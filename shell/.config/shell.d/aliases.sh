@@ -21,6 +21,8 @@ alias t='trash'
 if _checkexec xbps-install; then
     alias uu='sudo xbps-install -Su'
     alias mup='sudo makewhatis /usr/share/man'
+    alias xi='sudo xbps-install'
+    alias xq='sudo xbps-query'
 elif _checkexec dnf; then
     alias uu='sudo dnf upgrade --refresh -y'
 elif _checkexec apt; then
