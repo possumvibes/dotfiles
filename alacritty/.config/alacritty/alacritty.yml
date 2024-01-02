@@ -7,8 +7,7 @@ window:
 font:
   size: 10
   normal:
-    family: 0xProto
-    style: Regular
+    family: Monospace
   
 import:
   - ~/.config/alacritty/themes/tempus-themes/tempus_night.yml
