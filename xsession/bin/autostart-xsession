@@ -18,7 +18,7 @@ _check pipewire && pipewire &
 
 ## Disk auto-mounting
 # -a auto-mount, -n notify, -t tray icon
-_check udiskie && udiskie -ant
+_check udiskie && udiskie -ant &
 
 # Screensaver
 xset s 300 5
