@@ -6,7 +6,7 @@ abbr -a k kak
 abbr -a t trash
 
 # Config files
-abbr -a aa	"cd $XDG_CONFIG_HOME/fish; kak conf.d/abbreviations.fish"
+abbr -a aa	"cd $XDG_CONFIG_HOME/fish; kak conf.d/15_abbreviations.fish"
 abbr -a fishconf "cd $XDG_CONFIG_HOME/fish; kak config.fish"
 abbr -a zconf "cd $ZDOTDIR; kak .zshrc"
 
@@ -20,13 +20,22 @@ abbr -a note  "cd $NOTEBOOK_DIR"
 
 # Utilities
 abbr -a md	'mkdir -p'
-abbr -a rm  'rm -i'
+abbr -a rm  'rm -I'
+abbr -a srm 'sudo rm -i'
 
 abbr -a d cdh
 
 # Config Management
-abbr -a cmc	"cd $STOWDIR" #config-management cd
+abbr -a cmc	"cd $DOTS_DIR" #config-management cd
 
 # Shell With Secrets In (requires pass)
 abbr -a priv 'secretshell'
+
+if command -q xbps-install
+  abbr -a mup 'sudo makewhatis /usr/share/man'
+  abbr -a xi 'sudo xbps-install'
+  abbr -a xq 'sudo xbps-query'
+  abbr -a xqrs 'sudo xbps-query -Rs'
+end
+
 

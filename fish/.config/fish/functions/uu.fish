@@ -4,6 +4,13 @@
 # update.fish - a single function for cross-distro Default Package Updates
 # ##########################################################################
 
+if command -q xbps-install
+  function uu -d 'xbps-install repository sync and package update'
+    sudo xbps-install -Su && sudo makewhatis /usr/share/man
+  end
+  exit
+end
+
 if command -q dnf
     function uu -d 'dnf package update and upgrade'
         sudo dnf upgrade --refresh -y $argv;
