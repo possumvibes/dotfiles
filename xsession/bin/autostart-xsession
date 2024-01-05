@@ -3,11 +3,6 @@
 ## XOrg AutoStart Script #####################
 #
 
-# Check Xresources for our autostart flag,
-# and only continue if it isn't present.
-xresource_name='session.autostarted'
-xrdb -query | grep "$xresource_name" >/dev/null && exit 0
-
 _check()
 {
   command -v "$1" > /dev/null
@@ -56,5 +51,3 @@ if [ "$DESKTOP_SESSION" == "bspwm" ]; then
   fi
 fi
 
-# Set the flag in xresources to prevent duplicate executions
-xrdb -merge <<< "$xresource_name":true

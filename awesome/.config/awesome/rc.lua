@@ -55,8 +55,8 @@ editor_cmd = terminal .. " -e " .. editor
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     layout.centerwork,
-    awful.layout.suit.fair.horizontal,
     awful.layout.suit.fair,
+    awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.nw,
     awful.layout.suit.corner.se,
@@ -351,5 +351,10 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
--- idempotent autostart script for all the programs :D
-awful.spawn.with_shell("autostart-xsession")
+local xresources_name = "awesome.autostarted"
+local xresources = awful.util.pread("xrdb -query")
+if not xresources:match(xresources_name) then
+    awful.util.spawn_with_shell("xrdb -merge <<< " .. "'" .. xresources_name .. ":true'")
+    -- Execute once for X server
+    awful.spawn.with_shell("autostart-xsession")
+end
