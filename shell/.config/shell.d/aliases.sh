@@ -60,11 +60,21 @@ alias rm='rm -I'
 # make 'sudo rm' less dangerous
 alias srm='sudo rm -i'
 
+# Color!
+if [ -x /usr/bin/dircolors ]; then
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto --group-directories-first -pv'
+  alias dir='dir --color=auto'
+  alias vdir='vdir --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
+fi
+
 # navigation and listing
-alias ls='ls -pv --color=auto --group-directories-first'
-alias l='ls -pv1 --color=auto --group-directories-first'
-alias la='ls -pvlah --color=auto --group-directories-first'
-alias ll='ls -pvlh --color=auto --group-directories-first'
+alias l='ls -pv1 --group-directories-first'
+alias la='ls -pvlah --group-directories-first'
+alias ll='ls -pvlh --group-directories-first'
 
 # dots navigation
 alias ..='cd ..'
@@ -77,4 +87,5 @@ alias cmc="cd ${DOTS_DIR:-$HOME/.dotfiles}" # config-management cd
 
 # Shell With Secrets In (requires pass)
 alias priv="secretshell"
+
 
