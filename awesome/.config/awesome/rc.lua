@@ -48,7 +48,7 @@ end
 beautiful.init(gears.filesystem.get_xdg_config_home() .. "awesome/theme/possum/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "alacritty"
 editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 

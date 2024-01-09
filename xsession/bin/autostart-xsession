@@ -8,6 +8,10 @@ _check()
   command -v "$1" > /dev/null
 }
 
+[ -n "$SESSION_AUTOSTARTED" ] && exit 0
+
+$SESSION_AUTOSTARTED=true
+
 ## Sound
 _check pipewire && pipewire &
 
