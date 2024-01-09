@@ -12,13 +12,13 @@ setopt auto_param_slash
 setopt auto_remove_slash
 
 setopt extended_glob        # Use extended globbing syntax.
-setopt complete_aliases
 _comp_options+=(globdots)   # Include hidden files in completions
 setopt no_case_glob
 
 setopt always_to_end        # Move cursor to the end of a completed word.
 setopt complete_in_word     # Complete from both ends of a word.
 
+setopt no_complete_aliases  # Complete_aliases prevents aliases or cd from being completed
 setopt no_menu_complete
 setopt no_flow_control
 setopt no_list_ambiguous
@@ -104,9 +104,14 @@ zstyle ':completion:*:history-words' menu yes
 
 # ----------------------------------------------------------
 
-
 ## Enable Completion #########################################################
+# bash completions also
+autoload bashcompinit
+bashcompinit
+
 # zmodload zsh/complist    # menu-specific bindings, load before compinit
 autoload -Uz compinit
 compinit -i -C -d $ZSH_CACHE_DIR/completions
 
+# Alias completions not otherwise picked up
+compdef "_$EDITOR" e

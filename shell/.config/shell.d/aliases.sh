@@ -14,6 +14,7 @@ _checkexec (){
 alias e="$EDITOR"
 
 alias b='bat'
+alias g='git'
 alias k='kak'
 alias t='trash'
 
