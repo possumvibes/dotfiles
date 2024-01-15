@@ -17,6 +17,7 @@ alias b='bat'
 alias g='git'
 alias k='kak'
 alias t='trash'
+alias tt='tree'
 
 # package updates
 if _checkexec xbps-install; then
