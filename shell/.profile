@@ -7,7 +7,6 @@
 # Ensure ssh-agent is started once and consistently
 # note: .zprofile will need to source this file in sh emulation.
 
-echo $XDG_RUNTIME_DIR
 if [ -z "$SSH_BOOTSTRAPPED" ]; then
   # Explicitly set SSH_AUTH_SOCK to reuse
   export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.$USER.sock
