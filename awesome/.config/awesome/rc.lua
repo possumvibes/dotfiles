@@ -351,10 +351,5 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-local xresources_name = "awesome.autostarted"
-local xresources = awful.util.pread("xrdb -query")
-if not xresources:match(xresources_name) then
-    awful.util.spawn_with_shell("xrdb -merge <<< " .. "'" .. xresources_name .. ":true'")
-    -- Execute once for X server
-    awful.spawn.with_shell("autostart-xsession")
-end
+-- idempotent autostart script
+awful.spawn.with_shell("autostart-xsession")

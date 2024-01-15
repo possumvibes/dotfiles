@@ -3,31 +3,30 @@
 ## XOrg AutoStart Script #####################
 #
 
-_check()
+xresource_flag="xsession.autostarted"
+xrdb -query | grep $xresource_flag &>/dev/null && exit 0
+
+_check_installed()
 {
   command -v "$1" > /dev/null
 }
 
-[ -n "$SESSION_AUTOSTARTED" ] && exit 0
-
-$SESSION_AUTOSTARTED=true
-
 ## Sound
-_check pipewire && pipewire &
+_check_installed pipewire && pipewire &
 
 ## Disk auto-mounting
 # -a auto-mount, -n notify, -t tray icon
-_check udiskie && udiskie -ant &
+_check_installed udiskie && udiskie -ant &
 
 # Screensaver
 xset s 300 5
-_check xss-lock && xss-lock -l -- lockscreen &
+_check_installed xss-lock && xss-lock -l -- lockscreen &
 
 ## Compositor
-_check picom && picom &
+_check_installed picom && picom &
 
 ## Blue light shift
-_check redshift &&  redshift &
+_check_installed redshift &&  redshift &
 
 # Load Xresources
 xrdb -I "$HOME" -merge "$HOME"/.Xresources
@@ -37,15 +36,15 @@ xrdb -I "$HOME" -merge "$HOME"/.Xresources
 if [ "$DESKTOP_SESSION" == "bspwm" ]; then
 
   # hotkey daemon
-  _check sxhkd && env SXHKD_SHELL='sh' sxhkd
+  _check_installed sxhkd && env SXHKD_SHELL='sh' sxhkd
 
 	# notifications
-  _check dunst && dunst &
+  _check_installed dunst && dunst &
 
   # wallpaper!
-  _check feh && [ -f ~/.fehbg ] && ~/.fehbg &
+  _check_installed feh && [ -f ~/.fehbg ] && ~/.fehbg &
 
-  if _check polybar
+  if _check_installed polybar
   then
     # Make sure there are no running instances
     pkill -x polybar
@@ -55,3 +54,4 @@ if [ "$DESKTOP_SESSION" == "bspwm" ]; then
   fi
 fi
 
+xrdb -merge <<< "$xresource_flag:true"

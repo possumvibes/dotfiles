@@ -7,7 +7,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 local keys = {}
 local modkey = "Mod4"
 
-local tagcount = 9
+local tagcount = 5
 keys.tagcount = tagcount
 
 -- Gui:           Focus, Flags, System Launch
@@ -218,10 +218,12 @@ keys.globalkeys = gears.table.join(
 
 )
 
+
+-- the `i+9` is necessary for the bindings to work
 for i = 1, tagcount do
     keys.globalkeys = gears.table.join(keys.globalkeys,
         -- View tag only.
-        awful.key({ modkey }, "#" .. i + tagcount,
+        awful.key({ modkey }, "#" .. i + 9,
                   function ()
                         local screen = awful.screen.focused()
                         local tag = screen.tags[i]
@@ -232,7 +234,7 @@ for i = 1, tagcount do
                   {description = "view tag #"..i, group = "tag"}),
 
         -- Move client to tag.
-        awful.key({ modkey, "Shift" }, "#" .. i + tagcount,
+        awful.key({ modkey, "Shift" }, "#" .. i + 9,
                   function ()
                       if client.focus then
                           local tag = client.focus.screen.tags[i]
@@ -244,7 +246,7 @@ for i = 1, tagcount do
                   {description = "move focused client to tag #"..i, group = "tag"}),
 
         -- -- Toggle tag display (for screen).
-        -- awful.key({ modkey, "Control", "Shift" }, "#" .. i + tagcount,
+        -- awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
         --           function ()
         --               local screen = awful.screen.focused()
         --               local tag = screen.tags[i]
@@ -255,7 +257,7 @@ for i = 1, tagcount do
         --           {description = "toggle tag #" .. i, group = "tag"})
 
         -- Toggle tag on focused client.
-        awful.key({ modkey, "Control" }, "#" .. i + tagcount,
+        awful.key({ modkey, "Control" }, "#" .. i + 9,
                   function ()
                       if client.focus then
                           local tag = client.focus.screen.tags[i]
