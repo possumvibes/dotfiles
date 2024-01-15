@@ -74,7 +74,14 @@ base_secret_indicator="%B%F{1}[SECRET ENV ACTIVE]%f%b "
 secretshell_indicator=""
 [ "$SECRETSHELL_ACTIVE" = "1" ] && secretshell_indicator=$base_secret_indicator
 
+
+## Host/SSH information
+base_userinfo="%F{14}%n%F{12}@%m%f: "
+userinfo=""
+[ ! -z "$SSH_CLIENT" ] && userinfo=$base_userinfo
+
 ## Setting the prompt itself:
+
 baseprompt="%F{12}%~%f"
 secondline="%(?.%F{10}.%F{9})%(!.#.$)%f"
 
@@ -82,5 +89,5 @@ secondline="%(?.%F{10}.%F{9})%(!.#.$)%f"
 # $
 
 export PROMPT='
-$secretshell_indicator$baseprompt $vcs_info_msg_0_
+$secretshell_indicator$userinfo$baseprompt $vcs_info_msg_0_
 $secondline '
