@@ -22,5 +22,5 @@ fi
 
 # move to the notebook dir and open the note
 cd $NOTEBOOK_DIR
-nvim $note_path
+$EDITOR $note_path
 
