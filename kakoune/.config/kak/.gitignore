@@ -1,6 +1,6 @@
 # kak-specific gitignore
-# ignore the default autoload rc
-autoload/standard-library
+# # ignore the default autoload rc
+# autoload/standard-library
 
 # pls stop appearing in my tree results
 autoload/remote
