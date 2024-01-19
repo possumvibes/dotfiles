@@ -1,8 +1,8 @@
 # vi:ft=yaml
 colors:
-  name: 'Tempus Spring'
-  author: 'Protesilaos Stavrou (https://protesilaos.com)'
-  description: 'Dark theme with a palette inspired by early spring colours (WCAG AA compliant)'
+  # name: 'Tempus Spring'
+  # author: 'Protesilaos Stavrou (https://protesilaos.com)'
+  # description: 'Dark theme with a palette inspired by early spring colours (WCAG AA compliant)'
   primary:
     foreground: '#b5b8b7'
     background: '#283a37'

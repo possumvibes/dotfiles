@@ -1,0 +1,36 @@
+# [colors]
+# author = "Protesilaos Stavrou (https://protesilaos.com)"
+# description = "Dark theme with a palette inspired by earthly colours (WCAG AA compliant)"
+# name = "Tempus Autumn"
+
+[colors.bright]
+black = "#36302a"
+blue = "#958fdf"
+cyan = "#2fa6b7"
+green = "#43aa7a"
+magenta = "#ce7dc4"
+red = "#e27e3d"
+white = "#a9a2a6"
+yellow = "#ba9400"
+
+[colors.cursor]
+cursor = "#a9a2a6"
+text = "#302420"
+
+[colors.normal]
+black = "#302420"
+blue = "#799aca"
+cyan = "#52a885"
+green = "#85a400"
+magenta = "#df798e"
+red = "#f46f55"
+white = "#a8948a"
+yellow = "#b09640"
+
+[colors.primary]
+background = "#302420"
+foreground = "#a9a2a6"
+
+[colors.selection]
+background = "#a9a2a6"
+text = "#302420"

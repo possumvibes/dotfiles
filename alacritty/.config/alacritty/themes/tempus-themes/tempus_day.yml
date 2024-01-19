@@ -1,8 +1,8 @@
 # vi:ft=yaml
 colors:
-  name: 'Tempus Day'
-  author: 'Protesilaos Stavrou (https://protesilaos.com)'
-  description: 'Light theme with warm colours (WCAG AA compliant)'
+  # name: 'Tempus Day'
+  # author: 'Protesilaos Stavrou (https://protesilaos.com)'
+  # description: 'Light theme with warm colours (WCAG AA compliant)'
   primary:
     foreground: '#464340'
     background: '#f8f2e5'

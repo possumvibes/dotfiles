@@ -1,8 +1,8 @@
 # vi:ft=yaml
 colors:
-  name: 'Tempus Winter'
-  author: 'Protesilaos Stavrou (https://protesilaos.com)'
-  description: 'Dark theme with a palette inspired by winter nights at the city (WCAG AA compliant)'
+  # name: 'Tempus Winter'
+  # author: 'Protesilaos Stavrou (https://protesilaos.com)'
+  # description: 'Dark theme with a palette inspired by winter nights at the city (WCAG AA compliant)'
   primary:
     foreground: '#8da3b8'
     background: '#202427'

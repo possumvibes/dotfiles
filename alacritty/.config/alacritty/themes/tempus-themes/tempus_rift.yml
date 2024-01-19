@@ -1,8 +1,8 @@
 # vi:ft=yaml
 colors:
-  name: 'Tempus Rift'
-  author: 'Protesilaos Stavrou (https://protesilaos.com)'
-  description: 'Dark theme with a subdued palette on the green side of the spectrum (WCAG AA compliant)'
+  # name: 'Tempus Rift'
+  # author: 'Protesilaos Stavrou (https://protesilaos.com)'
+  # description: 'Dark theme with a subdued palette on the green side of the spectrum (WCAG AA compliant)'
   primary:
     foreground: '#bbbcbc'
     background: '#162c22'

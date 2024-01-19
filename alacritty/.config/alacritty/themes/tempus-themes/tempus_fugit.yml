@@ -1,8 +1,8 @@
 # vi:ft=yaml
 colors:
-  name: 'Tempus Fugit'
-  author: 'Protesilaos Stavrou (https://protesilaos.com)'
-  description: 'Light, pleasant theme optimised for long writing/coding sessions (WCAG AA compliant)'
+  # name: 'Tempus Fugit'
+  # author: 'Protesilaos Stavrou (https://protesilaos.com)'
+  # description: 'Light, pleasant theme optimised for long writing/coding sessions (WCAG AA compliant)'
   primary:
     foreground: '#4d595f'
     background: '#fff5f3'

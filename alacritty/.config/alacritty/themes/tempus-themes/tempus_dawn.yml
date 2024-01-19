@@ -1,8 +1,8 @@
 # vi:ft=yaml
 colors:
-  name: 'Tempus Dawn'
-  author: 'Protesilaos Stavrou (https://protesilaos.com)'
-  description: 'Light theme with a soft, slightly desaturated palette (WCAG AA compliant)'
+  # name: 'Tempus Dawn'
+  # author: 'Protesilaos Stavrou (https://protesilaos.com)'
+  # description: 'Light theme with a soft, slightly desaturated palette (WCAG AA compliant)'
   primary:
     foreground: '#4a4b4e'
     background: '#eff0f2'

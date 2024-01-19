@@ -1,8 +1,8 @@
 # vi:ft=yaml
 colors:
-  name: 'Tempus Totus'
-  author: 'Protesilaos Stavrou (https://protesilaos.com)'
-  description: 'Light theme for prose or for coding in an open space (WCAG AAA compliant)'
+  # name: 'Tempus Totus'
+  # author: 'Protesilaos Stavrou (https://protesilaos.com)'
+  # description: 'Light theme for prose or for coding in an open space (WCAG AAA compliant)'
   primary:
     foreground: '#4a484d'
     background: '#ffffff'

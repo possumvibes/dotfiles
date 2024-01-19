@@ -1,0 +1,14 @@
+import = ["/home/possum/.config/alacritty/themes/tempus-themes/tempus_autumn.toml"]
+
+[font]
+size = 8.5
+
+[font.normal]
+family = "Monospace"
+
+[window]
+opacity = 0.95
+
+[window.padding]
+x = 5
+y = 5

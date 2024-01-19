@@ -1,8 +1,8 @@
 # vi:ft=yaml
 colors:
-  name: 'Tempus Tempest'
-  author: 'Protesilaos Stavrou (https://protesilaos.com)'
-  description: 'A green-scale, subtle theme for late night hackers (WCAG AAA compliant)'
+  # name: 'Tempus Tempest'
+  # author: 'Protesilaos Stavrou (https://protesilaos.com)'
+  # description: 'A green-scale, subtle theme for late night hackers (WCAG AAA compliant)'
   primary:
     foreground: '#b6e0ca'
     background: '#282b2b'

@@ -1,8 +1,8 @@
 # vi:ft=yaml
 colors:
-  name: 'Tempus Night'
-  author: 'Protesilaos Stavrou (https://protesilaos.com)'
-  description: 'High contrast dark theme with bright colours (WCAG AAA compliant)'
+  # name: 'Tempus Night'
+  # author: 'Protesilaos Stavrou (https://protesilaos.com)'
+  # description: 'High contrast dark theme with bright colours (WCAG AAA compliant)'
   primary:
     foreground: '#e0e0e0'
     background: '#1a1a1a'
