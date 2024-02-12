@@ -29,7 +29,7 @@ if ! zgenom saved; then
     zgenom load jeffreytse/zsh-vi-mode
 
     # fzf must load after zsh-vi-mode to correctly override the bindings
-    zgenom load /usr/share/fzf/shell/key-bindings.zsh
+    zgenom load /usr/share/fzf/key-bindings.zsh
 
     zgenom load zsh-users/zsh-completions 
     zgenom load zdharma-continuum/fast-syntax-highlighting
