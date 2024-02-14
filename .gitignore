@@ -22,4 +22,8 @@ kakoune/.config/kak/testing
 # runit
 
 # Supervision dir symlinks
-**/sv/*/supervise
+runit/.config/sv/*/supervise
+runit/.config/sv/*/down
+
+runit/service/*
+!runit/service/README.md
