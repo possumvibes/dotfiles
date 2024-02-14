@@ -22,4 +22,4 @@ kakoune/.config/kak/testing
 # runit
 
 # Supervision dir symlinks
-**/runit/*/supervise
+**/sv/*/supervise
