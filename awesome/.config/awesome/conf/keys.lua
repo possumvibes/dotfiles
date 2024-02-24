@@ -272,7 +272,7 @@ end
 
 keys.clientkeys = gears.table.join(
     -- Focus Except It's Actually Client Management: Gui
-    awful.key({ modkey }, "w",      function (c) c:kill() end,
+    awful.key({ modkey }, "q",      function (c) c:kill() end,
         {description = "close", group = "client"}
     ),
 
