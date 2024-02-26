@@ -2,31 +2,39 @@ status is-interactive || exit
 
 # workflow apps
 abbr -a e $EDITOR
+
+abbr -a b bat
+abbr -a g git
 abbr -a k kak
 abbr -a t trash
+abbr -a tt tree
 
 # Config files
-abbr -a aa	"cd $XDG_CONFIG_HOME/fish; kak conf.d/15_abbreviations.fish"
-abbr -a fishconf "cd $XDG_CONFIG_HOME/fish; kak config.fish"
+abbr -a aa	"cd $XDG_CONFIG_HOME/fish; $EDITOR conf.d/15_abbreviations.fish"
+abbr -a fishconf "cd $XDG_CONFIG_HOME/fish; $EDITOR config.fish"
 abbr -a zconf "cd $ZDOTDIR; kak .zshrc"
 
 # Editor config files
-abbr -a vimrc "cd $XDG_CONFIG_HOME/nvim; nvim init.lua"
-abbr -a kakrc "cd $XDG_CONFIG_HOME/kak; kak kakrc"
+alias vimrc "cd $XDG_CONFIG_HOME/vim; vim vimrc"
+alias kakrc "cd $XDG_CONFIG_HOME/kak; kak kakrc"
 
 # Notes
-abbr -a notes "cd $NOTEBOOK_DIR; $EDITOR scratchpad.md"
-abbr -a note  "cd $NOTEBOOK_DIR"
+alias notes "cd $NOTEBOOK_DIR; $EDITOR scratchpad.md"
+alias note  "cd $NOTEBOOK_DIR"
+
+abbr src "cd $REPOSDIR"
+abbr -a keeb "cd $QMK_USERSPACE/users/possumvibes"
 
 # Utilities
 abbr -a md	'mkdir -p'
-abbr -a rm  'rm -I'
+
+# Better utility defaults, as aliases
+alias cp 'cp -rvi'
+alias mv 'mv -i'
+alias rm 'rm -I'
+
+# make 'sudo rm' less dangerous
 abbr -a srm 'sudo rm -i'
-
-abbr -a d cdh
-
-# Config Management
-abbr -a cmc	"cd $DOTS_DIR" #config-management cd
 
 # Shell With Secrets In (requires pass)
 abbr -a priv 'secretshell'
