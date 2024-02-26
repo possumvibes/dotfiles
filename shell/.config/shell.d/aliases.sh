@@ -29,7 +29,6 @@ elif _checkexec dnf; then
     alias uu='sudo dnf upgrade --refresh -y'
 elif _checkexec apt; then
     alias uu='sudo apt update && sudo apt upgrade -y'
-    alias UU='sudo apt update && sudo apt upgrade -y && sudo apt-get update && sudo apt-get upgrade -y'
 fi
 
 # Shell config files
