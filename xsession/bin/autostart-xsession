@@ -13,6 +13,7 @@ _check_installed()
 
 ## Sound
 _check_installed pipewire && pipewire &
+_check_installed mpd &&  mpd --no-daemon --stderr &
 
 ## Disk auto-mounting
 # -a auto-mount, -n notify, -t tray icon

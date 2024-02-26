@@ -35,7 +35,6 @@ if command -q xbps-install
   abbr -a mup 'sudo makewhatis /usr/share/man'
   abbr -a xi 'sudo xbps-install'
   abbr -a xq 'sudo xbps-query'
-  abbr -a xqrs 'sudo xbps-query -Rs'
 end
 
 

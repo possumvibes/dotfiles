@@ -19,7 +19,7 @@ if test -d $fisher_path
     end
 end
 
-if command -q bash2env
+if type -q bash2env
     bash2env source /etc/profile
     bash2env source $HOME/.config/shell.d/0_env.sh
 end

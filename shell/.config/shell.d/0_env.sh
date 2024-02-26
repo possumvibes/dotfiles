@@ -74,6 +74,12 @@ export ICEAUTHORITY=${XDG_CACHE_HOME}/ICEauthority
 export LESSHISTFILE=$XDG_CACHE_HOME/less.history
 export LESSKEY="${XDG_CONFIG_HOME}/less/keys"
 
+# music player daemon
+MPD_CONFIG_DIR=$XDG_CONFIG_HOME/mpd
+MPD_CACHE_DIR=$XDG_CACHE_HOME/mpd
+MPD_DATA_DIR=$XDG_DATA_HOME/mpd
+mkdir -p "${MPD_CACHE_DIR}" "${MPD_DATA_DIR}"
+
 # nethack
 export NETHACKOPTIONS=$XDG_CONFIG_HOME/nethack/nethackrc
 # 
