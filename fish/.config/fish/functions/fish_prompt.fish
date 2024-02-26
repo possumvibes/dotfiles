@@ -3,7 +3,7 @@ set fish_prompt_pwd_dir_length 0
 # Git prompt
 set __fish_git_prompt_showuntrackedfiles 'no'
 set __fish_git_prompt_showdirtystate 'yes'
-set __fish_git_prompt_showupstream 'yes'
+set __fish_git_prompt_showupstream 'auto'
 set __fish_git_prompt_showstashstate 'yes'
 
 set __fish_git_prompt_color_merging magenta
@@ -17,6 +17,7 @@ set __fish_git_prompt_color_upstream blue
 set __fish_git_prompt_char_untrackedfiles '?'
 set __fish_git_prompt_char_stateseparator ''
 set __fish_git_prompt_char_dirtystate '!'
+set __fish_git_prompt_char_invalidstate '#'
 set __fish_git_prompt_char_stagedstate '+'
 set __fish_git_prompt_char_stashstate '$'
 set __fish_git_prompt_char_upstream_prefix ''
