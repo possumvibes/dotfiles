@@ -11,6 +11,7 @@ abbr -a tt tree
 
 # Config files
 abbr -a aa	"cd $XDG_CONFIG_HOME/fish; $EDITOR conf.d/15_abbreviations.fish"
+abbr -a AA  "cd $XDG_CONFIG_HOME/shell.d; $EDITOR 0_env.sh"
 abbr -a fishconf "cd $XDG_CONFIG_HOME/fish; $EDITOR config.fish"
 abbr -a zconf "cd $ZDOTDIR; kak .zshrc"
 
@@ -45,4 +46,6 @@ if command -q xbps-install
   abbr -a xq 'sudo xbps-query'
 end
 
-
+# rescue me from myself
+abbr -a ':q!' 'exit'
+abbr -a ':wq' 'exit'
