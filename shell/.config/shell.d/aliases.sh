@@ -89,6 +89,3 @@ alias cmc="cd ${DOTS_DIR:-$HOME/.dotfiles}" # config-management cd
 # Shell With Secrets In (requires pass)
 alias priv="secretshell"
 
-# Rescue me from myself
-alias ':q!' 'exit'
-alias ':wq' 'exit'
