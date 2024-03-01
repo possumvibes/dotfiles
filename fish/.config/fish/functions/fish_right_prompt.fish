@@ -1,6 +1,10 @@
 #!/usr/bin/env fish
 
 function fish_right_prompt
+    if test $fish_key_bindings != "fish_vi_key_bindings"
+        return
+    end
+
     if test -n "$fish_private_mode"
         _print_in_color "private " brblack
     end
