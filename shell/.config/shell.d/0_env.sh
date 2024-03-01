@@ -61,6 +61,10 @@ pathadd $HOME/.local/bin
 
 ## Utilities #####################################################################
 
+# fzf
+export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --info=inline --border'
+
 # gnupg
 export GNUPGHOME=${XDG_CONFIG_HOME}/gnupg
 
