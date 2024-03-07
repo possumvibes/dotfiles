@@ -1,0 +1,5 @@
+#!/bin/bash
+
+## Fuzzy filter files and edit.
+
+fd --type f --follow | fzf --multi --bind 'enter:become(kak {+})'
