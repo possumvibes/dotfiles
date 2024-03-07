@@ -27,6 +27,8 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_BIN_HOME="$HOME/.local/bin"
 
 export MAN_HOME="$XDG_DATA_HOME/man"
+export SVDIR="$HOME/service"
+
 export REPOSDIR="$HOME/repos"
 
 export ZDOTDIR=$XDG_CONFIG_HOME/zsh
