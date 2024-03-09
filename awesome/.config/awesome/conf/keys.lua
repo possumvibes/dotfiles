@@ -24,7 +24,7 @@ keys.globalkeys = gears.table.join(
     awful.key({ modkey, "Control" }, "w", function () mymainmenu:show() end,
         {description = "show main menu", group = "awesome"} ),
 
-    awful.key({ modkey, "Control" }, "r", awesome.restart,
+    awful.key({ modkey, "Mod1", "Control" }, "r", awesome.restart,
         {description = "reload awesome", group = "awesome"} ),
 
     awful.key({ modkey, "Control" }, "q", awesome.quit,
@@ -50,11 +50,11 @@ keys.globalkeys = gears.table.join(
         {description = "focus right", group = "client"} ),
 
     -- by index
-    awful.key({ modkey }, "j",
+    awful.key({ modkey }, "o",
         function () awful.client.focus.byidx( 1) end,
         {description = "focus next by index", group = "client"} ),
 
-    awful.key({ modkey }, "i",
+    awful.key({ modkey }, "l",
         function () awful.client.focus.byidx(-1) end,
         {description = "focus previous by index", group = "client"} ),
 
@@ -105,11 +105,11 @@ keys.globalkeys = gears.table.join(
         function () awful.client.swap.bydirection("right") end,
         {description = "swap with next client right", group = "client"} ),
 
-    awful.key({ modkey, "Shift"   }, "j",
+    awful.key({ modkey, "Shift"   }, "o",
         function () awful.client.swap.byidx(  1)    end,
         {description = "swap with next client by index", group = "client"} ),
 
-    awful.key({ modkey, "Shift"   }, "k",
+    awful.key({ modkey, "Shift"   }, "l",
         function () awful.client.swap.byidx( -1)    end,
         {description = "swap with previous client by index", group = "client"} ),
 
@@ -166,11 +166,6 @@ keys.globalkeys = gears.table.join(
 
     -- System launch: Gui
     -- Prompts and pickers
-    awful.key({ modkey }, "p",
-        function() awful.spawn.with_shell("rofi -show combi -combi-modes 'window,drun,run'") end,
-        {description = "launch rofi application picker", group = "launcher"} ),
-
-    -- temp: G-space as backup picker
     awful.key({ modkey }, "space",
         function() awful.spawn.with_shell("rofi -show combi -combi-modes 'window,drun,run'") end,
         {description = "launch rofi application picker", group = "launcher"} ),
@@ -188,31 +183,30 @@ keys.globalkeys = gears.table.join(
             history_path = awful.util.get_cache_dir() .. "/history_eval"
           }
         end,
-        {description = "lua execute prompt", group = "awesome"} ),
+        {description = "lua execute prompt", group = "launcher"} ),
 
 
     -- Terminal
     awful.key({ modkey, }, "Return", function () awful.spawn(terminal) end,
-        {description = "open a terminal", group = "launcher"}),
+        {description = "open a terminal", group = "programs"}),
     
     -- Emoji picker
     awful.key({ modkey, }, ".", function () awful.spawn.with_shell("bemoji -t") end,
         {description = "emoji picker", group = "programs"}),
 
-    -- Launch: Control+Alt
-    awful.key( {"Control", "Mod1"}, "d", function () awful.spawn("thunar") end,
+    awful.key( {modkey}, "d", function () awful.spawn("thunar") end,
         {description = "launch thunar", group = "programs"}),
 
-    awful.key( {"Control", "Mod1"}, "h", function () awful.spawn("firefox") end,
+    awful.key( {modkey}, "h", function () awful.spawn("firefox") end,
         {description = "launch firefox", group = "programs"}),
 
-    awful.key( {"Control", "Mod1"}, "k", function () awful.spawn("keepassxc") end,
+    awful.key( {modkey}, "k", function () awful.spawn("keepassxc") end,
         {description = "launch keepassxc", group = "programs"}),
 
-    awful.key( {"Control", "Mod1"}, "l", function () awful.spawn.with_shell("xset s activate") end,
+    awful.key( {modkey}, "l", function () awful.spawn.with_shell("xset s activate") end,
         {description = "lock screen", group = "programs"}),
 
-    awful.key( {"Control", "Mod1"}, "s", function () awful.spawn.with_shell("flameshot gui") end,
+    awful.key( {modkey}, "s", function () awful.spawn.with_shell("flameshot gui") end,
         {description = "take a screenshot", group = "programs"})
 
 
