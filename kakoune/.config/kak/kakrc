@@ -12,7 +12,8 @@ hook global ModuleLoaded tmux %{ require-module tmux-windowing }
 # Remote Plugins ----------------------------------------------------
 
 # colorscheme: kakoune-mysticaltutor
-try %{ colorscheme mysticaltutor } catch %{ echo -debug "Error configuring kakoune-mysticaltutor!" }
+# try %{ colorscheme mysticaltutor } catch %{ echo -debug "Error configuring kakoune-mysticaltutor!" }
+try %{ colorscheme ef-rosa } catch %{ echo -debug "Error configuring kakoune-themes!" }
 
 # auto-pairing: gh/alexherbo2/auto-pairs.kak
 try %{ enable-auto-pairs } catch %{ echo -debug "Error configuring auto-pairs.kak!" }
