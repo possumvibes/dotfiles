@@ -75,7 +75,7 @@ theme.layout_fullscreen                         = theme.confdir .. "/icons/fulls
 theme.layout_magnifier                          = theme.confdir .. "/icons/magnifier.png"
 theme.layout_floating                           = theme.confdir .. "/icons/floating.png"
 theme.layout_centerwork                         = lainiconsdir .. "/layout/zenburn/centerwork.png"
-theme.layout_termfair                         = lainiconsdir .. "/layout/zenburn/termfair.png"
+theme.layout_termfair                           = lainiconsdir .. "/layout/zenburn/termfair.png"
 theme.layout_centerfair                         = lainiconsdir .. "/layout/zenburn/centerfair.png"
 theme.titlebar_close_button_normal              = theme.confdir .. "/icons/titlebar/close_normal.png"
 theme.titlebar_close_button_focus               = theme.confdir .. "/icons/titlebar/close_focus.png"
@@ -115,55 +115,6 @@ theme.cal = lain.widget.cal({
         bg   = theme.bg_normal
     }
 })
-
--- Weather
---[[ to be set before use
-local weathericon = wibox.widget.imagebox(theme.widget_weather)
-theme.weather = lain.widget.weather({
-    city_id = 2643743, -- placeholder (London)
-    notification_preset = { font = "Cozette 10", fg = theme.fg_normal },
-    weather_na_markup = markup.fontfg(theme.font, "#eca4c4", "N/A "),
-    settings = function()
-        descr = weather_now["weather"][1]["description"]:lower()
-        units = math.floor(weather_now["main"]["temp"])
-        widget:set_markup(markup.fontfg(theme.font, "#eca4c4", descr .. " @ " .. units .. "°C "))
-    end
-})
---]]
-
--- / fs
---[[ commented because it needs Gio/Glib >= 2.54
-local fsicon = wibox.widget.imagebox(theme.widget_fs)
-theme.fs = lain.widget.fs({
-    notification_preset = { font = "Cozette 10", fg = theme.fg_normal },
-    settings  = function()
-        widget:set_markup(markup.fontfg(theme.font, "#80d9d8", string.format("%.1f", fs_now["/"].percentage) .. "% "))
-    end
-})
---]]
-
--- Mail IMAP check
---[[ to be set before use
-local mailicon = wibox.widget.imagebox()
-theme.mail = lain.widget.imap({
-    timeout  = 180,
-    server   = "server",
-    mail     = "mail",
-    password = "keyring get mail",
-    settings = function()
-        if mailcount > 0 then
-            mailicon:set_image(theme.widget_mail)
-            widget:set_markup(markup.fontfg(theme.font, "#cccccc", mailcount .. " "))
-        else
-            widget:set_text("")
-            --mailicon:set_image() -- not working in 4.0
-            mailicon._private.image = nil
-            mailicon:emit_signal("widget::redraw_needed")
-            mailicon:emit_signal("widget::layout_changed")
-        end
-    end
-})
---]]
 
 -- CPU
 local cpuicon = wibox.widget.imagebox(theme.widget_cpu)
@@ -221,7 +172,7 @@ local netupinfo = lain.widget.net({
         end
         --]]
 
-        widget:set_markup(markup.fontfg(theme.font, "#e54c62", net_now.sent .. " "))
+        widget:set_markup(markup.fontfg(theme.font, "#d36982", net_now.sent .. " "))
         netdowninfo:set_markup(markup.fontfg(theme.font, "#87af5f", net_now.received .. " "))
     end
 })
@@ -338,19 +289,6 @@ function theme.at_screen_connect(s)
         },
     }
 
-    -- Create the bottom wibox
-    -- s.mybottomwibox = awful.wibar({ position = "bottom", screen = s, border_width = 0, height = dpi(20), bg = theme.bg_normal, fg = theme.fg_normal })
-
-    -- Add widgets to the bottom wibox
-    -- s.mybottomwibox:setup {
-    --     layout = wibox.layout.align.horizontal,
-    --     { -- Left widgets
-    --         layout = wibox.layout.fixed.horizontal,
-    --     },
-    --     { -- Right widgets
-    --         layout = wibox.layout.fixed.horizontal,
-    --     },
-    -- }
 end
 
 return theme

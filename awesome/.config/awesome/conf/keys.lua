@@ -3,6 +3,7 @@
 local gears = require("gears")
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
+local lain = require("lain")
 
 local keys = {}
 local modkey = "Mod4"
@@ -71,7 +72,7 @@ keys.globalkeys = gears.table.join(
         end,
         {description = "go back", group = "client"}),
 
-    -- Focus Tags: Gui: Gui
+    -- Focus Tags: Gui
     awful.key({ modkey }, "Left", awful.tag.viewprev,
         {description = "view previous", group = "tag"} ),
 
@@ -106,7 +107,7 @@ keys.globalkeys = gears.table.join(
         {description = "swap with next client right", group = "client"} ),
 
     awful.key({ modkey, "Shift"   }, "o",
-        function () awful.client.swap.byidx(  1)    end,
+        function () awful.client.swap.byidx(  2)    end,
         {description = "swap with next client by index", group = "client"} ),
 
     awful.key({ modkey, "Shift"   }, "l",
@@ -148,6 +149,12 @@ keys.globalkeys = gears.table.join(
     awful.key({ modkey, "Mod1", "Shift" }, "space",
         function () awful.layout.inc(-1) end,
         {description = "select previous layout", group = "layout"} ),
+
+    -- On-the-fly Gaps change
+    awful.key({ modkey, "Mod1" }, "g", function () lain.util.useless_gaps_resize(1) end,
+              {description = "increment useless gaps", group = "tag"}),
+    awful.key({ modkey, "Mod1", "Shift"}, "g", function () lain.util.useless_gaps_resize(-1) end,
+              {description = "decrement useless gaps", group = "tag"}),
 
 
 
@@ -207,9 +214,69 @@ keys.globalkeys = gears.table.join(
         {description = "lock screen", group = "programs"}),
 
     awful.key( {modkey}, "s", function () awful.spawn.with_shell("flameshot gui") end,
-        {description = "take a screenshot", group = "programs"})
+        {description = "take a screenshot", group = "programs"}),
 
+    -- Widgets: Gui+Control
+    -- Alsa Volume
+    
+    awful.key({}, "XF86AudioRaiseVolume",
+	function ()
+		os.execute(string.format("amixer set %s 1%%+", volume.channel))
+		volume.update()
+	end),
+    awful.key({}, "XF86AudioLowerVolume",
+    	function ()
+    		os.execute(string.format("amixer set %s 1%%-", volume.channel))
+    		volume.update()
+    	end),
+    awful.key({}, "XF86AudioMute",
+    	function ()
+    		os.execute(string.format("amixer set %s toggle", volume.togglechannel or volume.channel))
+    		volume.update()
+    	end),
 
+    -- MPD control
+    awful.key({ modkey, "Control" }, "Up",
+        function ()
+            os.execute("mpc toggle")
+            beautiful.mpd.update()
+        end,
+        {description = "mpc toggle", group = "widgets"}),
+
+    awful.key({ modkey, "Control" }, "Down",
+        function ()
+            os.execute("mpc stop")
+            beautiful.mpd.update()
+        end,
+        {description = "mpc stop", group = "widgets"}),
+
+    awful.key({ modkey, "Control" }, "Left",
+        function ()
+            os.execute("mpc prev")
+            beautiful.mpd.update()
+        end,
+        {description = "mpc prev", group = "widgets"}),
+
+    awful.key({ modkey, "Control" }, "Right",
+        function ()
+            os.execute("mpc next")
+            beautiful.mpd.update()
+        end,
+        {description = "mpc next", group = "widgets"}),
+
+    awful.key({ modkey, "Control" }, "End",
+        function ()
+            local common = { text = "MPD widget ", position = "top_middle", timeout = 2 }
+            if beautiful.mpd.timer.started then
+                beautiful.mpd.timer:stop()
+                common.text = common.text .. lain.util.markup.bold("OFF")
+            else
+                beautiful.mpd.timer:start()
+                common.text = common.text .. lain.util.markup.bold("ON")
+            end
+            naughty.notify(common)
+        end,
+        {description = "mpc on/off", group = "widgets"})
 )
 
 
