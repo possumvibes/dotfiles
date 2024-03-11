@@ -192,7 +192,6 @@ keys.globalkeys = gears.table.join(
         end,
         {description = "lua execute prompt", group = "launcher"} ),
 
-
     -- Terminal
     awful.key({ modkey, }, "Return", function () awful.spawn(terminal) end,
         {description = "open a terminal", group = "programs"}),
