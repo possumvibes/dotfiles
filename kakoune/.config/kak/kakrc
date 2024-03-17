@@ -61,7 +61,22 @@ try %{
 
 # TODO POSSUM assess this
 # fancy f/t behavior: gl/listentolist/kakoune-fandt
-try %{ require-module fandt } catch %{ echo -debug "Error configuring kakoune-fandt!" } 
+try %{ require-module fandt } catch %{ echo -debug "Error configuring kakoune-fandt!" }
+
+# try %{
+#   require-module quickscope
+#   set-option global quickscope_user_mode '.*'     # use '.^' to disable auto-user-mode
+#   map global normal <f>   ':quickscope-f<ret>'   -docstring 'f, but with quickscope'
+#   map global normal <F>   ':quickscope-F<ret>'   -docstring 'F, but with quickscope'
+#   map global normal <a-f> ':quickscope-a-f<ret>' -docstring 'a-f, but with quickscope'
+#   map global normal <a-F> ':quickscope-a-F<ret>' -docstring 'a-F, but with quickscope'
+#   map global normal <t>   ':quickscope-t<ret>'   -docstring 't, but with quickscope'
+#   map global normal <T>   ':quickscope-T<ret>'   -docstring 'T, but with quickscope'
+#   map global normal <a-t> ':quickscope-a-t<ret>' -docstring 'a-t, but with quickscope'
+#   map global normal <a-T> ':quickscope-a-T<ret>' -docstring 'a-T, but with quickscope'
+#   ## TODO fork; add "quickscope active" option, show quickscope in modeline instead of menu
+#   # also the repeat doesn't work--maybe fancify fandt instead?
+# } catch %{ echo -debug "Error configuring quickscope.kak!"}
 
 ## Options ----------------------------------------------------------
 # use ripgrep instead of grep
@@ -137,7 +152,7 @@ hook global -always BufOpenFifo '\*make\*' %{
 # Normal mode 
 map global normal <#>     "<a-;>"                            -docstring 'flip selection direction'
 map global normal <a-#>   "<a-:>"                            -docstring 'ensure forward selection direction'
-map global normal <esc>   ";,"                               -docstring 'clear all selections to current cursor'
+map global normal <a-esc>  ";,"                               -docstring 'clear all selections to current cursor'
 
 map global normal <a-%>   '*%s<ret>'                         -docstring "select all occurrences of selection"
 map global normal "'"     ':enter_mirror_mode<ret>'          -docstring 'enter mirror mode: expand and surround selections'
@@ -183,6 +198,7 @@ map global view q v -docstring 'center cursor (vertically)'
 # r s t h k  j n e a i
 #   b p f      m , .
 #      z
+map global user <space>  ";,"                                  -docstring 'clear all selections to current cursor'
 
 map global user b     ':open-buffer-picker<ret>'               -docstring 'open buffer picker' 
 map global user c     ':comment-line<ret>'                     -docstring 'comment line'

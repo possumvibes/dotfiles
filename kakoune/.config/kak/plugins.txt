@@ -4,9 +4,7 @@ colors/remote    https://github.com/caksoylar/kakoune-mysticaltutor
 autoload/remote  https://github.com/alexherbo2/auto-pairs.kak
 autoload/remote  https://github.com/possumvibes/kaktree
 autoload/remote  https://github.com/occivink/kakoune-expand
-# autoload/remote  https://github.com/occivink/kakoune-snippets
 autoload/remote  https://github.com/occivink/kakoune-phantom-selection
 autoload/remote  https://github.com/occivink/kakoune-vertical-selection
 autoload/remote  https://gitlab.com/listentolist/kakoune-fandt
-# autoload/remote  https://github.com/possumvibes/wiki.kak                 possumdev
- 
+autoload/remote  https://git.sr.ht/~voroskoi/quickscope.kak
