@@ -8,3 +8,6 @@ autoload/remote  https://github.com/occivink/kakoune-phantom-selection
 autoload/remote  https://github.com/occivink/kakoune-vertical-selection
 autoload/remote  https://gitlab.com/listentolist/kakoune-fandt
 autoload/remote  https://git.sr.ht/~voroskoi/quickscope.kak
+autoload/remote  https://github.com/jtrv/grep-write.kak 
+autoload/remote  https://github.com/jtrv/grep-expand.kak
+autoload/remote  https://github.com/andreyorst/smarttab.kak

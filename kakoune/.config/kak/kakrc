@@ -78,6 +78,15 @@ try %{ require-module fandt } catch %{ echo -debug "Error configuring kakoune-fa
 #   # also the repeat doesn't work--maybe fancify fandt instead?
 # } catch %{ echo -debug "Error configuring quickscope.kak!"}
 
+# smarttab.kak
+try %{
+    require-module smarttab
+    set-option global softtabstop 4
+
+    hook global WinSetOption filetype=(csharp|c|cpp|python|rust|markdown|kak|lisp|scheme|sh|fish|perl|yaml) expandtab
+    hook global WinSetOption filetype=(makefile) noexpandtab
+} catch %{ echo -debug "Error configuring smarttab.kak!" }
+
 ## Options ----------------------------------------------------------
 # use ripgrep instead of grep
 set-option global grepcmd 'rg --column --smart-case --sort path'
