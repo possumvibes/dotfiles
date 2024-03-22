@@ -166,6 +166,7 @@ map global normal <a-esc>  ";,"                               -docstring 'clear 
 map global normal <a-%>   '*%s<ret>'                         -docstring "select all occurrences of selection"
 map global normal "'"     ':enter_mirror_mode<ret>'          -docstring 'enter mirror mode: expand and surround selections'
 map global normal Y       ':enter-phantomsel-mode<ret>'      -docstring 'enter phantom selection mode'
+map global normal <a-Y>   ':phantom-selection-add-selection<ret>' -docstring 'add selection to phantom list'
 
 map global normal <a-I>   '\i'                               -docstring 'insert without hooks before selection'
 map global normal <a-A>   '\a'                               -docstring 'insert without hooks after selection'
