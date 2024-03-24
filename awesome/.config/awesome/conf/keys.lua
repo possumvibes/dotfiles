@@ -217,46 +217,46 @@ keys.globalkeys = gears.table.join(
 
     -- Widgets: Gui+Control
     -- Alsa Volume
-    
+    -- TODO fix these bindings on account of they do not work
     awful.key({}, "XF86AudioRaiseVolume",
 	function ()
-		os.execute(string.format("amixer set %s 1%%+", volume.channel))
-		volume.update()
+		os.execute(string.format("amixer set %s 1%%+", beautiful.volume.channel))
+		beautiful.volume.update()
 	end),
     awful.key({}, "XF86AudioLowerVolume",
     	function ()
-    		os.execute(string.format("amixer set %s 1%%-", volume.channel))
-    		volume.update()
+    		os.execute(string.format("amixer set %s 1%%-", beautiful.volume.channel))
+    		beautiful.volume.update()
     	end),
     awful.key({}, "XF86AudioMute",
     	function ()
-    		os.execute(string.format("amixer set %s toggle", volume.togglechannel or volume.channel))
-    		volume.update()
+    		os.execute(string.format("amixer set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
+    		beautiful.volume.update()
     	end),
 
     -- MPD control
-    awful.key({ modkey, "Control" }, "Up",
+    awful.key({}, "XF86AudioPlay",
         function ()
             os.execute("mpc toggle")
             beautiful.mpd.update()
         end,
         {description = "mpc toggle", group = "widgets"}),
 
-    awful.key({ modkey, "Control" }, "Down",
+    awful.key({}, "XF86AudioStop",
         function ()
             os.execute("mpc stop")
             beautiful.mpd.update()
         end,
         {description = "mpc stop", group = "widgets"}),
 
-    awful.key({ modkey, "Control" }, "Left",
+    awful.key({}, "XF86AudioPrev ",
         function ()
             os.execute("mpc prev")
             beautiful.mpd.update()
         end,
         {description = "mpc prev", group = "widgets"}),
 
-    awful.key({ modkey, "Control" }, "Right",
+    awful.key({}, "XF86AudioNext",
         function ()
             os.execute("mpc next")
             beautiful.mpd.update()
