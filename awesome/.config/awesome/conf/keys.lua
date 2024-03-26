@@ -216,51 +216,55 @@ keys.globalkeys = gears.table.join(
     awful.key( {modkey}, "s", function () awful.spawn.with_shell("flameshot gui") end,
         {description = "take a screenshot", group = "programs"}),
 
-    -- Widgets: Gui+Control
-    -- Alsa Volume
-    -- TODO fix these bindings on account of they do not work
+    -- Multimedia Keys
 
- -- ALSA volume control
+    -- Screen Brightness (requires xbacklight)
+    -- awful.key({ }, "XF86MonBrightnessUp", function () awful.spawn.with_shell("xbacklight -inc 10") end,
+    --     {description = "+10%", group = "hotkeys"}),
+    -- awful.key({ }, "XF86MonBrightnessDown", function () awful.spawn.with_shell("xbacklight -dec 10") end,
+    --     {description = "-10%", group = "hotkeys"}),
+
+ -- ALSA volume control (requires amixer)
     awful.key({}, "XF86AudioRaiseVolume", function ()
-            os.execute("amixer -q set Master 5%%+" )
+            awful.spawn.with_shell("amixer -q set Master 5%+" )
             beautiful.volume.update()
         end, {description="sounds volume up", group="widgets"}),
 
     awful.key({}, "XF86AudioLowerVolume", function ()
-            os.execute("amixer -q set Master 5%%-" )
+            awful.spawn.with_shell("amixer -q set Master 5%-" )
             beautiful.volume.update()
         end, {description="sounds volume down", group="widgets"}),
 
     awful.key({}, "XF86AudioMute",
         function ()
-            os.execute("amixer -q set Master toggle" )
+            awful.spawn.with_shell("amixer -q set Master toggle" )
             beautiful.volume.update()
         end, {description="sounds volume toggle mute", group="widgets"}),
 
-    -- MPD control
+    -- Music control (requires playerctl and appropriate mpris client)
     awful.key({}, "XF86AudioPlay",
         function ()
-            os.execute("playerctl play-pause")
+            awful.spawn.with_shell("playerctl play-pause")
             beautiful.mpd.update()
-        end, {description = "pause/play mpdris2", group = "widgets"}),
+        end, {description = "play/pause media", group = "widgets"}),
 
     awful.key({}, "XF86AudioStop",
         function ()
-            os.execute("playerctl stop")
+            awful.spawn.with_shell("playerctl stop")
             beautiful.mpd.update()
-        end, {description = "playerctl stop", group = "widgets"}),
+        end, {description = "stop media", group = "widgets"}),
 
-    awful.key({}, "XF86AudioPrev ",
+    awful.key({}, "XF86AudioPrev",
         function ()
-            os.execute("playerctl previous")
+            awful.spawn.with_shell("playerctl previous")
             beautiful.mpd.update()
-        end, {description = "playerctl previous", group = "widgets"}),
+        end, {description = "previous track", group = "widgets"}),
 
     awful.key({}, "XF86AudioNext",
         function ()
-            os.execute("playerctl next")
+            awful.spawn.with_shell("playerctl next")
             beautiful.mpd.update()
-        end, {description = "playerctl next", group = "widgets"}),
+        end, {description = "next track", group = "widgets"}),
 
     awful.key({ modkey, "Control" }, "End",
         function ()
