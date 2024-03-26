@@ -31,15 +31,14 @@ _print_usage() {
 # define package collections
 HEADLESS_PACKAGES=(
     python3 python3-pip # languages
-    gcc lib32stdc++-10-dev g++ # c/cpp toolchain for kak and general building
-    gdb make cmake ninja-build # more c toolchain for kak
     fish-shell zsh tmux # shell
-    bat exa fd fzf ripgrep # rust/go fancy terminal tools
+    bat eza fd fzf ripgrep # rust/go fancy terminal tools
     vim xclip # you'd think these would always be there but SOMETIMES THEY'RE NOT
     restic syncthing pass # sync and backup
     delta # source control
     curl wget rsync unzip zip # utilities
-    htop tree bc trash-cli # more utilities
+    btop tree bc trash-cli # more utilities
+    mpd mpDris2 playerctl ncmpdcpp # music
 )
 
 GRAPHICAL_PACKAGES=(
