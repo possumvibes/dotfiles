@@ -14,6 +14,7 @@ _check_installed()
 ## Sound
 _check_installed pipewire && pipewire &
 _check_installed mpd &&  mpd --no-daemon --stderr &
+_check_installed mpDris2 && mpDris2 --music-dir /home/possum/music/ &
 
 ## Disk auto-mounting
 # -a auto-mount, -n notify, -t tray icon
