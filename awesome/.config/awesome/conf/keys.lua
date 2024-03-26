@@ -7,6 +7,7 @@ local lain = require("lain")
 
 local keys = {}
 local modkey = "Mod4"
+local altkey = "Mod1"
 
 local tagcount = 5
 keys.tagcount = tagcount
@@ -25,7 +26,7 @@ keys.globalkeys = gears.table.join(
     awful.key({ modkey, "Control" }, "w", function () mymainmenu:show() end,
         {description = "show main menu", group = "awesome"} ),
 
-    awful.key({ modkey, "Mod1", "Control" }, "r", awesome.restart,
+    awful.key({ modkey, altkey, "Control" }, "r", awesome.restart,
         {description = "reload awesome", group = "awesome"} ),
 
     awful.key({ modkey, "Control" }, "q", awesome.quit,
@@ -117,43 +118,43 @@ keys.globalkeys = gears.table.join(
 
 
     -- Layout/display: Gui+Alt for next/increase; Gui+Alt+Shift for prev/decrease
-    awful.key({ modkey, "Mod1" }, "f", function () awful.tag.incmwfact( 0.05) end,
+    awful.key({ modkey, altkey }, "f", function () awful.tag.incmwfact( 0.05) end,
         {description = "increase main client width factor", group = "layout"} ),
 
-    awful.key({ modkey, "Mod1", "Shift"}, "f", function () awful.tag.incmwfact(-0.05) end,
+    awful.key({ modkey, altkey, "Shift"}, "f", function () awful.tag.incmwfact(-0.05) end,
         {description = "decrease main client width factor", group = "layout"} ),
 
 
-    awful.key({ modkey, "Mod1" }, "c",
+    awful.key({ modkey, altkey }, "c",
         function () awful.tag.incnmaster( 1, nil, true) end,
         {description = "increase the number of main clients", group = "layout"} ),
 
-    awful.key({ modkey, "Mod1", "Shift" }, "c",
+    awful.key({ modkey, altkey, "Shift" }, "c",
         function () awful.tag.incnmaster(-1, nil, true) end,
         {description = "decrease the number of main clients", group = "layout"} ),
 
 
-    awful.key({ modkey, "Mod1" }, "l",
+    awful.key({ modkey, altkey }, "l",
         function () awful.tag.incncol( 1, nil, true) end,
         {description = "increase the number of columns", group = "layout"} ),
 
-    awful.key({ modkey, "Mod1", "Shift" }, "l",
+    awful.key({ modkey, altkey, "Shift" }, "l",
         function () awful.tag.incncol(-1, nil, true) end,
         {description = "decrease the number of columns", group = "layout"} ),
 
 
-    awful.key({ modkey, "Mod1", }, "space",
+    awful.key({ modkey, altkey, }, "space",
         function () awful.layout.inc( 1) end,
         {description = "select next layout", group = "layout"} ),
 
-    awful.key({ modkey, "Mod1", "Shift" }, "space",
+    awful.key({ modkey, altkey, "Shift" }, "space",
         function () awful.layout.inc(-1) end,
         {description = "select previous layout", group = "layout"} ),
 
     -- On-the-fly Gaps change
-    awful.key({ modkey, "Mod1" }, "g", function () lain.util.useless_gaps_resize(1) end,
+    awful.key({ modkey, altkey }, "g", function () lain.util.useless_gaps_resize(1) end,
               {description = "increment useless gaps", group = "tag"}),
-    awful.key({ modkey, "Mod1", "Shift"}, "g", function () lain.util.useless_gaps_resize(-1) end,
+    awful.key({ modkey, altkey, "Shift"}, "g", function () lain.util.useless_gaps_resize(-1) end,
               {description = "decrement useless gaps", group = "tag"}),
 
 
@@ -218,50 +219,48 @@ keys.globalkeys = gears.table.join(
     -- Widgets: Gui+Control
     -- Alsa Volume
     -- TODO fix these bindings on account of they do not work
-    awful.key({}, "XF86AudioRaiseVolume",
-	function ()
-		os.execute(string.format("amixer set %s 1%%+", beautiful.volume.channel))
-		beautiful.volume.update()
-	end),
-    awful.key({}, "XF86AudioLowerVolume",
-    	function ()
-    		os.execute(string.format("amixer set %s 1%%-", beautiful.volume.channel))
-    		beautiful.volume.update()
-    	end),
+
+ -- ALSA volume control
+    awful.key({}, "XF86AudioRaiseVolume", function ()
+            os.execute("amixer -q set Master 5%%+" )
+            beautiful.volume.update()
+        end, {description="sounds volume up", group="widgets"}),
+
+    awful.key({}, "XF86AudioLowerVolume", function ()
+            os.execute("amixer -q set Master 5%%-" )
+            beautiful.volume.update()
+        end, {description="sounds volume down", group="widgets"}),
+
     awful.key({}, "XF86AudioMute",
-    	function ()
-    		os.execute(string.format("amixer set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
-    		beautiful.volume.update()
-    	end),
+        function ()
+            os.execute("amixer -q set Master toggle" )
+            beautiful.volume.update()
+        end, {description="sounds volume toggle mute", group="widgets"}),
 
     -- MPD control
     awful.key({}, "XF86AudioPlay",
         function ()
-            os.execute("mpc toggle")
+            os.execute("playerctl play-pause")
             beautiful.mpd.update()
-        end,
-        {description = "mpc toggle", group = "widgets"}),
+        end, {description = "pause/play mpdris2", group = "widgets"}),
 
     awful.key({}, "XF86AudioStop",
         function ()
-            os.execute("mpc stop")
+            os.execute("playerctl stop")
             beautiful.mpd.update()
-        end,
-        {description = "mpc stop", group = "widgets"}),
+        end, {description = "playerctl stop", group = "widgets"}),
 
     awful.key({}, "XF86AudioPrev ",
         function ()
-            os.execute("mpc prev")
+            os.execute("playerctl previous")
             beautiful.mpd.update()
-        end,
-        {description = "mpc prev", group = "widgets"}),
+        end, {description = "playerctl previous", group = "widgets"}),
 
     awful.key({}, "XF86AudioNext",
         function ()
-            os.execute("mpc next")
+            os.execute("playerctl next")
             beautiful.mpd.update()
-        end,
-        {description = "mpc next", group = "widgets"}),
+        end, {description = "playerctl next", group = "widgets"}),
 
     awful.key({ modkey, "Control" }, "End",
         function ()
@@ -274,8 +273,7 @@ keys.globalkeys = gears.table.join(
                 common.text = common.text .. lain.util.markup.bold("ON")
             end
             naughty.notify(common)
-        end,
-        {description = "mpc on/off", group = "widgets"})
+        end, {description = "mpc on/off", group = "widgets"})
 )
 
 
@@ -374,13 +372,13 @@ keys.clientkeys = gears.table.join(
               {description = "toggle keep on top", group = "client"}),
 
     -- Layout: Fancy Maximizes Can Use Alt, Thanks
-    awful.key({ modkey, "Mod1" }, "v",
+    awful.key({ modkey, altkey }, "v",
         function (c)
             c.maximized_vertical = not c.maximized_vertical
             c:raise()
         end ,
         {description = "(un)maximize vertically", group = "client"}),
-    awful.key({ modkey, "Mod1" }, "h",
+    awful.key({ modkey, altkey }, "h",
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
             c:raise()

@@ -158,6 +158,10 @@ theme.volume = lain.widget.alsa({
     end
 })
 
+theme.volbar = lain.widget.alsabar({
+    notification_preset = { font = theme.font, fg = "#7493d2"},
+})
+
 -- Net
 local netdownicon = wibox.widget.imagebox(theme.widget_netdown)
 local netdowninfo = wibox.widget.textbox()
@@ -250,10 +254,10 @@ function theme.at_screen_connect(s)
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             s.mytaglist,
-            s.mytasklist, -- Middle widget
-            s.mypromptbox,
             mpdicon,
             theme.mpd.widget,
+            s.mytasklist, -- Middle widget
+            s.mypromptbox,
         },
         --s.mytasklist, -- Middle widget
         nil,
@@ -268,6 +272,7 @@ function theme.at_screen_connect(s)
             netupinfo.widget,
             volicon,
             theme.volume.widget,
+            -- theme.volbar.widget,
             memicon,
             memory.widget,
             cpuicon,
