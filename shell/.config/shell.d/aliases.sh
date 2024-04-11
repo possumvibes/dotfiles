@@ -89,3 +89,10 @@ alias cmc="cd ${DOTS_DIR:-$HOME/.dotfiles}" # config-management cd
 # Shell With Secrets In (requires pass)
 alias priv="secretshell"
 
+## Quick shortcuts for `yt-dlp`. Output is placed in the current working directory.
+if _checkexec yt-dlp; then
+  alias ytaud='yt-dlp --add-metadata -ci --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s"'
+  alias ytvid='yt-dlp --add-metadata --no-playlist --no-part --write-description --newline --prefer-free-formats -o "%(title)s.%(ext)s" '
+fi
+
+

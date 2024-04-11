@@ -49,3 +49,8 @@ end
 # rescue me from myself
 abbr -a ':q!' 'exit'
 abbr -a ':wq' 'exit'
+
+if command -q yt-dlp
+  alias ytaud 'yt-dlp --add-metadata -ci --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s"'
+  alias ytvid 'yt-dlp --add-metadata --no-playlist --no-part --write-description --newline --prefer-free-formats -o "%(title)s.%(ext)s" '
+end
