@@ -39,6 +39,7 @@ HEADLESS_PACKAGES=(
     curl wget rsync unzip zip # utilities
     btop tree bc trash-cli # more utilities
     mpd mpDris2 playerctl ncmpdcpp # music
+    yt-dlp ffmpeg # download ye olde videos
 )
 
 GRAPHICAL_PACKAGES=(
