@@ -59,31 +59,15 @@ try %{
     map global normal <a-^> ':vertical-selection-up<ret>'     -docstring 'copy matching selections above' 
 } catch %{ echo -debug "Error configuring kakoune-vertical-selection!" }
 
-# TODO POSSUM assess this
 # fancy f/t behavior: gl/listentolist/kakoune-fandt
 try %{ require-module fandt } catch %{ echo -debug "Error configuring kakoune-fandt!" }
-
-# try %{
-#   require-module quickscope
-#   set-option global quickscope_user_mode '.*'     # use '.^' to disable auto-user-mode
-#   map global normal <f>   ':quickscope-f<ret>'   -docstring 'f, but with quickscope'
-#   map global normal <F>   ':quickscope-F<ret>'   -docstring 'F, but with quickscope'
-#   map global normal <a-f> ':quickscope-a-f<ret>' -docstring 'a-f, but with quickscope'
-#   map global normal <a-F> ':quickscope-a-F<ret>' -docstring 'a-F, but with quickscope'
-#   map global normal <t>   ':quickscope-t<ret>'   -docstring 't, but with quickscope'
-#   map global normal <T>   ':quickscope-T<ret>'   -docstring 'T, but with quickscope'
-#   map global normal <a-t> ':quickscope-a-t<ret>' -docstring 'a-t, but with quickscope'
-#   map global normal <a-T> ':quickscope-a-T<ret>' -docstring 'a-T, but with quickscope'
-#   ## TODO fork; add "quickscope active" option, show quickscope in modeline instead of menu
-#   # also the repeat doesn't work--maybe fancify fandt instead?
-# } catch %{ echo -debug "Error configuring quickscope.kak!"}
 
 # smarttab.kak
 try %{
     require-module smarttab
     set-option global softtabstop 4
 
-    hook global WinSetOption filetype=(csharp|c|cpp|python|rust|markdown|kak|lisp|scheme|sh|fish|perl|yaml) expandtab
+    hook global WinSetOption filetype=(csharp|c|cpp|python|rust|markdown|kak|lisp|scheme|sh|fish|perl|yaml|zig) expandtab
     hook global WinSetOption filetype=(makefile) noexpandtab
 } catch %{ echo -debug "Error configuring smarttab.kak!" }
 
@@ -122,9 +106,11 @@ hook global WinCreate ^.*$ %{
   hook window -group relative-insert-numbers ModeChange .*:insert:.* %{
       add-highlighter -override window/numbers number-lines -hlcursor -relative
   }
+
+
 }
 
-hook global WinSetOption filetype=rust %{
+hook global WinSetOption filetype=(rust|zig) %{
     set-option buffer tabstop 4
     set-option buffer indentwidth 4
     lsp-init
