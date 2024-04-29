@@ -4,7 +4,7 @@
 set-face global InactiveCursor default,bright-black
 
 # Reset to default colors when switching to a buffer.
-hook global WinDisplay .* %{
+hook global WinDisplay ^.* %{
     # Here first PrimaryCursor is the name of the face we want to set and
     # second PrimaryCursor is the color which is set by your color scheme.
     set-face window PrimaryCursor PrimaryCursor
@@ -17,7 +17,7 @@ hook global WinDisplay .* %{
 }
 
 # Reset to default colors when switching to an active client.
-hook global FocusIn .* %{
+hook global FocusIn ^.* %{
     # Here first PrimaryCursor is the name of the face we want to set and
     # second PrimaryCursor is the color which is set by your color scheme.
     set-face window PrimaryCursor PrimaryCursor
@@ -30,7 +30,7 @@ hook global FocusIn .* %{
 }
 
 # Change colors to InactiveCursor when focus leaves an active client.
-hook global FocusOut .* %{
+hook global FocusOut ^.* %{
     set-face window PrimaryCursor InactiveCursor
     set-face window PrimaryCursorEol InactiveCursor
     set-face window SecondaryCursor InactiveCursor
