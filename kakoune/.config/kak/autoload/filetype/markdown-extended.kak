@@ -41,6 +41,6 @@ add-highlighter shared/markdown-extended/ordered-list   regex ^\h*(\d+[.)])\s 1:
 ## And apply them on markdown files!
 hook global WinSetOption filetype=markdown %{
   add-highlighter window/markdown-extended ref markdown-extended
-  hook -once -always window WinSetOption filetype=.* %{ remove-hooks markdown-extended-.+ }
+  hook -once -always window WinSetOption filetype=.* %{ remove-hooks window markdown-extended-.+ }
 }
 
