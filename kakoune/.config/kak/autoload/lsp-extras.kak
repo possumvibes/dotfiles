@@ -4,6 +4,7 @@
 define-command lsp-init %{
 	# enable LSP for the window
     lsp-enable-window
+    lsp-auto-hover-buffer-enable
 
 	# Map the lsp-specific bindings only if we're LSP'd
     map window user d ':lsp-diagnostics<ret>'           -docstring "LSP diagnostics"
