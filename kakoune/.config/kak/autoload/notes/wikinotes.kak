@@ -32,42 +32,57 @@ define-command wikinotes-go-url %{
 }
 
 define-command wikinotes-process-link %{
-  evaluate-commands -no-hooks -save-regs a %{
-
-    ## Get the link path
-    try %{
+      try %{
       # 1. Check if a link is selected
       execute-keys -draft s\[([^\[\n]+)\(([^\(\n]+)\)<ret>
       execute-keys -draft <a-i>b_
+      edit %val{selection}
       # Success: It's a link, and we've selected the linkpath.
 
       try %{
-        # 1.1. Attempt to handle as URL
-        execute-keys -draft shttp[s]?://
-        wikinotes-go-url
-# 
-      } catch %{
-        # 1.2. Handle as filepath
-        # It's a filepath! edit it. 
         edit %val{selection}
-      }
-    } catch %{
-      # 2. Selection is not a link
-
-      try %{
-        # 2.1. Check for bare URL
-        execute-keys _shttp[s]?://[^\n]<ret>
-        wikinotes-go-url
-      } catch %{
-        # 2.2. Unlinked selection! Add a link.
-        # escape the selection into a valid username: replace <space> with <minus>, allow only [a-z0-9-_]
-        execute-keys -draft '`s\s+<ret>c-<esc>zs[^a-z0-9-_]d<a-i>b"ay'
-
-				execute-keys 'i[<esc>a]<esc>"api(<esc>a.md)<esc>'
-      }
-    }
-  }
+# 
+      } 
+    } 
 }
+
+# define-command wikinotes-process-link %{
+#   evaluate-commands -no-hooks -save-regs a %{
+
+#     ## Get the link path
+#     try %{
+#       # 1. Check if a link is selected
+#       execute-keys -draft s\[([^\[\n]+)\(([^\(\n]+)\)<ret>
+#       execute-keys -draft <a-i>b_
+#       # Success: It's a link, and we've selected the linkpath.
+
+#       try %{
+#         # 1.1. Attempt to handle as URL
+#         execute-keys -draft shttp[s]?://
+#         wikinotes-go-url
+# # 
+#       } catch %{
+#         # 1.2. Handle as filepath
+#         # It's a filepath! edit it whether it exists or not. 
+#         edit %val{selection}
+#       }
+#     } catch %{
+#       # 2. Selection is not a link
+
+#       try %{
+#         # 2.1. Check for bare URL
+#         execute-keys _shttp[s]?://[^\n]<ret>
+#         wikinotes-go-url
+#       } catch %{
+#         # 2.2. Unlinked selection! Add a link.
+#         # escape the selection into a valid username: replace <space> with <minus>, allow only [a-z0-9-_]
+#         execute-keys -draft '`s\s+<ret>c-<esc>zs[^a-z0-9-_]d<a-i>b"ay'
+
+# 				execute-keys 'i[<esc>a]<esc>"api(<esc>a.md)<esc>'
+#       }
+#     }
+#   }
+# }
 
 
 declare-user-mode wiki
@@ -76,3 +91,4 @@ map global wiki p ':wikinotes-select-prev-link<ret>' -docstring 'select prev mar
 map global wiki g '<a-i>bgf' -docstring 'temporary: go to filepath in selected markdown link'
 map global wiki c 'ggO:title:<ret><esc>|date +%Y-%m-%d<ret>I:created: <esc>o:updated:<esc>ggA ' -docstring 'add title/created/updated card header'
 map global wiki D '|date +%Y-%m-%d<ret>' -docstring 'insert a yyyy-mm-dd date before selection'
+

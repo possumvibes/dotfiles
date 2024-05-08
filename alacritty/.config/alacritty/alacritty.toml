@@ -1,4 +1,4 @@
-import = ["/home/possum/.config/alacritty/themes/gruvbox_dark"]
+import = ["/home/possum/.config/alacritty/themes/tempus-themes/tempus_winter.toml"]
 
 [font]
 size = 8.5
