@@ -11,3 +11,4 @@ autoload/remote  https://gitlab.com/listentolist/kakoune-fandt
 autoload/remote  https://github.com/jtrv/grep-write.kak 
 autoload/remote  https://github.com/jtrv/grep-expand.kak
 autoload/remote  https://github.com/andreyorst/smarttab.kak
+remote           https://github.com/anhsirk0/kakoune-themes.git

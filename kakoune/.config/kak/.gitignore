@@ -5,6 +5,8 @@
 # pls stop appearing in my tree results
 autoload/remote
 colors/remote
+remote/*
+!remote/README.md
 
 # plugin testing dead zone
 testing

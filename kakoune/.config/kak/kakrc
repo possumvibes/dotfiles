@@ -13,7 +13,10 @@ hook global ModuleLoaded tmux %{ require-module tmux-windowing }
 
 # colorscheme: kakoune-mysticaltutor
 # try %{ colorscheme mysticaltutor } catch %{ echo -debug "Error configuring kakoune-mysticaltutor!" }
-try %{ colorscheme ef-rosa } catch %{ echo -debug "Error configuring kakoune-themes!" }
+try %{ colorscheme ef-rosa } catch %{
+  echo -debug "Error configuring kakoune-themes!"
+  colorscheme base16
+}
 
 # auto-pairing: gh/alexherbo2/auto-pairs.kak
 try %{ enable-auto-pairs } catch %{ echo -debug "Error configuring auto-pairs.kak!" }
