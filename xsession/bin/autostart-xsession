@@ -20,6 +20,9 @@ _check_installed mpDris2 && mpDris2 --music-dir /home/possum/music/ &
 # -a auto-mount, -n notify, -t tray icon
 _check_installed udiskie && udiskie -ant &
 
+## Network Manager
+_check_installed nm-applet && nm-applet &
+
 # Screensaver
 xset s 300 5
 _check_installed xss-lock && xss-lock -l -- lockscreen &

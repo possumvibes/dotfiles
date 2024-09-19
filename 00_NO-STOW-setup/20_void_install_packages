@@ -50,6 +50,7 @@ GRAPHICAL_PACKAGES=(
     kdiff3 thunar xarchiver # utilities
     zathura okular gnumeric libreoffice thunderbird # file edit/view
     flatpak  # for discord etc
+    network-manager-applet # system tray networkin'
 )
 
 # -------------------------
