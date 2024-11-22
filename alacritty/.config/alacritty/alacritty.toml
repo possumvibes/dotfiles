@@ -1,4 +1,3 @@
-import = ["/home/possum/.config/alacritty/themes/tempus-themes/tempus_winter.toml"]
 
 [font]
 size = 8.5
@@ -7,7 +6,7 @@ size = 8.5
 family = "Monospace"
 
 [window]
-opacity = 0.95
+opacity = 0.98
 
 [window.padding]
 x = 5
@@ -15,3 +14,6 @@ y = 5
 
 [env]
 TERM = "xterm-256color"
+
+[general]
+import = ["/home/possum/.config/alacritty/themes/tempus-themes/tempus_night.toml"]

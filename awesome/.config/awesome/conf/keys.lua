@@ -175,7 +175,7 @@ keys.globalkeys = gears.table.join(
     -- System launch: Gui
     -- Prompts and pickers
     awful.key({ modkey }, "space",
-        function() awful.spawn.with_shell("rofi -show combi -combi-modes 'window,drun,run'") end,
+        function() awful.spawn.with_shell("rofi -show combi -combi-modes 'drun,run'") end,
         {description = "launch rofi application picker", group = "launcher"} ),
 
     awful.key({ modkey, "Shift" }, "r",
