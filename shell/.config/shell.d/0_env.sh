@@ -47,6 +47,7 @@ done
 
 # Frequently Accessed Directories
 export DOTS_DIR="$HOME/.dots"
+export SPOTS_DIR="$HOME/.spots"
 export NVIMDIR="$XDG_CONFIG_HOME/nvim"
 export KAKDIR="$XDG_CONFIG_HOME/kak"
 export NOTEBOOK_DIR="$HOME/common/ari_yelling"
