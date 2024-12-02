@@ -23,10 +23,10 @@ exec chpst -u "$USER:$groups" runsvdir "$svdir"
 
 The `svdir` value defined in the system service is the directory where my live user services will like (equivalent to /var/service).
 
-Because I do not have SVDIR exported as an environment variable in my shell, I need to specify the full path to the service to be able to interact with it with `sv`:
+I have the `SVDIR` environment variable set to `$HOME/service`, so I am able to use `sv` with just the service name:
 
 ```sh
-sv status ~/service/syncthing
+sv status syncthing
 ```
 
 User services are managed by my dotfiles and live in ~/.config/sv/. The services in my SVDIR are *not* managed by dotfiles and must be manually re-linked to enable when updating the dots.
