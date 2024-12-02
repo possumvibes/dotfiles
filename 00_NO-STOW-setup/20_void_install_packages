@@ -38,7 +38,6 @@ HEADLESS_PACKAGES=(
     delta # source control
     curl wget rsync unzip zip # utilities
     btop tree bc trash-cli # more utilities
-    mpd mpDris2 playerctl ncmpdcpp # music
     yt-dlp ffmpeg # download ye olde videos
 )
 
@@ -46,11 +45,20 @@ GRAPHICAL_PACKAGES=(
     awesome rofi xss-lock xsecurelock # WM
     dunst flameshot # wm/desktop utilities
     picom feh redshift # prettification
+
     alacritty keepassxc firefox # apps
     kdiff3 thunar xarchiver # utilities
     zathura okular gnumeric libreoffice thunderbird # file edit/view
+    strawberry # music
     flatpak  # for discord etc
     network-manager-applet # system tray networkin'
+)
+
+## NOTE: these packages are not used in this installation.
+# They are for reference.
+CARGO_PACKAGES=(
+  gitu # git porcelain inspired by magit. my bestest friend.
+  trashy # i like it more than trash-cli.
 )
 
 # -------------------------
