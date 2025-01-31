@@ -1,0 +1,54 @@
+###############################
+### Basic Game Experience ###
+###############################
+
+# Movement: NUMBER PAD let's GO
+OPTIONS=number_pad:1
+
+# Show time (turns)
+OPTIONS=time:true
+
+# Use the Curses ux
+OPTIONS=windowtype:curses
+OPTIONS=align_message:bottom
+OPTIONS=guicolor
+## always show the inventory to the side
+OPTIONS=perm_invent
+
+# General UX
+OPTIONS=boulder:0
+SYMBOLS=S_golem:7
+SYMBOLS=S_ghost:8
+
+OPTIONS=hilite_pet:true
+
+# Game end disclosures
+## inventory, attributes, conduct, and dungeon without prompting; ask for kills
+OPTIONS=disclose:+i ya yv yg yc yo
+
+###############################
+######## Gameplay ##########
+###############################
+
+# Ask first if an item would exceed a burden level (default stressed):
+# (Unencumbered, Burdened, streSsed, straiNed, Overtaxed, or overLoaded)
+OPTIONS=pickup_burden:unencumbered
+
+# Auto pickup only items considered "generally safe": 
+# gold, scrolls, potions, wands, rings, and amulets.
+OPTIONS=autopickup, pickup_types:$?!/="
+
+# Always pick up daggers and gems
+AUTOPICKUP_EXCEPTION="<lichen corpse"
+AUTOPICKUP_EXCEPTION="<dagger"
+AUTOPICKUP_EXCEPTION="<gem"
+
+###############################
+######## Defaults ##########
+###############################
+
+# Creature names
+OPTIONS=catname:Minnow
+OPTIONS=dogname:Spot
+OPTIONS=horsename:Fluffy
+
