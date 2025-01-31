@@ -26,7 +26,10 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_BIN_HOME="$HOME/.local/bin"
 
+## Local man pages
 export MAN_HOME="$XDG_DATA_HOME/man"
+export MANPATH="$MAN_HOME:$MANPATH"
+
 export SVDIR="$HOME/service"
 
 export REPOSDIR="$HOME/repos"

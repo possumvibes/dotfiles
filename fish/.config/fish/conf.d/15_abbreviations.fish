@@ -22,6 +22,7 @@ alias kakrc "cd $XDG_CONFIG_HOME/kak; kak kakrc"
 # Notes
 alias notes "cd $NOTEBOOK_DIR; $EDITOR scratchpad.md"
 alias note  "cd $NOTEBOOK_DIR"
+alias nn "tmux new -A -s notes -c $NOTEBOOK_DIR"
 
 abbr src "cd $REPOSDIR"
 abbr -a keeb "cd $QMK_USERSPACE/users/possumvibes"
@@ -54,3 +55,4 @@ if command -q yt-dlp
   alias ytaud 'yt-dlp --add-metadata -ci --extract-audio -o "%(title)s.%(ext)s"'
   alias ytvid 'yt-dlp --add-metadata --no-playlist --write-description --newline -o "%(title)s.%(ext)s" '
 end
+
