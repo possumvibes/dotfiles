@@ -1,33 +1,64 @@
 [user]
-	name = "Possumvibes"
-	email = "90935434+possumvibes@users.noreply.github.com"
+  name = "Possumvibes"
+  email = "90935434+possumvibes@users.noreply.github.com"
 [alias]
   b = branch
-	cam = commit -a -m
-	cm = commit -m
-	cb = checkout -b
-	l = log --oneline
-	nuke = branch -D
-	psu = push --set-upstream
-	psuo = push --set-upstream origin
-	rpo = remote prune origin
+  cam = commit -a -m
+  cm = commit -m
+  cb = checkout -b
+  l = log --oneline
+  nuke = branch -D
+  psu = push --set-upstream
+  psuo = push --set-upstream origin
+  rpo = remote prune origin
   s = status -s
   wb = checkout -b willitblend
+  ddiff = !git diff | delta --side-by-side
+
+[column]
+  ui = auto
+[branch]
+  sort = -committerdate
+[tag]
+  sort = version:refname
 [init]
-	defaultBranch = main
-[pull]
-  rebase = false
-[core]
-  excludesFile = ~/.gitignore
-  pager = delta
-[pager]
-  diff = delta
-  log = delta
-  reflog = delta
-  show = delta
-[delta]
-  navigate = true
-  line-numbers = true
-	side-by-side=true
-[interactive]
-  diffFilter = delta --color-only
+  defaultBranch = main
+[commit]
+  verbose = true
+
+[diff]
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
+[push]
+  default = simple
+  autoSetupRemote = true
+  followTags = true
+[fetch]
+  prune = true
+  pruneTags = true
+  all = true
+[merge]
+  conflictstyle = zdiff3
+[rebase]
+  autoSquash = true
+  autoStash = true
+  updateRefs = true
+[rerere]
+  enabled = true
+  autoupdate = true
+
+; [core]
+;   pager = delta
+; [pager]
+;   diff = delta
+;   log = delta
+;   reflog = delta
+;   show = delta
+; [delta]
+;   navigate = true
+;   line-numbers = true
+;   side-by-side=true
+; [interactive]
+;   diffFilter = delta --color-only
