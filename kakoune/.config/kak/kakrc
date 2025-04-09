@@ -9,7 +9,7 @@ hook global ModuleLoaded tmux %{ require-module tmux-windowing }
 
 # colorscheme: kakoune-mysticaltutor
 # try %{ colorscheme mysticaltutor } catch %{ echo -debug "Error configuring kakoune-mysticaltutor!" }
-try %{ colorscheme ef-rosa } catch %{
+try %{ colorscheme ef-cherie } catch %{
   echo -debug "Error configuring kakoune-themes!"
   colorscheme base16
 }
@@ -207,6 +207,7 @@ map global user s     ':w<ret>'                                -docstring 'write
 map global user t     ':enter-user-mode kak-tasks<ret>'        -docstring 'task mode'
 map global user w     ":enter-user-mode wiki<ret>"             -docstring 'wiki mode'
 map global user x     ":db<ret>"                               -docstring "close buffer"
+map global user X     ":kill<ret>"                             -docstring "kill session"
 map global user <ret> ':expand<ret>'                           -docstring 'expand selection to next outer region'
 map global user /     ':open_rg_picker<ret>'                   -docstring 'search project'
 map global user =     ':enter_math_mode<ret>'                  -docstring 'enter math mode'
