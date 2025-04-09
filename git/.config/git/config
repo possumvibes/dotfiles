@@ -6,14 +6,18 @@
   cam = commit -a -m
   cm = commit -m
   cb = checkout -b
+  ddiff = "! git diff $1 | delta --side-by-side"
   l = log --oneline
+  lg = log --oneline --graph --decorate
+  lga = log --oneline --graph --decorate --all
   nuke = branch -D
   psu = push --set-upstream
   psuo = push --set-upstream origin
   rpo = remote prune origin
   s = status -s
+  sw = switch
+  sc = switch -c
   wb = checkout -b willitblend
-  ddiff = !git diff | delta --side-by-side
 
 [column]
   ui = auto
