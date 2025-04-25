@@ -117,4 +117,7 @@ export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/ruby/bundle"
 export GEM_HOME="$XDG_DATA_HOME/ruby/gem"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME/ruby/gem"
 
+## Wayland #####################################################################
 
+# Firefox
+export MOZ_ENABLE_WAYLAND=1
