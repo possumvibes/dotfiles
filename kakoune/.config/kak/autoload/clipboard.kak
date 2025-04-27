@@ -28,6 +28,9 @@ evaluate-commands %sh{
     if [ -n "$WSL_DISTRO_NAME" ]; then
         clippaste="powershell.exe -noprofile Get-Clipboard | tr -d \"\r\""
         primpaste="powershell.exe -noprofile Get-Clipboard | tr -d \"\r\""
+    elif [ -n "$WAYLAND_DISPLAY" ]; then
+      clippaste="wl-paste --no-newline"
+      primpaste="wl-paste --primary --no-newline"
     else
     	# OSC-52 yanks to clipboard (as opposed to primary), so we will paste from clipboard
     	clippaste="xclip -o -selection clipboard";
