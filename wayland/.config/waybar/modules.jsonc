@@ -1,0 +1,65 @@
+{
+  // Waybar modules
+  "niri/window":{
+    "icon": true,
+    "max-length": 70
+  },
+  "battery": {
+    "format": "{capacity}% {icon}",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "clock": {
+    "format": "{:%a, %d %b. %H:%M}",
+    "tooltip-format": "<tt>{calendar}</tt>"
+  },
+  "cpu": {
+    "format": " {usage:2}%",
+    "interval": 10
+  },
+  "memory": {
+    "format": " {}%",
+    "interval": 10
+  },
+  "network": {
+    "format": "{ifname}",
+    "format-wifi": " {essid}",
+    "format-ethernet": "󰈀 {ifname}",
+    "format-disconnected": "Disconnected",
+    "tooltip-format-wifi": " {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+    "tooltip-format-ethernet": "󰈀 {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50,
+    // "on-click": "alacritty --title nmtui --config-file $NIRICONF/alacritty/float.toml -e nmtui connect"
+  },
+  "pulseaudio": {
+    "format": "{icon}{volume}%",
+    "format-bluetooth": "{icon}",
+    "tooltip-format": "{desc} - {volume}%",
+    "format-muted": " ",
+    "on-click": "pavucontrol",
+    "format-icons": {
+      "headphone": " ",
+      "default": [" ", " "]
+    },
+    "reverse-scrolling": true
+  },
+  "tray": {
+    "spacing": 10
+  },
+
+  // Custom modules
+  "custom/media": {
+    "format": "{}",
+    "tooltip": true,
+    "tooltip-format": "{}",
+    "escape": true,
+    "return-type": "json",
+    "max-length": 50,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl stop",
+    "on-scroll-up": "playerctl previous",
+    "on-scroll-down": "playerctl next",
+    "exec": "$HOME/.config/waybar/modules/media-player.py 2> /dev/null"
+  }
+}
+

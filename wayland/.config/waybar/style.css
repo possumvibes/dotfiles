@@ -1,0 +1,96 @@
+/*base background color*/
+@define-color bg_main rgba(25, 25, 25, 0.65);
+@define-color bg_main_tooltip rgba(0, 0, 0, 0.7);
+
+/*base background color of selections */
+@define-color bg_hover rgba(200, 200, 200, 0.3);
+/*base background color of active elements */
+@define-color bg_active rgba(100, 100, 100, 0.5);
+
+/*base border color*/
+@define-color border_main rgba(255, 255, 255, 0.2);
+
+/*text color for entries, views and content in general */
+@define-color content_main white;
+/*text color for entries that are unselected */
+@define-color content_inactive rgba(255, 255, 255, 0.25);
+
+* {
+  text-shadow: none;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+  font-family: "Liberation Mono", "Noto Sans Mono CJK TC";
+  font-weight: 500;
+  font-size: 12px;
+}
+
+window#waybar {
+  background: @bg_main;
+  border-top: 1px solid @border_main;
+  color: @content_main;
+}
+
+tooltip {
+  background: @bg_main_tooltip;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: @border_main;
+}
+tooltip label {
+  color: @content_main;
+}
+
+#workspaces {
+  color: transparent;
+  margin-right: 4px;
+  margin-left: 14px;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.focused {
+    background-color: #64727D;
+    box-shadow: inset 0 -2px #ffffff;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+#custom-media,
+#pulseaudio,
+#battery,
+#network,
+#cpu,
+#memory,
+#clock,
+#tray {
+  margin: 0 10px 0 0;
+  padding: 2px 2px;
+  color: @content_main_white;
+  background: @bc_color;
+}
+
+#battery.good {
+  color: #228b22;
+}
+
+#battery.warning {
+  color: #fad104;
+}
+
+#battery.critical {
+  color: #ee2e24;
+}
+
+#battery.charging {
+  color: #ffffff;
+}
+
+#custom-media {
+  color: #8968cd;
+}
