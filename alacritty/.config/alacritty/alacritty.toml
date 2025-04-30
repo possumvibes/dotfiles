@@ -1,6 +1,7 @@
 
 [font]
-size = 8.5
+# size = 8.5 #x11 font size
+size = 10 #wayland font size
 
 [font.normal]
 family = "Monospace"
