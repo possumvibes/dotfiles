@@ -1,0 +1,8 @@
+#!/bin/bash
+
+niri msg action do-screen-transition --delay-ms 300
+swaylock \
+  --daemonize \
+  --ignore-empty-password \
+  --indicator-idle-visible \
+  --color 000000 
