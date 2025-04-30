@@ -47,7 +47,8 @@ GRAPHICAL_PACKAGES=(
     picom feh redshift # prettification
 
     alacritty keepassxc firefox # apps
-    kdiff3 thunar xarchiver # utilities
+    kdiff3 xarchiver # utilities
+    thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman tumbler # thunar with all the fixins
     zathura okular gnumeric libreoffice thunderbird # file edit/view
     strawberry # music
     flatpak  # for discord etc
