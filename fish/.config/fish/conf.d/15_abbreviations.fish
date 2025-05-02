@@ -14,6 +14,7 @@ abbr -a aa	"cd $XDG_CONFIG_HOME/fish; $EDITOR conf.d/15_abbreviations.fish"
 abbr -a AA  "cd $XDG_CONFIG_HOME/shell.d; $EDITOR 0_env.sh"
 abbr -a fishconf "cd $XDG_CONFIG_HOME/fish; $EDITOR config.fish"
 abbr -a zconf "cd $ZDOTDIR; kak .zshrc"
+abbr -a niriconf "cd $XDG_CONFIG_HOME/niri; $EDITOR config.kdl"
 
 # Editor config files
 alias vimrc "cd $XDG_CONFIG_HOME/vim; vim vimrc"
@@ -33,7 +34,7 @@ abbr -a md	'mkdir -p'
 # Better utility defaults, as aliases
 alias cp 'cp -rvi'
 alias mv 'mv -i'
-alias rm 'rm -I'
+alias rm 'rm -I -r'
 
 # make 'sudo rm' less dangerous
 abbr -a srm 'sudo rm -i'
