@@ -16,6 +16,13 @@
     "format": " {usage:2}%",
     "interval": 10
   },
+  "idle_inhibitor": {
+      "format": "{icon}",
+      "format-icons": {
+          "activated": "",
+          "deactivated": ""
+      }
+  },
   "memory": {
     "format": " {}%",
     "interval": 10

@@ -48,6 +48,10 @@ tooltip label {
   margin-left: 14px;
 }
 
+#workspaces button {
+  min-width: 15px;
+}
+
 #workspaces button:hover {
     background: rgba(0, 0, 0, 0.2);
 }
@@ -61,13 +65,23 @@ tooltip label {
     background-color: #eb4d4b;
 }
 
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+#window {
+    margin: 0 5px;
+}
+
 #custom-media,
-#pulseaudio,
 #battery,
-#network,
 #cpu,
-#memory,
 #clock,
+#idle_inhibitor,
+#memory,
+#network,
+#pulseaudio,
 #tray {
   margin: 0 10px 0 0;
   padding: 2px 2px;
