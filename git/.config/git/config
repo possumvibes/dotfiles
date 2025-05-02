@@ -13,7 +13,7 @@
   nuke = branch -D
   psu = push --set-upstream
   psuo = push --set-upstream origin
-  rpo = remote prune origin
+  shove = push --force-with-lease
   s = status -s
   sw = switch
   sc = switch -c
