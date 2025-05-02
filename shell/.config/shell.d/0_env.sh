@@ -121,3 +121,6 @@ export GEM_SPEC_CACHE="$XDG_CACHE_HOME/ruby/gem"
 
 # Firefox
 export MOZ_ENABLE_WAYLAND=1
+
+## Style (QT Is A Fusspot)
+export QT_QPA_PLATFORMTHEME=qt6ct
