@@ -1,13 +1,10 @@
 #!/bin/sh
 
-
-DATE="$date"
-
-echo "\nwl-idlelock: $DATE\nNiri Socket: $NIRI_SOCKET\n" >> /home/possum/temp/niri_socket_tattle
+lock=$HOME/.config/niri/scripts/niri-swaylock
 
 /usr/bin/swayidle -w \
-timeout 10 'if pgrep -x swaylock; then niri msg action power-off-monitors; fi' \
-timeout 601 'niri msg action power-off-monitors' \
-timeout 600 "$HOME/bin/swaylock.sh" \
-resume 'niri msg action power-on-monitors' \
-before-sleep "$HOME/bin/swaylock.sh"
+  timeout 10 'if pgrep -x swaylock; then niri msg action power-off-monitors; fi' \
+  timeout 301 'niri msg action power-off-monitors' \
+  timeout 300 "$lock" \
+  resume 'niri msg action power-on-monitors' \
+  before-sleep "$lock"

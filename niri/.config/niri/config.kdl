@@ -103,6 +103,10 @@ environment {
   DISPLAY ":3"
 }
 
+cursor {
+  xcursor-theme "Sweet-cursors"
+}
+
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
@@ -117,6 +121,8 @@ layout {
     // - "on-overflow", focusing a column will center it if it doesn't fit
     //   together with the previously focused column.
     center-focused-column "never"
+
+    always-center-single-column
 
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
     preset-column-widths {
@@ -135,9 +141,9 @@ layout {
     // preset-window-heights { }
 
     // You can change the default width of the new windows.
-    // default-column-width { proportion 0.5; }
+    default-column-width { proportion 0.33333; }
     // If you leave the brackets empty, the windows themselves will decide their initial width.
-    default-column-width {}
+    // default-column-width {}
 
     // By default focus ring and border are rendered as a solid background rectangle
     // behind windows. That is, they will show up through semitransparent windows.
@@ -253,23 +259,27 @@ layout {
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
-spawn-at-startup "mako"
-spawn-at-startup "pipewire"
-spawn-at-startup "sh" "-c" "/home/possum/.config/niri/scripts/niri-swayidle"
-spawn-at-startup "swaybg" "-i" "/home/possum/.local/share/wallpapers/Deep_Space_75_Withou_A_Logo.jpg" "-m" "fill"
-spawn-at-startup "wlsunset" "-l" "39.7" "-L" "-105" "-t" "3500"
-spawn-at-startup "waybar"
-spawn-at-startup "udiskie" "--automount" "--notify" "--tray"
-spawn-at-startup "nm-applet"
+
+ spawn-at-startup "mako"
+ spawn-at-startup "pipewire"
+ spawn-at-startup "sh" "-c" "/home/possum/.config/niri/scripts/niri-swayidle"
+ spawn-at-startup "swaybg" "-i" "/home/possum/.local/share/wallpapers/Deep_Space_75_Withou_A_Logo.jpg" "-m" "fill"
+ spawn-at-startup "wlsunset" "-l" "39.7" "-L" "-105" "-t" "3500"
+ spawn-at-startup "waybar"
+ spawn-at-startup "udiskie" "--automount" "--notify" "--tray"
+ spawn-at-startup "nm-applet"
+ spawn-at-startup "xwayland-satellite"
+
+// spawn-at-startup "autostart-wayland"
+
 spawn-at-startup "alacritty"
-spawn-at-startup "xwayland-satellite"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
 // This option will also fix border/focus ring drawing behind some semitransparent windows.
 // After enabling or disabling this, you need to restart the apps for this to take effect.
-// prefer-no-csd
+prefer-no-csd
 
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
