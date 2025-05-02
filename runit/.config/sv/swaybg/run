@@ -1,0 +1,3 @@
+#!/bin/sh
+exec swaybg -i $HOME/.local/share/wallpapers/current-wallpaper -m fill
+

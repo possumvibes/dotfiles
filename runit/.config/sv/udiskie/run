@@ -1,0 +1,2 @@
+#!/bin/sh
+exec udiskie --automount --notify --tray

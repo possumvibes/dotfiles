@@ -1,0 +1,10 @@
+#!/bin/sh
+
+lock=$HOME/.config/niri/swaylock
+
+exec /usr/bin/swayidle -w \
+  timeout 10 'if pgrep -x swaylock; then niri msg action power-off-monitors; fi' \
+  timeout 301 'niri msg action power-off-monitors' \
+  timeout 300 "$lock" \
+  resume 'niri msg action power-on-monitors' \
+  before-sleep "$lock"
