@@ -101,7 +101,7 @@ output "HDMI-A-2" {
 
 environment {
   ELECTRON_OZONE_PLATFORM_HINT "auto"
-  DISPLAY ":3"
+  DISPLAY ":0"
 }
 
 cursor {
@@ -226,16 +226,21 @@ layout {
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
+  spawn-at-startup "sh" "-c" "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+  spawn-at-startup "sh" "-c" "exec systemctl" "--user" "import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK"
+  spawn-at-startup 
+  spawn-at-startup "sh" "-c" "hash" "dbus-update-activation-environment 2>/dev/null && dbus-update-activation-environment" "--systemd" "DISPLAY WAYLAND_DISPLAY SWAYSOCK"
 
- spawn-at-startup "mako"
- spawn-at-startup "pipewire"
- spawn-at-startup "sh" "-c" "/home/possum/.config/niri/scripts/niri-swayidle"
- spawn-at-startup "swaybg" "-i" "/home/possum/.local/share/wallpapers/Deep_Space_75_Withou_A_Logo.jpg" "-m" "fill"
- spawn-at-startup "wlsunset" "-l" "39.7" "-L" "-105" "-t" "3500"
- spawn-at-startup "waybar"
- spawn-at-startup "udiskie" "--automount" "--notify" "--tray"
- spawn-at-startup "nm-applet"
- spawn-at-startup "xwayland-satellite"
+  spawn-at-startup "mako"
+  spawn-at-startup "pipewire"
+  spawn-at-startup "xwayland-satellite"
+  spawn-at-startup "sh" "-c" "/home/possum/.config/niri/scripts/niri-swayidle"
+  spawn-at-startup "swaybg" "-i" "/home/possum/.local/share/wallpapers/current-wallpaper" "-m" "fill"
+  spawn-at-startup "wlsunset" "-l" "39.7" "-L" "-105" "-t" "3500"
+  spawn-at-startup "waybar"
+  spawn-at-startup "udiskie" "--automount" "--notify" "--tray"
+  spawn-at-startup "nm-applet"
+  spawn-at-startup "sleep" "2" "&& firewall-applet"
 
 // spawn-at-startup "autostart-wayland"
 
