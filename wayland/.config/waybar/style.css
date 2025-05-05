@@ -22,7 +22,7 @@
   border-radius: 0;
   font-family: "Liberation Mono", "Noto Sans Mono CJK TC";
   font-weight: 500;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 window#waybar {
@@ -75,6 +75,7 @@ tooltip label {
 }
 
 #custom-media,
+#custom-power,
 #battery,
 #cpu,
 #clock,

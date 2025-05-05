@@ -21,6 +21,7 @@
     "memory",
     "tray",
     "idle_inhibitor",
-    "clock"
+    "clock",
+    "custom/power"
   ]
 }

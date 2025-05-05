@@ -67,6 +67,11 @@
     "on-scroll-up": "playerctl previous",
     "on-scroll-down": "playerctl next",
     "exec": "$HOME/.config/waybar/modules/media-player.py 2> /dev/null"
-  }
+  },
+  "custom/power": {
+    "format":"⏻",
+    "on-click": "exec ~/.config/waybar/modules/power_menu.sh",
+    "tooltip": false
+  },
 }
 
