@@ -7,7 +7,8 @@
   cm = commit -m
   cb = checkout -b
   ddiff = "! git diff $1 | delta --side-by-side"
-  l = log --oneline
+  l = log --oneline --max-count 15
+  ll = log --oneline
   lg = log --oneline --graph --decorate
   lga = log --oneline --graph --decorate --all
   nuke = branch -D
