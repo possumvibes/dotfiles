@@ -1,19 +1,25 @@
 # DOTS as managed through GNU Stow!
 
-This repo contains dotfiles to set up my [awesomewm](https://awesomewm.org) environment on [Void linux](https://voidlinux.org/).
+This repo contains dotfiles to set up my [Niri](https://github.com/YaLTeR/niri) environment on [Void linux](https://voidlinux.org/).
 
-## CURRENTLY USING (last updated 2024-01-08):
+## CURRENTLY USING (last updated 2025-05-07:
 
 - Dotfiles Management: [GNU Stow](https://www.gnu.org/software/stow/)
-- Window Manager: [awesomewm](https://awesomewm.org)
+- Window Manager: [Niri](https://github.com/YaLTeR/niri)
 - Terminal Emulator: [Alacritty](https://alacritty.org/) and [XTerm](https://invisible-island.net/xterm/)
 - Multiplexer: Tmux
 - Editor: [kakoune](https://kakoune.org/) and (n)vim
 - Shell: ZSH and [Fish](https://fishshell.com/)
 
 ## PREVIOUSLY USING
+
+### Until May 2025:
+- Window Manager: [awesomewm](https://awesomewm.org)
+
 ### Until November 2023:
 - Window Manager: [bspwm](https://github.com/baskerville/bspwm)
+- Shell: ZSH
+- Editors: [Neovim](neovim.io/) and [Helix](https://helix-editor.com/) are both fully retired.
 
 ### Until July 2023:
 - Dotfiles Management: [chezmoi](https://www.chezmoi.io). Last chezmoi-managed commit is [60bbcd](https://github.com/possumvibes/dotfiles/tree/60bbcd20b981f844197c40eb074131988ec28784). 
