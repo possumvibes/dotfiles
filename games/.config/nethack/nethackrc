@@ -20,6 +20,9 @@ OPTIONS=boulder:0
 SYMBOLS=S_golem:7
 SYMBOLS=S_ghost:8
 
+## no bones levels--I'm the only player on my computer!
+OPTIONS=bones:false
+
 OPTIONS=hilite_pet:true
 
 # Game end disclosures
