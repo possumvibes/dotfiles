@@ -18,10 +18,10 @@ logout(){
 
 case $SELECTION in
     *"󰌾 Lock"*)
-        gtklock;;
+        $XDG_CONFIG_HOME/niri/scripts/niri-swaylock;;
     # *"󰤄 Suspend"*)
     #     if confirm_action "Suspend"; then
-    #         systemctl suspend
+    #         loginctl suspend
     #     fi;;
     *"󰍃 Log out"*)
         if confirm_action "Log out"; then
@@ -29,14 +29,14 @@ case $SELECTION in
         fi;;
     *" Reboot"*)
         if confirm_action "Reboot"; then
-            systemctl reboot
+            loginctl reboot
         fi;;
     *" Reboot to UEFI"*)
         if confirm_action "Reboot to UEFI"; then
-            systemctl reboot --firmware-setup
+            loginctl reboot --firmware-setup
         fi;;
     *"󰐥 Shutdown"*)
         if confirm_action "Shutdown"; then
-            systemctl poweroff
+            loginctl poweroff
         fi;;
 esac
