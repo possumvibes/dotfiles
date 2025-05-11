@@ -12,6 +12,7 @@
   lg = log --oneline --graph --decorate
   lga = log --oneline --graph --decorate --all
   nuke = branch -D
+  turbonuke = push --delete
   psu = push --set-upstream
   psuo = push --set-upstream origin
   shove = push --force-with-lease
