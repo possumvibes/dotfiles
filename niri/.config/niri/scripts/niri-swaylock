@@ -1,5 +1,7 @@
 #!/bin/bash
 
+pgrep -x swaylock && exit
+
 niri msg action do-screen-transition --delay-ms 300
 swaylock \
   --daemonize \
