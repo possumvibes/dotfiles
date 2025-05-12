@@ -18,7 +18,7 @@ logout(){
 
 case $SELECTION in
     *"󰌾 Lock"*)
-        $XDG_CONFIG_HOME/niri/scripts/niri-swaylock;;
+        $XDG_CONFIG_HOME/niri/scripts/lockniri;;
     # *"󰤄 Suspend"*)
     #     if confirm_action "Suspend"; then
     #         loginctl suspend

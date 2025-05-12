@@ -66,7 +66,7 @@
     "on-click-right": "playerctl stop",
     "on-scroll-up": "playerctl previous",
     "on-scroll-down": "playerctl next",
-    "exec": "$HOME/.config/waybar/modules/media-player.py 2> /dev/null"
+    "exec": "$XDG_CONFIG_HOME/waybar/modules/media-player.sh"
   },
   "custom/power": {
     "format":"⏻",
