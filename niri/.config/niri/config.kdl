@@ -328,7 +328,7 @@ binds {
     Mod+Return { spawn "alacritty"; }
     Mod+Space { spawn "fuzzel"; }
     Mod+Ctrl+Space { spawn "wl-bemoji"; } 
-    Super+Alt+L { spawn "bash" "-c" "$HOME/.config/niri/scripts/niri-swaylock"; }
+    Super+Alt+L { spawn "bash" "-c" "$HOME/.config/niri/scripts/lockniri"; }
     
     Super+H {spawn "firefox"; }
     Super+B {spawn "keepassxc"; }

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+pgrep -x gtklock >/dev/null && exit
+
+niri msg action do-screen-transition --delay-ms 300
+gtklock -d
