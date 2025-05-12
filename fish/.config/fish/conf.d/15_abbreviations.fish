@@ -9,6 +9,8 @@ abbr -a k kak
 abbr -a t trash
 abbr -a tt tree
 
+abbr lg lazygit
+
 # Config files
 abbr -a aa	"cd $XDG_CONFIG_HOME/fish; $EDITOR conf.d/15_abbreviations.fish"
 abbr -a AA  "cd $XDG_CONFIG_HOME/shell.d; $EDITOR 0_env.sh"
