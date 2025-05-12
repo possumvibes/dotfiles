@@ -57,3 +57,6 @@ if command -q yt-dlp
   alias ytvid 'yt-dlp --add-metadata --no-playlist --write-description --newline -o "%(title)s.%(ext)s" '
 end
 
+if command -q fastfetch
+  abbr -a huh fastfetch
+end
