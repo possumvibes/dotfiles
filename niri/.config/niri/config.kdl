@@ -93,6 +93,12 @@ input {
     position x=1280 y=0
 }
 
+output "HDMI-A-2" {
+  mode "3440x1440@59.973"  
+  scale 1
+  transform "normal"
+}
+
 environment {
   ELECTRON_OZONE_PLATFORM_HINT "auto"
   DISPLAY ":3"
