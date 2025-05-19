@@ -27,6 +27,22 @@
     "format": " {}%",
     "interval": 10
   },
+  "mpris": {
+    "interval": 1,
+    "format": "{status_icon} {dynamic}",
+  	"format-paused": "{status_icon} <i>{dynamic}</i>",
+  	"player-icons": {
+  		"default": "▶",
+  		"mpv": "🎵",
+  		"strawberry": "🍓",
+      "": "▶", 
+  	},
+  	"status-icons": {
+  		"paused": "",
+  		"playing": ""
+  	},
+  	"ignored-players": ["firefox"]
+  },
   "network": {
     "format": "{ifname}",
     "format-wifi": " {essid}",
@@ -36,7 +52,28 @@
     "tooltip-format-ethernet": "󰈀 {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 50,
-    // "on-click": "alacritty --title nmtui --config-file $NIRICONF/alacritty/float.toml -e nmtui connect"
+  },
+  "privacy": {
+    "icon-spacing": 4,
+    "icon-size": 18,
+    "transition-duration": 250,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-out",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      }
+    ]
   },
   "pulseaudio": {
     "format": "{icon}{volume}%",
@@ -53,25 +90,28 @@
   "tray": {
     "spacing": 10
   },
-
-  // Custom modules
-  "custom/media": {
-    "format": "{}",
-    "tooltip": true,
-    "tooltip-format": "{}",
-    "escape": true,
-    "return-type": "json",
-    "max-length": 50,
-    "on-click": "playerctl play-pause",
-    "on-click-right": "playerctl stop",
-    "on-scroll-up": "playerctl previous",
-    "on-scroll-down": "playerctl next",
-    "exec": "$XDG_CONFIG_HOME/waybar/modules/media-player.sh"
-  },
   "custom/power": {
     "format":"⏻",
     "on-click": "exec ~/.config/waybar/modules/power_menu.sh",
     "tooltip": false
   },
+  "custom/hardware": {
+    "format": "Hardware",
+    "tooltip-format": "Hardware group"
+  },
+  "group/hardware": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 500,
+      "children-class": "not-hardware-header",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/hardware",
+      "cpu",
+      "memory"
+    ]
+  }
+
 }
 

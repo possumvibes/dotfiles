@@ -74,20 +74,19 @@ tooltip label {
     margin: 0 5px;
 }
 
-#custom-media,
 #custom-power,
 #battery,
 #cpu,
 #clock,
 #idle_inhibitor,
 #memory,
+#mpris,
 #network,
+#privacy,
 #pulseaudio,
 #tray {
   margin: 0 10px 0 0;
   padding: 2px 2px;
-  color: @content_main_white;
-  background: @bc_color;
 }
 
 #battery.good {
@@ -106,6 +105,31 @@ tooltip label {
   color: #ffffff;
 }
 
-#custom-media {
-  color: #8968cd;
+/* Definitively colored modules */
+#custom-power{
+  color: #A0A1FE;
 }
+#mpris {
+  color: #CFAAFF;
+}
+
+/*Might change my mind about these!!*/
+#cpu {
+  color: #FFC5C6;
+}
+#idle_inhibitor{
+  color: #C6FFC5;
+}
+#memory {
+  color: #F7E796;
+}
+#network {
+  color: #FFC5F4;
+}
+#privacy {
+  color: #C5D8FF;
+}
+#pulseaudio {
+  color: #CFAAFF;
+}
+

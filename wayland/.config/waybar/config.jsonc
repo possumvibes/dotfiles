@@ -1,5 +1,6 @@
 {
   "layer": "top",
+  "position": "top",
   "margin-top": 0,
   "margin-bottom": 0,
   "margin-left": 0,
@@ -12,16 +13,21 @@
     "niri/workspaces",
     "niri/window"
   ],
+  "modules-center": [
+    "mpris"
+  ],
   "modules-right": [
-    "custom/media",
     "pulseaudio",
-    "battery",
+    // "battery",
     "network",
     "cpu",
     "memory",
+    "group/hardware",
     "tray",
     "idle_inhibitor",
+    "privacy",
     "clock",
     "custom/power"
   ]
 }
+
