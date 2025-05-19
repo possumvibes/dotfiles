@@ -227,17 +227,19 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
+spawn-at-startup "dbus-update-activation-environment" "2>/dev/null" "&& dbus-update-activation-environment" "--systemd" "DISPLAY" "WAYLAND_DISPLAY" "NIRI_SOCKET"
+
 spawn-at-startup "mako"
 spawn-at-startup "pipewire"
 spawn-at-startup "sh" "-c" "/home/possum/.config/niri/scripts/niri-swayidle"
-spawn-at-startup "swaybg" "-i" "/home/possum/.local/share/wallpapers/Deep_Space_75_Withou_A_Logo.jpg" "-m" "fill"
+spawn-at-startup "swaybg" "-i" "/home/possum/.local/share/wallpapers/current-wallpaper" "-m" "fill"
 spawn-at-startup "wlsunset" "-l" "39.7" "-L" "-105" "-t" "3500"
 spawn-at-startup "waybar"
 spawn-at-startup "udiskie" "--automount" "--notify" "--tray"
 spawn-at-startup "nm-applet"
 spawn-at-startup "xwayland-satellite"
 
-spawn-at-startup "foot --server"
+spawn-at-startup "foot" "--server"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
