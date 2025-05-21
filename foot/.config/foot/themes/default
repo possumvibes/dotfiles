@@ -1,0 +1,28 @@
+# -*- conf -*-
+# Foot Default theme as yoinked from the default config.ini
+
+[colors]
+alpha=0.95  # Adjust alpha to change transparency level
+foreground=e3e3ea  # ColorForeground
+background=1c1824  # ColorBackground
+
+# ## Normal/regular colors (color palette 0-7)
+regular0=546E7A  # gray
+regular1=FF4A4A  # red
+regular2=3FF27D  # green
+regular3=FFC233  # yellow
+regular4=339CFF  # blue
+regular5=C166FF  # purple
+regular6=33FFF0  # cyan
+regular7=E5E5E5  # white
+
+## Bright colors (color palette 8-15)
+bright0=B0BEC5   # bright gray
+bright1=FF7070   # bright red
+bright2=62FFA0   # bright green
+bright3=FFD966   # bright yellow
+bright4=66B2FF   # bright blue
+bright5=D884FF   # bright purple
+bright6=5DFFF5   # bright cyan
+bright7=FFFFFF   # bright white
+
