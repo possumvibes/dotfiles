@@ -1,4 +1,5 @@
 # DOTS as managed through GNU Stow!
+This repository is archived and no longer active. I have migrated my repositories to Codeberg.
 
 This repo contains dotfiles to set up my [Niri](https://github.com/YaLTeR/niri) environment on [Void linux](https://voidlinux.org/).
 
